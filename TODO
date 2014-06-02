@@ -1,0 +1,12 @@
+- find a way to distinguish between local and 'system' options
+  (added Fri Jan  9 03:03:30 2004, incomplete, priority medium)
+
+- provide a way to select 'slaves' to the option
+  (added Fri Jan  9 03:05:00 2004, incomplete, priority medium)
+
+- add a 'Revert' button to the option-selecting stuff
+  (added Sun Jan 11 14:34:10 2004, incomplete, priority medium)
+
+- make adding/removing/editing alternatives work
+  (added Fri Jan  9 03:05:33 2004, incomplete, priority low)
+

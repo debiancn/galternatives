@@ -1,0 +1,209 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-25 18:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../galternatives/main.py:78
+msgid "Unknown/None"
+msgstr ""
+
+#: ../galternatives/main.py:165
+msgid "Alternatives"
+msgstr ""
+
+#: ../galternatives/main.py:208
+msgid ""
+"The file or directory you selected does not exist.\n"
+"Please select a valid one."
+msgstr ""
+
+#: ../galternatives/main.py:255
+msgid "Are you sure you want to remove this option?"
+msgstr ""
+
+#: ../galternatives/main.py:316
+msgid "Choice"
+msgstr ""
+
+#: ../galternatives/main.py:323
+msgid "Priority"
+msgstr ""
+
+#: ../galternatives/main.py:332 ../galternatives.h:16
+msgid "Options"
+msgstr ""
+
+#: ../galternatives/main.py:338
+msgid "Name"
+msgstr ""
+
+#: ../galternatives/main.py:343
+msgid "Slave"
+msgstr ""
+
+#: ../galternatives/main.py:484
+msgid "Running Alternatives Configurator..."
+msgstr ""
+
+#: ../galternatives/main.py:485
+msgid ""
+"<b>I need your root password to run\n"
+"the Alternatives Configurator.</b>"
+msgstr ""
+
+#: ../galternatives/main.py:491
+msgid ""
+"<b>This program should be run as root and /usr/bin/gksu is not available.</"
+"b>\n"
+"\n"
+"I am unable to request the password myself without gksu. Unless you have "
+"modified your system to explicitely allow your normal user to modify the "
+"alternatives system, GAlternatives will not work."
+msgstr ""
+
+#: ../galternatives/main.py:507
+msgid "Testing galternatives..."
+msgstr ""
+
+#: ../galternatives/alternative.py:16 ../galternatives.h:15
+msgid "No description"
+msgstr ""
+
+#.
+#. * Arquivo de strings que podem ser traduzidas gerado pelo Glade.
+#. * Adicione esse arquivo ao POTFILE.in do seu projeto.
+#. * NÃO compile esse arquivo como parte de sua aplicação.
+#.
+#: ../galternatives.h:7
+msgid "G Alternatives"
+msgstr ""
+
+#: ../galternatives.h:8
+msgid "_File"
+msgstr ""
+
+#: ../galternatives.h:9
+msgid "_Help"
+msgstr ""
+
+#: ../galternatives.h:10
+msgid "_About"
+msgstr ""
+
+#: ../galternatives.h:11
+msgid "Status:"
+msgstr ""
+
+#: ../galternatives.h:12
+msgid "auto"
+msgstr ""
+
+#: ../galternatives.h:13
+msgid "manual"
+msgstr ""
+
+#: ../galternatives.h:14
+msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+msgstr ""
+
+#: ../galternatives.h:17
+msgid "Details"
+msgstr ""
+
+#: ../galternatives.h:18
+msgid "Slaves"
+msgstr ""
+
+#: ../galternatives.h:19
+msgid "About G Alternatives"
+msgstr ""
+
+#: ../galternatives.h:20
+msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+msgstr ""
+
+#: ../galternatives.h:21
+msgid ""
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default.\n"
+"\n"
+"(C) 2003 Gustavo Noronha Silva"
+msgstr ""
+
+#: ../galternatives.h:24
+msgid "C_redits"
+msgstr ""
+
+#: ../galternatives.h:25
+msgid "G Alternatives Credits"
+msgstr ""
+
+#: ../galternatives.h:26
+msgid "Gustavo Noronha Silva <kov@debian.org>"
+msgstr ""
+
+#: ../galternatives.h:27
+msgid "Written by"
+msgstr ""
+
+#: ../galternatives.h:28
+msgid "translator_credits"
+msgstr ""
+
+#: ../galternatives.h:29
+msgid "Translated by"
+msgstr ""
+
+#: ../galternatives.h:30
+msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+msgstr ""
+
+#: ../galternatives.h:31
+msgid "Thanks to"
+msgstr ""
+
+#: ../galternatives.h:32
+msgid "Adding option to alternative"
+msgstr ""
+
+#: ../galternatives.h:33
+msgid "Path:"
+msgstr ""
+
+#: ../galternatives.h:34
+msgid "*"
+msgstr ""
+
+#: ../galternatives.h:35
+msgid "_Browse..."
+msgstr ""
+
+#: ../galternatives.h:36
+msgid "Priority:"
+msgstr ""
+
+#: ../galternatives.h:37
+msgid "Select File"
+msgstr ""
+
+#: ../galternatives.desktop.in.h:1
+msgid "Alternatives Configurator"
+msgstr ""
+
+#: ../galternatives.desktop.in.h:2
+msgid "Configure the system default alternatives"
+msgstr ""

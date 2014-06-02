@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+_Name=Alternatives Configurator
+_Comment=Configure the system default alternatives
+Type=Application
+Exec=/usr/sbin/galternatives
+Icon=galternatives
+Terminal=false
+Categories=Settings;GTK;System;
+StartupNotify=true

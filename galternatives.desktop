@@ -1,0 +1,20 @@
+[Desktop Entry]
+Version=1.0
+Name=Alternatives Configurator
+Name[cs]=Nastavení alternativ
+Name[es]=Configurador de alternativas
+Name[fr]=Configurateur d'alternatives
+Name[pt_BR]=Configurador de Alternativas
+Name[sv]=Alternativkonfiguratorn
+Comment=Configure the system default alternatives
+Comment[cs]=Nastaví výchozí alternativy pro celý systém
+Comment[es]=Configurar las alternativas por defecto del sistema
+Comment[fr]=Configuration des alternatives par défaut du système
+Comment[pt_BR]=Configure as alternativas padrão do sistema
+Comment[sv]=Konfigurera systemets standardalternativ
+Type=Application
+Exec=/usr/sbin/galternatives
+Icon=galternatives
+Terminal=false
+Categories=Settings;GTK;System;
+StartupNotify=true

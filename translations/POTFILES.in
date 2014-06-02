@@ -1,0 +1,7 @@
+[encoding: UTF-8]
+galternatives/main.py
+galternatives/alternative.py
+galternatives/common.py
+galternatives.h
+galternatives.desktop.in
+descriptions/x-terminal-emulator.control.in.h

@@ -1,0 +1,6 @@
+galternatives/galternatives usr/sbin/
+galternatives.glade usr/share/galternatives/
+galternatives.desktop usr/share/applications/
+pixmaps/galternatives.png usr/share/pixmaps/
+debian/galternatives.xpm usr/share/pixmaps/
+descriptions/*control usr/share/galternatives/descriptions/

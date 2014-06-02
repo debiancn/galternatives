@@ -1,0 +1,225 @@
+galternatives (0.13.5+nmu3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Change all hardcoded instances of /usr/sbin/update-alternatives to
+    use a variable that points to /usr/bin/update-alternatives.
+    Closes: #749895. Thanks to Margarita Manterola.
+  * Apply Ubuntu's changes:
+    - Update desktop file to current standards and remove empty TryExec
+    - galternatives.desktop.in, galternatives.desktop: add Settings in
+      Categories to install icon in Settings menu entry
+    - debian/galternatives.menu: update section to
+      Applications/System/Administration
+    Closes: #589012. Thanks to Angel Abad.
+    Closes: #472662. Thanks to Stefano Rivera.
+  * Fix typo in main.py. Closes: #550199. Thanks to Chris Leick.
+  * Fix encoding problem in Spanish translation. Closes: #696589.
+    Thanks to Christian Perrier.
+  * Add initial Deutsch translation. Closes: #550197. Thanks to Chris Leick.
+
+ -- Maximiliano Curia <maxy@debian.org>  Mon, 02 Jun 2014 15:35:07 +0200
+
+galternatives (0.13.5+nmu2) unstable; urgency=low
+
+  [ Piotr Ożarowski ]
+  * Non-maintainer upload.
+  * Change XS-Python-Version from "current" to ">= 2.4" (closes: #586317)
+
+  [ Andreas Barth ]
+  * actually uploading to unstable
+
+ -- Andreas Barth <aba@not.so.argh.org>  Fri, 25 Jun 2010 18:37:51 +0000
+
+galternatives (0.13.5) unstable; urgency=low
+
+  * take over package (Closes: #365365)
+  * fix problem with rebuilding package by converting to dh7
+    (Closes: #574767)
+
+ -- Ryan Niebur <ryan@debian.org>  Mon, 29 Mar 2010 00:03:14 -0700
+
+galternatives (0.13.4) unstable; urgency=low
+
+  * QA upload.
+  * translations/merge-translations.sh: Fix bashism.  Closes: #384824.
+  * Build-depend on debhelper (>= 5.0.37.2) for new dh_python.
+
+ -- Matej Vela <vela@debian.org>  Sun, 27 Aug 2006 10:13:45 +0200
+
+galternatives (0.13.3) unstable; urgency=low
+
+  * QA Upload
+  * Add Manpage (Closes: #379563)
+    debian/rules: add DEB_INSTALL_MANPAGES_xx
+
+ -- Michael Ablassmeier <abi@debian.org>  Mon,  7 Aug 2006 17:22:31 +0200
+
+galternatives (0.13.2) unstable; urgency=low
+
+  * QA upload.
+  * Update package to the last python policy (Closes: #380803).
+
+ -- Pierre Habouzit <madcoder@debian.org>  Tue,  1 Aug 2006 21:39:35 +0200
+
+galternatives (0.13.1) unstable; urgency=low
+
+  * QA Upload
+  * Add Swedish and Czech translations (Closes: #348058, #361665)
+  * Move Debhelper and CDBS to Build-Depends
+  * Conforms with new Standards Version 
+
+ -- Michael Ablassmeier <abi@debian.org>  Wed, 17 May 2006 14:48:10 +0200
+
+galternatives (0.13) unstable; urgency=low
+
+  * Orphaning thepackage.
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Sat, 29 Apr 2006 12:10:59 -0300
+
+galternatives (0.12) unstable; urgency=low
+
+  * debian/galternatives.menu:
+  - accepted patch by Guilherme de S. Pastore <gpastore@colband.com.br>
+    to fix the misuse of the hints field (Closes: #314398)
+  * translations/fr.po:
+  - updated by Christian Perrier <bubulle@debian.org> (Closes: #298520)
+  * galternatives/main.py:
+  - accepted patch by Kazuhiro NISHIYAMA <zn@mbf.nifty.com> to sort 
+    by priority and right-align it (Closes: #301002)
+  * debian/control:
+  - increased Standards-Version with no changes
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Wed, 17 Aug 2005 22:41:25 -0300
+
+galternatives (0.11) unstable; urgency=low
+
+  * New release
+  * galternatives/main.py, galternatives/galternatives:
+  - look for /usr/bin/gksu before using it when being ran by a 
+    normal user and, if it is not found, show a dialog saying
+    things are probably not work.
+  * debian/control:
+  - change Depends on gksu to Recommends and conflicts with
+    versions before 0.8.0, to avoid breakage (Closes: #276967)
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Wed,  8 Dec 2004 00:05:26 -0200
+
+galternatives (0.10) unstable; urgency=medium
+
+  * New release
+  * galternatives/alternative.py:
+  - no longer provide a default argument to 'status' on
+    Alternative.set_option_status method
+  * galternatives/main.py:
+  - fixed property names to use the Alternative class instead
+    of the old self.* stuff for the alternative name and link
+    (Closes: #281629)
+  * urgency medium because it fixes a nasty bug
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Mon, 22 Nov 2004 01:53:02 -0200
+
+galternatives (0.9) unstable; urgency=low
+
+  * New release
+  * galternatives/main.py, galternatives/alternative.py:
+  - also include 'unixname' to hold the name of the file and
+    alternative besides the name given by the description
+    file (Closes: #263547)
+  * galternatives/main.py:
+  - replace all gtk.mainloop's for gtk.main's and all
+    gtk.mainquit's for gtk.main_quit's (Closes: #275590)
+  - options are now ordered by priority (Closes: #256538)
+  * translations/{update-po,merge-translations}.sh:
+  - fixed to show what languages are being dealt with at the
+    moment
+  * translations/pt_BR/galternatives.po:
+  - translation updated
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Mon, 11 Oct 2004 16:05:07 -0300
+
+galternatives (0.8) unstable; urgency=low
+
+  * New release
+  * galternatives/main.py:
+  - fixed problems with toggle buttons and manual/auto 
+    menu not behaving (Closes: #254350, #254406)
+  * debian/control:
+  - added python to Build-Depends-Indep (Closes: 254141)
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Mon, 14 Jun 2004 19:01:16 -0300
+
+galternatives (0.7) unstable; urgency=low
+
+  * New release
+  - first release to unstable
+  - uses first-try setup.py
+  * main.py, galternatives, alternative.py:
+  - modified to accept the new locations of the descriptions,
+    image and description files (/usr/share/galternatives subdirs)
+  - galternative is now a Python script instead of a
+    shell script
+  * debian/galternatives.menu:
+  - added quotes to make lintian happy
+  * debian/control:
+  - Standards-Version 3.6.1, no changes
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Sat, 12 Jun 2004 12:31:13 -0300
+
+galternatives (0.6) experimental; urgency=low
+
+  * New release
+  * main.py:
+  - add option dialog now has the file selector that works and
+    the spinbutton is being taken into account
+  * translations/fr.po:
+  - new translation, by seb128!
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Thu, 22 Jan 2004 13:01:54 -0200
+
+galternatives (0.5) experimental; urgency=low
+
+  * New release
+  * main.py:
+  - fixed problem with image
+  - made debuging optional through a --debug command line
+    (Closes: #226336)
+  * debian/galternatives.install:
+  - use pixmaps/galternatives.png to install, instead of
+    ./galternatives.png, which I now removed
+  * debian/docs, TODO:
+  - adding a small TODO file to list what needs to be worked
+    on right now
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Fri,  9 Jan 2004 02:31:31 -0200
+
+galternatives (0.4) experimental; urgency=low
+
+  * New release
+  - implements adding and removing options
+  - better parser, now uses /var/lib/dpkg/alternatives/ files,
+    no longer parses update-alternatives output
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Mon, 22 Dec 2003 23:34:27 -0200
+
+galternatives (0.3) experimental; urgency=low
+
+  * New release
+  - implementing menu stuff, credits and basic UI for new
+    features like adding new alternatives/options
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Sun,  7 Dec 2003 13:40:07 -0200
+
+galternatives (0.2) experimental; urgency=low
+
+  * New release
+  - provide basic infra-structure to handle descriptions for the
+    alternatives
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Mon, 17 Nov 2003 23:56:11 -0200
+
+galternatives (0.1) experimental; urgency=low
+
+  * Initial release.
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Sat, 15 Nov 2003 09:37:01 -0200
+
