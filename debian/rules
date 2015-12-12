@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+CMD=$(subst override_,,$@)
+
+%:
+	dh --buildsystem=python_distutils --with python2 $@
+
+override_dh_auto_build:
+	/bin/sh translations/update-translations.sh
+	$(CMD)
+
+override_dh_auto_install:
+	/bin/sh translations/install-translations.sh
+	$(CMD)

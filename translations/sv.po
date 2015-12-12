@@ -1,0 +1,224 @@
+# Swedish translation of galternatives.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the galternatives package.
+# Daniel Nylander <po@danielnylander.se>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: galternatives 0.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-25 18:42+0000\n"
+"PO-Revision-Date: 2006-01-14 17:19+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../galternatives/main.py:78
+msgid "Unknown/None"
+msgstr "Okänd/Ingen"
+
+#: ../galternatives/main.py:165
+msgid "Alternatives"
+msgstr "Alternativ"
+
+#: ../galternatives/main.py:208
+msgid ""
+"The file or directory you selected does not exist.\n"
+"Please select a valid one."
+msgstr ""
+"Filen eller katalogen du valde existerar inte.\n"
+"Välj en giltig."
+
+#: ../galternatives/main.py:255
+msgid "Are you sure you want to remove this option?"
+msgstr "Är du säker att du vill ta bort detta alternativ?"
+
+#: ../galternatives/main.py:316
+msgid "Choice"
+msgstr "Val"
+
+#: ../galternatives/main.py:323
+msgid "Priority"
+msgstr "Prioritet"
+
+#: ../galternatives/main.py:332 ../galternatives.h:16
+msgid "Options"
+msgstr "Alternativ"
+
+#: ../galternatives/main.py:338
+msgid "Name"
+msgstr "Namn"
+
+#: ../galternatives/main.py:343
+msgid "Slave"
+msgstr "Slav"
+
+#: ../galternatives/main.py:484
+msgid "Running Alternatives Configurator..."
+msgstr "Kör Alternativkonfiguratorn..."
+
+#: ../galternatives/main.py:485
+msgid ""
+"<b>I need your root password to run\n"
+"the Alternatives Configurator.</b>"
+msgstr ""
+"<b>Jag behöver ditt root-lösenord för\n"
+"att köra Alternativkonfiguratorn.</b>"
+
+#: ../galternatives/main.py:491
+msgid ""
+"<b>This program should be run as root and /usr/bin/gksu is not available.</"
+"b>\n"
+"\n"
+"I am unable to request the password myself without gksu. Unless you have "
+"modified your system to explicitely allow your normal user to modify the "
+"alternatives system, GAlternatives will not work."
+msgstr ""
+"<b>Detta program bör köras som root och /usr/bin/gksu är inte tillgänglig.</"
+"b>\n"
+"\n"
+"Jag kan inte begära lösenordet själv utan gksu. Om du inte har modifierat "
+"ditt system att specifikt tillåta din normala användare att modifiera "
+"alterativsystemet kommer GAlternatives inte att fungera."
+
+#: ../galternatives/main.py:507
+msgid "Testing galternatives..."
+msgstr "Testar galternatives..."
+
+#: ../galternatives/alternative.py:16 ../galternatives.h:15
+msgid "No description"
+msgstr "Ingen beskrivning"
+
+#.
+#. * Arquivo de strings que podem ser traduzidas gerado pelo Glade.
+#. * Adicione esse arquivo ao POTFILE.in do seu projeto.
+#. * NÃO compile esse arquivo como parte de sua aplicação.
+#.
+#: ../galternatives.h:7
+msgid "G Alternatives"
+msgstr "G Alternatives"
+
+#: ../galternatives.h:8
+msgid "_File"
+msgstr "_Arkiv"
+
+#: ../galternatives.h:9
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: ../galternatives.h:10
+msgid "_About"
+msgstr "_Om"
+
+#: ../galternatives.h:11
+msgid "Status:"
+msgstr "Status:"
+
+#: ../galternatives.h:12
+msgid "auto"
+msgstr "auto"
+
+#: ../galternatives.h:13
+msgid "manual"
+msgstr "manuell"
+
+#: ../galternatives.h:14
+msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+msgstr "<span size=\"xx-large\" weight=\"bold\">Alternativ</span>"
+
+#: ../galternatives.h:17
+msgid "Details"
+msgstr "Detaljer"
+
+#: ../galternatives.h:18
+msgid "Slaves"
+msgstr "Slavar"
+
+#: ../galternatives.h:19
+msgid "About G Alternatives"
+msgstr "Om G Alternatives"
+
+#: ../galternatives.h:20
+msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+msgstr "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+
+#: ../galternatives.h:21
+msgid ""
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default.\n"
+"\n"
+"(C) 2003 Gustavo Noronha Silva"
+msgstr ""
+"Ett verktyg att hjälpa administratören att välja vilka program som ger "
+"specifika tjänster för användarna som standard.\n"
+"\n"
+"(C) 2003 Gustavo Noronha Silva"
+
+#: ../galternatives.h:24
+msgid "C_redits"
+msgstr "Med_verkande"
+
+#: ../galternatives.h:25
+msgid "G Alternatives Credits"
+msgstr "Medverkande i G Alternatives"
+
+#: ../galternatives.h:26
+msgid "Gustavo Noronha Silva <kov@debian.org>"
+msgstr "Gustavo Noronha Silva <kov@debian.org>"
+
+#: ../galternatives.h:27
+msgid "Written by"
+msgstr "Skrivet av"
+
+#: ../galternatives.h:28
+msgid "translator_credits"
+msgstr ""
+"Daniel Nylander <po@danielnylander.se>\n"
+"Skicka synpunkter på översättningen till <tp-sv@listor.tp-sv.se>"
+
+#: ../galternatives.h:29
+msgid "Translated by"
+msgstr "Översatt av"
+
+#: ../galternatives.h:30
+msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+
+#: ../galternatives.h:31
+msgid "Thanks to"
+msgstr "Tack till"
+
+#: ../galternatives.h:32
+msgid "Adding option to alternative"
+msgstr "Lägger till nytt alternativ"
+
+#: ../galternatives.h:33
+msgid "Path:"
+msgstr "Sökväg:"
+
+#: ../galternatives.h:34
+msgid "*"
+msgstr "*"
+
+#: ../galternatives.h:35
+msgid "_Browse..."
+msgstr "_Bläddra..."
+
+#: ../galternatives.h:36
+msgid "Priority:"
+msgstr "Prioritet:"
+
+#: ../galternatives.h:37
+msgid "Select File"
+msgstr "Välj fil"
+
+#: ../galternatives.desktop.in.h:1
+msgid "Alternatives Configurator"
+msgstr "Alternativkonfiguratorn"
+
+#: ../galternatives.desktop.in.h:2
+msgid "Configure the system default alternatives"
+msgstr "Konfigurera systemets standardalternativ"
