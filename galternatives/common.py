@@ -1,4 +1,4 @@
 #!/usr/bin/python
 
 PACKAGE='galternatives'
-VERSION='0.9'
+VERSION='0.13.5'

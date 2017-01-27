@@ -1,4 +1,4 @@
-galternatives (0.13.5+nmu1) unstable; urgency=medium
+galternatives (0.13.5+nmu4.1) unstable; urgency=medium
 
   * Non-maintainer upload.
   * Apply "wrap-and-sort -abst".
@@ -17,6 +17,8 @@ galternatives (0.13.5+nmu1) unstable; urgency=medium
     + Refresh translations.
     + Add Simplified Chinese translation.
   * add a .gitignore file for .mo files.
+  * bump "galternatives" python package version to 0.13.5.
+  * remove obsoleted line for "list-mos.sh" in setup.py.
 
  -- Boyuan Yang <073plan@gmail.com>  Fri, 27 Jan 2017 11:12:47 +0800
 
