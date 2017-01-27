@@ -1,3 +1,18 @@
+galternatives (0.13.5+nmu1) UNRELEASED; urgency=medium
+
+  * Non-maintainer upload.
+  * Apply "wrap-and-sort -abst".
+  * d/compat: bump to v10.
+  * d/menu: drop obsoleted xpm file and menu file.
+  * debian/control:
+    + Bump Standards-Version to 3.9.8. (No change needed)
+    + Bump dependency to debhelper to 10~.
+  * d/copyright: rewrite with machine-readable format.
+    - Explicitly mark license as GPL-1+ since original declaration
+      only said "GPL".
+
+ -- Boyuan Yang <073plan@gmail.com>  Fri, 27 Jan 2017 10:07:19 +0800
+
 galternatives (0.13.5+nmu4) unstable; urgency=medium
 
   * Non-maintainer upload.
