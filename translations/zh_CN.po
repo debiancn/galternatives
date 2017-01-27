@@ -1,77 +1,76 @@
-# Translation of galternatives to German
-# Copyright (C) 2003 Gustavo Noronha Silva <kov@debian.org>.
-# This file is distributed under the same license as the galternatives 
-# package.
-# Chris Leick <c.leick@vollbio.de>, 2009.
+# Simplified Chinese translation for G Alternatives.
+# Copyright (C) 2003, Gustavo Noronha Silva <kov@debian.org>
+# This file is distributed under the same license as the galternatives package.
+# Boyuan Yang <073plan@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: galternatives 0.13.4\n"
+"Project-Id-Version: galternatives 0.13.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-27 11:08+0800\n"
-"PO-Revision-Date: 2009-10-07 19:41+GMT\n"
-"Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
-"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2017-01-27 10:41+0800\n"
+"Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../galternatives/main.py:80
 msgid "Unknown/None"
-msgstr "Unbekannt/Keine"
+msgstr "未知/无"
 
 #: ../galternatives/main.py:167
 msgid "Alternatives"
-msgstr "Alternativen"
+msgstr "可选项"
 
 #: ../galternatives/main.py:210
 msgid ""
 "The file or directory you selected does not exist.\n"
 "Please select a valid one."
 msgstr ""
-"Die Datei oder das Verzeichnis, das Sie ausgewählt haben, existiert nicht.\n"
-"Bitte wählen Sie ein gültiges."
+"您选择的文件或目录不存在。\n"
+"请选择一个有效的项目。"
 
 #: ../galternatives/main.py:257
 msgid "Are you sure you want to remove this option?"
-msgstr "Sind Sie sicher, dass Sie diese Option entfernen möchten?"
+msgstr "您确定要删除这个选项吗？"
 
 #: ../galternatives/main.py:319
 msgid "Choice"
-msgstr "Auswahl"
+msgstr "选择项"
 
 #: ../galternatives/main.py:326
 msgid "Priority"
-msgstr "Priorität"
+msgstr "优先级"
 
 #: ../galternatives/main.py:335 ../galternatives.h:16
 msgid "Options"
-msgstr "Optionen"
+msgstr "可选项"
 
 #: ../galternatives/main.py:341
 msgid "Name"
-msgstr "Name"
+msgstr "名称"
 
 #: ../galternatives/main.py:346
 msgid "Slave"
-msgstr "Slave"
+msgstr "子配置"
 
 #: ../galternatives/main.py:487
 msgid "Running Alternatives Configurator..."
-msgstr "Alternativen-Einrichter wird ausgeführt ..."
+msgstr "正在运行可选项配置工具..."
 
 #: ../galternatives/main.py:488
 msgid ""
 "<b>I need your root password to run\n"
 "the Alternatives Configurator.</b>"
 msgstr ""
-"<b>Ihr root-Passwort wird zur Ausführung\n"
-"des Alternativen-Einrichters benötigt.</b>"
+"<b>我需要您的 root 密码来运行\n"
+"可选项配置工具。</b>"
 
 #: ../galternatives/main.py:494
-#, fuzzy
 msgid ""
 "<b>This program should be run as root and /usr/bin/gksu is not available.</"
 "b>\n"
@@ -80,21 +79,18 @@ msgid ""
 "modified your system to explicitly allow your normal user to modify the "
 "alternatives system, GAlternatives will not work."
 msgstr ""
-"<b>Dieses Programm sollte als root ausgeführt werden und /usr/bin/gksu ist "
-"nicht verfügbar.</b>\n"
+"<b>该程序应当以 root 用户身份运行，但是 /usr/bin/gksu 不可用。</b>\n"
 "\n"
-"Das Passwort kann ohne gksu nicht abgefragt werden. Sofern Sie Ihr System "
-"nicht so geändert haben, dass ihrem normalen Benutzer ausdrücklich erlaubt "
-"wird das Alternativen-System zu verändern, wird GAlternatives nicht "
-"funktionieren."
+"没有 gksu，我无法自行请求密码。除非您修改了您的系统配置以使得 alternatives 系"
+"统可以允许普通用户进行修改，GAltarnatives 将无法工作。"
 
 #: ../galternatives/main.py:510
 msgid "Testing galternatives..."
-msgstr "galternatives wird getestet ..."
+msgstr "正在测试 galternatives..."
 
 #: ../galternatives/alternative.py:16 ../galternatives.h:15
 msgid "No description"
-msgstr "Keine Beschreibung"
+msgstr "无描述"
 
 #.
 #. * Arquivo de strings que podem ser traduzidas gerado pelo Glade.
@@ -103,51 +99,51 @@ msgstr "Keine Beschreibung"
 #.
 #: ../galternatives.h:7
 msgid "G Alternatives"
-msgstr "G-Alternatives"
+msgstr "G Alternatives"
 
 #: ../galternatives.h:8
 msgid "_File"
-msgstr "_Datei"
+msgstr "文件(_F)"
 
 #: ../galternatives.h:9
 msgid "_Help"
-msgstr "_Hilfe"
+msgstr "帮助(_H)"
 
 #: ../galternatives.h:10
 msgid "_About"
-msgstr "_Über"
+msgstr "关于(_A)"
 
 #: ../galternatives.h:11
 msgid "Status:"
-msgstr "Status:"
+msgstr "状态："
 
 #: ../galternatives.h:12
 msgid "auto"
-msgstr "automatisch"
+msgstr "自动"
 
 #: ../galternatives.h:13
 msgid "manual"
-msgstr "manuell"
+msgstr "手动"
 
 #: ../galternatives.h:14
 msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
-msgstr "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+msgstr "<span size=\"xx-large\" weight=\"bold\">可选项</span>"
 
 #: ../galternatives.h:17
 msgid "Details"
-msgstr "Details"
+msgstr "详细信息"
 
 #: ../galternatives.h:18
 msgid "Slaves"
-msgstr "Slaves"
+msgstr "子配置"
 
 #: ../galternatives.h:19
 msgid "About G Alternatives"
-msgstr "Über G-Alternatives"
+msgstr "关于 G Alternatives"
 
 #: ../galternatives.h:20
 msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
-msgstr "<span size=\"xx-large\" weight=\"bold\">G-Alternatives</span>"
+msgstr "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
 
 #: ../galternatives.h:21
 msgid ""
@@ -156,18 +152,17 @@ msgid ""
 "\n"
 "(C) 2003 Gustavo Noronha Silva"
 msgstr ""
-"Ein Werkzeug, das dem Administrator hilft, Programme auszuwählen, die dem "
-"Benutzer spezielle Dienste als Vorgabe bereitstellen.\n"
+"帮助管理员选择为用户提供特定服务的默认选项的一个工具。\n"
 "\n"
 "(C) 2003 Gustavo Noronha Silva"
 
 #: ../galternatives.h:24
 msgid "C_redits"
-msgstr "_Danksagungen"
+msgstr "鸣谢(_R)"
 
 #: ../galternatives.h:25
 msgid "G Alternatives Credits"
-msgstr "G-Alternatives Danksagungen"
+msgstr "G Altarnatives 鸣谢信息"
 
 #: ../galternatives.h:26
 msgid "Gustavo Noronha Silva <kov@debian.org>"
@@ -175,15 +170,15 @@ msgstr "Gustavo Noronha Silva <kov@debian.org>"
 
 #: ../galternatives.h:27
 msgid "Written by"
-msgstr "Geschrieben von"
+msgstr "作者"
 
 #: ../galternatives.h:28
 msgid "translator_credits"
-msgstr "Chris Leick <c.leick@vollbio.de>"
+msgstr "Boyuan Yang <073plan@gmail.com>"
 
 #: ../galternatives.h:29
 msgid "Translated by"
-msgstr "Übersetzt von"
+msgstr "翻译贡献者"
 
 #: ../galternatives.h:30
 msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
@@ -191,15 +186,15 @@ msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
 
 #: ../galternatives.h:31
 msgid "Thanks to"
-msgstr "Dank an"
+msgstr "感谢"
 
 #: ../galternatives.h:32
 msgid "Adding option to alternative"
-msgstr "Option zur Alternative hinzufügen"
+msgstr "向可选项列表中添加选项"
 
 #: ../galternatives.h:33
 msgid "Path:"
-msgstr "Pfad:"
+msgstr "路径："
 
 #: ../galternatives.h:34
 msgid "*"
@@ -207,20 +202,20 @@ msgstr "*"
 
 #: ../galternatives.h:35
 msgid "_Browse..."
-msgstr "_Durchstöbern ..."
+msgstr "浏览(_B)..."
 
 #: ../galternatives.h:36
 msgid "Priority:"
-msgstr "Priorität:"
+msgstr "优先级："
 
 #: ../galternatives.h:37
 msgid "Select File"
-msgstr "Datei auswählen"
+msgstr "选择文件"
 
 #: ../galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
-msgstr "Alternativeneinrichter"
+msgstr "可选项配置工具"
 
 #: ../galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
-msgstr "Die Standard-Alternativen des Systems einrichten."
+msgstr "配置系统可选项的默认值"

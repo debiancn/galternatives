@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-25 18:42+0000\n"
+"POT-Creation-Date: 2017-01-27 11:08+0800\n"
 "PO-Revision-Date: 2004-12-08 00:07-0200\n"
 "Last-Translator: Gustavo Noronha Silva <kov@debina.org>\n"
 "Language-Team: Debian Brasil <debian-l10n-portuguese@lists.debian.org>\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../galternatives/main.py:78
+#: ../galternatives/main.py:80
 msgid "Unknown/None"
 msgstr "Desconhecido/Nenhum"
 
-#: ../galternatives/main.py:165
+#: ../galternatives/main.py:167
 msgid "Alternatives"
 msgstr "Alternativas"
 
-#: ../galternatives/main.py:208
+#: ../galternatives/main.py:210
 msgid ""
 "The file or directory you selected does not exist.\n"
 "Please select a valid one."
@@ -32,35 +32,35 @@ msgstr ""
 "O arquivo ou diretório que você selecionou não existe.\n"
 "Por favor selecione um caminha válido."
 
-#: ../galternatives/main.py:255
+#: ../galternatives/main.py:257
 msgid "Are you sure you want to remove this option?"
 msgstr "Tem certeza de que quer remover essa opção?"
 
-#: ../galternatives/main.py:316
+#: ../galternatives/main.py:319
 msgid "Choice"
 msgstr "Escolha"
 
-#: ../galternatives/main.py:323
+#: ../galternatives/main.py:326
 msgid "Priority"
 msgstr "Prioridade"
 
-#: ../galternatives/main.py:332 ../galternatives.h:16
+#: ../galternatives/main.py:335 ../galternatives.h:16
 msgid "Options"
 msgstr "Opções"
 
-#: ../galternatives/main.py:338
+#: ../galternatives/main.py:341
 msgid "Name"
 msgstr "Nome"
 
-#: ../galternatives/main.py:343
+#: ../galternatives/main.py:346
 msgid "Slave"
 msgstr "Ajudantes"
 
-#: ../galternatives/main.py:484
+#: ../galternatives/main.py:487
 msgid "Running Alternatives Configurator..."
 msgstr "Executando o Configurador de Alternativas..."
 
-#: ../galternatives/main.py:485
+#: ../galternatives/main.py:488
 msgid ""
 "<b>I need your root password to run\n"
 "the Alternatives Configurator.</b>"
@@ -68,13 +68,14 @@ msgstr ""
 "<b>Eu preciso da sua senha de administrador para\n"
 "executar o Configurador de Alternativas.</b>"
 
-#: ../galternatives/main.py:491
+#: ../galternatives/main.py:494
+#, fuzzy
 msgid ""
 "<b>This program should be run as root and /usr/bin/gksu is not available.</"
 "b>\n"
 "\n"
 "I am unable to request the password myself without gksu. Unless you have "
-"modified your system to explicitely allow your normal user to modify the "
+"modified your system to explicitly allow your normal user to modify the "
 "alternatives system, GAlternatives will not work."
 msgstr ""
 "<b>Esse programa deve ser executado como root e o /usr/bin/gksu não está "
@@ -84,7 +85,7 @@ msgstr ""
 "tenha modificado seu sistema explicitamente para permitir que seu usuário "
 "comum modifique o sistema de alternatives o GAlternatives não funcionará."
 
-#: ../galternatives/main.py:507
+#: ../galternatives/main.py:510
 msgid "Testing galternatives..."
 msgstr "Testando o galternatives..."
 

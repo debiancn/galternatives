@@ -1,4 +1,4 @@
-galternatives (0.13.5+nmu1) UNRELEASED; urgency=medium
+galternatives (0.13.5+nmu1) unstable; urgency=medium
 
   * Non-maintainer upload.
   * Apply "wrap-and-sort -abst".
@@ -7,11 +7,16 @@ galternatives (0.13.5+nmu1) UNRELEASED; urgency=medium
   * debian/control:
     + Bump Standards-Version to 3.9.8. (No change needed)
     + Bump dependency to debhelper to 10~.
+    + Write collab-maint url for Vcs-*.
   * d/copyright: rewrite with machine-readable format.
     - Explicitly mark license as GPL-1+ since original declaration
       only said "GPL".
+  * translation:
+    + Refresh translations.
+    + Add Simplified Chinese translation.
+  * add a .gitignore file for .mo files.
 
- -- Boyuan Yang <073plan@gmail.com>  Fri, 27 Jan 2017 10:07:19 +0800
+ -- Boyuan Yang <073plan@gmail.com>  Fri, 27 Jan 2017 10:23:09 +0800
 
 galternatives (0.13.5+nmu4) unstable; urgency=medium
 

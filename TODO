@@ -10,3 +10,6 @@
 - make adding/removing/editing alternatives work
   (added Fri Jan  9 03:05:33 2004, incomplete, priority low)
 
+- either recover the dead project on Alioth, or put the package
+  into collab-maint. (See https://alioth.debian.org/projects/galternatives/).
+  (added Fri Jan 27 10:13:32 2017, incomplete, priority high)
