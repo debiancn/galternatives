@@ -16,14 +16,16 @@ if sys.argv[1] == 'build' or sys.argv[1] == 'install':
     os.chdir ('%s/translations' % (curdir))
     os.system ('./update-translations.sh')
 
-    pipe = os.popen ('./list-mos.sh')
-    while True:
-        line = pipe.readline ().strip ()
-        if line == '':
-            break
-        data.append (('share/locale/%s/LC_MESSAGES' % (line), ['translations/%s/galternatives.mo' % (line)]))
-    pipe.close ()
-    print data
+## list-mos.sh has disappeared and no longer working.
+#    pipe = os.popen ('./list-mos.sh')
+#    while True:
+#        line = pipe.readline ().strip ()
+#        if line == '':
+#            break
+#        data.append (('share/locale/%s/LC_MESSAGES' % (line), ['translations/%s/galternatives.mo' % (line)]))
+#    pipe.close ()
+
+    print(data)
     os.chdir (curdir)
 
 if __name__ == '__main__' :
@@ -33,7 +35,7 @@ if __name__ == '__main__' :
           description           = "Manager for the alternatives system",
           author                = "Gustavo Noronha Silva",
           author_email          = "kov@debian.org",
-          url                   = "http://galternatives.alioth.debian.org/",
+          url                   = "https://galternatives.alioth.debian.org/",
           packages              = [ 'galternatives' ],
           data_files		= data)
 
