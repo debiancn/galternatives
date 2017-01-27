@@ -3,7 +3,7 @@
 CMD=$(subst override_,,$@)
 
 %:
-	dh --buildsystem=python_distutils --with python2 $@
+	dh $@ --buildsystem=python_distutils --with python2
 
 override_dh_auto_build:
 	/bin/sh translations/update-translations.sh
