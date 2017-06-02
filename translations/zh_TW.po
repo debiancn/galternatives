@@ -1,0 +1,219 @@
+# Traditional Chinese translation for G Alternatives.
+# Copyright (C) 2003, Gustavo Noronha Silva <kov@debian.org>
+# This file is distributed under the same license as the galternatives package.
+# Yangfl <mmyangfl@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: galternatives 0.13.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-27 11:08+0800\n"
+"PO-Revision-Date: 2017-06-02 16:13+0800\n"
+"Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../galternatives/main.py:80
+msgid "Unknown/None"
+msgstr "未知/無"
+
+#: ../galternatives/main.py:167
+msgid "Alternatives"
+msgstr "可選項"
+
+#: ../galternatives/main.py:210
+msgid ""
+"The file or directory you selected does not exist.\n"
+"Please select a valid one."
+msgstr ""
+"您選擇的檔案或目錄不存在。\n"
+"請選擇一個有效的項目。"
+
+#: ../galternatives/main.py:257
+msgid "Are you sure you want to remove this option?"
+msgstr "您確定要刪除這個選項嗎？"
+
+#: ../galternatives/main.py:319
+msgid "Choice"
+msgstr "選擇項"
+
+#: ../galternatives/main.py:326
+msgid "Priority"
+msgstr "優先級"
+
+#: ../galternatives/main.py:335 ../galternatives.h:16
+msgid "Options"
+msgstr "可選項"
+
+#: ../galternatives/main.py:341
+msgid "Name"
+msgstr "名稱"
+
+#: ../galternatives/main.py:346
+msgid "Slave"
+msgstr "子配置"
+
+#: ../galternatives/main.py:487
+msgid "Running Alternatives Configurator..."
+msgstr "正在執行可選項配置工具..."
+
+#: ../galternatives/main.py:488
+msgid ""
+"<b>I need your root password to run\n"
+"the Alternatives Configurator.</b>"
+msgstr ""
+"<b>我需要您的 root 密碼來執行\n"
+"可選項配置工具。</b>"
+
+#: ../galternatives/main.py:494
+msgid ""
+"<b>This program should be run as root and /usr/bin/gksu is not available.</"
+"b>\n"
+"\n"
+"I am unable to request the password myself without gksu. Unless you have "
+"modified your system to explicitly allow your normal user to modify the "
+"alternatives system, GAlternatives will not work."
+msgstr ""
+"<b>該程式應當以 root 使用者身分執行，但是 /usr/bin/gksu 不可用。</b>\n"
+"\n"
+"沒有 gksu，我無法自行請求密碼。除非您修改了您的系統組態以使得 alternatives 系"
+"統可以允許普通使用者進行修改，GAltarnatives 將無法工作。"
+
+#: ../galternatives/main.py:510
+msgid "Testing galternatives..."
+msgstr "正在測試 galternatives..."
+
+#: ../galternatives/alternative.py:16 ../galternatives.h:15
+msgid "No description"
+msgstr "無描述"
+
+#.
+#. * Arquivo de strings que podem ser traduzidas gerado pelo Glade.
+#. * Adicione esse arquivo ao POTFILE.in do seu projeto.
+#. * NÃO compile esse arquivo como parte de sua aplicação.
+#.
+#: ../galternatives.h:7
+msgid "G Alternatives"
+msgstr "G Alternatives"
+
+#: ../galternatives.h:8
+msgid "_File"
+msgstr "檔案(_F)"
+
+#: ../galternatives.h:9
+msgid "_Help"
+msgstr "幫助(_H)"
+
+#: ../galternatives.h:10
+msgid "_About"
+msgstr "關於(_A)"
+
+#: ../galternatives.h:11
+msgid "Status:"
+msgstr "狀態："
+
+#: ../galternatives.h:12
+msgid "auto"
+msgstr "自動"
+
+#: ../galternatives.h:13
+msgid "manual"
+msgstr "手動"
+
+#: ../galternatives.h:14
+msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+msgstr "<span size=\"xx-large\" weight=\"bold\">可選項</span>"
+
+#: ../galternatives.h:17
+msgid "Details"
+msgstr "詳細資訊"
+
+#: ../galternatives.h:18
+msgid "Slaves"
+msgstr "子配置"
+
+#: ../galternatives.h:19
+msgid "About G Alternatives"
+msgstr "關於 G Alternatives"
+
+#: ../galternatives.h:20
+msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+msgstr "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+
+#: ../galternatives.h:21
+msgid ""
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default.\n"
+"\n"
+"(C) 2003 Gustavo Noronha Silva"
+msgstr ""
+"幫助管理員選擇為使用者提供特定服務的預設選項的一個工具。\n"
+"\n"
+"(C) 2003 Gustavo Noronha Silva"
+
+#: ../galternatives.h:24
+msgid "C_redits"
+msgstr "鳴謝(_R)"
+
+#: ../galternatives.h:25
+msgid "G Alternatives Credits"
+msgstr "G Altarnatives 鳴謝資訊"
+
+#: ../galternatives.h:26
+msgid "Gustavo Noronha Silva <kov@debian.org>"
+msgstr "Gustavo Noronha Silva <kov@debian.org>"
+
+#: ../galternatives.h:27
+msgid "Written by"
+msgstr "作者"
+
+#: ../galternatives.h:28
+msgid "translator_credits"
+msgstr "Yangfl <mmyangfl@gmail.com>"
+
+#: ../galternatives.h:29
+msgid "Translated by"
+msgstr "翻譯貢獻者"
+
+#: ../galternatives.h:30
+msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+
+#: ../galternatives.h:31
+msgid "Thanks to"
+msgstr "感謝"
+
+#: ../galternatives.h:32
+msgid "Adding option to alternative"
+msgstr "向可選項列表中添加選項"
+
+#: ../galternatives.h:33
+msgid "Path:"
+msgstr "路徑："
+
+#: ../galternatives.h:34
+msgid "*"
+msgstr "*"
+
+#: ../galternatives.h:35
+msgid "_Browse..."
+msgstr "瀏覽(_B)..."
+
+#: ../galternatives.h:36
+msgid "Priority:"
+msgstr "優先級："
+
+#: ../galternatives.h:37
+msgid "Select File"
+msgstr "選擇檔案"
+
+#: ../galternatives.desktop.in.h:1
+msgid "Alternatives Configurator"
+msgstr "可選項配置工具"
+
+#: ../galternatives.desktop.in.h:2
+msgid "Configure the system default alternatives"
+msgstr "配置系統可選項的預設值"
