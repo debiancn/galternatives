@@ -1,0 +1,5 @@
+PACKAGE = 'galternatives'
+VERSION = '0.13.5'
+DESC_DIR = '/usr/share/galternatives/descriptions'
+GLADE_PATH = '/usr/share/galternatives/galternatives.glade'
+ABOUT_IMAGE_PATH = '/usr/share/pixmaps/galternatives.png'

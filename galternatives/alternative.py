@@ -1,167 +1,109 @@
-#!/usr/bin/python
+from __future__ import nested_scopes, generators, division, absolute_import, \
+    with_statement, print_function
 
-from common import PACKAGE
-import os, gettext
+from . import logger
+from .appdata import PACKAGE, DESC_DIR
+
+import os
+import gettext
+import sys
+
+if sys.version_info >= (3,):
+    import configparser
+else:
+    import ConfigParser
+    configparser = None
 
 _ = gettext.gettext
 
-from gadebug import print_debug
+
+ALT_DB_DIR = '/var/lib/dpkg/alternatives'
+ALT_LINK_DIR = '/etc/alternatives'
+
 
 class Alternative:
-    def __init__ (self, unixname, locale = 'C'):
-        # default fallback, in case there's no control file, or a
-        # corrupted one
-        self.unixname = unixname
-        self.name = unixname
-        self.description = _('No description')
-        self.locale = locale
-        try:
-            desc_file = open ('/usr/share/galternatives/descriptions/%s.control' %
-                              (unixname))
+    default_description = _('No description')
 
-            # init some variables, cause we're gonna check all of
-            # them, and some may be unitialized
-            original_name = ''
-            translated_name = ''
-            original_desc = ''
-            translated_desc = ''
+    def __init__(self, name, locale='C'):
+        alt_filepath = os.path.join(ALT_DB_DIR, name)
+        if not os.path.isfile(alt_filepath):
+            raise KeyError('No such alternative name')
 
-            while 1:
-                str = desc_file.readline ().strip ()
-                if str == '':
-                    break
-
-                elif str[:4] == 'Name':
-                    translation_start = 5 + len (self.locale)
-
-                    if str[4] == '=':
-                        original_name = str[5:]
-                    elif str[5:translation_start] == self.locale:
-                        translated_name = str[translation_start+2:]
-
-                elif str[:11] == 'Description':
-                    print_debug (str)
-                    translation_start = 12 + len (self.locale)
-
-                    if str[11] == '=':
-                        original_desc = str[12:]
-                    elif str[12:translation_start] == self.locale:
-                        translated_desc = str[translation_start+2:]
-
-            desc_file.close ()
-
-            if translated_name:
-                self.name = translated_name
-            else:
-                self.name = original_name
-                
-            if translated_desc:
-                self.description = translated_desc
-            else:
-                self.description = original_desc
-
-        except IOError:
-            pass
-
-        # now get the real information!
-        altfile = open ('/var/lib/dpkg/alternatives/%s' % (unixname))
-
-        # parsing file
-        self.option_status = altfile.readline ().strip ()
-        print_debug ('The Status is: %s' % (self.option_status))
-
-        self.link = altfile.readline ().strip ()
-        print_debug ('The link is: %s' % (self.link))
-
-        # find out what are the slaves used by this alternative
-        # we need that to know how many slaves to expect from each
-        # alternative
-        self.slaves = []
-        while 1:
-            line = altfile.readline ().strip ()
-            if line == '':
-                break
-            
-            sdict = {}
-            sdict['name'] = line
-            sdict['link'] = altfile.readline ().strip ()
-            self.slaves.append (sdict)
-            
-        self.current_option = os.readlink ('/etc/alternatives/%s' %
-                                           (unixname))
-        print_debug ('Link currently points to: %s' % (self.current_option))
-
-        self.options = []
-        while 1:
-            line = altfile.readline ().strip ()
-            if line == '':
-                break
-
-            odict = {}
-            odict['path'] = line
-            odict['priority'] = altfile.readline ().strip ()
-            print_debug (odict)
-            optslaves = []
-            for count in range(len (self.slaves)):
-                sdict = {}
-                sdict['name'] = self.slaves[count]['name']
-                sdict['path'] = altfile.readline ().strip ()
-                optslaves.append (sdict)
-            odict['slaves'] = optslaves
-
-            self.options.append (odict)
-        print_debug (self.options)
-
-        altfile.close ()
-
-    def get_unixname (self):
-        return self.unixname
-
-    def get_name (self):
-        return self.name
-
-    def get_description (self):
-        return self.description
-
-    def get_options (self):
-        return self.options
-
-    def get_slaves (self):
-        return self.slaves
-
-    def get_link (self):
-        return self.link
-
-    def get_current_option (self):
-        return self.current_option
-
-    def get_option_status (self):
-        return self.option_status
-
-    def set_option_status (self, status):
-        self.option_status = status
-
-    def set_unixname (self, unixname):
-        self.unixname = unixname
-
-    def set_name (self, name):
+        self.description = self.default_description
         self.name = name
 
-    def set_description (self, description):
-        self.description = description
+        # read friendly description from .desktop,
+        # although most of them are not available
+        desc_file = os.path.join(DESC_DIR, '{}.desktop'.format(name))
+        # this func call also read the config file!
+        if configparser:
+            config = configparser.ConfigParser()
+            if desc_file in config.read(desc_file):
+                section = config['Desktop Entry']
+                self.description = \
+                    section.get('Comment[{}]'.format(locale)) or \
+                    section.get('Comment') or \
+                    self.default_description
+                self.name = \
+                    section.get('Name[{}]'.format(locale)) or \
+                    section.get('Name') or \
+                    name
+        else:
+            config = ConfigParser.RawConfigParser()
+            if desc_file in config.read(desc_file):
+                self.description = \
+                    config.has_option('Desktop Entry', 'Comment[{}]'.format(locale)) and \
+                    config.get('Desktop Entry', 'Comment[{}]'.format(locale)) or \
+                    config.has_option('Desktop Entry', 'Comment') and \
+                    config.get('Desktop Entry', 'Comment') or \
+                    self.default_description
+                self.name = \
+                    config.has_option('Desktop Entry', 'Name[{}]'.format(locale)) and \
+                    config.get('Desktop Entry', 'Name[{}]'.format(locale)) or \
+                    config.has_option('Desktop Entry', 'Name') and \
+                    config.get('Desktop Entry', 'Name') or \
+                    name
 
-    def set_options (self, options):
-        self.options = options
 
-    def set_slaves (self, slaves):
-        self.slaves = slaves
+        # now get the real information!
+        with open(alt_filepath) as altfile:
+            # parsing file
+            self.option_status = altfile.readline().strip()
+            logger.debug('The Status is: %s' % (self.option_status))
 
-    def set_link (self, link):
-        self.link = link
+            self.link = altfile.readline().strip()
+            logger.debug('The link is: %s' % (self.link))
 
-if __name__ == '__main__':
-    alt = Alternative ('x-terminal-emulator')
-    print 'name: %s\nlink: %s\ndescription: %s\nOptions:' \
-          % (alt.get_name (), alt.get_link(), alt.get_description ())
-    print alt.get_options ()
-    print 'current_option: %s' % (alt.get_current_option ())
+            # find out what are the slaves used by this alternative
+            # we need that to know how many slaves to expect from each
+            # alternative
+            self.slaves = []
+            while True:
+                line = altfile.readline().strip()
+                if line == '':
+                    break
+                self.slaves.append({
+                    'name': line,
+                    'link': altfile.readline().strip()
+                })
+
+            self.current_option = os.readlink(os.path.join(ALT_LINK_DIR, name))
+            logger.debug('Link currently points to: %s' % (self.current_option))
+
+            self.options = []
+            while True:
+                line = altfile.readline().strip()
+                if line == '':
+                    break
+
+                self.options.append({
+                    'path': line,
+                    'priority': altfile.readline().strip(),
+                    'slaves': [
+                        {
+                            'name': slave['name'],
+                            'path': altfile.readline().strip()
+                        } for slave in self.slaves
+                    ]
+                })
+            logger.debug(self.options)
