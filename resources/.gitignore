@@ -1,0 +1,4 @@
+*.mo
+*.h
+*.desktop
+POTFILES.in

@@ -1,18 +1,17 @@
 from __future__ import nested_scopes, generators, division, absolute_import, \
-    with_statement, print_function
+    with_statement
 
-import pygtk
-pygtk.require ('2.0')
-import gtk, gobject
-from gtk import glade
-
-from . import logger
-import sys, os, gettext
-
+from . import logger, _
 from .alternative import Alternative
 from .appdata import PACKAGE, GLADE_PATH, ABOUT_IMAGE_PATH
 
-_ = gettext.gettext
+import os
+import pygtk
+pygtk.require('2.0')
+import gtk
+import gobject
+from gtk import glade
+
 
 UPDATE_ALTERNATIVES = '/usr/bin/update-alternatives'
 
@@ -32,8 +31,6 @@ class GAlternatives:
     SLAVEPATH = 1
 
     def __init__ (self):
-        gettext.bindtextdomain (PACKAGE)
-        gettext.textdomain (PACKAGE)
         glade.bindtextdomain(PACKAGE)
         glade.textdomain (PACKAGE)
 
@@ -481,33 +478,12 @@ class GAlternatives:
         self.status_menu.handler_unblock (self.status_changed_signal)
 
 
-def main():
-    if os.getuid ():
-        if os.access ('/usr/bin/gksu', os.X_OK):
-            sys.exit (os.system ('/usr/bin/gksu -t "%s" -m "%s" -u root %s' %
-                                 (_('Running Alternatives Configurator...'),
-                                  _('<b>I need your root password to run\n'
-                                    'the Alternatives Configurator.</b>'),
-                                  sys.argv[0])))
-        else:
-            dialog = gtk.MessageDialog (None, gtk.DIALOG_DESTROY_WITH_PARENT,
-                                        gtk.MESSAGE_WARNING, gtk.BUTTONS_CLOSE)
-            dialog.set_markup (_('<b>This program should be run as root and /usr/bin/gksu is not available.</b>\n\n'
-                                 'I am unable to request the password myself without gksu. Unless you have '
-                                 'modified your system to explicitly allow your normal user to modify '
-                                 'the alternatives system, GAlternatives will not work.'))
-            dialog.run ()
-            dialog.destroy ()
-
-    DEBUG = False
-    try:
-        if sys.argv[1] == '--debug':
-            DEBUG = True
-    except IndexError:
-        pass
-
-    galternatives = GAlternatives ()
-
-    logger.debug(_('Testing galternatives...'))
-
-    gtk.main ()
+def no_gksu():
+    dialog = gtk.MessageDialog(None, gtk.DIALOG_DESTROY_WITH_PARENT,
+                                gtk.MESSAGE_WARNING, gtk.BUTTONS_CLOSE)
+    dialog.set_markup(_('<b>This program should be run as root and /usr/bin/gksu is not available.</b>\n\n'
+                        'I am unable to request the password myself without gksu. Unless you have '
+                        'modified your system to explicitly allow your normal user to modify '
+                        'the alternatives system, GAlternatives will not work.'))
+    dialog.run()
+    dialog.destroy()

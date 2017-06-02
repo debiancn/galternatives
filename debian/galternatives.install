@@ -1,5 +1,4 @@
-descriptions/*control usr/share/galternatives/descriptions/
-galternatives.desktop usr/share/applications/
-galternatives.glade usr/share/galternatives/
-galternatives/galternatives usr/sbin/
-pixmaps/galternatives.png usr/share/pixmaps/
+resources/descriptions/*.desktop usr/share/galternatives/descriptions/
+resources/galternatives.desktop usr/share/applications/
+resources/glade/galternatives.glade usr/share/galternatives/
+resources/pixmaps/*.png usr/share/pixmaps/
