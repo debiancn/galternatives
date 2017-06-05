@@ -1,4 +1,0 @@
-resources/descriptions/*.desktop usr/share/galternatives/descriptions/
-resources/galternatives.desktop usr/share/applications/
-resources/glade/galternatives.glade usr/share/galternatives/
-resources/pixmaps/*.png usr/share/pixmaps/

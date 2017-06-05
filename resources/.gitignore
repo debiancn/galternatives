@@ -2,3 +2,4 @@
 *.h
 *.desktop
 POTFILES.in
+locale/
