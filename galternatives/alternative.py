@@ -1,11 +1,12 @@
 from __future__ import nested_scopes, generators, division, absolute_import, \
     with_statement
 
-from . import logger
+from . import logger, _
 from .appdata import PACKAGE, DESC_DIR
+from .config import options
 
+import locale
 import os
-import gettext
 import sys
 
 if sys.version_info >= (3,):
@@ -14,18 +15,13 @@ else:
     import ConfigParser
     configparser = None
 
-_ = gettext.gettext
-
-
-ALT_DB_DIR = '/var/lib/dpkg/alternatives'
-ALT_LINK_DIR = '/etc/alternatives'
-
 
 class Alternative:
     default_description = _('No description')
 
-    def __init__(self, name, locale='C'):
-        alt_filepath = os.path.join(ALT_DB_DIR, name)
+    def __init__(self, name, locale=locale.getdefaultlocale()[0]):
+        # property names come from update-alternatives(1)
+        alt_filepath = os.path.join(options['altdir'], name)
         if not os.path.isfile(alt_filepath):
             raise KeyError('No such alternative name')
 
@@ -35,9 +31,9 @@ class Alternative:
         # read friendly description from .desktop,
         # although most of them are not available
         desc_file = os.path.join(DESC_DIR, '{}.desktop'.format(name))
-        # this func call also read the config file!
         if configparser:
             config = configparser.ConfigParser()
+            # this func call also read the config file!
             if desc_file in config.read(desc_file):
                 section = config['Desktop Entry']
                 self.description = \
@@ -85,7 +81,7 @@ class Alternative:
                     'link': altfile.readline().strip()
                 })
 
-            self.current_option = os.readlink(os.path.join(ALT_LINK_DIR, name))
+            self.current_option = os.readlink(os.path.join(options['admindir'], name))
             logger.debug('Link currently points to: %s' % (self.current_option))
 
             self.options = []

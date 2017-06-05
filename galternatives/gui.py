@@ -32,21 +32,7 @@ class GAlternatives:
 
     def __init__ (self):
         glade.bindtextdomain(PACKAGE)
-        glade.textdomain (PACKAGE)
-
-        locale = os.getenv ('LC_MESSAGES')
-
-        if not locale:
-            locale = os.getenv ('LC_ALL')
-            if not locale:
-                locale = os.getenv ('LANG', 'C')
-
-        try:
-            self.locale = locale[:locale.index ('.')]
-        except ValueError:
-            self.locale = locale
-
-        logger.debug('SL: %s - L: %s' % (self.locale, locale))
+        glade.textdomain(PACKAGE)
 
         self.gui = glade.XML (GLADE_PATH)
         self.gui.signal_autoconnect (globals ())
@@ -476,14 +462,3 @@ class GAlternatives:
         else:
             status_menu.set_history (1)
         self.status_menu.handler_unblock (self.status_changed_signal)
-
-
-def no_gksu():
-    dialog = gtk.MessageDialog(None, gtk.DIALOG_DESTROY_WITH_PARENT,
-                                gtk.MESSAGE_WARNING, gtk.BUTTONS_CLOSE)
-    dialog.set_markup(_('<b>This program should be run as root and /usr/bin/gksu is not available.</b>\n\n'
-                        'I am unable to request the password myself without gksu. Unless you have '
-                        'modified your system to explicitly allow your normal user to modify '
-                        'the alternatives system, GAlternatives will not work.'))
-    dialog.run()
-    dialog.destroy()

@@ -6,21 +6,20 @@ SRC := $(wildcard ../galternatives/*.py)
 space :=
 space +=
 
-.PHONY: all clean
+.PHONY: all update clean
 
 all: $(DESKTOP:.desktop.in=.desktop) $(DESC:.desktop.in=.desktop) $(TRANSLATION:.po=.mo)
+
+extract: translations/POTFILES.in
+	(cd translations; intltool-update -g galternatives -p)
+
+update: $(TRANSLATION:.po=.update.po)
 
 %.desktop: %.desktop.in
 	intltool-merge -d translations $< $@
 
-descriptions/%.desktop: descriptions/%.desktop.in
-	intltool-merge -d translations $< $@
-
-translations/%.mo: translations/%.po
+%.mo: %.po
 	msgfmt --statistics -o $@ $<
-
-extract: translations/POTFILES.in
-	(cd translations; intltool-update -g galternatives -p)
 
 translations/POTFILES.in:
 	echo '[encoding: UTF-8]' > $@
@@ -29,12 +28,9 @@ translations/POTFILES.in:
 	echo $(subst $(space),\\n,$(DESC)) >> $@
 	echo $(subst $(space),\\n,$(GLADE)) >> $@
 
-
-update:
-	$(foreach oldpo, $(TRANSLATION), \
-		msgmerge -o $(oldpo).new $(oldpo) translations/galternatives.pot; \
-		mv $(oldpo).new $(oldpo); \
-	)
+%.update.po: %.po
+	msgmerge -o $@ $< translations/galternatives.pot
+	mv $@ $<
 
 clean:
 	rm -f $(DESKTOP:.desktop.in=.desktop) $(DESC:.desktop.in=.desktop) $(TRANSLATION:.po=.mo) translations/POTFILES.in
