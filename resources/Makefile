@@ -9,7 +9,7 @@ SRC := $(wildcard ../galternatives/*.py)
 space :=
 space +=
 
-.PHONY: all update install clean
+.PHONY: all extract update clean
 
 all: $(DESKTOP) $(DESC) $(TRANSLATION)
 

@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import gettext
 import logging
 
+
 PACKAGE = 'galternatives'
 VERSION = '0.13.5'
 

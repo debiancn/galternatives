@@ -1,5 +1,6 @@
 *.mo
 *.h
 *.desktop
+*.glade~
 POTFILES.in
 locale/

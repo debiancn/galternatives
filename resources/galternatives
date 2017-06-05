@@ -1,2 +1,1 @@
-#!/bin/sh
-python -m galternatives
+#!/usr/bin/python -m galternatives

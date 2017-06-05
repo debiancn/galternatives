@@ -1,6 +1,4 @@
-from __future__ import nested_scopes, generators, division, absolute_import, \
-    with_statement
-#from __future__ import absolute_import
+from __future__ import absolute_import
 
 from . import logger, _
 from .appdata import DESC_DIR

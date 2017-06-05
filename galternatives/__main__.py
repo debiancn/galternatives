@@ -55,8 +55,7 @@ if Gtk.get_minor_version() < 14:
         'The program can only detect Gtk+ {}.{}. If you continue, the program '
         'may or may not work properly, and potential damage could be happened. '
         'Strongly recommend update your Gtk+ libaray before continue.').format(
-            Gtk.get_major_version(), Gtk.get_minor_version()
-        ))
+            Gtk.get_major_version(), Gtk.get_minor_version()))
 
 if len(sys.argv) >= 2 and sys.argv[1] in ['--debug', '-d']:
     DEBUG = True

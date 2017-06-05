@@ -1,7 +1,7 @@
 from __future__ import nested_scopes, generators, division, absolute_import, \
     with_statement
 
-from . import logger, _
+from . import logger, _, DEBUG
 from .alternative import Alternative
 from .description import altname_description
 from .appdata import PACKAGE, GLADE_PATH, ABOUT_IMAGE_PATH
