@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from alternative.alternative import Alternative
+from galternatives.alternative import Alternative
 
 if __name__ == '__main__':
     alt = Alternative('x-terminal-emulator')
