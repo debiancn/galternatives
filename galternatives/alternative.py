@@ -1,5 +1,5 @@
 from __future__ import nested_scopes, generators, division, absolute_import, \
-    with_statement, print_function
+    with_statement
 
 from . import logger
 from .appdata import PACKAGE, DESC_DIR
@@ -64,10 +64,8 @@ class Alternative:
                     config.get('Desktop Entry', 'Name') or \
                     name
 
-
-        # now get the real information!
+        # parse alt file
         with open(alt_filepath) as altfile:
-            # parsing file
             self.option_status = altfile.readline().strip()
             logger.debug('The Status is: %s' % (self.option_status))
 
@@ -95,7 +93,6 @@ class Alternative:
                 line = altfile.readline().strip()
                 if line == '':
                     break
-
                 self.options.append({
                     'path': line,
                     'priority': altfile.readline().strip(),

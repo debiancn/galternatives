@@ -1,10 +1,15 @@
-from __future__ import nested_scopes, generators, division, absolute_import, \
-    with_statement, print_function, unicode_literals
+from __future__ import absolute_import
 
 from .appdata import *
 
+import gettext
 import logging
 
+_ = gettext.gettext
+gettext.bindtextdomain(PACKAGE)
+gettext.textdomain(PACKAGE)
+
+DEBUG = False
 logger = logging.getLogger(PACKAGE)
 
 
@@ -18,6 +23,3 @@ def set_logger(verbose=False, full=False):
         ch.setFormatter(formatter)
         logging.getLogger(PACKAGE).addHandler(ch)
     logger.addHandler(ch)
-
-
-set_logger(True, True)
