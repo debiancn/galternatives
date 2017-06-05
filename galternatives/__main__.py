@@ -58,6 +58,12 @@ if Gtk.get_minor_version() < 14:
             Gtk.get_major_version(), Gtk.get_minor_version()
         ))
 
+if len(sys.argv) >= 2 and sys.argv[1] in ['--debug', '-d']:
+    DEBUG = True
+    set_logger(True, True)
+else:
+    set_logger()
+
 if os.getuid():
     # not root
     if os.access('/usr/bin/gksu', os.X_OK):
@@ -66,14 +72,11 @@ if os.getuid():
             _('<b>I need your root password to run\n'
               'the Alternatives Configurator.</b>'),
             sys.argv[0])))
+    elif DEBUG:
+        logger.warn('No root detected, but continue as in debug mode')
     else:
         no_gksu()
 
-if len(sys.argv) >= 2 and sys.argv[1] in ['--debug', '-v']:
-    DEBUG = True
-    set_logger(True, True)
-else:
-    set_logger()
 
 from .gui import GAlternatives
 

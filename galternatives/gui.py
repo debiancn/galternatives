@@ -3,6 +3,7 @@ from __future__ import nested_scopes, generators, division, absolute_import, \
 
 from . import logger, _
 from .alternative import Alternative
+from .description import altname_description
 from .appdata import PACKAGE, GLADE_PATH, ABOUT_IMAGE_PATH
 
 import os
@@ -12,6 +13,7 @@ from gi.repository import Gtk
 
 
 UPDATE_ALTERNATIVES = '/usr/bin/update-alternatives'
+alt_db = Alternative()
 
 
 def gtk_main_quit(*args):
@@ -376,10 +378,10 @@ class GAlternatives:
 
         option = self.status_menu.get_history ()
         if option == 0:
-            alt.option_status = 'auto'
+            alt.status = 'auto'
             os.system ('%s --auto %s  > /dev/null 2>&1' % (UPDATE_ALTERNATIVES, alt.name)) # FIXME: os.system
         else:
-            alt.option_status = 'manual'
+            alt.status = 'manual'
             tm, iter = selection.get_selected()
             self.set_alternative_option(iter)
 
@@ -393,7 +395,7 @@ class GAlternatives:
         self.options_model.clear ()
 
         for option in alt.options:
-            if option['path'] == alt.current_option:
+            if option == alt.current:
                 is_chosen = True
             else:
                 is_chosen = False
@@ -401,8 +403,8 @@ class GAlternatives:
             iter = self.options_model.append (None)
             self.options_model.set (iter,
                                     self.CHOICE, is_chosen,
-                                    self.PRIORITY, int(option['priority']),
-                                    self.OPTIONS, option['path'])
+                                    self.PRIORITY, int(option.priority),
+                                    self.OPTIONS, option[alt.name])
 
         # selects the first alternative on the list
         iter = self.options_model.get_iter_first ()
@@ -459,7 +461,7 @@ class GAlternatives:
         selection = self.alternatives_tv.get_selection()
         tm, iter = selection.get_selected()
 
-        self.alternative = Alternative (tm.get_value (iter, self.ALTERNATIVES))
+        self.alternative = alt_db[tm.get_value(iter, self.ALTERNATIVES)]
         alt = self.alternative
 
         alternative_label = self.builder.get_object('alternative_label')
@@ -470,14 +472,15 @@ class GAlternatives:
         self.refresh_ui ()
 
         # set the name of the alternative to the information area
+        name, description = altname_description(alt.name)
         alternative_label.set_markup ('<span size="xx-large" weight="bold">%s</span>\n[ %s ]' % \
-                                      (alt.name, alt.link))
-        description_label.set_text (alt.description)
+                                      (name, alt.link))
+        description_label.set_text (description)
 
         # need to block this signal, or the status_menu change will
         # undo my changes
         self.status_menu.handler_block (self.status_changed_signal)
-        if alt.option_status == 'auto':
+        if alt.status == 'auto':
             status_menu.set_active(0)
         else:
             status_menu.set_active(1)
