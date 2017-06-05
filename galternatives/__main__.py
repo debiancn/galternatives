@@ -5,32 +5,58 @@ from . import logger, _, DEBUG, PACKAGE
 
 import logging
 import os
-import gtk
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 import sys
+# https://stackoverflow.com/questions/16410852/keyboard-interrupt-with-with-python-gtk
+import signal
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+
+def gtk_warning(hint):
+    dialog = Gtk.MessageDialog(
+        None, Gtk.DialogFlags.DESTROY_WITH_PARENT,
+        Gtk.MessageType.WARNING, Gtk.ButtonsType.OK_CANCEL)
+    dialog.set_markup(hint)
+    if dialog.run() != Gtk.ResponseType.OK:
+        exit(1)
+    dialog.destroy()
+
+
+def no_gksu():
+    return gtk_warning(_(
+        '<b>This program should be run as root and /usr/bin/gksu is not available.</b>\n\n'
+        'I am unable to request the password myself without gksu. Unless you have '
+        'modified your system to explicitly allow your normal user to modify '
+        'the alternatives system, GAlternatives will not work.'))
 
 
 def set_logger(verbose=False, full=False):
+    logger = logging.getLogger(PACKAGE)
     if verbose:
         logger.setLevel(logging.DEBUG)
     ch = logging.StreamHandler()
     if full:
         formatter = logging.Formatter(
-            '%(asctime)s - %(levelname)s: %(message)s')
+            # log by time
+            # '%(asctime)s - %(levelname)s: %(message)s')
+            # gtk style
+            # '(%(pathname)s:%(process)d): %(funcName)s-%(levelname)s **: %(message)s')
+            # gtk style but lineno
+            '(%(pathname)s->%(lineno)d): %(funcName)s-%(levelname)s **: %(message)s')
         ch.setFormatter(formatter)
-        logging.getLogger(PACKAGE).addHandler(ch)
     logger.addHandler(ch)
 
 
-def no_gksu():
-    dialog = gtk.MessageDialog(None, gtk.DIALOG_DESTROY_WITH_PARENT,
-                                gtk.MESSAGE_WARNING, gtk.BUTTONS_CLOSE)
-    dialog.set_markup(_('<b>This program should be run as root and /usr/bin/gksu is not available.</b>\n\n'
-                        'I am unable to request the password myself without gksu. Unless you have '
-                        'modified your system to explicitly allow your normal user to modify '
-                        'the alternatives system, GAlternatives will not work.'))
-    dialog.run()
-    dialog.destroy()
-
+if Gtk.get_minor_version() < 14:
+    gtk_warning(_(
+        '<b>This program required Gtk+ 3.14 or higher.</b>\n\n'
+        'The program can only detect Gtk+ {}.{}. If you continue, the program '
+        'may or may not work properly, and potential damage could be happened. '
+        'Strongly recommend update your Gtk+ libaray before continue.').format(
+            Gtk.get_major_version(), Gtk.get_minor_version()
+        ))
 
 if os.getuid():
     # not root
@@ -43,7 +69,7 @@ if os.getuid():
     else:
         no_gksu()
 
-if len(sys.argv) >= 2 and sys.argv[1] == '--debug':
+if len(sys.argv) >= 2 and sys.argv[1] in ['--debug', '-v']:
     DEBUG = True
     set_logger(True, True)
 else:
@@ -53,4 +79,4 @@ from .gui import GAlternatives
 
 galternatives = GAlternatives()
 logger.debug(_('Testing galternatives...'))
-gtk.main()
+Gtk.main()
