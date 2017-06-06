@@ -25,7 +25,7 @@ class GtkEditableTable:
     def __init__(self, grid):
         self.grid = grid
         self.rgroup = Gtk.RadioButton()
-        self.empty = Gtk.Label()
+        self.empty = Gtk.Switch(tooltip_text=_('Toggle auto mode'))
         self.heading_priority = Gtk.Label(label=_('Priority'))
         self.grid.show_all()
         self.changed = WeakKeyDictionary()
@@ -49,10 +49,12 @@ class GtkEditableTable:
         self.wg_rows = [
             [
                 Gtk.RadioButton(group=self.rgroup),
-                Gtk.Entry(text=entry[heading[0]]),
+                Gtk.FileChooserButton(),
+                # Gtk.Entry(text=entry[heading[0]]),
                 Gtk.SpinButton(adjustment=priorities[row]),
             ] + [
-                Gtk.Entry(text=entry[heading[col]])
+                Gtk.FileChooserButton()
+                # Gtk.Entry(text=entry[heading[col]])
                 for col in range(1, len(heading))
             ] for row, entry in enumerate(data)
         ]
@@ -63,11 +65,15 @@ class GtkEditableTable:
                 self.grid.attach(wg_cell, col, row + 1, 1, 1)
                 if col == 0:
                     wg_cell.connect('toggled', self.on_toggled, data[row])
+                elif isinstance(wg_cell, Gtk.FileChooserButton):
+                    if col == 1:
+                        wg_cell.set_filename(entry[heading[0]])
+                    else:
+                        wg_cell.set_filename(entry[heading[col - 3]])
                 else:
                     wg_cell.connect('focus-out-event', self.on_leave, data[row])
                     wg_cell.connect('activate', self.on_enterpress, data[row])
                     wg_cell.connect('changed', self.on_changed, data[row])
-            #data[0].set_sensitive(False)
         self.grid.show_all()
 
     def connect(self, signal, cb, *args):
@@ -117,14 +123,18 @@ class GAlternatives:
                 self.builder.get_object('confirm_closing').show() or True
                 if False else Gtk.main_quit(),
             'onDeleteSubWindow': lambda window, *args: window.hide() or True,
-            'confirm_quit': Gtk.main_quit,
-            'save_quit': Gtk.main_quit,
-            'show_about_dialog': lambda *args:
+            'show_about': lambda *args:
                 self.builder.get_object('about_dialog').show(),
+            'show_preferences': lambda *args:
+                self.builder.get_object('preferences_dialog').show(),
+            'show_edit_warning': lambda *args:
+                self.builder.get_object('edit_warning').show(),
             'add_group': lambda *args: None,
             'edit_group': lambda *args: None,
             'remove_group': lambda *args: None,
             'save': lambda *args: None,
+            'confirm_quit': Gtk.main_quit,
+            'save_quit': Gtk.main_quit,
         })
         self.builder.set_translation_domain(PACKAGE) # XXX: needs to reconsider
 
@@ -403,12 +413,10 @@ class GAlternatives:
                                      text=self.SLAVEPATH)
         self.slaves_tv.append_column (column)
 
-    def update_alternatives(self, directory='/var/lib/dpkg/alternatives/'):
+    def update_alternatives(self):
         self.alternatives_model.clear()
-        alternatives = os.listdir(directory)
-        alternatives.sort()
 
-        for alternative in alternatives:
+        for alternative in sorted(alt_db.keys()):
             iter = self.alternatives_model.append (None)
             self.alternatives_model.set (iter, self.ALTERNATIVES,
                                          alternative)
@@ -510,6 +518,7 @@ class GAlternatives:
         alt = self.alternative
 
         alternative_label = self.builder.get_object('alternative_label')
+        link_label = self.builder.get_object('link_label')
         description_label = self.builder.get_object('description_label')
         #status_menu = self.builder.get_object('status_menu')
 
@@ -518,8 +527,8 @@ class GAlternatives:
 
         # set the name of the alternative to the information area
         name, description = altname_description(alt.name)
-        alternative_label.set_markup ('<span size="xx-large" weight="bold">%s</span>\n[ %s ]' % \
-                                      (name, alt.link))
+        alternative_label.set_text(name)
+        link_label.set_text(alt.link)
         description_label.set_text (description)
 
         # need to block this signal, or the status_menu change will
