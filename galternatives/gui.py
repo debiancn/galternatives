@@ -14,11 +14,58 @@ from gi.repository import Gtk
 
 UPDATE_ALTERNATIVES = '/usr/bin/update-alternatives'
 alt_db = Alternative()
+LOWER = -(1 << 31)
+UPPER = 1 << 31
 
 
-def gtk_main_quit(*args):
-    """Quit the loop of GTK GUI application."""
-    Gtk.main_quit()
+class GtkEditableTable:
+    cb = lambda radio, data: None
+
+    def __init__(self, grid):
+        self.grid = grid
+        self.rgroup = Gtk.RadioButton()
+        self.grid.show_all()
+
+    def update(self, heading, data):
+        for widget in self.grid.get_children():
+            self.grid.remove(widget)
+
+        wg_heading = [
+            Gtk.Label(),
+            Gtk.Label(label=heading[0]),
+            Gtk.Label(label=_('Priority'))
+        ] + [Gtk.Label(label=slave.get()) for slave in heading[1:]]
+        for col, label in enumerate(wg_heading):
+            self.grid.attach(label, col, 0, 1, 1)
+
+        priorities = [
+            Gtk.Adjustment(entry.priority, LOWER, UPPER, 1, 50, 0) for entry in data
+        ]
+        wg_rows = [
+            [
+                Gtk.RadioButton(group=self.rgroup),
+                Gtk.Entry(text=entry[heading[0]]),
+                Gtk.SpinButton(adjustment=priorities[row]),
+            ] + [
+                Gtk.Entry(text=entry[heading[col]])
+                for col in range(1, len(heading))
+            ] for row, entry in enumerate(data)
+        ]
+        for row, wg_row in enumerate(wg_rows):
+            for col, wg_cell in enumerate(wg_row):
+                self.grid.attach(wg_cell, col, row + 1, 1, 1)
+            #data[0].set_sensitive(False)
+            wg_row[0].connect('toggled', self.on_changed, data[row])
+        self.grid.show_all()
+
+    def connect(self, signal, cb, *args):
+        if signal != 'changed':
+            raise TypeError('{}: unknown signal name: {}'.format(self.grid, signal))
+        self.cb = lambda radio, data: cb(radio, data, *args)
+
+    def on_changed(self, radio, entry):
+        if radio.get_active():
+            self.cb(radio, data)
 
 
 class GAlternatives:
@@ -35,7 +82,7 @@ class GAlternatives:
     class WindowActionHandler():
         def onDeleteMainWindow(self, *args):
             "Should be called by destroying main window, no args."
-            gtk_main_quit(*args)
+            Gtk.main_quit()
 
         def onDeleteSubWindow(self, window):
             "Called by close button, specify correct window in glade."
@@ -97,7 +144,7 @@ class GAlternatives:
         self.update_alternatives()
 
         'Load option tree for each alternative item'
-        self.options_tv = self.builder.get_object('options_tv')
+        self.options_tv = GtkEditableTable(self.builder.get_object('options_grid'))
         self.options_model = Gtk.TreeStore(bool, int, str)
 #        self.options_model.set_sort_column_id (self.PRIORITY,
 #                                               gtk.SORT_DESCENDING)
@@ -390,7 +437,8 @@ class GAlternatives:
 
     def update_options_tree (self):
         alt = self.alternative
-        selection = self.options_tv.get_selection ()
+        self.options_tv.update(alt, alt.options)
+        #selection = self.options_tv.get_selection ()
 
         self.options_model.clear ()
 
@@ -408,8 +456,8 @@ class GAlternatives:
 
         # selects the first alternative on the list
         iter = self.options_model.get_iter_first ()
-        if iter != None:
-            selection.select_iter (iter)
+        #if iter != None:
+            #selection.select_iter (iter)
 
     def option_get_selected (self):
         selection = self.options_tv.get_selection ()

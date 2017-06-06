@@ -737,7 +737,7 @@ for the user by default.
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="option_grid">
+          <object class="GtkGrid" id="options_grid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>

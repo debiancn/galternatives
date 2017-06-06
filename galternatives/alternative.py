@@ -48,7 +48,7 @@ def except_typeof(i, of_type):
 
 
 def except_absolute(path):
-    if path is None:
+    if path == '':
         return
     except_typeof(path, str)
     if not os.path.isabs(path):
@@ -151,7 +151,7 @@ class AlternativeGroup(list):
         self._links = {}
         self._names = WeakValueDictionary()
         super(AlternativeGroup, self).__init__()
-        self[name] = None
+        self[name] = ''
         self.options = OptionList(self._names)
         if not create:
             self.reload()
