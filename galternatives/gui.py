@@ -108,27 +108,29 @@ class GAlternatives:
     SLAVENAME = 0
     SLAVEPATH = 1
 
-    def __init__ (self):
+    def __init__(self):
         'Load glade XML file'
         self.builder = Gtk.Builder()
         self.builder.add_from_file(GLADE_PATH)
         self.builder.connect_signals({
             'onDeleteMainWindow': lambda *args:
-                self.builder.get_object('confirm_closing').run()
-                if True else Gtk.main_quit(),
+                self.builder.get_object('confirm_closing').show() or True
+                if False else Gtk.main_quit(),
             'onDeleteSubWindow': lambda window, *args: window.hide() or True,
             'confirm_quit': Gtk.main_quit,
             'save_quit': Gtk.main_quit,
-            'show_about_window': lambda *args:
-                self.builder.get_object('about_window').run(),
-            'show_credits_window': lambda *args:
-                self.builder.get_object('credits_window').show_all(),
+            'show_about_dialog': lambda *args:
+                self.builder.get_object('about_dialog').show(),
+            'add_group': lambda *args: None,
+            'edit_group': lambda *args: None,
+            'remove_group': lambda *args: None,
+            'save': lambda *args: None,
         })
         self.builder.set_translation_domain(PACKAGE) # XXX: needs to reconsider
 
         self.main_window = self.builder.get_object('main_window')
 
-        self.builder.get_object('about_window').set_logo_icon_name(ABOUT_IMAGE_PATH)
+        self.builder.get_object('about_dialog').set_logo_icon_name(ABOUT_IMAGE_PATH)
 
         #translator_label = self.builder.get_object('translator_label')
         #if translator_label.get_text () == 'translator_credits':
@@ -145,8 +147,8 @@ class GAlternatives:
                                              self.alternative_selected_cb) # FIXME callback not reviewed
 
 
-        self.status_menu = self.builder.get_object('status_menu') # TODO FIXME Status menu removed in Glade3 needs fix
-        self.status_changed_signal = self.status_menu.connect('changed', self.status_changed_cb) # FIXME callback not reviewed
+        #self.status_menu = self.builder.get_object('status_menu') # TODO FIXME Status menu removed in Glade3 needs fix
+        #self.status_changed_signal = self.status_menu.connect('changed', self.status_changed_cb) # FIXME callback not reviewed
 
         self.update_alternatives()
 
@@ -509,7 +511,7 @@ class GAlternatives:
 
         alternative_label = self.builder.get_object('alternative_label')
         description_label = self.builder.get_object('description_label')
-        status_menu = self.builder.get_object('status_menu')
+        #status_menu = self.builder.get_object('status_menu')
 
         # feedback!
         self.refresh_ui ()
@@ -522,9 +524,9 @@ class GAlternatives:
 
         # need to block this signal, or the status_menu change will
         # undo my changes
-        self.status_menu.handler_block (self.status_changed_signal)
-        if alt.status == 'auto':
-            status_menu.set_active(0)
-        else:
-            status_menu.set_active(1)
-        self.status_menu.handler_unblock (self.status_changed_signal)
+        #self.status_menu.handler_block (self.status_changed_signal)
+        #if alt.status == 'auto':
+        #    status_menu.set_active(0)
+        #else:
+        #    status_menu.set_active(1)
+        #self.status_menu.handler_unblock (self.status_changed_signal)
