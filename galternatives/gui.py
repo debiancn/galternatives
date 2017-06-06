@@ -1,12 +1,12 @@
-from __future__ import nested_scopes, generators, division, absolute_import, \
-    with_statement
+from __future__ import absolute_import, with_statement
 
-from . import logger, _, DEBUG
+from . import logger, _
 from .alternative import Alternative
 from .description import altname_description
 from .appdata import PACKAGE, GLADE_PATH, ABOUT_IMAGE_PATH
 
 import os
+from weakref import WeakKeyDictionary
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -19,29 +19,34 @@ UPPER = 1 << 31
 
 
 class GtkEditableTable:
-    cb = lambda radio, data: None
+    radiocb = None
+    cellcb = None
 
     def __init__(self, grid):
         self.grid = grid
         self.rgroup = Gtk.RadioButton()
+        self.empty = Gtk.Label()
+        self.heading_priority = Gtk.Label(label=_('Priority'))
         self.grid.show_all()
+        self.changed = WeakKeyDictionary()
 
-    def update(self, heading, data):
+    def update(self, heading, data, sel=None):
         for widget in self.grid.get_children():
             self.grid.remove(widget)
 
         wg_heading = [
-            Gtk.Label(),
-            Gtk.Label(label=heading[0]),
-            Gtk.Label(label=_('Priority'))
-        ] + [Gtk.Label(label=slave.get()) for slave in heading[1:]]
+            self.empty, Gtk.Label(label=heading[0]), self.heading_priority
+        ] + [
+            Gtk.Label(label=heading[col])
+            for col in range(1, len(heading))
+        ]
         for col, label in enumerate(wg_heading):
             self.grid.attach(label, col, 0, 1, 1)
 
         priorities = [
             Gtk.Adjustment(entry.priority, LOWER, UPPER, 1, 50, 0) for entry in data
         ]
-        wg_rows = [
+        self.wg_rows = [
             [
                 Gtk.RadioButton(group=self.rgroup),
                 Gtk.Entry(text=entry[heading[0]]),
@@ -51,21 +56,46 @@ class GtkEditableTable:
                 for col in range(1, len(heading))
             ] for row, entry in enumerate(data)
         ]
-        for row, wg_row in enumerate(wg_rows):
+        if sel is not None:
+            self.wg_rows[sel][0].set_active(True)
+        for row, wg_row in enumerate(self.wg_rows):
             for col, wg_cell in enumerate(wg_row):
                 self.grid.attach(wg_cell, col, row + 1, 1, 1)
+                if col == 0:
+                    wg_cell.connect('toggled', self.on_toggled, data[row])
+                else:
+                    wg_cell.connect('focus-out-event', self.on_leave, data[row])
+                    wg_cell.connect('activate', self.on_enterpress, data[row])
+                    wg_cell.connect('changed', self.on_changed, data[row])
             #data[0].set_sensitive(False)
-            wg_row[0].connect('toggled', self.on_changed, data[row])
         self.grid.show_all()
 
     def connect(self, signal, cb, *args):
-        if signal != 'changed':
+        if signal == 'changed':
+            self.radiocb = lambda radio, data: cb(radio, data, *args)
+        elif signal == 'edited':
+            self.cellcb = lambda widget, data: cb(widget, data, *args)
+        else:
             raise TypeError('{}: unknown signal name: {}'.format(self.grid, signal))
-        self.cb = lambda radio, data: cb(radio, data, *args)
 
-    def on_changed(self, radio, entry):
+    def on_changed(self, widget, entry):
+        self.changed[widget] = True
+
+    def on_enterpress(self, widget, entry):
+        self.empty.grab_focus()
+        print(900000)
+
+    def on_leave(self, widget, focus, entry):
+        if widget in self.changed and self.changed[widget]:
+            del self.changed[widget]
+            print('changed')
+            if self.cellcb:
+                self.cellcb(widget, entry)
+
+    def on_toggled(self, radio, entry):
         if radio.get_active():
-            self.cb(radio, data)
+            if self.radiocb:
+                self.radiocb(radio, entry)
 
 
 class GAlternatives:
@@ -78,54 +108,31 @@ class GAlternatives:
     SLAVENAME = 0
     SLAVEPATH = 1
 
-    """Explicitly list signals to connect here."""
-    class WindowActionHandler():
-        def onDeleteMainWindow(self, *args):
-            "Should be called by destroying main window, no args."
-            Gtk.main_quit()
-
-        def onDeleteSubWindow(self, window):
-            "Called by close button, specify correct window in glade."
-            window.hide()
-
     def __init__ (self):
         'Load glade XML file'
         self.builder = Gtk.Builder()
         self.builder.add_from_file(GLADE_PATH)
-        self.builder.connect_signals(self.WindowActionHandler())
+        self.builder.connect_signals({
+            'onDeleteMainWindow': lambda *args:
+                self.builder.get_object('confirm_closing').run()
+                if True else Gtk.main_quit(),
+            'onDeleteSubWindow': lambda window, *args: window.hide() or True,
+            'confirm_quit': Gtk.main_quit,
+            'save_quit': Gtk.main_quit,
+            'show_about_window': lambda *args:
+                self.builder.get_object('about_window').run(),
+            'show_credits_window': lambda *args:
+                self.builder.get_object('credits_window').show_all(),
+        })
         self.builder.set_translation_domain(PACKAGE) # XXX: needs to reconsider
 
         self.main_window = self.builder.get_object('main_window')
 
+        self.builder.get_object('about_window').set_logo_icon_name(ABOUT_IMAGE_PATH)
 
-# FIXME: about/credit window not drawn after destruction
-        'About Window, menus / about / credits'
-        self.about_window = self.builder.get_object('about_window')
-        self.about_window.connect('delete-event', lambda w, e: w.hide() or True)
-# Note: This is function(window, event): window.hide()
-
-        self.about_image = self.builder.get_object('about_image')
-        self.about_image.set_from_file(ABOUT_IMAGE_PATH)
-
-        self.about_mitem = self.builder.get_object('about_mitem')
-        self.about_mitem.connect ('activate', self.show_about_window_cb)
-
-        self.credits_button = self.builder.get_object('credits_button')
-        self.credits_button.connect ('clicked', self.show_credits_window_cb)
-
-        self.about_close_button = self.builder.get_object('about_close_button')
-        self.about_close_button.connect ('clicked', self.close_about_window_cb)
-
-        self.credits_window = self.builder.get_object('credits_window')
-        self.credits_window.connect('delete-event', lambda w, e: w.hide() or True)
-
-        translator_label = self.builder.get_object('translator_label')
-        if translator_label.get_text () == 'translator_credits':
-            translator_label.set_text (_('Unknown/None'))
-
-        self.credits_close_button = self.builder.get_object('credits_close_button')
-        self.credits_close_button.connect ('clicked', self.close_credits_window_cb)
-
+        #translator_label = self.builder.get_object('translator_label')
+        #if translator_label.get_text () == 'translator_credits':
+            #translator_label.set_text (_('Unknown/None'))
 
         'Alternatives treeview, left side in main_window'
         self.alternatives_tv = self.builder.get_object('alternatives_tv')
@@ -473,18 +480,6 @@ class GAlternatives:
 
     def hide_details_cb (self, *args):
         self.details_window.hide ()
-
-    def show_about_window_cb (self, *args):
-        self.about_window.show_all ()
-
-    def close_about_window_cb(self, *args):
-        self.about_window.hide()
-
-    def show_credits_window_cb (self, *args):
-        self.credits_window.show_all ()
-
-    def close_credits_window_cb (self, *args):
-        self.credits_window.hide()
 
     def options_find_path_in_list (self, path):
         alt = self.alternative
