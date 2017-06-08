@@ -52,10 +52,10 @@ def set_logger(verbose=False, full=False):
 if Gtk.get_minor_version() < 14:
     gtk_message(_(
         '<b>This program required Gtk+ 3.14 or higher.</b>\n\n'
-        'The program can only detect Gtk+ {}.{}. If you continue, the program '
+        'The program can only detect Gtk+ 3.{}. If you continue, the program '
         'may or may not work properly, and potential damage could be happened. '
         'Strongly recommend update your Gtk+ libaray before continue.').format(
-            Gtk.get_major_version(), Gtk.get_minor_version()),
+            Gtk.get_minor_version()),
         Gtk.MessageType.ERROR)
 
 if len(sys.argv) >= 2 and sys.argv[1] in ['--debug', '-d']:

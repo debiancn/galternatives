@@ -144,7 +144,7 @@ class GAlternatives:
 
         #translator_label = self.builder.get_object('translator_label')
         #if translator_label.get_text () == 'translator_credits':
-            #translator_label.set_text (_('Unknown/None'))
+            #translator_label.set_text ('Unknown/None')
 
         'Alternatives treeview, left side in main_window'
         self.alternatives_tv = self.builder.get_object('alternatives_tv')
@@ -156,67 +156,16 @@ class GAlternatives:
         self.alternatives_selection.connect ('changed',
                                              self.alternative_selected_cb) # FIXME callback not reviewed
 
-
-        #self.status_menu = self.builder.get_object('status_menu') # TODO FIXME Status menu removed in Glade3 needs fix
-        #self.status_changed_signal = self.status_menu.connect('changed', self.status_changed_cb) # FIXME callback not reviewed
-
         self.update_alternatives()
 
         'Load option tree for each alternative item'
         self.options_tv = GtkEditableTable(self.builder.get_object('options_grid'))
         self.options_model = Gtk.TreeStore(bool, int, str)
-#        self.options_model.set_sort_column_id (self.PRIORITY,
-#                                               gtk.SORT_DESCENDING)
-#
-#        self.options_tv.set_model (self.options_model)
-#        self.set_options_columns ()
-#
-#        self.opt_add_button = self.gui.get_widget ('opt_add_button')
-#        self.opt_add_button.connect ('clicked', self.show_add_opt_window_cb)
-#
-#        self.opt_properties_button = self.gui.get_widget ('opt_properties_button')
-#        self.opt_properties_button.connect ('clicked', self.show_details_cb)
-#
-#        self.opt_remove_button = self.gui.get_widget ('opt_remove_button')
-#        self.opt_remove_button.connect ('clicked', self.remove_option_cb)
-#
-#        # add option window
-#        self.add_opt_window = self.gui.get_widget ('add_opt_window')
-#        self.add_opt_window.connect ('delete-event', self.hide_add_opt_window_cb)
-#        self.add_opt_entry = self.gui.get_widget ('add_opt_entry')
-#        self.add_opt_spin = self.gui.get_widget ('add_opt_spin')
-#
-#        self.file_selector = self.gui.get_widget ('file_selector')
-#        self.filesel_ok = self.gui.get_widget ('filesel_ok')
-#        self.filesel_ok.connect ('clicked', self.close_filesel_cb)
-#        self.filesel_cancel = self.gui.get_widget ('filesel_cancel')
-#        self.filesel_cancel.connect ('clicked', self.close_filesel_cb)
-#
-#        self.browse_opt_button = self.gui.get_widget ('browse_opt_button')
-#        self.browse_opt_button.connect ('clicked', self.choose_opt_cb)
-#
-#        self.add_opt_cancel = self.gui.get_widget ('add_opt_cancel')
-#        self.add_opt_cancel.connect ('clicked', self.hide_add_opt_window_cb)
-#
-#        self.add_opt_ok = self.gui.get_widget ('add_opt_ok')
-#        self.add_opt_ok.connect ('clicked', self.add_option_cb)
-#
-#        # details window
-#        self.details_window = self.gui.get_widget ('details_window')
-#        self.details_window.connect ('delete_event', self.hide_details_cb)
-#
-#        # tree for slaves for each option
-#        self.slaves_tv = self.gui.get_widget ('slaves_tv')
-#        self.slaves_model = gtk.TreeStore (gobject.TYPE_STRING,
-#                                           gobject.TYPE_STRING)
-#        self.slaves_tv.set_model (self.slaves_model)
-#        self.set_slaves_columns ()
-#
-#        # selects the first alternative on the list
-#        iter = self.alternatives_model.get_iter_first ()
-#        if iter != None:
-#            self.alternatives_selection.select_iter (iter)
-#
+        # selects the first alternative on the list
+        iter = self.alternatives_model.get_iter_first ()
+        if iter != None:
+            self.alternatives_selection.select_iter (iter)
+
     def mainloop (self):
         Gtk.main()
 
