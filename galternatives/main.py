@@ -420,6 +420,7 @@ class GAlternatives:
 
     def hide_details_cb (self, *args):
         self.details_window.hide ()
+        return True
 
     def show_about_window_cb (self, *args):
         self.about_window.show_all ()
