@@ -1,3 +1,10 @@
+galternatives (0.13.5+nmu4+deb9u1) stretch; urgency=medium
+
+  * Adopt and switch maintainer information.
+  * Fix the bug which causes properties window blank. Closes: #325172
+
+ -- Boyuan Yang <073plan@gmail.com>  Wed, 14 Jun 2017 10:17:30 +0800
+
 galternatives (0.13.5+nmu4) unstable; urgency=medium
 
   * Non-maintainer upload.
