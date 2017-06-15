@@ -1,9 +1,9 @@
 from __future__ import absolute_import, with_statement
 
-from . import logger, _
+from . import logger, _, PACKAGE
 from .alternative import Alternative
 from .description import altname_description
-from .appdata import PACKAGE, GLADE_PATH, ABOUT_IMAGE_PATH
+from .appdata import *
 
 import os
 from weakref import WeakKeyDictionary
@@ -104,7 +104,7 @@ class GtkEditableTable:
                 self.radiocb(radio, entry)
 
 
-class GAlternatives:
+class GAlternativesWindow:
     ALTERNATIVES = 0
 
     CHOICE = 0
@@ -114,10 +114,10 @@ class GAlternatives:
     SLAVENAME = 0
     SLAVEPATH = 1
 
-    def __init__(self):
+    def __init__(self, app):
         'Load glade XML file'
-        self.builder = Gtk.Builder()
-        self.builder.add_from_file(GLADE_PATH)
+        self.builder = Gtk.Builder.new_from_file(locate_appdata(
+            PATHS['appdata'], ('galternatives.glade', 'glade/galternatives.glade')))
         self.builder.connect_signals({
             'onDeleteMainWindow': lambda *args:
                 self.builder.get_object('confirm_closing').show() or True
@@ -139,8 +139,9 @@ class GAlternatives:
         self.builder.set_translation_domain(PACKAGE) # XXX: needs to reconsider
 
         self.main_window = self.builder.get_object('main_window')
+        self.main_window.set_application(app)
 
-        self.builder.get_object('about_dialog').set_logo_icon_name(ABOUT_IMAGE_PATH)
+        #self.builder.get_object('about_dialog').set_logo_icon_name(locate_appdata(PATHS['icon'], 'galternatives.png'))
 
         #translator_label = self.builder.get_object('translator_label')
         #if translator_label.get_text () == 'translator_credits':
@@ -166,8 +167,8 @@ class GAlternatives:
         if iter != None:
             self.alternatives_selection.select_iter (iter)
 
-    def mainloop (self):
-        Gtk.main()
+    def show(self):
+        self.main_window.show()
 
     def refresh_ui (self):
         while Gtk.events_pending ():

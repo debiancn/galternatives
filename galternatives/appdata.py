@@ -7,41 +7,42 @@ from . import logger, PACKAGE
 import os
 
 
-__all__ = ['PACKAGE', 'VERSION', 'DESC_DIR', 'GLADE_PATH', 'ABOUT_IMAGE_PATH']
+__all__ = ['locate_appdata', 'PATHS']
 
 
 # Idea stealed from QStandardPaths
-appdata_locations = [
-    os.path.join('/usr/share', PACKAGE),
-    os.path.join('/usr/local/share', PACKAGE),
-    os.path.join('~/.local/share', PACKAGE),
-    os.path.join(os.path.dirname(os.path.realpath(__file__)), 'resources'),
-    os.path.dirname(os.path.realpath(__file__)),
-    os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
-                 'resources'),
-]
-icon_locations = [
-    os.path.join('/usr/share/pixmaps', PACKAGE),
-    os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                 'resources/pixmaps'),
-    os.path.dirname(os.path.realpath(__file__)),
-    os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
-                 'resources/pixmaps'),
-]
+PATHS = {
+    'appdata': [
+        os.path.join('/usr/share', PACKAGE),
+        os.path.join('/usr/local/share', PACKAGE),
+        os.path.join('~/.local/share', PACKAGE),
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'resources'),
+        os.path.dirname(os.path.realpath(__file__)),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
+                     'resources'),
+    ],
+    'icon': [
+        os.path.join('/usr/share/pixmaps', PACKAGE),
+        os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                     'resources/pixmaps'),
+        os.path.dirname(os.path.realpath(__file__)),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
+                     'resources/pixmaps'),
+    ],
+}
 
 
-def locate_appdata(locations, filename, is_dir=False):
+def locate_appdata(locations, filenames, is_dir=False):
+    if type(filenames) != str:
+        filename = filenames[0]
+    else:
+        filename = filenames
+        filenames = (filename, )
     for test_location in locations:
-        test_path = os.path.join(test_location, filename)
-        if os.path.isdir(test_path) if is_dir else os.path.isfile(test_path):
-            logger.debug(
-                'locate_appdata: locate "{}" at {}'.format(filename, test_path))
-            return test_path
+        for alt_filename in filenames:
+            candidate = os.path.join(test_location, alt_filename)
+            if os.path.isdir(candidate) if is_dir else os.path.isfile(candidate):
+                logger.debug(
+                    'locate_appdata: locate "{}" at {}'.format(filename, candidate))
+                return candidate
     logger.warn('locate_appdata: locate "{}" FAILED'.format(filename))
-    return ''
-
-
-DESC_DIR = locate_appdata(appdata_locations, 'descriptions', True)
-GLADE_PATH = locate_appdata(appdata_locations, 'galternatives.glade') or \
-             locate_appdata(appdata_locations, 'glade/galternatives.glade')
-ABOUT_IMAGE_PATH = locate_appdata(icon_locations, 'galternatives.png')

@@ -3,34 +3,6 @@
 <!--*- mode: xml -*-->
 <interface>
   <requires lib="gtk+" version="3.14"/>
-  <object class="GtkMessageDialog" id="automode_warning">
-    <property name="can_focus">False</property>
-    <property name="type_hint">dialog</property>
-    <property name="message_type">warning</property>
-    <property name="buttons">ok-cancel</property>
-    <property name="text" translatable="yes">&lt;span size="large" weight="bold"&gt;WARNING - auto mode is epic dangerous&lt;/span&gt;</property>
-    <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">Any mis operation will be immediately written to disk. You will have no chance to review.</property>
-    <child internal-child="vbox">
-      <object class="GtkBox">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="homogeneous">True</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkWindow" id="group_info_window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Details</property>
@@ -59,113 +31,16 @@
       </object>
     </child>
   </object>
-  <object class="GtkMessageDialog" id="gtk_version_error">
-    <property name="can_focus">False</property>
-    <property name="type_hint">dialog</property>
-    <property name="message_type">error</property>
-    <property name="buttons">ok-cancel</property>
-    <property name="text" translatable="yes">&lt;b&gt;This program required Gtk+ 3.14 or higher.&lt;/b&gt;</property>
-    <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes" context="{} for Gtk+ 3 minor version.">The program can only detect Gtk+ 3.{}. If you continue, the program may or may not work properly, and potential damage could be happened. Strongly recommend update your Gtk+ libaray before continue.</property>
-    <child internal-child="vbox">
-      <object class="GtkBox">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="homogeneous">True</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkWindow" id="main_window">
-    <property name="visible">True</property>
+  <object class="GtkApplicationWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">G Alternatives</property>
     <property name="default_width">640</property>
-    <property name="default_height">500</property>
-    <signal name="delete-event" handler="onDeleteMainWindow" swapped="no"/>
+    <property name="default_height">480</property>
     <child>
       <object class="GtkBox" id="main_window_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkMenuBar" id="menubar">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkMenuItem" id="file_menu_item">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_File</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="file_menu_item_menu">
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="preferences_mitem">
-                        <property name="label">gtk-preferences</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="show_preferences" swapped="no"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="quit_mitem">
-                        <property name="label">gtk-quit</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="onDeleteMainWindow" swapped="no"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="help">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Help</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="help_menu">
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="about_mitem">
-                        <property name="label">gtk-about</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="show_about" swapped="no"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkStatusbar" id="statusbar">
             <property name="visible">True</property>
@@ -179,12 +54,12 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="toolbar_box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">6</property>
             <child>
-              <object class="GtkToolbar" id="toolbar">
+              <object class="GtkToolbar" id="group_toolbar">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
@@ -240,7 +115,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolbar">
+              <object class="GtkToolbar" id="save_toolbar">
                 <property name="can_focus">False</property>
                 <child>
                   <object class="GtkToolButton" id="toolbar_save_button">
@@ -289,7 +164,6 @@
           <object class="GtkPaned" id="main_paned">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="wide_handle">True</property>
             <child>
               <object class="GtkScrolledWindow" id="main_left_sw">
                 <property name="visible">True</property>
@@ -321,8 +195,6 @@
                   <object class="GtkOverlay">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">2</property>
-                    <property name="margin_right">2</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
                     <child>
@@ -413,6 +285,30 @@
                             <child>
                               <placeholder/>
                             </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -440,26 +336,15 @@
       </object>
     </child>
   </object>
-  <object class="GtkAboutDialog" id="about_dialog">
+  <object class="GtkMessageDialog" id="automode_warning">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_window</property>
-    <property name="program_name">Glade</property>
-    <property name="version">0.13.5</property>
-    <property name="copyright">(C) 2003-2006 Gustavo Noronha Silva
-(C) 2017 Boyuan Yang</property>
-    <property name="comments" translatable="yes">A tool to help the administrator select
-which programs provide specific services
-for the user by default.</property>
-    <property name="authors">Gustavo Noronha Silva &lt;kov@debian.org&gt;
-Leandro A. F. Pereira &lt;leandro@linuxmag.com.br&gt;
-Boyuan Yang &lt;073plan@gmail.com&gt;
-Yangfl &lt;mmyangfl@gmail.com&gt;</property>
-    <property name="translator_credits" translatable="yes" context="Put &quot;your name &lt;your email&gt;, year&quot; here.">translator_credits</property>
-    <property name="logo_icon_name">image-missing</property>
-    <property name="license_type">gpl-2-0</property>
-    <signal name="delete-event" handler="onDeleteSubWindow" swapped="no"/>
-    <signal name="response" handler="onDeleteSubWindow" swapped="no"/>
+    <property name="message_type">warning</property>
+    <property name="buttons">ok-cancel</property>
+    <property name="text" translatable="yes">&lt;span size="large" weight="bold"&gt;WARNING - auto mode is epic dangerous&lt;/span&gt;</property>
+    <property name="use_markup">True</property>
+    <property name="secondary_text" translatable="yes">Any mis operation will be immediately written to disk. You will have no chance to review.</property>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -468,6 +353,7 @@ Yangfl &lt;mmyangfl@gmail.com&gt;</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox">
             <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
             <property name="layout_style">end</property>
           </object>
           <packing>
@@ -475,9 +361,6 @@ Yangfl &lt;mmyangfl@gmail.com&gt;</property>
             <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
-        </child>
-        <child>
-          <placeholder/>
         </child>
       </object>
     </child>
@@ -538,6 +421,49 @@ Yangfl &lt;mmyangfl@gmail.com&gt;</property>
             <property name="expand">False</property>
             <property name="fill">False</property>
             <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMessageDialog" id="confirm_writing">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_window</property>
+    <property name="message_type">question</property>
+    <property name="buttons">ok-cancel</property>
+    <property name="text" translatable="yes">&lt;b&gt;Please confirm the following changes&lt;/b&gt;</property>
+    <property name="use_markup">True</property>
+    <property name="secondary_text" translatable="yes">The following commands will be executed according to your modifications:</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkTreeView">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child internal-child="selection">
+              <object class="GtkTreeSelection"/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>
@@ -635,42 +561,12 @@ If you don't know what this means, click 'Cancel'.</property>
       </object>
     </child>
   </object>
-  <object class="GtkMessageDialog" id="no_root_warning">
-    <property name="can_focus">False</property>
-    <property name="type_hint">dialog</property>
-    <property name="transient_for">main_window</property>
-    <property name="message_type">warning</property>
-    <property name="buttons">ok-cancel</property>
-    <property name="text" translatable="yes">&lt;b&gt;This program should be run as root and &lt;tt&gt;gksu&lt;/tt&gt; is not available.&lt;/b&gt;</property>
-    <property name="use_markup">True</property>
-    <property name="secondary_text" translatable="yes">I am unable to request the password myself without &lt;tt&gt;gksu&lt;/tt&gt;. Unless you have modified your system to explicitly allow your normal user to modify the alternatives system, GAlternatives will not work.</property>
-    <property name="secondary_use_markup">True</property>
-    <child internal-child="vbox">
-      <object class="GtkBox">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="homogeneous">True</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkDialog" id="preferences_dialog">
     <property name="width_request">320</property>
     <property name="height_request">200</property>
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Glade Preferences</property>
+    <property name="title" translatable="yes">Preferences</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_window</property>
     <signal name="delete-event" handler="onDeleteSubWindow" swapped="no"/>

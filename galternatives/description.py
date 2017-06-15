@@ -1,13 +1,14 @@
 from __future__ import absolute_import
 
 from . import logger, _
-from .appdata import DESC_DIR
+from .appdata import *
 
 import locale
 import sys
 import os
 
 
+DESC_DIR = locate_appdata(PATHS['appdata'], 'descriptions', True)
 DEFAULT_DESCRIPTION = _('No description')
 
 # read friendly description from .desktop,
@@ -37,7 +38,6 @@ else:
         desc_file = os.path.join(DESC_DIR, '{}.desktop'.format(name))
         config = ConfigParser.RawConfigParser()
         config.read(desc_file)
-        #print config
         if desc_file in config.read(desc_file):
             return (
                 config.has_option(
