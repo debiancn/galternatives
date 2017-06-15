@@ -3,56 +3,17 @@
 <!--*- mode: xml -*-->
 <interface>
   <requires lib="gtk+" version="3.14"/>
-  <object class="GtkWindow" id="group_info_window">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Details</property>
-    <property name="default_width">400</property>
-    <property name="default_height">300</property>
-    <child>
-      <object class="GtkFrame" id="frame1">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label_xalign">0</property>
-        <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow3">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <child>
-              <object class="GtkTreeView" id="slaves_tv">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <child internal-child="selection">
-                  <object class="GtkTreeSelection"/>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkApplicationWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">G Alternatives</property>
     <property name="default_width">640</property>
     <property name="default_height">480</property>
+    <signal name="delete-event" handler="on_quit" swapped="no"/>
     <child>
       <object class="GtkBox" id="main_window_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkStatusbar" id="statusbar">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkBox" id="toolbar_box">
             <property name="visible">True</property>
@@ -338,12 +299,12 @@
   </object>
   <object class="GtkMessageDialog" id="automode_warning">
     <property name="can_focus">False</property>
+    <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_window</property>
     <property name="message_type">warning</property>
     <property name="buttons">ok-cancel</property>
-    <property name="text" translatable="yes">&lt;span size="large" weight="bold"&gt;WARNING - auto mode is epic dangerous&lt;/span&gt;</property>
-    <property name="use_markup">True</property>
+    <property name="text" translatable="yes">WARNING - auto mode is epic dangerous</property>
     <property name="secondary_text" translatable="yes">Any mis operation will be immediately written to disk. You will have no chance to review.</property>
     <child internal-child="vbox">
       <object class="GtkBox">
@@ -367,15 +328,15 @@
   </object>
   <object class="GtkMessageDialog" id="confirm_closing">
     <property name="can_focus">False</property>
+    <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_window</property>
     <property name="message_type">question</property>
     <property name="buttons">cancel</property>
-    <property name="text" translatable="yes">&lt;b&gt;Some changes not saved.&lt;/b&gt;</property>
-    <property name="use_markup">True</property>
+    <property name="text" translatable="yes">Some changes not saved.</property>
     <property name="secondary_text" translatable="yes">Do you want to save them before closing?</property>
-    <signal name="delete-event" handler="onDeleteSubWindow" swapped="no"/>
-    <signal name="response" handler="onDeleteSubWindow" swapped="no"/>
+    <signal name="delete-event" handler="hide_window" swapped="no"/>
+    <signal name="response" handler="hide_window" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -393,7 +354,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="confirm_quit" swapped="no"/>
+                <signal name="clicked" handler="do_quit" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -408,7 +369,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="save_quit" swapped="no"/>
+                <signal name="clicked" handler="save_and_quit" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -428,12 +389,12 @@
   </object>
   <object class="GtkMessageDialog" id="confirm_writing">
     <property name="can_focus">False</property>
+    <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_window</property>
     <property name="message_type">question</property>
     <property name="buttons">ok-cancel</property>
-    <property name="text" translatable="yes">&lt;b&gt;Please confirm the following changes&lt;/b&gt;</property>
-    <property name="use_markup">True</property>
+    <property name="text" translatable="yes">Please confirm the following changes</property>
     <property name="secondary_text" translatable="yes">The following commands will be executed according to your modifications:</property>
     <child internal-child="vbox">
       <object class="GtkBox">
@@ -471,18 +432,18 @@
   </object>
   <object class="GtkMessageDialog" id="edit_warning">
     <property name="can_focus">False</property>
+    <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_window</property>
     <property name="message_type">warning</property>
     <property name="buttons">cancel</property>
-    <property name="text" translatable="yes">&lt;b&gt;Editing alternative group is dangerous!&lt;/b&gt;</property>
-    <property name="use_markup">True</property>
+    <property name="text" translatable="yes">Editing alternative group is dangerous!</property>
     <property name="secondary_text" translatable="yes">Those are usually managed by &lt;tt&gt;dpkg&lt;/tt&gt; and provided by their correspond packages. Editing is only provided as an advanced feture. If edit wrongly, the system may become unstable or even stop working.
 
 If you don't know what this means, click 'Cancel'.</property>
     <property name="secondary_use_markup">True</property>
-    <signal name="delete-event" handler="onDeleteSubWindow" swapped="no"/>
-    <signal name="response" handler="onDeleteSubWindow" swapped="no"/>
+    <signal name="delete-event" handler="hide_window" swapped="no"/>
+    <signal name="response" handler="hide_window" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -561,16 +522,77 @@ If you don't know what this means, click 'Cancel'.</property>
       </object>
     </child>
   </object>
+  <object class="GtkWindow" id="group_info_window">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Details</property>
+    <property name="default_width">400</property>
+    <property name="default_height">300</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="transient_for">main_window</property>
+    <child>
+      <object class="GtkFrame" id="frame1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label_xalign">0</property>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow3">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkTreeView" id="slaves_tv">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection"/>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="option_info_window">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Details</property>
+    <property name="default_width">400</property>
+    <property name="default_height">300</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="transient_for">main_window</property>
+    <child>
+      <object class="GtkFrame" id="frame2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label_xalign">0</property>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkTreeView" id="slaves_tv1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection"/>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkDialog" id="preferences_dialog">
     <property name="width_request">320</property>
     <property name="height_request">200</property>
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Preferences</property>
+    <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_window</property>
-    <signal name="delete-event" handler="onDeleteSubWindow" swapped="no"/>
-    <signal name="response" handler="onDeleteSubWindow" swapped="no"/>
+    <signal name="delete-event" handler="hide_window" swapped="no"/>
+    <signal name="response" handler="hide_window" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox" id="preferences_dialog_box">
         <property name="can_focus">False</property>
@@ -921,33 +943,5 @@ Same as 'Safe' when advanced editing is disable.</property>
     <action-widgets>
       <action-widget response="-7">preferences_close_button</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkWindow" id="option_info_window">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Details</property>
-    <property name="default_width">400</property>
-    <property name="default_height">300</property>
-    <child>
-      <object class="GtkFrame" id="frame2">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label_xalign">0</property>
-        <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow1">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <child>
-              <object class="GtkTreeView" id="slaves_tv1">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <child internal-child="selection">
-                  <object class="GtkTreeSelection"/>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
   </object>
 </interface>

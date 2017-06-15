@@ -1,8 +1,8 @@
-#!/usr/bin/env python
 from __future__ import absolute_import
 
-from . import logger, _, PACKAGE, INFO
+from . import logger, _, PACKAGE, APPID
 from .appdata import *
+from .gui import GAlternativesWindow, GAlternativesAbout
 
 import logging
 import os
@@ -13,11 +13,6 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import Gtk
-try:
-    from gi.repository import GdkPixbuf
-except ImportError:
-    print('GdkPixbuf not available, cannot show icon in about dialog.')
-    GdkPixbuf = None
 # TODO: dbus?
 gi.require_version('Polkit', '1.0')
 try:
@@ -45,26 +40,18 @@ def set_logger(verbose=False, full=False):
     logger.addHandler(ch)
 
 
-def hide_window(window, *args):
-    window.hide()
-    return True
-
-
-from .gui import GAlternativesWindow
-
-
 class GAlternativesApp(Gtk.Application):
     debug = False
 
     def __init__(self, *args, **kwargs):
         super(Gtk.Application, self).__init__(
-            *args, application_id='org.debiancn.galternatives', **kwargs)
+            *args, application_id=APPID, **kwargs)
 
         self.add_main_option(
-            'debug', 'd', GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+            'debug', ord('d'), GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
             'Enable debug output', None)
         self.add_main_option(
-            'normal', 'n', GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+            'normal', ord('n'), GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
             'Do not try to acquire root (as normal user)', None)
 
     def do_handle_local_options(self, options):
@@ -135,25 +122,6 @@ class GAlternativesApp(Gtk.Application):
     def do_startup(self):
         Gtk.Application.do_startup(self)
 
-        self.about_dialog = Gtk.AboutDialog(logo=GdkPixbuf and GdkPixbuf.Pixbuf.new_from_file(locate_appdata(PATHS['icon'], 'galternatives.png')), **INFO)
-        self.about_dialog.connect('response', hide_window)
-        self.about_dialog.connect('delete-event', hide_window)
-
-        # Cannot use add_action_entries()
-        # see https://bugzilla.gnome.org/show_bug.cgi?id=678655
-
-        #action = Gio.SimpleAction(name='preferences')
-        #action.connect('activate', self.on_quit)
-        #self.add_action(action)
-
-        action = Gio.SimpleAction(name='about')
-        action.connect('activate', lambda action, param: self.about_dialog.present())
-        self.add_action(action)
-
-        action = Gio.SimpleAction(name='quit')
-        #action.connect('activate', self.on_quit)
-        self.add_action(action)
-
         self.set_app_menu(Gtk.Builder.new_from_file(locate_appdata(
             PATHS['appdata'], ('menubar.ui', 'glade/menubar.ui')
         )).get_object("menu"))
@@ -161,15 +129,22 @@ class GAlternativesApp(Gtk.Application):
     def do_activate(self):
         self.window = GAlternativesWindow(self)
         self.window.show()
-        self.about_dialog.set_transient_for(self.window.main_window)
-        #self.main_window = self.builder.get_object('main_window')
-        #self.main_window.set_application(self)
 
-        action = Gio.SimpleAction(name='preferences')
-        action.connect('activate', lambda *a:self.window.builder.get_object('preferences_dialog').show())
+        # Cannot use add_action_entries()
+        # see https://bugzilla.gnome.org/show_bug.cgi?id=678655
+
+        self.about_dialog = GAlternativesAbout(transient_for=self.window.main_window)
+        action = Gio.SimpleAction(name='about')
+        action.connect('activate', lambda action, param: self.about_dialog.present())
         self.add_action(action)
 
-        #self.main_window.show()
+        action = Gio.SimpleAction(name='preferences')
+        action.connect('activate', self.window.show_preferences)
+        self.add_action(action)
+
+        action = Gio.SimpleAction(name='quit')
+        action.connect('activate', self.window.on_quit)
+        self.add_action(action)
 
 
 if __name__ == '__main__':

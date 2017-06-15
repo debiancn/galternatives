@@ -10,7 +10,7 @@ import os
 __all__ = ['locate_appdata', 'PATHS']
 
 
-# Idea stealed from QStandardPaths
+# Idea stolen from QStandardPaths
 PATHS = {
     'appdata': [
         os.path.join('/usr/share', PACKAGE),

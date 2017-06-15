@@ -8,6 +8,7 @@ from gi.repository import Gtk
 
 
 PACKAGE = 'galternatives'
+APPID = 'org.debiancn.galternatives'
 
 _ = gettext.gettext
 gettext.bindtextdomain(PACKAGE)
@@ -23,11 +24,11 @@ INFO = {
     'license_type': Gtk.License.GPL_2_0,
     'copyright': '''(C) 2003-2006 Gustavo Noronha Silva
 (C) 2017 Boyuan Yang''',
+    'website': 'https://alioth.debian.org/projects/galternatives/',
     'authors': (
         'Gustavo Noronha Silva <kov@debian.org>',
         'Leandro A. F. Pereira <leandro@linuxmag.com.br>',
         'Boyuan Yang <073plan@gmail.com>',
         'Yangfl <mmyangfl@gmail.com>',
     ),
-    'translator_credits': _('translator_credits'),
 }

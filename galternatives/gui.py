@@ -1,21 +1,31 @@
-from __future__ import absolute_import, with_statement
+from __future__ import absolute_import
 
-from . import logger, _, PACKAGE
+from . import logger, _, PACKAGE, INFO
 from .alternative import Alternative
-from .description import altname_description
 from .appdata import *
+from .description import altname_description
 
 import os
 from weakref import WeakKeyDictionary
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+try:
+    from gi.repository import GdkPixbuf
+except ImportError:
+    print('GdkPixbuf not available, cannot show icon in about dialog.')
+    GdkPixbuf = None
 
 
 UPDATE_ALTERNATIVES = '/usr/bin/update-alternatives'
 alt_db = Alternative()
 LOWER = -(1 << 31)
 UPPER = 1 << 31
+
+
+def hide_window(window, *args):
+    window.hide()
+    return True
 
 
 class GtkEditableTable:
@@ -67,9 +77,9 @@ class GtkEditableTable:
                     wg_cell.connect('toggled', self.on_toggled, data[row])
                 elif isinstance(wg_cell, Gtk.FileChooserButton):
                     if col == 1:
-                        wg_cell.set_filename(entry[heading[0]])
+                        wg_cell.set_filename(data[row][heading[0]])
                     else:
-                        wg_cell.set_filename(entry[heading[col - 3]])
+                        wg_cell.set_filename(data[row][heading[col - 3]])
                 else:
                     wg_cell.connect('focus-out-event', self.on_leave, data[row])
                     wg_cell.connect('activate', self.on_enterpress, data[row])
@@ -119,33 +129,21 @@ class GAlternativesWindow:
         self.builder = Gtk.Builder.new_from_file(locate_appdata(
             PATHS['appdata'], ('galternatives.glade', 'glade/galternatives.glade')))
         self.builder.connect_signals({
-            'onDeleteMainWindow': lambda *args:
-                self.builder.get_object('confirm_closing').show() or True
-                if False else Gtk.main_quit(),
-            'onDeleteSubWindow': lambda window, *args: window.hide() or True,
-            'show_about': lambda *args:
-                self.builder.get_object('about_dialog').show(),
-            'show_preferences': lambda *args:
-                self.builder.get_object('preferences_dialog').show(),
+            'hide_window': hide_window,
             'show_edit_warning': lambda *args:
                 self.builder.get_object('edit_warning').show(),
             'add_group': lambda *args: None,
             'edit_group': lambda *args: None,
             'remove_group': lambda *args: None,
-            'save': lambda *args: None,
-            'confirm_quit': Gtk.main_quit,
-            'save_quit': Gtk.main_quit,
+            'save': self.save,
+            'on_quit': self.on_quit,
+            'save_and_quit': lambda *args: self.save() or self.do_quit(),
+            'do_quit': self.do_quit,
         })
         self.builder.set_translation_domain(PACKAGE) # XXX: needs to reconsider
 
         self.main_window = self.builder.get_object('main_window')
         self.main_window.set_application(app)
-
-        #self.builder.get_object('about_dialog').set_logo_icon_name(locate_appdata(PATHS['icon'], 'galternatives.png'))
-
-        #translator_label = self.builder.get_object('translator_label')
-        #if translator_label.get_text () == 'translator_credits':
-            #translator_label.set_text ('Unknown/None')
 
         'Alternatives treeview, left side in main_window'
         self.alternatives_tv = self.builder.get_object('alternatives_tv')
@@ -169,6 +167,22 @@ class GAlternativesWindow:
 
     def show(self):
         self.main_window.show()
+
+    def show_preferences(self, *args):
+        self.builder.get_object('preferences_dialog').show(),
+
+    def on_quit(self, *args):
+        if 0:  # change not save
+            self.builder.get_object('confirm_closing').show()
+            return True
+        self.do_quit()
+
+    def do_quit(self, *args):
+        self.main_window.destroy()
+
+    def save(self, *args):
+        if 0: # failed
+            return True
 
     def refresh_ui (self):
         while Gtk.events_pending ():
@@ -489,3 +503,15 @@ class GAlternativesWindow:
         #else:
         #    status_menu.set_active(1)
         #self.status_menu.handler_unblock (self.status_changed_signal)
+
+
+class GAlternativesAbout(Gtk.AboutDialog):
+    def __init__(self, *args, **kwargs):
+        kwargs.update(INFO)
+        super(Gtk.AboutDialog, self).__init__(
+            logo=GdkPixbuf and GdkPixbuf.Pixbuf.new_from_file(
+                locate_appdata(PATHS['icon'], 'galternatives.png')),
+            translator_credits=_('translator_credits'),
+            **kwargs)
+        self.connect('response', hide_window)
+        self.connect('delete-event', hide_window)
