@@ -1,40 +1,45 @@
-DESKTOP := $(wildcard *.desktop.in)
-DESC := $(wildcard descriptions/*.desktop.in)
+DESKTOP_SRC := $(wildcard *.desktop.in)
+DESKTOP := $(DESKTOP_SRC:.desktop.in=.desktop)
+DESC_SRC := $(wildcard descriptions/*.desktop.in)
+DESC := $(DESC_SRC:.desktop.in=.desktop)
 GLADE := $(wildcard glade/*.glade)
-TRANSLATION := $(wildcard translations/*.po)
+TRANSLATION_SRC := $(wildcard translations/*.po)
+TRANSLATION := $(TRANSLATION_SRC:translations/%.po=locale/%/LC_MESSAGES/galternatives.mo)
 SRC := $(wildcard ../galternatives/*.py)
 space :=
 space +=
 
-.PHONY: all clean
+.PHONY: all extract update clean
 
-all: $(DESKTOP:.desktop.in=.desktop) $(DESC:.desktop.in=.desktop) $(TRANSLATION:.po=.mo)
+all: $(DESKTOP) $(DESC) $(TRANSLATION)
+
+extract: translations/POTFILES.in $(GLADE:.glade=.glade.in)
+	(cd translations; intltool-update -g galternatives -p)
+	rm -f $(GLADE:.glade=.glade.in)
+
+update: $(TRANSLATION_SRC:.po=.update.po)
 
 %.desktop: %.desktop.in
 	intltool-merge -d translations $< $@
 
-descriptions/%.desktop: descriptions/%.desktop.in
-	intltool-merge -d translations $< $@
-
-translations/%.mo: translations/%.po
+locale/%/LC_MESSAGES/galternatives.mo: translations/%.po
+	mkdir -p $(dir $@)
 	msgfmt --statistics -o $@ $<
-
-extract: translations/POTFILES.in
-	(cd translations; intltool-update -g galternatives -p)
 
 translations/POTFILES.in:
 	echo '[encoding: UTF-8]' > $@
 	echo $(subst $(space),\\n,$(SRC)) >> $@
-	echo $(subst $(space),\\n,$(DESKTOP)) >> $@
-	echo $(subst $(space),\\n,$(DESC)) >> $@
-	echo $(subst $(space),\\n,$(GLADE)) >> $@
+	echo $(subst $(space),\\n,$(DESKTOP_SRC)) >> $@
+	echo $(subst $(space),\\n,$(DESC_SRC)) >> $@
+	echo $(subst $(space),\\n,$(GLADE:.glade=.glade.in)) >> $@
 
+%.glade.in: %.glade
+	ln -s $(notdir $<) $@
 
-update:
-	$(foreach oldpo, $(TRANSLATION), \
-		msgmerge -o $(oldpo).new $(oldpo) translations/galternatives.pot; \
-		mv $(oldpo).new $(oldpo); \
-	)
+%.update.po: %.po
+	msgmerge -o $@ $< translations/galternatives.pot
+	mv $@ $<
 
 clean:
-	rm -f $(DESKTOP:.desktop.in=.desktop) $(DESC:.desktop.in=.desktop) $(TRANSLATION:.po=.mo) translations/POTFILES.in
+	rm -f $(DESKTOP) $(DESC) translations/POTFILES.in
+	rm -rf locale

@@ -1,25 +1,34 @@
 from __future__ import absolute_import
 
-from .appdata import *
-
 import gettext
 import logging
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+
+
+PACKAGE = 'galternatives'
+APPID = 'org.debiancn.galternatives'
 
 _ = gettext.gettext
 gettext.bindtextdomain(PACKAGE)
 gettext.textdomain(PACKAGE)
 
-DEBUG = False
 logger = logging.getLogger(PACKAGE)
 
-
-def set_logger(verbose=False, full=False):
-    if verbose:
-        logger.setLevel(logging.DEBUG)
-    ch = logging.StreamHandler()
-    if full:
-        formatter = logging.Formatter(
-            '%(asctime)s - %(levelname)s: %(message)s')
-        ch.setFormatter(formatter)
-        logging.getLogger(PACKAGE).addHandler(ch)
-    logger.addHandler(ch)
+INFO = {
+    'program_name': 'G Alternatives',
+    'version': '0.13.5',
+    'comments': _('A tool to help the administrator select which programs '
+                  'provide specific services for the user by default.'),
+    'license_type': Gtk.License.GPL_2_0,
+    'copyright': '''(C) 2003-2006 Gustavo Noronha Silva
+(C) 2017 Boyuan Yang''',
+    'website': 'https://alioth.debian.org/projects/galternatives/',
+    'authors': (
+        'Gustavo Noronha Silva <kov@debian.org>',
+        'Leandro A. F. Pereira <leandro@linuxmag.com.br>',
+        'Boyuan Yang <073plan@gmail.com>',
+        'Yangfl <mmyangfl@gmail.com>',
+    ),
+}

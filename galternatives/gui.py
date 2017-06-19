@@ -1,26 +1,150 @@
-from __future__ import nested_scopes, generators, division, absolute_import, \
-    with_statement
+from __future__ import absolute_import
 
-from . import logger, _
+from . import logger, _, PACKAGE, INFO
 from .alternative import Alternative
-from .appdata import PACKAGE, GLADE_PATH, ABOUT_IMAGE_PATH
+from .appdata import *
+from .description import altname_description, query_pkg
 
 import os
-import pygtk
-pygtk.require('2.0')
-import gtk
-import gobject
-from gtk import glade
+from weakref import WeakKeyDictionary
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gio
+from gi.repository import Gtk
+try:
+    from gi.repository import GdkPixbuf
+except ImportError:
+    logger.warn('GdkPixbuf not available, cannot show icon in about dialog.')
+    GdkPixbuf = None
+# TODO: dbus?
+gi.require_version('Polkit', '1.0')
+try:
+    from gi.repository import Polkit
+except ImportError:
+    logger.warn('Polkit not available, in-program root access not available.')
+    Polkit = None
+
+
+def polkit():
+    result = Polkit.Authority.get().check_authorization_sync(
+        Polkit.UnixProcess.new(os.getppid()),
+        'org.freedesktop.policykit.exec',
+        None,
+        Polkit.CheckAuthorizationFlags.ALLOW_USER_INTERACTION,
+        None
+    )
+    authenticated = False
+    try:
+        authenticated = result.get_is_authorized() or result.get_is_challenge()
+    except Polkit.Error as err:
+        logger.warn('_polkit_auth_callback: error: %s'.format(err))
+    if not authenticated:
+        return 1
 
 
 UPDATE_ALTERNATIVES = '/usr/bin/update-alternatives'
+alt_db = Alternative()
+UPPER = 1 << 31
+LOWER = -UPPER
 
 
-def gtk_main_quit (*args):
-    gtk.main_quit ()
+def hide_on_delete(window, *args):
+    return Gtk.Widget.hide_on_delete(window)
 
 
-class GAlternatives:
+def reset_dialog(dialog, *args):
+    btn_cancel = dialog.get_widget_for_response(Gtk.ResponseType.CANCEL)
+    btn_cancel.grab_focus()
+    btn_cancel.grab_default()
+
+
+class GtkEditableTable:
+    radiocb = None
+    cellcb = None
+
+    def __init__(self, grid):
+        self.grid = grid
+        self.rgroup = Gtk.RadioButton()
+        self.empty = Gtk.Switch(tooltip_text=_('Toggle auto mode'))
+        self.heading_priority = Gtk.Label(label=_('Priority'))
+        self.grid.show_all()
+        self.changed = WeakKeyDictionary()
+
+    def update(self, heading, data, sel=None):
+        for widget in self.grid.get_children():
+            self.grid.remove(widget)
+
+        wg_heading = [
+            self.empty, Gtk.Label(label=heading[0]), self.heading_priority
+        ] + [
+            Gtk.Label(label=heading[col])
+            for col in range(1, len(heading))
+        ]
+        for col, label in enumerate(wg_heading):
+            self.grid.attach(label, col, 0, 1, 1)
+
+        priorities = [
+            Gtk.Adjustment(entry.priority, LOWER, UPPER, 1, 50, 0) for entry in data
+        ]
+        self.wg_rows = [
+            [
+                Gtk.RadioButton(group=self.rgroup),
+                Gtk.FileChooserButton(),
+                # Gtk.Entry(text=entry[heading[0]]),
+                Gtk.SpinButton(adjustment=priorities[row]),
+            ] + [
+                Gtk.FileChooserButton()
+                # Gtk.Entry(text=entry[heading[col]])
+                for col in range(1, len(heading))
+            ] for row, entry in enumerate(data)
+        ]
+        if sel is not None:
+            self.wg_rows[sel][0].set_active(True)
+        for row, wg_row in enumerate(self.wg_rows):
+            for col, wg_cell in enumerate(wg_row):
+                self.grid.attach(wg_cell, col, row + 1, 1, 1)
+                if col == 0:
+                    wg_cell.connect('toggled', self.on_toggled, data[row])
+                elif isinstance(wg_cell, Gtk.FileChooserButton):
+                    if col == 1:
+                        wg_cell.set_filename(data[row][heading[0]])
+                    else:
+                        wg_cell.set_filename(data[row][heading[col - 3]])
+                else:
+                    wg_cell.connect('focus-out-event', self.on_leave, data[row])
+                    wg_cell.connect('activate', self.on_enterpress, data[row])
+                    wg_cell.connect('changed', self.on_changed, data[row])
+        self.grid.show_all()
+
+    def connect(self, signal, cb, *args):
+        if signal == 'changed':
+            self.radiocb = lambda radio, data: cb(radio, data, *args)
+        elif signal == 'edited':
+            self.cellcb = lambda widget, data: cb(widget, data, *args)
+        else:
+            raise TypeError('{}: unknown signal name: {}'.format(self.grid, signal))
+
+    def on_changed(self, widget, entry):
+        self.changed[widget] = True
+
+    def on_enterpress(self, widget, entry):
+        self.empty.grab_focus()
+        print(900000)
+
+    def on_leave(self, widget, focus, entry):
+        if widget in self.changed and self.changed[widget]:
+            del self.changed[widget]
+            print('changed')
+            if self.cellcb:
+                self.cellcb(widget, entry)
+
+    def on_toggled(self, radio, entry):
+        if radio.get_active():
+            if self.radiocb:
+                self.radiocb(radio, entry)
+
+
+class GAlternativesWindow:
     ALTERNATIVES = 0
 
     CHOICE = 0
@@ -30,140 +154,111 @@ class GAlternatives:
     SLAVENAME = 0
     SLAVEPATH = 1
 
-    def __init__ (self):
-        glade.bindtextdomain(PACKAGE)
-        glade.textdomain (PACKAGE)
+    def __init__(self, app):
+        'Load glade XML file'
+        self.builder = Gtk.Builder.new_from_file(locate_appdata(
+            PATHS['appdata'], ('galternatives.glade', 'glade/galternatives.glade')))
+        self.builder.set_translation_domain(PACKAGE) # XXX: needs to reconsider
 
-        locale = os.getenv ('LC_MESSAGES')
+        self.main_window = self.builder.get_object('main_window')
+        self.main_window.set_application(app)
 
-        if not locale:
-            locale = os.getenv ('LC_ALL')
-            if not locale:
-                locale = os.getenv ('LANG', 'C')
+        self.group_info_window = self.builder.get_object('group_info_window')
+        self.preferences_dialog = self.builder.get_object('preferences_dialog')
 
-        try:
-            self.locale = locale[:locale.index ('.')]
-        except ValueError:
-            self.locale = locale
+        self.edit_warning = self.builder.get_object('edit_warning')
+        self.adding_problem = self.builder.get_object('adding_problem')
 
-        logger.debug('SL: %s - L: %s' % (self.locale, locale))
-
-        self.gui = glade.XML (GLADE_PATH)
-        self.gui.signal_autoconnect (globals ())
-
-        self.main_window = self.gui.get_widget ('main_window')
-
-        # menus / about / credits
-        self.about_window = self.gui.get_widget ('about_window')
-        self.about_window.connect ('delete-event', self.close_about_window_cb)
-
-        self.about_image = self.gui.get_widget ('about_image')
-        self.about_image.set_from_file (ABOUT_IMAGE_PATH)
-
-        self.about_mitem = self.gui.get_widget ('about_mitem')
-        self.about_mitem.connect ('activate', self.show_about_window_cb)
-
-        self.credits_button = self.gui.get_widget ('credits_button')
-        self.credits_button.connect ('clicked', self.show_credits_window_cb)
-
-        self.about_close_button = self.gui.get_widget ('about_close_button')
-        self.about_close_button.connect ('clicked', self.close_about_window_cb)
-
-        self.credits_window = self.gui.get_widget ('credits_window')
-        self.credits_window.connect ('delete-event', self.close_credits_window_cb)
-
-        translator_label = self.gui.get_widget ('translator_label')
-        if translator_label.get_text () == 'translator_credits':
-            translator_label.set_text (_('Unknown/None'))
-
-        self.credits_close_button = self.gui.get_widget ('credits_close_button')
-        self.credits_close_button.connect ('clicked', self.close_credits_window_cb)
-
-        # alternatives treeview
-        self.alternatives_tv = self.gui.get_widget ('alternatives_tv')
-        self.alternatives_model = gtk.TreeStore (gobject.TYPE_STRING)
-        self.alternatives_tv.set_model (self.alternatives_model)
-        self.set_alternatives_columns ()
+        'Alternatives treeview, left side in main_window'
+        self.alternatives_tv = self.builder.get_object('alternatives_tv')
+        self.alternatives_model = Gtk.TreeStore(str) # model is "store"
+        self.alternatives_tv.set_model(self.alternatives_model)
+        self.set_alternatives_columns()
 
         self.alternatives_selection = self.alternatives_tv.get_selection ()
         self.alternatives_selection.connect ('changed',
-                                             self.alternative_selected_cb)
+                                             self.alternative_selected_cb) # FIXME callback not reviewed
 
+        self.update_alternatives()
 
-        self.status_menu = self.gui.get_widget ('status_menu')
-        self.status_changed_signal = self.status_menu.connect ('changed', self.status_changed_cb)
-
-        self.update_alternatives ()
-
-        # tree for options for each alternative
-        self.options_tv = self.gui.get_widget ('options_tv')
-        self.options_model = gtk.TreeStore (gobject.TYPE_BOOLEAN,
-                                            gobject.TYPE_INT,
-                                            gobject.TYPE_STRING)
-        self.options_model.set_sort_column_id (self.PRIORITY,
-                                               gtk.SORT_DESCENDING)
-
-        self.options_tv.set_model (self.options_model)
-        self.set_options_columns ()
-
-        self.opt_add_button = self.gui.get_widget ('opt_add_button')
-        self.opt_add_button.connect ('clicked', self.show_add_opt_window_cb)
-
-        self.opt_properties_button = self.gui.get_widget ('opt_properties_button')
-        self.opt_properties_button.connect ('clicked', self.show_details_cb)
-
-        self.opt_remove_button = self.gui.get_widget ('opt_remove_button')
-        self.opt_remove_button.connect ('clicked', self.remove_option_cb)
-
-        # add option window
-        self.add_opt_window = self.gui.get_widget ('add_opt_window')
-        self.add_opt_window.connect ('delete-event', self.hide_add_opt_window_cb)
-        self.add_opt_entry = self.gui.get_widget ('add_opt_entry')
-        self.add_opt_spin = self.gui.get_widget ('add_opt_spin')
-
-        self.file_selector = self.gui.get_widget ('file_selector')
-        self.filesel_ok = self.gui.get_widget ('filesel_ok')
-        self.filesel_ok.connect ('clicked', self.close_filesel_cb)
-        self.filesel_cancel = self.gui.get_widget ('filesel_cancel')
-        self.filesel_cancel.connect ('clicked', self.close_filesel_cb)
-
-        self.browse_opt_button = self.gui.get_widget ('browse_opt_button')
-        self.browse_opt_button.connect ('clicked', self.choose_opt_cb)
-
-        self.add_opt_cancel = self.gui.get_widget ('add_opt_cancel')
-        self.add_opt_cancel.connect ('clicked', self.hide_add_opt_window_cb)
-
-        self.add_opt_ok = self.gui.get_widget ('add_opt_ok')
-        self.add_opt_ok.connect ('clicked', self.add_option_cb)
-
-        # details window
-        self.details_window = self.gui.get_widget ('details_window')
-        self.details_window.connect ('delete_event', self.hide_details_cb)
-
-        # tree for slaves for each option
-        self.slaves_tv = self.gui.get_widget ('slaves_tv')
-        self.slaves_model = gtk.TreeStore (gobject.TYPE_STRING,
-                                           gobject.TYPE_STRING)
-        self.slaves_tv.set_model (self.slaves_model)
-        self.set_slaves_columns ()
-
+        'Load option tree for each alternative item'
+        self.options_tv = GtkEditableTable(self.builder.get_object('options_grid'))
+        self.options_model = Gtk.TreeStore(bool, int, str)
         # selects the first alternative on the list
         iter = self.alternatives_model.get_iter_first ()
         if iter != None:
             self.alternatives_selection.select_iter (iter)
 
-    def mainloop (self):
-        gtk.main ()
+        for name, activate in {
+            'preferences': lambda *args: self.preferences_dialog.show(),
+            'quit': self.on_quit,
+            'group.add': lambda *args: self.adding_problem.run() != Gtk.ResponseType.OK or self.group_info_window.show(),
+            'group.edit': lambda *args: self.confirm_editable() or self.group_info_window.show(),
+            'group.remove': lambda *args: self.confirm_editable() or self.group_info_window.show(),
+            'change.save': self.save,
+            'change.reload': self.save,
+        }.items():
+            action = Gio.SimpleAction(name=name)
+            action.connect('activate', activate)
+            self.main_window.add_action(action)
+
+        self.builder.connect_signals({
+            'hide_on_delete': hide_on_delete,
+            'reset_dialog': reset_dialog,
+            'on_editable_check_toggled': self.on_editable_check_toggled,
+            'on_config_changed': self.on_config_changed,
+            'on_quit': self.on_quit,
+            'save_and_quit': lambda *args: self.save() or self.do_quit(),
+            'do_quit': self.do_quit,
+        })
+
+    def show(self):
+        self.main_window.show()
+
+    def on_editable_check_toggled(self, widget):
+        if widget.get_active():
+            self.edit_warning.get_widget_for_response(Gtk.ResponseType.OK).show()
+            self.edit_warning.get_widget_for_response(Gtk.ResponseType.YES).hide()
+            self.edit_warning.get_widget_for_response(Gtk.ResponseType.NO).hide()
+            if self.edit_warning.run() == Gtk.ResponseType.CANCEL:
+                widget.set_active(False)
+
+    def on_config_changed(self, widget):
+        print(Gtk.Buildable.get_name(widget), widget.get_active())
+
+    def confirm_editable(self, *args):
+        self.edit_warning.get_widget_for_response(Gtk.ResponseType.OK).hide()
+        self.edit_warning.get_widget_for_response(Gtk.ResponseType.YES).show()
+        self.edit_warning.get_widget_for_response(Gtk.ResponseType.NO).show()
+        if self.edit_warning.run() == Gtk.ResponseType.CANCEL:
+            return True
+
+    def on_quit(self, *args):
+        if 0:  # change not save
+            self.builder.get_object('confirm_closing').show()
+            return True
+        self.do_quit()
+
+    def do_quit(self, *args):
+        self.main_window.destroy()
+
+    def save(self, *args):
+        if 0: # failed
+            return True
 
     def refresh_ui (self):
-        while gtk.events_pending ():
-            gtk.main_iteration_do (False)
+        while Gtk.events_pending ():
+            Gtk.main_iteration_do (False)
 
-    def set_alternatives_columns (self):
-        cell_renderer = gtk.CellRendererText ()
-        column = gtk.TreeViewColumn (_('Alternatives'), cell_renderer,
-                                     text=self.ALTERNATIVES)
-        self.alternatives_tv.append_column (column)
+    def set_alternatives_columns(self):
+        """Set Tree View Columns for left side view in main window."""
+        cell_renderer = Gtk.CellRendererText()
+        column = Gtk.TreeViewColumn(
+                _('Alternatives'),
+                cell_renderer,
+                text=self.ALTERNATIVES,
+                )
+        self.alternatives_tv.append_column(column)
 
     def option_choice_toggled_cb (self, cr, path):
         iter = self.options_model.get_iter_from_string (path)
@@ -175,13 +270,13 @@ class GAlternatives:
         self.set_alternative_option (iter)
 
     def show_add_opt_window_cb (self, *args):
-# FIXME: need to finish this part of the window
-#        for slave in self.altslaves:
-#            label = gtk.Label ()
-#            label.set_text ('%s (%s)' % (slave['name'], slave['link']))
-#            self.add_opt_window.vbox.pack_start (label, 1, 1, 0)
-#
-#            entry
+## FIXME: need to finish this part of the window
+##        for slave in self.altslaves:
+##            label = gtk.Label ()
+##            label.set_text ('%s (%s)' % (slave['name'], slave['link']))
+##            self.add_opt_window.vbox.pack_start (label, 1, 1, 0)
+##
+##            entry
 
 
         self.add_opt_window.show_all ()
@@ -230,7 +325,7 @@ class GAlternatives:
 
     def choose_opt_cb (self, *args):
         self.file_selector.show_now ()
-        gtk.main ()
+        Gtk.main () # XXX: needs review
 
         filename = self.file_selector.get_filename ()
         if filename != '':
@@ -240,8 +335,8 @@ class GAlternatives:
 
     def close_filesel_cb (self, *args):
         self.file_selector.hide ()
-        if gtk.main_level () > 1:
-            gtk.main_quit ()
+        if Gtk.main_level () > 1:
+            Gtk.main_quit () # Needs review
 
     def remove_option_cb (self, *args):
         alt = self.alternative
@@ -318,9 +413,9 @@ class GAlternatives:
         column.set_fixed_width (50)
         self.options_tv.append_column (column)
 
-        cell_renderer = gtk.CellRendererText ()
+        cell_renderer = Gtk.CellRendererText ()
         cell_renderer.set_property ('xalign', 0.9)
-        column = gtk.TreeViewColumn (_('Priority'), cell_renderer,
+        column = Gtk.TreeViewColumn (_('Priority'), cell_renderer,
                                      text=self.PRIORITY)
         column.set_sort_order (gtk.SORT_DESCENDING)
         column.set_sort_indicator (True)
@@ -328,28 +423,26 @@ class GAlternatives:
         column.set_fixed_width (50)
         self.options_tv.append_column (column)
 
-        cell_renderer = gtk.CellRendererText ()
-        column = gtk.TreeViewColumn (_('Options'), cell_renderer,
+        cell_renderer = Gtk.CellRendererText ()
+        column = Gtk.TreeViewColumn (_('Options'), cell_renderer,
                                      text=self.OPTIONS)
         self.options_tv.append_column (column)
 
     def set_slaves_columns (self):
-        cell_renderer = gtk.CellRendererText ()
-        column = gtk.TreeViewColumn (_('Name'), cell_renderer,
+        cell_renderer = Gtk.CellRendererText ()
+        column = Gtk.TreeViewColumn (_('Name'), cell_renderer,
                                      text=self.SLAVENAME)
         self.slaves_tv.append_column (column)
 
-        cell_renderer = gtk.CellRendererText ()
-        column = gtk.TreeViewColumn (_('Slave'), cell_renderer,
+        cell_renderer = Gtk.CellRendererText ()
+        column = Gtk.TreeViewColumn (_('Slave'), cell_renderer,
                                      text=self.SLAVEPATH)
         self.slaves_tv.append_column (column)
 
-    def update_alternatives (self, directory='/var/lib/dpkg/alternatives/'):
-        self.alternatives_model.clear ()
-        alternatives = os.listdir (directory)
-        alternatives.sort ()
+    def update_alternatives(self):
+        self.alternatives_model.clear()
 
-        for alternative in alternatives:
+        for alternative in sorted(alt_db.keys()):
             iter = self.alternatives_model.append (None)
             self.alternatives_model.set (iter, self.ALTERNATIVES,
                                          alternative)
@@ -363,6 +456,11 @@ class GAlternatives:
 
 
     def status_changed_cb (self, *args):
+        """
+        Change alternatives system config on user's selection changed.
+
+        NEEDS TO REWORK, since status_menu is gone in glade3.
+        """
         alt = self.alternative
         selection = self.options_tv.get_selection ()
 
@@ -370,24 +468,25 @@ class GAlternatives:
 
         option = self.status_menu.get_history ()
         if option == 0:
-            alt.option_status = 'auto'
-            os.system ('%s --auto %s  > /dev/null 2>&1' % (UPDATE_ALTERNATIVES, alt.name))
+            alt.status = 'auto'
+            os.system ('%s --auto %s  > /dev/null 2>&1' % (UPDATE_ALTERNATIVES, alt.name)) # FIXME: os.system
         else:
-            alt.option_status = 'manual'
-            tm, iter = selection.get_selected ()
-            self.set_alternative_option (iter)
+            alt.status = 'manual'
+            tm, iter = selection.get_selected()
+            self.set_alternative_option(iter)
 
         self.update_metainfo ()
         self.update_options_tree ()
 
     def update_options_tree (self):
         alt = self.alternative
-        selection = self.options_tv.get_selection ()
+        self.options_tv.update(alt, alt.options)
+        #selection = self.options_tv.get_selection ()
 
         self.options_model.clear ()
 
         for option in alt.options:
-            if option['path'] == alt.current_option:
+            if option == alt.current:
                 is_chosen = True
             else:
                 is_chosen = False
@@ -395,13 +494,13 @@ class GAlternatives:
             iter = self.options_model.append (None)
             self.options_model.set (iter,
                                     self.CHOICE, is_chosen,
-                                    self.PRIORITY, int(option['priority']),
-                                    self.OPTIONS, option['path'])
+                                    self.PRIORITY, int(option.priority),
+                                    self.OPTIONS, option[alt.name])
 
         # selects the first alternative on the list
         iter = self.options_model.get_iter_first ()
-        if iter != None:
-            selection.select_iter (iter)
+        #if iter != None:
+            #selection.select_iter (iter)
 
     def option_get_selected (self):
         selection = self.options_tv.get_selection ()
@@ -417,18 +516,6 @@ class GAlternatives:
 
     def hide_details_cb (self, *args):
         self.details_window.hide ()
-
-    def show_about_window_cb (self, *args):
-        self.about_window.show_all ()
-
-    def close_about_window_cb (self, *args):
-        self.about_window.hide ()
-
-    def show_credits_window_cb (self, *args):
-        self.credits_window.show_all ()
-
-    def close_credits_window_cb (self, *args):
-        self.credits_window.hide ()
 
     def options_find_path_in_list (self, path):
         alt = self.alternative
@@ -449,41 +536,44 @@ class GAlternatives:
                                    self.SLAVENAME, slave['name'],
                                    self.SLAVEPATH, slave['path'])
 
-    def update_metainfo (self):
-        selection = self.alternatives_tv.get_selection ()
-        tm, iter = selection.get_selected ()
+    def update_metainfo(self):
+        selection = self.alternatives_tv.get_selection()
+        tm, iter = selection.get_selected()
 
-        self.alternative = Alternative (tm.get_value (iter, self.ALTERNATIVES))
+        self.alternative = alt_db[tm.get_value(iter, self.ALTERNATIVES)]
         alt = self.alternative
 
-        alternative_label = self.gui.get_widget ('alternative_label')
-        description_label = self.gui.get_widget ('description_label')
-        status_menu = self.gui.get_widget ('status_menu')
+        alternative_label = self.builder.get_object('alternative_label')
+        link_label = self.builder.get_object('link_label')
+        description_label = self.builder.get_object('description_label')
+        #status_menu = self.builder.get_object('status_menu')
 
         # feedback!
         self.refresh_ui ()
 
         # set the name of the alternative to the information area
-        alternative_label.set_markup ('<span size="xx-large" weight="bold">%s</span>\n[ %s ]' % \
-                                      (alt.name, alt.link))
-        description_label.set_text (alt.description)
+        name, description = altname_description(alt.name)
+        alternative_label.set_text(name)
+        link_label.set_text(alt.link)
+        description_label.set_text (description)
 
         # need to block this signal, or the status_menu change will
         # undo my changes
-        self.status_menu.handler_block (self.status_changed_signal)
-        if alt.option_status == 'auto':
-            status_menu.set_history (0)
-        else:
-            status_menu.set_history (1)
-        self.status_menu.handler_unblock (self.status_changed_signal)
+        #self.status_menu.handler_block (self.status_changed_signal)
+        #if alt.status == 'auto':
+        #    status_menu.set_active(0)
+        #else:
+        #    status_menu.set_active(1)
+        #self.status_menu.handler_unblock (self.status_changed_signal)
 
 
-def no_gksu():
-    dialog = gtk.MessageDialog(None, gtk.DIALOG_DESTROY_WITH_PARENT,
-                                gtk.MESSAGE_WARNING, gtk.BUTTONS_CLOSE)
-    dialog.set_markup(_('<b>This program should be run as root and /usr/bin/gksu is not available.</b>\n\n'
-                        'I am unable to request the password myself without gksu. Unless you have '
-                        'modified your system to explicitly allow your normal user to modify '
-                        'the alternatives system, GAlternatives will not work.'))
-    dialog.run()
-    dialog.destroy()
+class GAlternativesAbout(Gtk.AboutDialog):
+    def __init__(self, *args, **kwargs):
+        kwargs.update(INFO)
+        super(Gtk.AboutDialog, self).__init__(
+            logo=GdkPixbuf and GdkPixbuf.Pixbuf.new_from_file(
+                locate_appdata(PATHS['icon'], 'galternatives.png')),
+            translator_credits=_('translator_credits'),
+            **kwargs)
+        self.connect('response', hide_on_delete)
+        self.connect('delete-event', hide_on_delete)
