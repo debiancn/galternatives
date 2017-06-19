@@ -2,9 +2,12 @@ from __future__ import absolute_import
 
 from . import logger, _, PACKAGE, APPID
 from .appdata import *
-from .gui import GAlternativesWindow, GAlternativesAbout
+from .gui import GAlternativesWindow, GAlternativesAbout, Polkit
+try:
+    from .log import set_logger
+except ImportError:
+    set_logger = None
 
-import logging
 import os
 import sys
 import signal
@@ -13,54 +16,28 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import Gtk
-# TODO: dbus?
-gi.require_version('Polkit', '1.0')
-try:
-    from gi.repository import Polkit
-    from gi.repository import GObject
-except ImportError:
-    print('Polkit not available, in-program root access not available.')
-    Polkit = None
-
-
-def set_logger(verbose=False, full=False):
-    logger = logging.getLogger(PACKAGE)
-    if verbose:
-        logger.setLevel(logging.DEBUG)
-    ch = logging.StreamHandler()
-    if full:
-        formatter = logging.Formatter(
-            # log by time
-            # '%(asctime)s - %(levelname)s: %(message)s')
-            # gtk style
-            # '(%(pathname)s:%(process)d): %(funcName)s-%(levelname)s **: %(message)s')
-            # gtk style but lineno
-            '(%(pathname)s->%(lineno)d): %(funcName)s-%(levelname)s **: %(message)s')
-        ch.setFormatter(formatter)
-    logger.addHandler(ch)
 
 
 class GAlternativesApp(Gtk.Application):
     debug = False
+    window = None
+    about_dialog = None
 
     def __init__(self, *args, **kwargs):
-        super(Gtk.Application, self).__init__(
+        super(GAlternativesApp, self).__init__(
             *args, application_id=APPID, **kwargs)
-
         self.add_main_option(
             'debug', ord('d'), GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-            'Enable debug output', None)
+            _('Enable debug output'), None)
         self.add_main_option(
             'normal', ord('n'), GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-            'Do not try to acquire root (as normal user)', None)
+            _('Do not try to acquire root (as normal user)'), None)
 
     def do_handle_local_options(self, options):
-        if options.contains('debug'):
-            self.debug = True
-            set_logger(True, True)
+        self.debug = options.contains('debug')
+        if set_logger:
+            set_logger(PACKAGE, self.debug)
             logger.debug(_('Testing galternatives...'))
-        else:
-            set_logger()
 
         if Gtk.get_minor_version() < 14:
             dialog = Gtk.MessageDialog(
@@ -68,7 +45,7 @@ class GAlternativesApp(Gtk.Application):
                 Gtk.MessageType.ERROR, Gtk.ButtonsType.OK_CANCEL,
                 _('The program requires Gtk+ 3.14 or higher'),
                 secondary_text=_(
-                    'Your system provides Gtk+ 3.{}. If you continue, the program '
+                    'Your system only provides Gtk+ 3.{}. If you continue, the program '
                     'may or may not work properly, and potential damage could happen. '
                     'Strongly recommend update your Gtk+ libaray before continue.'
                 ).format(Gtk.get_minor_version()))
@@ -81,24 +58,11 @@ class GAlternativesApp(Gtk.Application):
             if options.contains('normal'):
                 logger.warn('No root detected, but continue as in your wishes')
             elif Polkit:
-                result = Polkit.Authority.get().check_authorization_sync(
-                    Polkit.UnixProcess.new(os.getppid()),
-                    'org.freedesktop.policykit.exec',
-                    None,
-                    Polkit.CheckAuthorizationFlags.ALLOW_USER_INTERACTION,
-                    None
-                )
-                authenticated = False
-                try:
-                    authenticated = result.get_is_authorized() or result.get_is_challenge()
-                except GObject.GError as err:
-                    logger.warn('_polkit_auth_callback: error: %s'.format(err))
-                if not authenticated:
-                    return 1
+                logger.debug('delay root acquirement since Polkit available')
             elif os.access('/usr/bin/pkexec', os.X_OK):
-                return os.system('/usr/bin/pkexec {}'.format(sys.argv[0]))
+                return os.system('/usr/bin/pkexec "{}"'.format(sys.argv[0]))
             elif os.access('/usr/bin/gksu', os.X_OK):
-                return os.system('/usr/bin/gksu -t "{}" -m "{}" -u root {}'.format(
+                return os.system('/usr/bin/gksu -t "{}" -m "{}" -u root "{}"'.format(
                     _('Running Alternatives Configurator...'),
                     _('<b>I need your root password to run\n'
                       'the Alternatives Configurator.</b>'),
@@ -121,30 +85,29 @@ class GAlternativesApp(Gtk.Application):
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
-
         self.set_app_menu(Gtk.Builder.new_from_file(locate_appdata(
             PATHS['appdata'], ('menubar.ui', 'glade/menubar.ui')
-        )).get_object("menu"))
+        )).get_object('menu'))
 
     def do_activate(self):
-        self.window = GAlternativesWindow(self)
+        if self.window is None:
+            self.window = GAlternativesWindow(self)
+
+            # Cannot use add_action_entries()
+            # see https://bugzilla.gnome.org/show_bug.cgi?id=678655
+            for name, activate in {
+                'about': self.on_about,
+            }.items():
+                action = Gio.SimpleAction(name=name)
+                action.connect('activate', activate)
+                self.add_action(action)
+
         self.window.show()
 
-        # Cannot use add_action_entries()
-        # see https://bugzilla.gnome.org/show_bug.cgi?id=678655
-
-        self.about_dialog = GAlternativesAbout(transient_for=self.window.main_window)
-        action = Gio.SimpleAction(name='about')
-        action.connect('activate', lambda action, param: self.about_dialog.present())
-        self.add_action(action)
-
-        action = Gio.SimpleAction(name='preferences')
-        action.connect('activate', self.window.show_preferences)
-        self.add_action(action)
-
-        action = Gio.SimpleAction(name='quit')
-        action.connect('activate', self.window.on_quit)
-        self.add_action(action)
+    def on_about(self, action, param):
+        if self.about_dialog is None:
+            self.about_dialog = GAlternativesAbout(transient_for=self.window and self.window.main_window)
+        self.about_dialog.present()
 
 
 if __name__ == '__main__':

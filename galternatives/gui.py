@@ -3,29 +3,59 @@ from __future__ import absolute_import
 from . import logger, _, PACKAGE, INFO
 from .alternative import Alternative
 from .appdata import *
-from .description import altname_description
+from .description import altname_description, query_pkg
 
 import os
 from weakref import WeakKeyDictionary
 import gi
 gi.require_version('Gtk', '3.0')
+from gi.repository import Gio
 from gi.repository import Gtk
 try:
     from gi.repository import GdkPixbuf
 except ImportError:
-    print('GdkPixbuf not available, cannot show icon in about dialog.')
+    logger.warn('GdkPixbuf not available, cannot show icon in about dialog.')
     GdkPixbuf = None
+# TODO: dbus?
+gi.require_version('Polkit', '1.0')
+try:
+    from gi.repository import Polkit
+except ImportError:
+    logger.warn('Polkit not available, in-program root access not available.')
+    Polkit = None
+
+
+def polkit():
+    result = Polkit.Authority.get().check_authorization_sync(
+        Polkit.UnixProcess.new(os.getppid()),
+        'org.freedesktop.policykit.exec',
+        None,
+        Polkit.CheckAuthorizationFlags.ALLOW_USER_INTERACTION,
+        None
+    )
+    authenticated = False
+    try:
+        authenticated = result.get_is_authorized() or result.get_is_challenge()
+    except Polkit.Error as err:
+        logger.warn('_polkit_auth_callback: error: %s'.format(err))
+    if not authenticated:
+        return 1
 
 
 UPDATE_ALTERNATIVES = '/usr/bin/update-alternatives'
 alt_db = Alternative()
-LOWER = -(1 << 31)
 UPPER = 1 << 31
+LOWER = -UPPER
 
 
-def hide_window(window, *args):
-    window.hide()
-    return True
+def hide_on_delete(window, *args):
+    return Gtk.Widget.hide_on_delete(window)
+
+
+def reset_dialog(dialog, *args):
+    btn_cancel = dialog.get_widget_for_response(Gtk.ResponseType.CANCEL)
+    btn_cancel.grab_focus()
+    btn_cancel.grab_default()
 
 
 class GtkEditableTable:
@@ -128,22 +158,16 @@ class GAlternativesWindow:
         'Load glade XML file'
         self.builder = Gtk.Builder.new_from_file(locate_appdata(
             PATHS['appdata'], ('galternatives.glade', 'glade/galternatives.glade')))
-        self.builder.connect_signals({
-            'hide_window': hide_window,
-            'show_edit_warning': lambda *args:
-                self.builder.get_object('edit_warning').show(),
-            'add_group': lambda *args: None,
-            'edit_group': lambda *args: None,
-            'remove_group': lambda *args: None,
-            'save': self.save,
-            'on_quit': self.on_quit,
-            'save_and_quit': lambda *args: self.save() or self.do_quit(),
-            'do_quit': self.do_quit,
-        })
         self.builder.set_translation_domain(PACKAGE) # XXX: needs to reconsider
 
         self.main_window = self.builder.get_object('main_window')
         self.main_window.set_application(app)
+
+        self.group_info_window = self.builder.get_object('group_info_window')
+        self.preferences_dialog = self.builder.get_object('preferences_dialog')
+
+        self.edit_warning = self.builder.get_object('edit_warning')
+        self.adding_problem = self.builder.get_object('adding_problem')
 
         'Alternatives treeview, left side in main_window'
         self.alternatives_tv = self.builder.get_object('alternatives_tv')
@@ -165,11 +189,49 @@ class GAlternativesWindow:
         if iter != None:
             self.alternatives_selection.select_iter (iter)
 
+        for name, activate in {
+            'preferences': lambda *args: self.preferences_dialog.show(),
+            'quit': self.on_quit,
+            'group.add': lambda *args: self.adding_problem.run() != Gtk.ResponseType.OK or self.group_info_window.show(),
+            'group.edit': lambda *args: self.confirm_editable() or self.group_info_window.show(),
+            'group.remove': lambda *args: self.confirm_editable() or self.group_info_window.show(),
+            'change.save': self.save,
+            'change.reload': self.save,
+        }.items():
+            action = Gio.SimpleAction(name=name)
+            action.connect('activate', activate)
+            self.main_window.add_action(action)
+
+        self.builder.connect_signals({
+            'hide_on_delete': hide_on_delete,
+            'reset_dialog': reset_dialog,
+            'on_editable_check_toggled': self.on_editable_check_toggled,
+            'on_config_changed': self.on_config_changed,
+            'on_quit': self.on_quit,
+            'save_and_quit': lambda *args: self.save() or self.do_quit(),
+            'do_quit': self.do_quit,
+        })
+
     def show(self):
         self.main_window.show()
 
-    def show_preferences(self, *args):
-        self.builder.get_object('preferences_dialog').show(),
+    def on_editable_check_toggled(self, widget):
+        if widget.get_active():
+            self.edit_warning.get_widget_for_response(Gtk.ResponseType.OK).show()
+            self.edit_warning.get_widget_for_response(Gtk.ResponseType.YES).hide()
+            self.edit_warning.get_widget_for_response(Gtk.ResponseType.NO).hide()
+            if self.edit_warning.run() == Gtk.ResponseType.CANCEL:
+                widget.set_active(False)
+
+    def on_config_changed(self, widget):
+        print(Gtk.Buildable.get_name(widget), widget.get_active())
+
+    def confirm_editable(self, *args):
+        self.edit_warning.get_widget_for_response(Gtk.ResponseType.OK).hide()
+        self.edit_warning.get_widget_for_response(Gtk.ResponseType.YES).show()
+        self.edit_warning.get_widget_for_response(Gtk.ResponseType.NO).show()
+        if self.edit_warning.run() == Gtk.ResponseType.CANCEL:
+            return True
 
     def on_quit(self, *args):
         if 0:  # change not save
@@ -513,5 +575,5 @@ class GAlternativesAbout(Gtk.AboutDialog):
                 locate_appdata(PATHS['icon'], 'galternatives.png')),
             translator_credits=_('translator_credits'),
             **kwargs)
-        self.connect('response', hide_window)
-        self.connect('delete-event', hide_window)
+        self.connect('response', hide_on_delete)
+        self.connect('delete-event', hide_on_delete)

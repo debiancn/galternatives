@@ -42,7 +42,6 @@ def locate_appdata(locations, filenames, is_dir=False):
         for alt_filename in filenames:
             candidate = os.path.join(test_location, alt_filename)
             if os.path.isdir(candidate) if is_dir else os.path.isfile(candidate):
-                logger.debug(
-                    'locate_appdata: locate "{}" at {}'.format(filename, candidate))
+                logger.debug('locate "{}" at {}'.format(filename, candidate))
                 return candidate
-    logger.warn('locate_appdata: locate "{}" FAILED'.format(filename))
+    logger.warn('locate "{}" FAILED'.format(filename))

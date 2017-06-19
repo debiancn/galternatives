@@ -4,6 +4,7 @@ from . import logger, _
 from .appdata import *
 
 import locale
+import subprocess
 import sys
 import os
 
@@ -54,3 +55,13 @@ else:
                 DEFAULT_DESCRIPTION,
             )
         return (name, DEFAULT_DESCRIPTION)
+
+
+def query_pkg(filename):
+    p = subprocess.Popen(('dpkg', '-S', filename), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    if not out:
+        return
+    if p.returncode:
+        raise RuntimeError("`dpkg' returned with code {}".format(p.returncode))
+    return out.split(': ')[0]
