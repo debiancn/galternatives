@@ -8,7 +8,6 @@ from gi.repository import Gtk
 
 
 PACKAGE = 'galternatives'
-APPID = 'org.debiancn.galternatives'
 
 _ = gettext.gettext
 gettext.bindtextdomain(PACKAGE)
@@ -16,6 +15,7 @@ gettext.textdomain(PACKAGE)
 
 logger = logging.getLogger(PACKAGE)
 
+APPID = 'org.debiancn.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
     'version': '0.13.5',

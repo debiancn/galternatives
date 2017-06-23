@@ -9,6 +9,8 @@ import sys
 import os
 
 
+__all__ = ['altname_description', 'query_pkg', 'friendlize']
+
 DESC_DIR = locate_appdata(PATHS['appdata'], 'descriptions', True)
 DEFAULT_DESCRIPTION = _('No description')
 
@@ -65,3 +67,18 @@ def query_pkg(filename):
     if p.returncode:
         raise RuntimeError("`dpkg' returned with code {}".format(p.returncode))
     return out.split(': ')[0]
+
+
+def friendlize(commands):
+    for cmd in commands:
+        type_ = cmd[0]
+        if type_ == 'install':
+            yield _("Install option `{2}' for group `{1}'").format(*cmd)  # XXX
+        elif type_ == 'auto':
+            yield _("Set group `{1}' in auto mode").format(*cmd)
+        elif type_ == 'set':
+            yield _("Set group `{1}' in manual mode, pointed to `{2}'").format(*cmd)
+        elif type_ == 'remove':
+            yield _("Remove option `{2}' for group `{1}'").format(*cmd)
+        elif type_ == 'remove-all':
+            yield _("Remove group `{1}'").format(*cmd)

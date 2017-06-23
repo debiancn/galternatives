@@ -1,3 +1,3 @@
 Requirement
 
-Gtk+ 3.14 or later (Debian 8+)
+Gtk+ 3.4 or later

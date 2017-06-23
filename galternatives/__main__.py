@@ -39,6 +39,10 @@ class GAlternativesApp(Gtk.Application):
             set_logger(PACKAGE, self.debug)
             logger.debug(_('Testing galternatives...'))
 
+        '''
+        GtkBuilder said: The builder will error out if the version requirements are not met.
+        Can we bypass this?
+
         if Gtk.get_minor_version() < 14:
             dialog = Gtk.MessageDialog(
                 None, Gtk.DialogFlags.DESTROY_WITH_PARENT,
@@ -52,12 +56,13 @@ class GAlternativesApp(Gtk.Application):
             if dialog.run() != Gtk.ResponseType.OK:
                 return 2
             dialog.destroy()
+        '''
 
         if os.getuid():
             # not root
             if options.contains('normal'):
                 logger.warn('No root detected, but continue as in your wishes')
-            elif Polkit:
+            elif 0 and Polkit:  # TODO: remove after implemented
                 logger.debug('delay root acquirement since Polkit available')
             elif os.access('/usr/bin/pkexec', os.X_OK):
                 return os.system('/usr/bin/pkexec "{}"'.format(sys.argv[0]))
@@ -71,10 +76,9 @@ class GAlternativesApp(Gtk.Application):
                 dialog = Gtk.MessageDialog(
                     None, Gtk.DialogFlags.DESTROY_WITH_PARENT,
                     Gtk.MessageType.WARNING, Gtk.ButtonsType.OK_CANCEL,
-                    _('<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not available.</b>'),
-                    use_markup=True,
+                    _('This program should be run as root and none of its dependencies are available.'),
                     secondary_text=_(
-                        'I am unable to request the password myself without gksu. Unless you have '
+                        'I am unable to request the password myself. Unless you have '
                         'modified your system to explicitly allow your normal user to modify '
                         'the alternatives system, GAlternatives will not work.'))
                 if dialog.run() != Gtk.ResponseType.OK:
@@ -86,7 +90,7 @@ class GAlternativesApp(Gtk.Application):
     def do_startup(self):
         Gtk.Application.do_startup(self)
         self.set_app_menu(Gtk.Builder.new_from_file(locate_appdata(
-            PATHS['appdata'], ('menubar.ui', 'glade/menubar.ui')
+            PATHS['appdata'], 'glade/menubar.ui'
         )).get_object('menu'))
 
     def do_activate(self):
@@ -106,7 +110,8 @@ class GAlternativesApp(Gtk.Application):
 
     def on_about(self, action, param):
         if self.about_dialog is None:
-            self.about_dialog = GAlternativesAbout(transient_for=self.window and self.window.main_window)
+            self.about_dialog = GAlternativesAbout(
+                transient_for=self.window and self.window.main_window)
         self.about_dialog.present()
 
 

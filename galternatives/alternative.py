@@ -2,13 +2,6 @@ from __future__ import with_statement
 
 import os
 import sys
-from weakref import WeakValueDictionary
-
-
-ALTDIR = '/var/lib/dpkg/alternatives'
-ADMINDIR = '/etc/alternatives'
-LOG = '/var/log/alternatives.log'
-UPDATE_ALTERNATIVES = '/usr/bin/update-alternatives'
 
 
 def get_admin(admindir, name):
@@ -61,45 +54,10 @@ def except_tag(tag):
         raise ValueError('special char not allowed')
 
 
-class Name:
-    def __init__(self, name):
-        self.name = name
-
-    def set(self, name):
-        except_tag(name)
-        self.name = name
-
-    def get(self):
-        return self.name
-
-    def __repr__(self):
-        return 'Name({})'.format(self.name)
-
-
 class Option(dict):
-    def __init__(self, init={}, priority=0, names=None, *args, **kwargs):
-        super(Option, self).__init__(init, *args, **kwargs)
-        for name, path in self.items():
-            except_typeof(name, Name)
-            except_absolute(path)
-        self._names = names
+    def __init__(self, it=(), priority=0, *args, **kwargs):
+        super(Option, self).__init__(it, *args, **kwargs)
         self.priority = priority
-
-    def __getitem__(self, name):
-        return super(Option, self).__getitem__(self._names[name])
-
-    def __setitem__(self, name, path):
-        except_absolute(path)
-        return super(Option, self).__setitem__(self._names[name], path)
-
-    def __contains__(self, name):
-        return super(Option, self).__contains__(self._names[name])
-
-    def __eq__(self, other):
-        return all(
-            name in other and self[name] == other[name]
-            for name in self._names
-        )
 
     def describe(self, group):
         diff = []
@@ -114,45 +72,24 @@ class Option(dict):
                 diff.append(self.priority)
         return tuple(diff)
 
+    def same_with(self, other, group):
+        return all(self[name] == other[name] for name in group)
 
-class OptionList(list):
-    def __init__(self, names):
-        super(OptionList, self).__init__()
-        self._names = names
-
-    def _map(self, dic):
-        return {self._names[name]: path for name, path in dic.items()}
-
-    def __setitem__(self, index, item):
-        return super(OptionList, self).__setitem__(
-            index, item if isinstance(item, Option) else
-            Option(self._map(item), 0, self._names))
-
-    def find(self, name, path):
-        for option in self:
-            if option[name] == path:
-                return option
-        # raise ValueError('{} is not in list'.format(name))
-
-    def append(self, item, priority=0):
-        return super(OptionList, self).append(
-            item if isinstance(item, Option) else
-            Option(self._map(item), priority, self._names))
+    def __hash__(self):
+        return id(self)
 
 
-class AlternativeGroup(list):
+class Group(list):
     # property names come from update-alternatives(1)
-    STATUS = {'auto', 'manual'}
-    _status = 'auto'
-    _current = None
+    status = True
+    current = None
 
     def __init__(self, name, create=False, parent=None):
         self._parent = parent
         self._links = {}
-        self._names = WeakValueDictionary()
-        super(AlternativeGroup, self).__init__()
+        super(Group, self).__init__()
         self[name] = ''
-        self.options = OptionList(self._names)
+        self.options = []
         if not create:
             self.reload()
 
@@ -167,8 +104,8 @@ class AlternativeGroup(list):
                 it = iter(it)
 
             # target parser
-            self._status = next(it)
-            self[self[0]] = next(it)
+            self.status = next(it) == 'auto'
+            self[self.name] = next(it)
             while True:
                 line = next(it)
                 if line == '':
@@ -177,21 +114,19 @@ class AlternativeGroup(list):
 
             # option parser
             while True:
+                it_name = iter(self)
                 line = next(it)
                 if line == '':
                     break
-                option = []
-                option.append(line)
-                priority = int(next(it))
-                for i in range(len(self) - 1):
-                    option.append(next(it))
-                self.options.append(
-                    {name: path for name, path in zip(self, option)}, priority)
+                option = Option({next(it_name): line}, int(next(it)))
+                for name in it_name:
+                    option[name] = next(it)
+                self.options.append(option)
 
         current_path = os.readlink(get_admin(self._parent.admindir, self.name))
         for option in self.options:
             if option[self.name] == current_path:
-                self._current = option
+                self.current = option
 
     @property
     def alt(self):
@@ -201,136 +136,138 @@ class AlternativeGroup(list):
     def name(self):
         return self[0]
 
-    @name.setter
-    def name(self, value):
-        self[0] = value
-
     @property
     def link(self):
-        return self[self[0]]
-
-    @link.setter
-    def link(self, value):
-        self[self[0]] = value
-
-    @property
-    def current(self):
-        return self._current
-
-    @current.setter
-    def current(self, value):
-        if value is None:
-            if self.current not in self.options:
-                self.status = 'auto'
-            return
-        if value == self._current:
-            return
-        if value not in self.options:
-            raise ValueError('value nonexist')
-        self._current = value
-
-    @property
-    def status(self):
-        return self._status
-
-    @status.setter
-    def status(self, value):
-        if value == self._status:
-            return
-        if value not in self.__class__.STATUS:
-            raise ValueError(
-                "status must be 'auto' or 'manual', not '{}'".format(value))
-        self._status = value
-        if value == 'auto':
-            self._current = self.best
+        return self[self.name]
 
     @property
     def best(self):
-        return max(self.options.values(), key=lambda o: o.priority)
+        return max(self.options, key=lambda o: o.priority)
+
+    @property
+    def options_dict(self):
+        res = {option[self.name]: option for option in self.options}
+        if len(res) != len(self.options):
+            raise ValueError('duplicated master path found')
+        return res
+
+    def select(self, index=None):
+        if index is None:
+            if self.status:
+                return False
+            else:
+                self.current = self.best
+                self.status = True
+                return True
+        else:
+            if not self.status and self.current == self.options[index]:
+                return False
+            else:
+                self.current = self.options[index]
+                self.status = False
+                return True
 
     def __setitem__(self, index, value):
         if type(index) == int:
-            if value in self._names:
+            if value in self._links:
                 raise KeyError('element already exists')
-            if index == 0:
-                self._parent._move(self.name, value)
-            self._names[value] = self._names[self[index]]
-            del self._names[self[index]]
-            super(AlternativeGroup, self).__getitem__(index).set(value)
+            except_tag(value)
+            self._links[value] = self._links[self[index]]
+            del self._links[self[index]]
+            super(Group, self).__setitem__(index, value)
         else:
             except_absolute(value)
-            if index not in self._names:
-                super(AlternativeGroup, self).append(Name(index))
-                self._names[index] = \
-                    super(AlternativeGroup, self).__getitem__(-1)
-            self._links[self._names[index]] = value
+            if index not in self._links:
+                super(Group, self).append(index)
+            self._links[index] = value
 
     def __getitem__(self, index):
         if type(index) == int:
-            return super(AlternativeGroup, self).__getitem__(index).get()
+            return super(Group, self).__getitem__(index)
         else:
-            return self._links[self._names[index]]
+            return self._links[index]
 
     def __delitem__(self, index):
         if type(index) != int:
-            index = self.index(self._names[index])
-        assert index > 0
-        del self._links[super(AlternativeGroup, self).__getitem__(index)]
-        super(AlternativeGroup, self).__delitem__(index)
-
-    def __iter__(self):
-        return (self[i] for i in range(len(self)))
+            index = self.index(self[index])
+        del self._links[super(Group, self).__getitem__(index)]
+        super(Group, self).__delitem__(index)
 
     def __repr__(self):
         return 'altgroup: {} links: {} options: {}'.format(
             self.name, repr(self._links), self.options)
 
+    def __hash__(self):
+        return id(self)
+
+    def find_option(self, path):
+        for option in self.options:
+            if option[self.name] == path:
+                return option
+
+    def compare(self, old_group={}):
+        new_options = self.options_dict
+        old_options = old_group and old_group.options_dict
+        res = [
+            ('remove', self.name, p)
+            for p in old_options
+            if p not in new_options
+        ] + [
+            o.describe(self)
+            for p, o in new_options.items()
+            if p not in old_options or not o.same_with(old_options[p], self)
+        ]
+        if self.status:
+            # self in auto
+            if old_group and not old_group.status:
+                # old in manual
+                res.append(('auto', self.name))
+        else:
+            # self in manual
+            if not old_group or old_group.status or not self.current.same_with(old_group.current, self):
+                # no old, old in auto, old current not the same
+                res.append(('set', self.name, self.current[self.name]))
+        return res
+
 
 class Alternative(dict):
-    def __init__(self, altdir=ALTDIR, admindir=ADMINDIR, log=LOG):
-        self._altdir = altdir
-        self._admindir = admindir
-        self._log = log
+    altdir = '/var/lib/dpkg/alternatives'
+    admindir = '/etc/alternatives'
+    log = '/var/log/alternatives.log'
+    update_alternatives = '/usr/bin/update-alternatives'
+
+    def __init__(self, altdir=None, admindir=None, log=None):
+        if altdir is not None:
+            self.altdir = altdir
+        if admindir is not None:
+            self.admindir = admindir
+        if log is not None:
+            self.log = log
         self._moves = {}
         super(Alternative, self).__init__(
             map(lambda name: (name, None), filter(
                 lambda name: os.path.isfile(os.path.join(self.altdir, name)),
                 os.listdir(self.altdir))))
 
-    @property
-    def altdir(self):
-        return self._altdir
-
-    @property
-    def admindir(self):
-        return self._admindir
-
-    @property
-    def log(self):
-        return self._log
-
     def __repr__(self):
         return repr(self.keys())
-
-    def __setitem__(self, name, item):
-        raise RuntimeError('use add() instead')
 
     def __getitem__(self, name):
         item = super(Alternative, self).__getitem__(name)
         if not item:
-            item = AlternativeGroup(name, parent=self)
+            item = Group(name, parent=self)
             super(Alternative, self).__setitem__(name, item)
         return item
 
     def add(self, item):
-        except_typeof(item, AlternativeGroup)
+        # except_typeof(item, Group)
         if item.name in self:
             raise KeyError('element already exists')
         item._parent = self
         self._moves[item.name] = None
         return super(Alternative, self).__setitem__(item.name, item)
 
-    def _move(self, old, new):
+    def move(self, old, new):
         if old in self._moves:
             self._moves[new] = self._moves[old]
             del self._moves[old]
@@ -341,49 +278,23 @@ class Alternative(dict):
         super(Alternative, self).__setitem__(new, self[old])
         super(Alternative, self).__delitem__(old)
 
-
-def shrink_group(new_group, old_group):
-    return [
-        ('remove', new_group.name, option[new_group.name])
-        for option in old_group.options
-        if not new_group.options.find(new_group.name, option[new_group.name])
-    ]
-
-
-def extend_group(new_group, old_group=AlternativeGroup('EMPTY', True)):
-    return [
-        option.describe(new_group)
-        for option in new_group.options
-        if option != old_group.options.find(
-            new_group.name, option[new_group.name])
-    ]
-
-
-def compare(new_db, old_db):
-    diff = []
-    for group in old_db:
-        if group not in new_db:
-            diff.append(('remove-all', group))
-    for group in new_db:
-        if dict.__getitem__(new_db, group) is not None:
-            if group in new_db._moves or \
-                    set(old_db[group]) - set(new_db[group]):
-                if group in new_db._moves and \
-                        new_db._moves[group] in old_db and \
-                        new_db._moves[group] in new_db:
-                    diff.append(('remove-all', new_db._moves[group]))
-                diff.extend(extend_group(new_db[group]))
-                if new_db[group].status != 'auto':
-                    diff.append(('set', group, new_db[group].current[0]))
-            else:
-                diff.extend(shrink_group(new_db[group], old_db[group]))
-                diff.extend(extend_group(new_db[group], old_db[group]))
-                if new_db[group].status != old_db[group].status:
-                    if new_db[group].status == 'auto':
-                        diff.append(('auto', group))
-                    elif new_db[group].current != old_db[group].current:
-                        diff.append(('set', group, new_db[group].current[0]))
-    return diff
+    def compare(self, old_db):
+        diff = []
+        for group in old_db:
+            if group not in self:
+                diff.append(('remove-all', group))
+        for group in self:
+            if dict.__getitem__(self, group):
+                if group in self._moves or \
+                        set(old_db[group]) - set(self[group]):
+                    if group in self._moves and \
+                            self._moves[group] in old_db and \
+                            self._moves[group] in self:
+                        diff.append(('remove-all', self._moves[group]))
+                    diff.extend(self[group].compare())
+                else:
+                    diff.extend(self[group].compare(old_db[group]))
+        return diff
 
 
 def commit(diff):
@@ -391,14 +302,16 @@ def commit(diff):
 
 
 if __name__ == '__main__':
+    from copy import deepcopy
     b=Alternative()
-    d=Alternative()
+    d=deepcopy(b)
+    #d=Alternative()
     c=d['awk']
     print(c)
     c.options[0]['nawk.1.gz'] = '/'
-    print(compare(d,b))
+    print(d.compare(b))
     del c.options[0]
-    c.options.append({'awk':'/'},1)
-    print(compare(d,b))
-    c.name='aaa'
-    print(compare(d,b))
+    c.options.append(Option({'awk':'/','aaa':'/a'},1))
+    print(d.compare(b))
+    d.move('awk','aaa')
+    print(d.compare(b))

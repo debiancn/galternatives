@@ -3,8 +3,10 @@ from __future__ import absolute_import
 from . import logger, _, PACKAGE, INFO
 from .alternative import Alternative
 from .appdata import *
-from .description import altname_description, query_pkg
+from .description import *
 
+from copy import deepcopy
+from collections import defaultdict
 import os
 from weakref import WeakKeyDictionary
 import gi
@@ -24,6 +26,10 @@ except ImportError:
     logger.warn('Polkit not available, in-program root access not available.')
     Polkit = None
 
+import sys
+if sys.version_info < (3,):
+    range = xrange
+
 
 def polkit():
     result = Polkit.Authority.get().check_authorization_sync(
@@ -42,181 +48,132 @@ def polkit():
         return 1
 
 
-UPDATE_ALTERNATIVES = '/usr/bin/update-alternatives'
-alt_db = Alternative()
-UPPER = 1 << 31
-LOWER = -UPPER
-
-
+### common actions begin ###
 def hide_on_delete(window, *args):
+    '''warpper for Gtk.Widget.hide_on_delete, but allow superfluous arguments'''
     return Gtk.Widget.hide_on_delete(window)
 
 
 def reset_dialog(dialog, *args):
+    '''select cancel button as default when re-show the dialog'''
     btn_cancel = dialog.get_widget_for_response(Gtk.ResponseType.CANCEL)
     btn_cancel.grab_focus()
     btn_cancel.grab_default()
 
 
-class GtkEditableTable:
-    radiocb = None
-    cellcb = None
-
-    def __init__(self, grid):
-        self.grid = grid
-        self.rgroup = Gtk.RadioButton()
-        self.empty = Gtk.Switch(tooltip_text=_('Toggle auto mode'))
-        self.heading_priority = Gtk.Label(label=_('Priority'))
-        self.grid.show_all()
-        self.changed = WeakKeyDictionary()
-
-    def update(self, heading, data, sel=None):
-        for widget in self.grid.get_children():
-            self.grid.remove(widget)
-
-        wg_heading = [
-            self.empty, Gtk.Label(label=heading[0]), self.heading_priority
-        ] + [
-            Gtk.Label(label=heading[col])
-            for col in range(1, len(heading))
-        ]
-        for col, label in enumerate(wg_heading):
-            self.grid.attach(label, col, 0, 1, 1)
-
-        priorities = [
-            Gtk.Adjustment(entry.priority, LOWER, UPPER, 1, 50, 0) for entry in data
-        ]
-        self.wg_rows = [
-            [
-                Gtk.RadioButton(group=self.rgroup),
-                Gtk.FileChooserButton(),
-                # Gtk.Entry(text=entry[heading[0]]),
-                Gtk.SpinButton(adjustment=priorities[row]),
-            ] + [
-                Gtk.FileChooserButton()
-                # Gtk.Entry(text=entry[heading[col]])
-                for col in range(1, len(heading))
-            ] for row, entry in enumerate(data)
-        ]
-        if sel is not None:
-            self.wg_rows[sel][0].set_active(True)
-        for row, wg_row in enumerate(self.wg_rows):
-            for col, wg_cell in enumerate(wg_row):
-                self.grid.attach(wg_cell, col, row + 1, 1, 1)
-                if col == 0:
-                    wg_cell.connect('toggled', self.on_toggled, data[row])
-                elif isinstance(wg_cell, Gtk.FileChooserButton):
-                    if col == 1:
-                        wg_cell.set_filename(data[row][heading[0]])
-                    else:
-                        wg_cell.set_filename(data[row][heading[col - 3]])
-                else:
-                    wg_cell.connect('focus-out-event', self.on_leave, data[row])
-                    wg_cell.connect('activate', self.on_enterpress, data[row])
-                    wg_cell.connect('changed', self.on_changed, data[row])
-        self.grid.show_all()
-
-    def connect(self, signal, cb, *args):
-        if signal == 'changed':
-            self.radiocb = lambda radio, data: cb(radio, data, *args)
-        elif signal == 'edited':
-            self.cellcb = lambda widget, data: cb(widget, data, *args)
-        else:
-            raise TypeError('{}: unknown signal name: {}'.format(self.grid, signal))
-
-    def on_changed(self, widget, entry):
-        self.changed[widget] = True
-
-    def on_enterpress(self, widget, entry):
-        self.empty.grab_focus()
-        print(900000)
-
-    def on_leave(self, widget, focus, entry):
-        if widget in self.changed and self.changed[widget]:
-            del self.changed[widget]
-            print('changed')
-            if self.cellcb:
-                self.cellcb(widget, entry)
-
-    def on_toggled(self, radio, entry):
-        if radio.get_active():
-            if self.radiocb:
-                self.radiocb(radio, entry)
+def open_file(button, *args):
+    '''select a file and fill the entry with the path'''
+    file_chooser = Gtk.FileChooserDialog(
+        title=_('Select File'), action=Gtk.FileChooserAction.OPEN,
+        parent=button.get_toplevel(), buttons=(
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+    if file_chooser.run() == Gtk.ResponseType.OK:
+        button.get_parent().foreach(lambda widget:
+            isinstance(widget, Gtk.Entry) and
+            widget.set_text(file_chooser.get_filename()))
+    file_chooser.destroy()
+### common actions end ###
 
 
 class GAlternativesWindow:
-    ALTERNATIVES = 0
-
-    CHOICE = 0
-    PRIORITY = 1
-    OPTIONS = 2
-
-    SLAVENAME = 0
-    SLAVEPATH = 1
+    group = None
+    option_index = None
 
     def __init__(self, app):
-        'Load glade XML file'
-        self.builder = Gtk.Builder.new_from_file(locate_appdata(
-            PATHS['appdata'], ('galternatives.glade', 'glade/galternatives.glade')))
-        self.builder.set_translation_domain(PACKAGE) # XXX: needs to reconsider
+        '''load alternative database and fetch objects from the builder'''
+        self.alt_db = Alternative()
+        self.alt_db_old = deepcopy(self.alt_db)
 
+        # load glade XML file
+        self.builder = Gtk.Builder.new_from_file(locate_appdata(
+            PATHS['appdata'], 'glade/galternatives.glade'))
+
+        # main window
         self.main_window = self.builder.get_object('main_window')
         self.main_window.set_application(app)
 
-        self.group_info_window = self.builder.get_object('group_info_window')
+        self.pending_box = self.builder.get_object('pending_box')
+
+        self.alternative_label = self.builder.get_object('alternative_label')
+        self.link_label = self.builder.get_object('link_label')
+        self.description_label = self.builder.get_object('description_label')
+
+        self.status_switch = self.builder.get_object('status_switch')
+        self.options_tv = self.builder.get_object('options_tv')
+        self.options_menu = self.builder.get_object('options_menu')
+        self.options_menu.insert_action_group('win', self.main_window)
+        self.option_edit_item = self.builder.get_object('option_edit_item')
+        self.option_remove_item = self.builder.get_object('option_remove_item')
+        self.option_add_item = self.builder.get_object('option_add_item')
+
+        # dialogs and messages
         self.preferences_dialog = self.builder.get_object('preferences_dialog')
 
         self.edit_warning = self.builder.get_object('edit_warning')
         self.adding_problem = self.builder.get_object('adding_problem')
+        self.confirm_closing = self.builder.get_object('confirm_closing')
+        self.confirm_writing = self.builder.get_object('confirm_writing')
 
-        'Alternatives treeview, left side in main_window'
-        self.alternatives_tv = self.builder.get_object('alternatives_tv')
-        self.alternatives_model = Gtk.TreeStore(str) # model is "store"
-        self.alternatives_tv.set_model(self.alternatives_model)
-        self.set_alternatives_columns()
+        self.group_glade = locate_appdata(PATHS['appdata'], 'glade/group.glade')
+        self.option_glade = locate_appdata(PATHS['appdata'], 'glade/option.glade')
 
-        self.alternatives_selection = self.alternatives_tv.get_selection ()
-        self.alternatives_selection.connect ('changed',
-                                             self.alternative_selected_cb) # FIXME callback not reviewed
+        self.group_windows = {}
+        self.option_windows = defaultdict(dict)
 
-        self.update_alternatives()
-
-        'Load option tree for each alternative item'
-        self.options_tv = GtkEditableTable(self.builder.get_object('options_grid'))
-        self.options_model = Gtk.TreeStore(bool, int, str)
-        # selects the first alternative on the list
-        iter = self.alternatives_model.get_iter_first ()
-        if iter != None:
-            self.alternatives_selection.select_iter (iter)
-
+        # actions and signals
         for name, activate in {
             'preferences': lambda *args: self.preferences_dialog.show(),
             'quit': self.on_quit,
-            'group.add': lambda *args: self.adding_problem.run() != Gtk.ResponseType.OK or self.group_info_window.show(),
-            'group.edit': lambda *args: self.confirm_editable() or self.group_info_window.show(),
-            'group.remove': lambda *args: self.confirm_editable() or self.group_info_window.show(),
-            'change.save': self.save,
-            'change.reload': self.save,
+            'group.add': self.add_group,
+            'group.edit': self.edit_group,
+            'group.remove': self.remove_group,
+            'option.add': self.add_option,
+            'option.edit': self.edit_option,
+            'option.remove': self.remove_option,
+            'change.save': self.on_save,
+            'change.reload': self.do_reload,
         }.items():
             action = Gio.SimpleAction(name=name)
             action.connect('activate', activate)
             self.main_window.add_action(action)
 
         self.builder.connect_signals({
+            # common
             'hide_on_delete': hide_on_delete,
             'reset_dialog': reset_dialog,
+            'open_file': open_file,
+            # config
+            'reload_config': self.reload_config,
             'on_editable_check_toggled': self.on_editable_check_toggled,
             'on_config_changed': self.on_config_changed,
+            # commit
             'on_quit': self.on_quit,
             'save_and_quit': lambda *args: self.save() or self.do_quit(),
             'do_quit': self.do_quit,
+            'get_pending_commands': self.get_pending_commands,
+            # main window
+            'update_groups': self.update_groups,
+            'update_options': self.update_options,
+            'change_status': self.change_status,
+            'select_option': self.select_option,
+            'on_options_tv_button_press_event': self.on_options_tv_button_press_event,
         })
 
     def show(self):
+        '''pretend itself as Gtk.Window'''
         self.main_window.show()
 
+    ### config actions begin ###
+    def reload_config(self, widget):
+        '''reload config when showing preference dialog'''
+        for options in ('altdir', 'admindir', 'log'):
+            self.builder.get_object(options + '_chooser').set_filename(getattr(self.alt_db, options))
+
     def on_editable_check_toggled(self, widget):
+        '''show warning when enabling edit feature'''
         if widget.get_active():
+            # set buttons for edit_warning dialog
             self.edit_warning.get_widget_for_response(Gtk.ResponseType.OK).show()
             self.edit_warning.get_widget_for_response(Gtk.ResponseType.YES).hide()
             self.edit_warning.get_widget_for_response(Gtk.ResponseType.NO).hide()
@@ -224,347 +181,214 @@ class GAlternativesWindow:
                 widget.set_active(False)
 
     def on_config_changed(self, widget):
+        '''auto save config change'''
         print(Gtk.Buildable.get_name(widget), widget.get_active())
+    ### config actions end ###
 
-    def confirm_editable(self, *args):
-        self.edit_warning.get_widget_for_response(Gtk.ResponseType.OK).hide()
-        self.edit_warning.get_widget_for_response(Gtk.ResponseType.YES).show()
-        self.edit_warning.get_widget_for_response(Gtk.ResponseType.NO).show()
-        if self.edit_warning.run() == Gtk.ResponseType.CANCEL:
-            return True
-
+    ### commit actions begin ###
     def on_quit(self, *args):
+        '''check for unsaved changes before quitting'''
         if 0:  # change not save
-            self.builder.get_object('confirm_closing').show()
+            self.confirm_closing.show()
             return True
         self.do_quit()
 
     def do_quit(self, *args):
+        '''close the window'''
         self.main_window.destroy()
 
-    def save(self, *args):
+    def on_save(self, *args):
+        if self.confirm_writing.run() == Gtk.ResponseType.OK:
+            print 1
+            # self.do_save()
+
+    def do_save(self, *args):
+        '''save changes'''
+        self.alt_db_old = deepcopy(self.alt_db)
         if 0: # failed
             return True
 
-    def refresh_ui (self):
-        while Gtk.events_pending ():
-            Gtk.main_iteration_do (False)
+    def do_reload(self, *args):
+        self.alt_db = deepcopy(self.alt_db_old)
 
-    def set_alternatives_columns(self):
-        """Set Tree View Columns for left side view in main window."""
-        cell_renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(
-                _('Alternatives'),
-                cell_renderer,
-                text=self.ALTERNATIVES,
-                )
-        self.alternatives_tv.append_column(column)
+    def get_pending_commands(self, widget):
+        commands = self.alt_db.compare(self.alt_db_old)
+        model = widget.get_model()
+        model.clear()
+        for friend_cmd in friendlize(commands):
+            model.set(model.append(None), 0, friend_cmd)
+    ### commit actions end ###
 
-    def option_choice_toggled_cb (self, cr, path):
-        iter = self.options_model.get_iter_from_string (path)
-        current_status = self.options_model.get_value (iter,
-                                                       self.CHOICE)
-        if current_status:
-            return
+    ### detail windows actions begin ###
+    def add_group(self, widget, data):
+        if self.adding_problem.run() == Gtk.ResponseType.OK:
+            self.show_group_window()
 
-        self.set_alternative_option (iter)
+    def edit_group(self, widget, data):
+        if self.confirm_editable():
+            self.show_group_window(self.group)
 
-    def show_add_opt_window_cb (self, *args):
-## FIXME: need to finish this part of the window
-##        for slave in self.altslaves:
-##            label = gtk.Label ()
-##            label.set_text ('%s (%s)' % (slave['name'], slave['link']))
-##            self.add_opt_window.vbox.pack_start (label, 1, 1, 0)
-##
-##            entry
+    def remove_group(self, widget, data):
+        if self.confirm_editable():
+            if self.group in self.group_windows:
+                self.group_windows[self.group].destory()
+            if self.group in self.option_windows:
+                for win in self.option_windows[self.group].values():
+                    win.destory()
 
-
-        self.add_opt_window.show_all ()
-
-
-    def hide_add_opt_window_cb (self, *args):
-        self.add_opt_window.hide ()
-        self.add_opt_entry.set_text ('')
-        self.add_opt_entry.grab_focus ()
-
-    def add_option_cb (self, *args):
-        alt = self.alternative
-        unixname = alt.name
-        link = alt.link
-
-        path = self.add_opt_entry.get_text ()
-        logger.debug('I should be adding %s to the %s alternative here...' %\
-                     (path, self.alternative))
-
-        if os.path.exists (path):
-            s = os.stat (path)
+    def show_group_window(self, group=None):
+        if group and group in self.group_windows:
+            window = self.group_windows[group]
         else:
-            msg = _('The file or directory you selected does not exist.\n'
-                    'Please select a valid one.')
-            dialog = gtk.MessageDialog (self.main_window,
-                                        gtk.DIALOG_MODAL,
-                                        gtk.MESSAGE_ERROR,
-                                        gtk.BUTTONS_CLOSE,
-                                        msg)
-            result = dialog.run ()
-            dialog.destroy ()
-            return
+            builder = Gtk.Builder.new_from_file(self.group_glade)
+            builder.connect_signals({
+                'open_file': open_file,
+                'on_group_window_close': self.on_group_window_close,
+            })
+            window = builder.get_object('group_window')
+            window.set_title(
+                _('Edit group - {}').format(group.name) if group
+                else _('Add group'))
+            window.group = group
+        if group and group not in self.group_windows:
+            self.group_windows[group] = window
+        window.present()
+        # TODO: get selected
 
-        priority = self.add_opt_spin.get_value ()
+    def on_group_window_close(self, window, event):
+        print window.group
 
-        cmd = '%s --install %s %s %s %d > /dev/null 2>&1' % (UPDATE_ALTERNATIVES, link, unixname, path, priority)
-        result = os.system (cmd)
+    def add_option(self, widget, data):
+        if self.adding_problem.run() == Gtk.ResponseType.OK:
+            self.show_option_window(self.group)
 
-        logger.debug(cmd)
-        logger.debug('Result: %d' % (result))
+    def edit_option(self, widget, data):
+        if self.confirm_editable():
+            self.show_option_window(self.group, option)
 
-        self.hide_add_opt_window_cb (self)
+    def remove_option(self, widget, data):
+        if self.confirm_editable():
+            if self.group in self.group_windows:
+                self.option_windows[self.group][self.option].destory()
 
-        self.update_metainfo ()
-        self.update_options_tree ()
-
-    def choose_opt_cb (self, *args):
-        self.file_selector.show_now ()
-        Gtk.main () # XXX: needs review
-
-        filename = self.file_selector.get_filename ()
-        if filename != '':
-            self.add_opt_entry.set_text (filename)
-        self.file_selector.set_filename ('')
-        logger.debug('File selected: %s' % (filename))
-
-    def close_filesel_cb (self, *args):
-        self.file_selector.hide ()
-        if Gtk.main_level () > 1:
-            Gtk.main_quit () # Needs review
-
-    def remove_option_cb (self, *args):
-        alt = self.alternative
-        selection = self.options_tv.get_selection ()
-
-        unixname = alt.name
-        tm, iter = selection.get_selected ()
-        option = self.options_model.get_value (iter, self.OPTIONS)
-
-        if self.ask_for_confirmation (_('Are you sure you want to remove this option?')):
-            cmd = '%s --remove %s %s > /dev/null 2>&1' % (UPDATE_ALTERNATIVES, unixname, option)
-            result = os.system (cmd)
-            logger.debug(cmd)
-            logger.debug('Result: %d' % (result))
-
-            self.update_metainfo ()
-            self.update_options_tree ()
-
-    def ask_for_confirmation (self, msg):
-        dialog = gtk.MessageDialog (self.main_window,
-                                    gtk.DIALOG_MODAL,
-                                    gtk.MESSAGE_QUESTION,
-                                    gtk.BUTTONS_YES_NO,
-                                    msg)
-        result = dialog.run ()
-        dialog.destroy ()
-
-        if result == gtk.RESPONSE_YES:
-            return True
+    def show_option_window(self, group, option=None):
+        if option and option in self.option_windows[group]:
+            window = self.option_windows[group][option]
         else:
-            return False
+            builder = Gtk.Builder.new_from_file(self.option_glade)
+            builder.connect_signals({
+                'open_file': open_file,
+                'on_option_window_close': self.on_option_window_close,
+            })
+            window = builder.get_object('group_window')
+            window.set_transient_for(self.main_window)
+            window.set_title(
+                _('Edit option - {}').format(option[group.name]) if option
+                else _('Add option'))
+            window.option = option
+        if option and option not in self.option_windows[group]:
+            self.option_windows[group][option] = window
+        window.present()
 
-    def set_alternative_option (self, iter):
-        alt = self.alternative
-        unixname = alt.name
-        option = self.options_model.get_value (iter, self.OPTIONS)
+    def on_option_window_close(self, window, event):
+        print window.option
 
-        cmd = '%s --set %s %s  > /dev/null 2>&1' % (UPDATE_ALTERNATIVES, unixname, option)
-        result = os.system (cmd)
+    def confirm_editable(self):
+        '''show warning dialog before editing or removing group'''
+        self.edit_warning.get_widget_for_response(Gtk.ResponseType.OK).hide()
+        self.edit_warning.get_widget_for_response(Gtk.ResponseType.YES).show()
+        self.edit_warning.get_widget_for_response(Gtk.ResponseType.NO).show()
+        return self.edit_warning.run() != Gtk.ResponseType.CANCEL
+    ### detail windows actions end ###
 
-        logger.debug(cmd)
-        logger.debug('Result: %d' % (result))
+    ### main window actions begin ###
+    def update_groups(self, widget):
+        '''load alternative group into groups_tv when startup'''
+        # widget = self.groups_tv
+        model = widget.get_model()
+        model.clear()
+        for alternative in sorted(self.alt_db):
+            model.set(model.append(None), 0, alternative)
 
-        def deactivate (model, path, iter):
-            if self.options_model.get_value (iter, self.CHOICE):
-                self.options_model.set (iter,
-                                        self.CHOICE,
-                                        False)
-        self.options_model.foreach (deactivate)
-
-        self.options_model.set (iter,
-                                self.CHOICE,
-                                False)
-
-        # refresh the GUI, to get the new situation
-        self.update_metainfo ()
-        self.update_options_tree ()
-
-    def set_options_columns (self):
-        """
-        set_options_columns ()
-
-        Sets up the columns for the Options list for the currently
-        selected alternative.
-        """
-
-        self.options_tv.set_reorderable (True)
-
-        cell_renderer = gtk.CellRendererToggle ()
-        cell_renderer.set_radio (True)
-        cell_renderer.connect ('toggled', self.option_choice_toggled_cb)
-        column = gtk.TreeViewColumn (_('Choice'), cell_renderer,
-                                     active=self.CHOICE)
-        column.set_fixed_width (50)
-        self.options_tv.append_column (column)
-
-        cell_renderer = Gtk.CellRendererText ()
-        cell_renderer.set_property ('xalign', 0.9)
-        column = Gtk.TreeViewColumn (_('Priority'), cell_renderer,
-                                     text=self.PRIORITY)
-        column.set_sort_order (gtk.SORT_DESCENDING)
-        column.set_sort_indicator (True)
-        column.set_sort_column_id (self.PRIORITY)
-        column.set_fixed_width (50)
-        self.options_tv.append_column (column)
-
-        cell_renderer = Gtk.CellRendererText ()
-        column = Gtk.TreeViewColumn (_('Options'), cell_renderer,
-                                     text=self.OPTIONS)
-        self.options_tv.append_column (column)
-
-    def set_slaves_columns (self):
-        cell_renderer = Gtk.CellRendererText ()
-        column = Gtk.TreeViewColumn (_('Name'), cell_renderer,
-                                     text=self.SLAVENAME)
-        self.slaves_tv.append_column (column)
-
-        cell_renderer = Gtk.CellRendererText ()
-        column = Gtk.TreeViewColumn (_('Slave'), cell_renderer,
-                                     text=self.SLAVEPATH)
-        self.slaves_tv.append_column (column)
-
-    def update_alternatives(self):
-        self.alternatives_model.clear()
-
-        for alternative in sorted(alt_db.keys()):
-            iter = self.alternatives_model.append (None)
-            self.alternatives_model.set (iter, self.ALTERNATIVES,
-                                         alternative)
-
-    def alternative_selected_cb (self, selection):
-        # feels faster ;)
-        self.refresh_ui ()
-
-        self.update_metainfo ()
-        self.update_options_tree ()
-
-
-    def status_changed_cb (self, *args):
-        """
-        Change alternatives system config on user's selection changed.
-
-        NEEDS TO REWORK, since status_menu is gone in glade3.
-        """
-        alt = self.alternative
-        selection = self.options_tv.get_selection ()
-
-        self.refresh_ui ()
-
-        option = self.status_menu.get_history ()
-        if option == 0:
-            alt.status = 'auto'
-            os.system ('%s --auto %s  > /dev/null 2>&1' % (UPDATE_ALTERNATIVES, alt.name)) # FIXME: os.system
-        else:
-            alt.status = 'manual'
-            tm, iter = selection.get_selected()
-            self.set_alternative_option(iter)
-
-        self.update_metainfo ()
-        self.update_options_tree ()
-
-    def update_options_tree (self):
-        alt = self.alternative
-        self.options_tv.update(alt, alt.options)
-        #selection = self.options_tv.get_selection ()
-
-        self.options_model.clear ()
-
-        for option in alt.options:
-            if option == alt.current:
-                is_chosen = True
-            else:
-                is_chosen = False
-
-            iter = self.options_model.append (None)
-            self.options_model.set (iter,
-                                    self.CHOICE, is_chosen,
-                                    self.PRIORITY, int(option.priority),
-                                    self.OPTIONS, option[alt.name])
-
-        # selects the first alternative on the list
-        iter = self.options_model.get_iter_first ()
-        #if iter != None:
-            #selection.select_iter (iter)
-
-    def option_get_selected (self):
-        selection = self.options_tv.get_selection ()
-        tm, iter = selection.get_selected ()
-        if iter == None:
-            return
-
-        return tm.get_value (iter, self.OPTIONS)
-
-    def show_details_cb (self, data):
-        self.update_slaves_tree ()
-        self.details_window.show_all ()
-
-    def hide_details_cb (self, *args):
-        self.details_window.hide ()
-
-    def options_find_path_in_list (self, path):
-        alt = self.alternative
-
-        for option in alt.options:
-            if option['path'] == path:
-                return option
-        return None
-
-    def update_slaves_tree (self):
-        option = self.option_get_selected ()
-        self.slaves_model.clear ()
-
-        option = self.options_find_path_in_list (option)
-        for slave in option['slaves']:
-            iter = self.slaves_model.append (None)
-            self.slaves_model.set (iter,
-                                   self.SLAVENAME, slave['name'],
-                                   self.SLAVEPATH, slave['path'])
-
-    def update_metainfo(self):
-        selection = self.alternatives_tv.get_selection()
-        tm, iter = selection.get_selected()
-
-        self.alternative = alt_db[tm.get_value(iter, self.ALTERNATIVES)]
-        alt = self.alternative
-
-        alternative_label = self.builder.get_object('alternative_label')
-        link_label = self.builder.get_object('link_label')
-        description_label = self.builder.get_object('description_label')
-        #status_menu = self.builder.get_object('status_menu')
-
-        # feedback!
-        self.refresh_ui ()
+    def update_options(self, widget):
+        '''load options for selected alternative group into options_tv'''
+        # save current group
+        # widget = self.groups_tv.get_selection()
+        groups_model, groups_it = widget.get_selected()
+        group = self.alt_db[groups_model.get_value(groups_it, 0)]
+        self.group = group
 
         # set the name of the alternative to the information area
-        name, description = altname_description(alt.name)
-        alternative_label.set_text(name)
-        link_label.set_text(alt.link)
-        description_label.set_text (description)
+        name, description = altname_description(group.name)
+        self.alternative_label.set_text(name)
+        self.link_label.set_text(group.link)
+        self.description_label.set_text(description)
+        self.status_switch.set_state(group.status)
 
-        # need to block this signal, or the status_menu change will
-        # undo my changes
-        #self.status_menu.handler_block (self.status_changed_signal)
-        #if alt.status == 'auto':
-        #    status_menu.set_active(0)
-        #else:
-        #    status_menu.set_active(1)
-        #self.status_menu.handler_unblock (self.status_changed_signal)
+        # set columns
+        self.options_tv.get_column(1).set_title(group.name)
+        for i in range(3, self.options_tv.get_n_columns()):
+            self.options_tv.remove_column(self.options_tv.get_column(3))
+        for i in range(1, len(group)):
+            self.options_tv.append_column(Gtk.TreeViewColumn(group[i], Gtk.CellRendererText(), text=i + 2))
+
+        options_model = Gtk.ListStore(bool, str, int, *(str for i in range(1, len(group))))
+        self.options_tv.set_model(options_model)
+        for option in group.options:
+            it = options_model.append(None)
+            options_model.set(
+                it,
+                0, option == group.current,
+                1, option[group.name],
+                2, option.priority
+            )
+            for i in range(1, len(group)):
+                options_model.set(it, i + 2, option[group[i]])
+
+    def change_status(self, widget, state):
+        '''handle click on status_switch
+        When current status is auto, it will block the click action.'''
+        if self.group is None:
+            return True
+        if state:
+            print 'before',widget.get_state(),widget.get_active()
+            if not self.group.status:
+                self.group.status = True
+                self.options_tv.get_model().foreach(lambda model, path, it:
+                    model.set(it, 0, self.group.current == self.group.options[path[0]]))
+        else:
+            widget.set_state(True)
+            print 'under',widget.get_state(),widget.get_active()
+            return True
+
+    def select_option(self, widget, path):
+        '''handle click on radio buttons of options'''
+        index = int(path)
+        if self.group.current == self.group.options[index]:
+            return
+        self.group.select(index)
+        model = self.options_tv.get_model()
+        model.foreach(lambda model, path, it:
+            model.get(it, 0)[0] and (model.set(it, 0, False) or True))
+        model.set(model.iter_nth_child(None, index), 0, True)
+        self.status_switch.set_state(False)
+
+    def on_options_tv_button_press_event(self, treeview, event):
+        if event.button == 3:
+            pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
+            if pthinfo:
+                self.option_index = pthinfo[0][0]
+                self.option_edit_item.set_sensitive(True)
+                self.option_remove_item.set_sensitive(True)
+                self.option_add_item.set_sensitive(bool(self.group))
+                self.options_menu.popup(None, None, None, None, event.button, event.time)
+
+    def on_altdb_changed(self):
+        if 0:
+            self.pending_box.show()
+        if 0:
+            self.pending_box.hide()
+    ### main window actions end ###
 
 
 class GAlternativesAbout(Gtk.AboutDialog):
