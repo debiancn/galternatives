@@ -1,6 +1,7 @@
 from __future__ import with_statement
 
 import os
+import subprocess
 import sys
 
 
@@ -296,9 +297,21 @@ class Alternative(dict):
                     diff.extend(self[group].compare(old_db[group]))
         return diff
 
-
-def commit(diff):
-    pass
+    def commit(self, diff):
+        results = []
+        for cmd in diff:
+            args = list(cmd)
+            args[0] = '--' + args[0]
+            args.insert(0, self.update_alternatives)
+            p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            out, err = p.communicate()
+            if isinstance(out, str):
+                results.append((p.returncode, out, err))
+            else:
+                results.append((p.returncode, out.decode(), err.decode()))
+            if p.returncode:
+                break
+        return results
 
 
 if __name__ == '__main__':
@@ -315,3 +328,4 @@ if __name__ == '__main__':
     print(d.compare(b))
     d.move('awk','aaa')
     print(d.compare(b))
+    print(d.commit(d.compare(b)))

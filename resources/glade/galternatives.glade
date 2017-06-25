@@ -39,7 +39,6 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkBox" id="pending_box">
-            <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkLabel">
@@ -108,7 +107,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkToolButton" id="add_btn">
+                      <object class="GtkToolButton" id="group_add_btn">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Create</property>
@@ -123,8 +122,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkToolButton" id="edit_btn">
+                      <object class="GtkToolButton" id="group_edit_btn">
                         <property name="visible">True</property>
+                        <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Edit</property>
                         <property name="action_name">win.group.edit</property>
@@ -138,8 +138,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkToolButton" id="remove_btn">
+                      <object class="GtkToolButton" id="group_remove_btn">
                         <property name="visible">True</property>
+                        <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Remove</property>
                         <property name="action_name">win.group.remove</property>
@@ -236,9 +237,10 @@
                         <child>
                           <object class="GtkSwitch" id="status_switch">
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="tooltip_text" translatable="yes">Auto mode</property>
-                            <signal name="activate" handler="change_status" swapped="no"/>
+                            <signal name="notify::active" handler="change_status" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -480,6 +482,88 @@
       </object>
     </child>
   </object>
+  <object class="GtkMessageDialog" id="commit_result">
+    <property name="can_focus">False</property>
+    <property name="modal">True</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_window</property>
+    <property name="buttons">close</property>
+    <property name="text" translatable="yes">Changes successfully applied</property>
+    <property name="secondary_text" translatable="yes">The results are:</property>
+    <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
+    <signal name="response" handler="hide_on_delete" swapped="no"/>
+    <signal name="show" handler="get_pending_commands" object="commit_result_tv" swapped="no"/>
+    <signal name="show" handler="reset_dialog" swapped="no"/>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <property name="propagate_natural_width">True</property>
+            <property name="propagate_natural_height">True</property>
+            <child>
+              <object class="GtkTreeView" id="commit_result_tv">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">commands_liststore</property>
+                <property name="headers_visible">False</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection"/>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn">
+                    <property name="title" translatable="yes">Command</property>
+                    <child>
+                      <object class="GtkCellRendererText"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">6</property>
+            <property name="label" translatable="yes">All your changes have been applied.</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkMessageDialog" id="confirm_closing">
     <property name="can_focus">False</property>
     <property name="modal">True</property>
@@ -489,7 +573,7 @@
     <property name="message_type">question</property>
     <property name="buttons">cancel</property>
     <property name="text" translatable="yes">Some changes not saved.</property>
-    <property name="secondary_text" translatable="yes">The following commands have not been applied since last commit:</property>
+    <property name="secondary_text" translatable="yes">The following changes have not been applied since last commit:</property>
     <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
     <signal name="response" handler="hide_on_delete" swapped="no"/>
     <signal name="show" handler="get_pending_commands" object="confirm_closing_tv" swapped="no"/>
@@ -593,7 +677,7 @@
       <action-widget response="-8">confirm_closing_yes</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkMessageDialog" id="confirm_writing">
+  <object class="GtkMessageDialog" id="confirm_commit">
     <property name="can_focus">False</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
@@ -605,7 +689,7 @@
     <property name="secondary_text" translatable="yes">The following commands will be executed according to your modifications:</property>
     <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
     <signal name="response" handler="hide_on_delete" swapped="no"/>
-    <signal name="show" handler="get_pending_commands" object="confirm_writing_tv" swapped="no"/>
+    <signal name="show" handler="get_pending_commands" object="confirm_commit_tv" swapped="no"/>
     <signal name="show" handler="reset_dialog" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox">
@@ -632,7 +716,7 @@
             <property name="propagate_natural_width">True</property>
             <property name="propagate_natural_height">True</property>
             <child>
-              <object class="GtkTreeView" id="confirm_writing_tv">
+              <object class="GtkTreeView" id="confirm_commit_tv">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="model">commands_liststore</property>
@@ -741,6 +825,8 @@ If you don't know what this means, click 'Cancel'.</property>
     <property name="type_hint">normal</property>
     <property name="transient_for">main_window</property>
     <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
+    <signal name="response" handler="hide_on_delete" swapped="no"/>
+    <signal name="show" handler="reload_config" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox" id="preferences_dialog_box">
         <property name="can_focus">False</property>
@@ -1137,6 +1223,109 @@ Same as 'Safe' when advanced editing is disable.</property>
         <property name="action_name">win.option.add</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="results_liststore">
+    <columns>
+      <!-- column-name icon -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name msg -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkMessageDialog" id="commit_failed">
+    <property name="can_focus">False</property>
+    <property name="modal">True</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_window</property>
+    <property name="message_type">error</property>
+    <property name="buttons">close</property>
+    <property name="text" translatable="yes">Commit failed</property>
+    <property name="secondary_text" translatable="yes">An error has occurred. The results are:</property>
+    <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
+    <signal name="response" handler="hide_on_delete" swapped="no"/>
+    <signal name="show" handler="get_pending_commands" object="commit_result_tv" swapped="no"/>
+    <signal name="show" handler="reset_dialog" swapped="no"/>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <property name="propagate_natural_width">True</property>
+            <property name="propagate_natural_height">True</property>
+            <child>
+              <object class="GtkTreeView" id="results_tv">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">results_liststore</property>
+                <property name="headers_visible">False</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection"/>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn">
+                    <property name="title" translatable="yes">Icon</property>
+                    <child>
+                      <object class="GtkCellRendererPixbuf"/>
+                      <attributes>
+                        <attribute name="pixbuf">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn">
+                    <property name="sizing">autosize</property>
+                    <property name="title" translatable="yes">Messages</property>
+                    <child>
+                      <object class="GtkCellRendererText"/>
+                      <attributes>
+                        <attribute name="text">1</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">6</property>
+            <property name="label" translatable="yes">Please contact your system administrator.</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
       </object>
     </child>
   </object>

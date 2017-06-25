@@ -1,15 +1,18 @@
-from __future__ import absolute_import
+#!/usr/bin/env python
+import os
+import sys
 
-from . import logger, _, PACKAGE, APPID
-from .appdata import *
-from .gui import GAlternativesWindow, GAlternativesAbout, Polkit
+if __name__ == '__main__' and __package__ is None:
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from galternatives import logger, _, PACKAGE, APPID
+from galternatives.appdata import *
+from galternatives.gui import GAlternativesWindow, GAlternativesAbout, Polkit
 try:
-    from .log import set_logger
+    from galternatives.log import set_logger
 except ImportError:
     set_logger = None
 
-import os
-import sys
 import signal
 import gi
 gi.require_version('Gtk', '3.0')
@@ -39,33 +42,13 @@ class GAlternativesApp(Gtk.Application):
             set_logger(PACKAGE, self.debug)
             logger.debug(_('Testing galternatives...'))
 
-        '''
-        GtkBuilder said: The builder will error out if the version requirements are not met.
-        Can we bypass this?
-
-        if Gtk.get_minor_version() < 14:
-            dialog = Gtk.MessageDialog(
-                None, Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                Gtk.MessageType.ERROR, Gtk.ButtonsType.OK_CANCEL,
-                _('The program requires Gtk+ 3.14 or higher'),
-                secondary_text=_(
-                    'Your system only provides Gtk+ 3.{}. If you continue, the program '
-                    'may or may not work properly, and potential damage could happen. '
-                    'Strongly recommend update your Gtk+ libaray before continue.'
-                ).format(Gtk.get_minor_version()))
-            if dialog.run() != Gtk.ResponseType.OK:
-                return 2
-            dialog.destroy()
-        '''
+        # GtkBuilder will error out if the version requirements are not met.
+        # No need to check it again.
 
         if os.getuid():
             # not root
             if options.contains('normal'):
                 logger.warn('No root detected, but continue as in your wishes')
-            elif 0 and Polkit:  # TODO: remove after implemented
-                logger.debug('delay root acquirement since Polkit available')
-            elif os.access('/usr/bin/pkexec', os.X_OK):
-                return os.system('/usr/bin/pkexec "{}"'.format(sys.argv[0]))
             elif os.access('/usr/bin/gksu', os.X_OK):
                 return os.system('/usr/bin/gksu -t "{}" -m "{}" -u root "{}"'.format(
                     _('Running Alternatives Configurator...'),
@@ -76,9 +59,10 @@ class GAlternativesApp(Gtk.Application):
                 dialog = Gtk.MessageDialog(
                     None, Gtk.DialogFlags.DESTROY_WITH_PARENT,
                     Gtk.MessageType.WARNING, Gtk.ButtonsType.OK_CANCEL,
-                    _('This program should be run as root and none of its dependencies are available.'),
+                    _('<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not available.</b>'),
+                    use_markup=True,
                     secondary_text=_(
-                        'I am unable to request the password myself. Unless you have '
+                        'I am unable to request the password myself without gksu. Unless you have '
                         'modified your system to explicitly allow your normal user to modify '
                         'the alternatives system, GAlternatives will not work.'))
                 if dialog.run() != Gtk.ResponseType.OK:

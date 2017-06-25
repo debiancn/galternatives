@@ -13,19 +13,19 @@ if sys.argv[1] == 'build' or sys.argv[1] == 'install':
 if __name__ == '__main__':
     setup(
         name=PACKAGE,
-        version=VERSION,
+        version=INFO['version'],
         license='GPL',
         description='Manager for the alternatives system',
         long_description='A GUI to help the system administrator to choose '
                          'what program should provide a given service.',
         author='Gustavo Noronha Silva',
         author_email='kov@debian.org',
-        url='https://galternatives.alioth.debian.org/',
+        url=INFO['website'],
         scripts=['resources/galternatives'],
         packages=[PACKAGE],
         data_files=[
             ('share/pixmaps', glob('resources/pixmaps/*.png')),
-            ('share/galternatives', glob('resources/glade/*.glade')),
+            ('share/galternatives/glade', glob('resources/glade/*.glade')),
             ('share/galternatives/descriptions',
              glob('resources/descriptions/*.desktop')),
         ] + [

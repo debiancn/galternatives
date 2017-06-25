@@ -18,7 +18,7 @@ try:
 except ImportError:
     logger.warn('GdkPixbuf not available, cannot show icon in about dialog.')
     GdkPixbuf = None
-# TODO: dbus?
+# TODO: Polkit? (require service registration)
 gi.require_version('Polkit', '1.0')
 try:
     from gi.repository import Polkit
@@ -31,24 +31,7 @@ if sys.version_info < (3,):
     range = xrange
 
 
-def polkit():
-    result = Polkit.Authority.get().check_authorization_sync(
-        Polkit.UnixProcess.new(os.getppid()),
-        'org.freedesktop.policykit.exec',
-        None,
-        Polkit.CheckAuthorizationFlags.ALLOW_USER_INTERACTION,
-        None
-    )
-    authenticated = False
-    try:
-        authenticated = result.get_is_authorized() or result.get_is_challenge()
-    except Polkit.Error as err:
-        logger.warn('_polkit_auth_callback: error: %s'.format(err))
-    if not authenticated:
-        return 1
-
-
-### common actions begin ###
+###s common actions begin ###
 def hide_on_delete(window, *args):
     '''warpper for Gtk.Widget.hide_on_delete, but allow superfluous arguments'''
     return Gtk.Widget.hide_on_delete(window)
@@ -56,7 +39,9 @@ def hide_on_delete(window, *args):
 
 def reset_dialog(dialog, *args):
     '''select cancel button as default when re-show the dialog'''
-    btn_cancel = dialog.get_widget_for_response(Gtk.ResponseType.CANCEL)
+    btn_cancel = \
+        dialog.get_widget_for_response(Gtk.ResponseType.CANCEL) or \
+        dialog.get_widget_for_response(Gtk.ResponseType.CLOSE)
     btn_cancel.grab_focus()
     btn_cancel.grab_default()
 
@@ -113,7 +98,10 @@ class GAlternativesWindow:
         self.edit_warning = self.builder.get_object('edit_warning')
         self.adding_problem = self.builder.get_object('adding_problem')
         self.confirm_closing = self.builder.get_object('confirm_closing')
-        self.confirm_writing = self.builder.get_object('confirm_writing')
+        self.confirm_commit = self.builder.get_object('confirm_commit')
+
+        self.commit_failed = self.builder.get_object('commit_failed')
+        self.results_tv = self.builder.get_object('results_tv')
 
         self.group_glade = locate_appdata(PATHS['appdata'], 'glade/group.glade')
         self.option_glade = locate_appdata(PATHS['appdata'], 'glade/option.glade')
@@ -165,6 +153,7 @@ class GAlternativesWindow:
         self.main_window.show()
 
     ### config actions begin ###
+    # TODO: allow config file? (may pollute user's home)
     def reload_config(self, widget):
         '''reload config when showing preference dialog'''
         for options in ('altdir', 'admindir', 'log'):
@@ -182,15 +171,22 @@ class GAlternativesWindow:
 
     def on_config_changed(self, widget):
         '''auto save config change'''
+        # TODO: save config?
         print(Gtk.Buildable.get_name(widget), widget.get_active())
     ### config actions end ###
 
     ### commit actions begin ###
     def on_quit(self, *args):
         '''check for unsaved changes before quitting'''
-        if 0:  # change not save
-            self.confirm_closing.show()
-            return True
+        if self.pending_box.get_visible():  # TODO: change not save
+            response_id = self.confirm_closing.run()
+            if response_id == Gtk.ResponseType.CANCEL:
+                return True
+            if response_id == Gtk.ResponseType.NO:
+                return self.do_quit()
+            if response_id == Gtk.ResponseType.YES:
+                self.do_save()
+                return self.pending_box.get_visible()
         self.do_quit()
 
     def do_quit(self, *args):
@@ -198,21 +194,37 @@ class GAlternativesWindow:
         self.main_window.destroy()
 
     def on_save(self, *args):
-        if self.confirm_writing.run() == Gtk.ResponseType.OK:
-            print 1
-            # self.do_save()
+        if self.confirm_commit.run() == Gtk.ResponseType.OK:
+            self.do_save()
 
-    def do_save(self, *args):
+    def do_save(self):
         '''save changes'''
-        self.alt_db_old = deepcopy(self.alt_db)
-        if 0: # failed
-            return True
+        # improve: neat way to reuse differential commands
+        if self.commands is None:
+            logger.warn('No commands supplied')
+            self.commands = self.alt_db.compare(self.alt_db_old)
+        results = self.alt_db.commit(self.commands)
+        if results:
+            model = self.results_tv.get_model()
+            model.clear()
+            for cmd, out in zip(friendlize(self.commands), results):
+                model.set(model.append(None), 1, cmd)
+                model.set(model.append(None), 1, out[2])
+            self.commit_failed.run()
+            self.alt_db_old = Alternative()
+            self.on_change()
+        else:
+            self.alt_db_old = deepcopy(self.alt_db)
+        self.commands = None
 
     def do_reload(self, *args):
         self.alt_db = deepcopy(self.alt_db_old)
+        self.pending_box.hide()
+        # TODO: flush all widgets
 
     def get_pending_commands(self, widget):
         commands = self.alt_db.compare(self.alt_db_old)
+        self.commands = commands
         model = widget.get_model()
         model.clear()
         for friend_cmd in friendlize(commands):
@@ -220,6 +232,7 @@ class GAlternativesWindow:
     ### commit actions end ###
 
     ### detail windows actions begin ###
+    # TODO: windows need a good way for handling (group destruction)
     def add_group(self, widget, data):
         if self.adding_problem.run() == Gtk.ResponseType.OK:
             self.show_group_window()
@@ -253,10 +266,10 @@ class GAlternativesWindow:
         if group and group not in self.group_windows:
             self.group_windows[group] = window
         window.present()
-        # TODO: get selected
+        # TODO: make window selected
 
     def on_group_window_close(self, window, event):
-        print window.group
+        print(window.group)
 
     def add_option(self, widget, data):
         if self.adding_problem.run() == Gtk.ResponseType.OK:
@@ -291,7 +304,7 @@ class GAlternativesWindow:
         window.present()
 
     def on_option_window_close(self, window, event):
-        print window.option
+        print(window.option)
 
     def confirm_editable(self):
         '''show warning dialog before editing or removing group'''
@@ -316,6 +329,11 @@ class GAlternativesWindow:
         # widget = self.groups_tv.get_selection()
         groups_model, groups_it = widget.get_selected()
         group = self.alt_db[groups_model.get_value(groups_it, 0)]
+
+        # enable buttons
+        if not self.group:
+            self.builder.get_object('group_edit_btn').set_sensitive(True)
+            self.builder.get_object('group_remove_btn').set_sensitive(True)
         self.group = group
 
         # set the name of the alternative to the information area
@@ -323,7 +341,10 @@ class GAlternativesWindow:
         self.alternative_label.set_text(name)
         self.link_label.set_text(group.link)
         self.description_label.set_text(description)
-        self.status_switch.set_state(group.status)
+        self.status_switch.block = True
+        self.status_switch.set_active(group.status)
+        self.status_switch.set_sensitive(not group.status)
+        self.status_switch.block = False
 
         # set columns
         self.options_tv.get_column(1).set_title(group.name)
@@ -345,21 +366,18 @@ class GAlternativesWindow:
             for i in range(1, len(group)):
                 options_model.set(it, i + 2, option[group[i]])
 
-    def change_status(self, widget, state):
+    def change_status(self, widget, gparam):
         '''handle click on status_switch
         When current status is auto, it will block the click action.'''
-        if self.group is None:
-            return True
-        if state:
-            print 'before',widget.get_state(),widget.get_active()
-            if not self.group.status:
-                self.group.status = True
-                self.options_tv.get_model().foreach(lambda model, path, it:
-                    model.set(it, 0, self.group.current == self.group.options[path[0]]))
-        else:
-            widget.set_state(True)
-            print 'under',widget.get_state(),widget.get_active()
-            return True
+        if widget.block:
+            return
+        assert not self.group.status
+        assert widget.get_active()
+        self.group.select()
+        self.options_tv.get_model().foreach(lambda model, path, it:
+            model.set(it, 0, self.group.current == self.group.options[path[0]]))
+        widget.set_sensitive(False)
+        self.on_change(True)
 
     def select_option(self, widget, path):
         '''handle click on radio buttons of options'''
@@ -371,7 +389,11 @@ class GAlternativesWindow:
         model.foreach(lambda model, path, it:
             model.get(it, 0)[0] and (model.set(it, 0, False) or True))
         model.set(model.iter_nth_child(None, index), 0, True)
-        self.status_switch.set_state(False)
+        self.status_switch.block = True
+        self.status_switch.set_active(False)
+        self.status_switch.set_sensitive(True)
+        self.status_switch.block = False
+        self.on_change(True)
 
     def on_options_tv_button_press_event(self, treeview, event):
         if event.button == 3:
@@ -383,10 +405,15 @@ class GAlternativesWindow:
                 self.option_add_item.set_sensitive(bool(self.group))
                 self.options_menu.popup(None, None, None, None, event.button, event.time)
 
-    def on_altdb_changed(self):
-        if 0:
+    def on_change(self, autosave=False):
+        commands = self.alt_db.compare(self.alt_db_old)
+        self.commands = commands
+        if autosave and len(commands) == 1:
+            self.do_save()
+            return
+        if commands:
             self.pending_box.show()
-        if 0:
+        else:
             self.pending_box.hide()
     ### main window actions end ###
 
