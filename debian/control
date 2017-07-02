@@ -1,7 +1,9 @@
 Source: galternatives
 Section: admin
 Priority: optional
-Maintainer: Ryan Niebur <ryan@debian.org>
+Maintainer: Debian Chinese Team <chinese-developers@lists.alioth.debian.org>
+Uploaders:
+ Boyuan Yang <073plan@gmail.com>
 Build-Depends: debhelper (>= 7.2)
 Build-Depends-Indep: python-dev (>= 2.3), python-support (>= 0.3), intltool, gettext, python-glade2
 Standards-Version: 3.7.2
