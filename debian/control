@@ -1,7 +1,8 @@
 Source: galternatives
 Section: admin
 Priority: optional
-Maintainer: Ryan Niebur <ryan@debian.org>
+Maintainer: Debian Chinese Team <chinese-developers@lists.alioth.debian.org>
+Uploaders: Boyuan Yang <073plan@gmail.com>
 Build-Depends: debhelper (>= 9)
 Build-Depends-Indep: dh-python, gettext, intltool
 Standards-Version: 3.9.8
@@ -11,7 +12,7 @@ X-Python-Version: >= 2.5
 
 Package: galternatives
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, python-gobject-2
+Depends: ${misc:Depends}, ${python:Depends}, python-gi, gir1.2-gtk-3.0
 # Depends: ${misc:Depends}, ${python3:Depends}, python3-gi
 Recommends: gksu
 Description: graphical setup tool for the alternatives system

@@ -2,29 +2,25 @@
 import os
 import sys
 
+# If run as a single file (rather than a module), include the correct path so
+# that the package can be imported
 if __name__ == '__main__' and __package__ is None:
     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from galternatives import logger, _, PACKAGE, APPID
 from galternatives.appdata import *
-from galternatives.gui import GAlternativesWindow, GAlternativesAbout, Polkit
+from galternatives.gui import MainWindow, AboutDialog
+from galternatives.utils import cached_property
 try:
     from galternatives.log import set_logger
 except ImportError:
     set_logger = None
 
-import signal
-import gi
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gio
-from gi.repository import GLib
-from gi.repository import Gtk
+from gi.repository import Gio, GLib, Gtk
 
 
 class GAlternativesApp(Gtk.Application):
     debug = False
-    window = None
-    about_dialog = None
 
     def __init__(self, *args, **kwargs):
         super(GAlternativesApp, self).__init__(
@@ -49,22 +45,31 @@ class GAlternativesApp(Gtk.Application):
             # not root
             if options.contains('normal'):
                 logger.warn('No root detected, but continue as in your wishes')
+            # TODO: other methods to acquire root
             elif os.access('/usr/bin/gksu', os.X_OK):
-                return os.system('/usr/bin/gksu -t "{}" -m "{}" -u root "{}"'.format(
-                    _('Running Alternatives Configurator...'),
-                    _('<b>I need your root password to run\n'
-                      'the Alternatives Configurator.</b>'),
-                    sys.argv[0]))
+                return os.system(
+                    '/usr/bin/gksu -t "{}" -m "{}" -u root "{}"'.format(
+                        _('Running Alternatives Configurator...'),
+                        _('<b>I need your root password to run\n'
+                          'the Alternatives Configurator.</b>'),
+                        sys.argv[0]))
+            # We prefer gksu since this is not the correct way to use pkexec,
+            # but by default gksu is not installed
+            elif os.access('/usr/bin/pkexec', os.X_OK):
+                # Note: the return code of pkexec does not reveal the state of
+                # permission
+                return os.system('/usr/bin/pkexec "{}"'.format(sys.argv[0]))
             else:
                 dialog = Gtk.MessageDialog(
                     None, Gtk.DialogFlags.DESTROY_WITH_PARENT,
                     Gtk.MessageType.WARNING, Gtk.ButtonsType.OK_CANCEL,
-                    _('<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not available.</b>'),
+                    _('<b>This program should be run as root and '
+                      '<tt>/usr/bin/gksu</tt> is not available.</b>'),
                     use_markup=True,
-                    secondary_text=_(
-                        'I am unable to request the password myself without gksu. Unless you have '
-                        'modified your system to explicitly allow your normal user to modify '
-                        'the alternatives system, GAlternatives will not work.'))
+                    secondary_text=_('''\
+I am unable to request the password myself without gksu. Unless you have \
+modified your system to explicitly allow your normal user to modify \
+the alternatives system, GAlternatives will not work.'''))
                 if dialog.run() != Gtk.ResponseType.OK:
                     return 1
                 dialog.destroy()
@@ -77,29 +82,34 @@ class GAlternativesApp(Gtk.Application):
             PATHS['appdata'], 'glade/menubar.ui'
         )).get_object('menu'))
 
+        # Cannot use add_action_entries()
+        # see https://bugzilla.gnome.org/show_bug.cgi?id=678655
+        for name, activate in {
+            'about': self.on_about,
+        }.items():
+            action = Gio.SimpleAction(name=name)
+            action.connect('activate', activate)
+            self.add_action(action)
+
     def do_activate(self):
-        if self.window is None:
-            self.window = GAlternativesWindow(self)
-
-            # Cannot use add_action_entries()
-            # see https://bugzilla.gnome.org/show_bug.cgi?id=678655
-            for name, activate in {
-                'about': self.on_about,
-            }.items():
-                action = Gio.SimpleAction(name=name)
-                action.connect('activate', activate)
-                self.add_action(action)
-
         self.window.show()
 
     def on_about(self, action, param):
-        if self.about_dialog is None:
-            self.about_dialog = GAlternativesAbout(
-                transient_for=self.window and self.window.main_window)
         self.about_dialog.present()
+
+    @cached_property
+    def about_dialog(self):
+        return AboutDialog(
+            transient_for=self.window and self.window.main_window)
+
+    @cached_property
+    def window(self):
+        return MainWindow(self)
 
 
 if __name__ == '__main__':
+    # Allow Ctrl-C to work
+    import signal
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = GAlternativesApp()
     sys.exit(app.run(sys.argv))

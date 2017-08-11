@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from galternatives import PACKAGE, VERSION
+from galternatives import PACKAGE, INFO
 
 from glob import glob
 import os
@@ -14,7 +14,7 @@ if __name__ == '__main__':
     setup(
         name=PACKAGE,
         version=INFO['version'],
-        license='GPL',
+        license='GPL2+',
         description='Manager for the alternatives system',
         long_description='A GUI to help the system administrator to choose '
                          'what program should provide a given service.',
@@ -25,7 +25,8 @@ if __name__ == '__main__':
         packages=[PACKAGE],
         data_files=[
             ('share/pixmaps', glob('resources/pixmaps/*.png')),
-            ('share/galternatives/glade', glob('resources/glade/*.glade')),
+            ('share/galternatives/glade',
+             glob('resources/glade/*.glade') + glob('resources/glade/*.ui')),
             ('share/galternatives/descriptions',
              glob('resources/descriptions/*.desktop')),
         ] + [
@@ -33,5 +34,6 @@ if __name__ == '__main__':
                 'resources/locale/{}/LC_MESSAGES/galternatives.mo'.format(
                     locale)
             ]) for locale in os.listdir('resources/locale')
-        ]
+        ] if os.path.isdir('resources/locale')
+        else []  # deal with `setup.py clean'
     )

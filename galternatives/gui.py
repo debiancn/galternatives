@@ -1,44 +1,37 @@
+'''
+Interface of the application.
+'''
 from __future__ import absolute_import
 
-from . import logger, _, PACKAGE, INFO
-from .alternative import Alternative
+from . import logger, _, PACKAGE, INFO, alternative
 from .appdata import *
 from .description import *
-
-from copy import deepcopy
-from collections import defaultdict
-import os
-from weakref import WeakKeyDictionary
-import gi
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gio
-from gi.repository import Gtk
-try:
-    from gi.repository import GdkPixbuf
-except ImportError:
-    logger.warn('GdkPixbuf not available, cannot show icon in about dialog.')
-    GdkPixbuf = None
-# TODO: Polkit? (require service registration)
-gi.require_version('Polkit', '1.0')
-try:
-    from gi.repository import Polkit
-except ImportError:
-    logger.warn('Polkit not available, in-program root access not available.')
-    Polkit = None
+from .utils import GtkTemplate, stateful_property
 
 import sys
-if sys.version_info < (3,):
-    range = xrange
+from copy import deepcopy
+from functools import wraps
+from itertools import cycle
+if sys.version_info >= (3,):
+    from itertools import zip_longest
+else:
+    from itertools import izip_longest as zip_longest
+from gi.repository import Gio, GLib, Gtk, GdkPixbuf
 
 
-###s common actions begin ###
 def hide_on_delete(window, *args):
-    '''warpper for Gtk.Widget.hide_on_delete, but allow superfluous arguments'''
+    '''
+    Warpper for Gtk.Widget.hide_on_delete, but allow superfluous arguments.
+    Used for singal callback.
+    '''
     return Gtk.Widget.hide_on_delete(window)
 
 
 def reset_dialog(dialog, *args):
-    '''select cancel button as default when re-show the dialog'''
+    '''
+    Select cancel button as default when reshow the dialog. Used for singal
+    callback.
+    '''
     btn_cancel = \
         dialog.get_widget_for_response(Gtk.ResponseType.CANCEL) or \
         dialog.get_widget_for_response(Gtk.ResponseType.CLOSE)
@@ -46,139 +39,398 @@ def reset_dialog(dialog, *args):
     btn_cancel.grab_default()
 
 
-def open_file(button, *args):
-    '''select a file and fill the entry with the path'''
-    file_chooser = Gtk.FileChooserDialog(
-        title=_('Select File'), action=Gtk.FileChooserAction.OPEN,
-        parent=button.get_toplevel(), buttons=(
-            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-            Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
-    if file_chooser.run() == Gtk.ResponseType.OK:
-        button.get_parent().foreach(lambda widget:
-            isinstance(widget, Gtk.Entry) and
-            widget.set_text(file_chooser.get_filename()))
-    file_chooser.destroy()
-### common actions end ###
+@GtkTemplate(ui=locate_appdata(PATHS['appdata'], 'glade/file_entry.glade'))
+class FileEntry(Gtk.Box):
+    def __init__(self, **kwargs):
+        super(FileEntry, self).__init__(**kwargs)
+        self.init_template()
+        self.entry = self.get_template_child('entry')
+
+    @GtkTemplate.Callback
+    def open_file(self, button):
+        '''Select a file and fill the entry with the path.'''
+        file_chooser = Gtk.FileChooserDialog(
+            title=_('Select File'), action=Gtk.FileChooserAction.OPEN,
+            parent=button.get_toplevel(), buttons=(
+                Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        if file_chooser.run() == Gtk.ResponseType.OK:
+            self.entry.set_text(file_chooser.get_filename())
+        file_chooser.destroy()
+
+    def set_text(self, text):
+        return self.entry.set_text(text)
+
+    def get_text(self):
+        return self.entry.get_text()
+
+    def set_icon_from_icon_name(self, icon_pos, icon_name):
+        return self.entry.set_icon_from_icon_name(icon_pos, icon_name)
+
+    def connect(self, detailed_signal, handler):
+        return self.entry.connect(
+            detailed_signal, lambda widget, *args: handler(self, *args))
 
 
-class GAlternativesWindow:
+# can't inherit GtkTemplate, need workaround
+
+@GtkTemplate(ui=locate_appdata(PATHS['appdata'], 'glade/edit_dialog.glade'))
+class EditDialog(Gtk.Dialog):
+    slave_it = None
+
+    def __init__(self, *args, **kwargs):
+        super(EditDialog, self).__init__(**kwargs)
+        self.init_template()
+        for widget_id in {
+            'requires', 'slaves_tv', 'slave_fields', 'slaves_edit',
+            'new_group_warning'
+        }:
+            setattr(self, widget_id, self.get_template_child(widget_id))
+
+    def _init_edit_dialog(self):
+        for i, (field_name, widget_class) in enumerate(self.REQUIRES):
+            widget = widget_class()
+            setattr(self, field_name.lower(), widget)
+            self.requires.attach(Gtk.Label(label=_(field_name)), 0, i, 1, 1)
+            self.requires.attach(widget, 1, i, 1, 1)
+        self.requires.show_all()
+
+        self.slaves_entries = []
+        for i, (column_name, widget_class) in enumerate(self.SLAVES):
+            column_name = _(column_name)
+            # slaves_tv
+            column = Gtk.TreeViewColumn(
+                column_name, Gtk.CellRendererText(),
+                text=2 * i, background=2 * i + 1)
+            column.set_resizable(True)
+            self.slaves_tv.append_column(column)
+            # slave_fields
+            widget = widget_class()
+            widget.i_column = i
+            widget.connect('changed', self.on_slave_fields_changed)
+            self.slaves_entries.append(widget)
+            box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+            box.pack_start(Gtk.Label(label=column_name), False, False, 0)
+            box.pack_start(widget, True, True, 0)
+            self.slave_fields.pack_start(box, False, False, 0)
+        self.slave_fields.show_all()
+        self.slaves_model = Gtk.ListStore(*(str, ) * len(self.SLAVES) * 2)
+        self.slaves_tv.set_model(self.slaves_model)
+
+    def __new__(cls, *args, **kwargs):
+        if cls != EditDialog:
+            self = EditDialog(**kwargs)
+            self.__class__ = cls
+            EditDialog._init_edit_dialog(self)
+            return self
+        else:
+            return super(EditDialog, cls).__new__(cls, *args, **kwargs)
+
+    @GtkTemplate.Callback
+    def add_row(self, button):
+        self.slaves_model.append((None, ) * len(self.SLAVES) * 2)
+
+    @GtkTemplate.Callback
+    def remove_row(self, button):
+        model, it = self.slaves_tv.get_selection().get_selected()
+        del model[it]
+        for widget in self.slaves_entries:
+            widget.set_text('')
+
+    @GtkTemplate.Callback
+    def on_click_slave(self, widget):
+        model, it = widget.get_selected()
+        if it is None:
+            return
+        self.slave_it = it
+        for widget, text in zip(
+                self.slaves_entries, model[it][::2] if it else cycle('')):
+            widget.set_text(text or '')
+
+    def on_slave_fields_changed(self, widget):
+        if self.slave_it is None:
+            return
+        self.slaves_model[self.slave_it][2 * widget.i_column] = \
+            widget.get_text()
+
+    @GtkTemplate.Callback
+    def on_response(self, window, response_id):
+        # only bind to cancel button
+        # dialog response can not be cancelled, thus not suitable for validation
+        if response_id == Gtk.ResponseType.CANCEL:
+            # do not emit delete-event
+            self.destroy()
+
+    @GtkTemplate.Callback
+    def close(self, *args):
+        return super(EditDialog, self).close()
+
+    @GtkTemplate.Callback
+    def on_delete_event(self, window, event):
+        validated = True
+        for (field_name, widget_class) in self.REQUIRES:
+            widget = getattr(self, field_name.lower())
+            if not widget.get_text():
+                self.requires_set_vaild(widget, False)
+                validated = False
+            else:
+                self.requires_set_vaild(widget, True)
+        for row in self.slaves_model:
+            if not row[0]:
+                row[1] = 'red'
+                validated = False
+            elif row[1]:
+                row[1] = None
+        if not validated:
+            return True
+        return self.on_close(window, event)
+
+    def requires_set_vaild(self, widget, status):
+        widget.set_icon_from_icon_name(
+            Gtk.EntryIconPosition.SECONDARY, None if status else 'dialog-error')
+
+
+class GroupDialog(EditDialog):
+    REQUIRES = (
+        ('Name', Gtk.Entry),
+        ('Link', FileEntry),
+    )
+    SLAVES = REQUIRES
+
+    def __init__(self, group=None, *args, **kwargs):
+        self.group = group
+
+        if isinstance(self.group, alternative.Group):
+            self.set_title(_('Edit group - {}').format(self.group.name))
+            self.name.set_text(self.group.name)
+            self.link.set_text(self.group.link)
+            for slave_name in self.group[1:]:
+                self.slaves_model.append(
+                    (slave_name, None, self.group[slave_name], None))
+        else:
+            self.set_title(_('Add group'))
+            self.new_group_warning.show()
+
+    def on_close(self, window, event):
+        main_instance = self.get_transient_for().main_instance
+        name = self.name.get_text()
+        reload_groups_p = False
+        slaves_diff = {}
+        if self.group is None:
+            self.group = alternative.Group(name, create=True)
+            main_instance.alt_db.add(self.group)
+            reload_groups_p = True
+        elif name != self.group.name:
+            slaves_diff[self.group.name] = name
+            main_instance.alt_db.move(self.group.name, name)
+            reload_groups_p = True
+        self.group.link = self.link.get_text()
+        slaves = set()
+        for i, row in enumerate(self.slaves_model):
+            if self.group[i] != row[0]:
+                slaves_diff[self.group[i]] = row[0]
+            self.group[row[0]] = row[2]
+            slaves.add(row[0])
+        for old_slave in self.group[1:]:
+            if old_slave not in slaves:
+                del self.group[old_slave]
+        for option in self.group.options:
+            option.update({
+                slaves_diff[k]: v for k, v in option.items() if k in slaves_diff
+            })
+        if reload_groups_p:
+            main_instance.load_groups()
+        else:
+            main_instance.load_options()
+        main_instance.on_change()
+
+
+class OptionDialog(EditDialog):
+    REQUIRES = (
+        ('Path', FileEntry),
+        ('Priority', Gtk.SpinButton),
+    )
+    SLAVES = (
+        ('Name', Gtk.Entry),
+        ('Path', FileEntry),
+    )
+
+    def __init__(self, option=None, group=None, *args, **kwargs):
+        self.group = group
+        self.option = option
+
+        self.slaves_edit.hide()
+        self.priority.set_adjustment(
+            Gtk.Adjustment(0, -(1 << 31), 1 << 31, 1, 10, 0))
+        if isinstance(self.option, alternative.Option):
+            self.set_title(
+                _('Edit option - {}').format(self.option[self.group.name]))
+            self.path.set_text(self.option[self.group.name])
+            self.priority.set_value(self.option.priority)
+            for slave_name in self.group[1:]:
+                self.slaves_model.append(
+                    (slave_name, None, self.option[slave_name], None))
+        else:
+            self.set_title(_('Add option'))
+            self.priority.set_value(0)
+            for slave_name in self.group[1:]:
+                self.slaves_model.append(
+                    (slave_name, None, None, None))
+
+    def on_close(self, window, event):
+        main_instance = self.get_transient_for().main_instance
+        if self.option is None:
+            self.option = alternative.Option()
+            self.group.options.append(self.option)
+        for row in self.slaves_model:
+            if row[2]:
+                self.option[row[0]] = row[2]
+            elif row[0] in self.option:
+                del self.option[row[0]]
+        path = self.path.get_text()
+        self.option[self.group.name] = path
+        self.option.priority = self.priority.get_value_as_int()
+        main_instance.load_options()
+        main_instance.on_change()
+
+
+def advanced(f):
+    @wraps(f)
+    def wrapper(self, *args, **kwargs):
+        if self.no_edit_warning:
+            return f(self, *args, **kwargs)
+        elif self.edit_warning.run() != Gtk.ResponseType.CANCEL:
+            self.no_edit_warning = not self.edit_warning_show_check.get_active()
+            return f(self, *args, **kwargs)
+    return wrapper
+
+
+icontheme = Gtk.IconTheme.get_default()
+STATUS_ICONS = []
+for icon_name in ('dialog-ok', 'dialog-error'):
+    try:
+        STATUS_ICONS.append(icontheme.load_icon(icon_name, 8, 0))
+    except GLib.Error:
+        STATUS_ICONS.append(None)
+del icontheme
+
+
+class MainWindow(object):
+    no_edit_warning = False
     group = None
-    option_index = None
+    paths = {}
 
     def __init__(self, app):
-        '''load alternative database and fetch objects from the builder'''
-        self.alt_db = Alternative()
-        self.alt_db_old = deepcopy(self.alt_db)
-
-        # load glade XML file
+        '''Load alternative database and fetch objects from the builder.'''
+        # glade XML
         self.builder = Gtk.Builder.new_from_file(locate_appdata(
             PATHS['appdata'], 'glade/galternatives.glade'))
-
-        # main window
-        self.main_window = self.builder.get_object('main_window')
+        for widget_id in {
+            # main window
+            'main_window',
+            'pending_box', 'groups_tv',
+            'alternative_label', 'link_label', 'description_label',
+            'status_switch', 'options_tv', 'options_column_package',
+            'options_menu', 'option_edit_item', 'option_remove_item',
+            'option_add_item',
+            # dialogs and messages
+            'preferences_dialog',
+            'edit_warning', 'edit_warning_show_check',
+            'confirm_closing', 'commit_failed', 'results_tv'
+        }:
+            setattr(self, widget_id, self.builder.get_object(widget_id))
         self.main_window.set_application(app)
-
-        self.pending_box = self.builder.get_object('pending_box')
-
-        self.alternative_label = self.builder.get_object('alternative_label')
-        self.link_label = self.builder.get_object('link_label')
-        self.description_label = self.builder.get_object('description_label')
-
-        self.status_switch = self.builder.get_object('status_switch')
-        self.options_tv = self.builder.get_object('options_tv')
-        self.options_menu = self.builder.get_object('options_menu')
+        self.main_window.main_instance = self
         self.options_menu.insert_action_group('win', self.main_window)
-        self.option_edit_item = self.builder.get_object('option_edit_item')
-        self.option_remove_item = self.builder.get_object('option_remove_item')
-        self.option_add_item = self.builder.get_object('option_add_item')
-
-        # dialogs and messages
-        self.preferences_dialog = self.builder.get_object('preferences_dialog')
-
-        self.edit_warning = self.builder.get_object('edit_warning')
-        self.adding_problem = self.builder.get_object('adding_problem')
-        self.confirm_closing = self.builder.get_object('confirm_closing')
-        self.confirm_commit = self.builder.get_object('confirm_commit')
-
-        self.commit_failed = self.builder.get_object('commit_failed')
-        self.results_tv = self.builder.get_object('results_tv')
-
-        self.group_glade = locate_appdata(PATHS['appdata'], 'glade/group.glade')
-        self.option_glade = locate_appdata(PATHS['appdata'], 'glade/option.glade')
-
-        self.group_windows = {}
-        self.option_windows = defaultdict(dict)
 
         # actions and signals
         for name, activate in {
-            'preferences': lambda *args: self.preferences_dialog.show(),
-            'quit': self.on_quit,
-            'group.add': self.add_group,
-            'group.edit': self.edit_group,
-            'group.remove': self.remove_group,
-            'option.add': self.add_option,
-            'option.edit': self.edit_option,
-            'option.remove': self.remove_option,
-            'change.save': self.on_save,
-            'change.reload': self.do_reload,
-        }.items():
+            ('preferences', lambda *args: self.preferences_dialog.show()),
+            ('quit', self.on_quit),
+            ('group.add', self.add_group),
+            ('group.edit', self.edit_group),
+            ('group.remove', self.remove_group),
+            ('option.add', self.add_option),
+            ('option.edit', self.edit_option),
+            ('option.remove', self.remove_option),
+            ('change.save', self.on_save),
+            ('change.reload', self.load_db),
+        }:
             action = Gio.SimpleAction(name=name)
             action.connect('activate', activate)
             self.main_window.add_action(action)
+            setattr(self, name.replace('.', '_'), action)
 
-        self.builder.connect_signals({
-            # common
-            'hide_on_delete': hide_on_delete,
-            'reset_dialog': reset_dialog,
-            'open_file': open_file,
-            # config
-            'reload_config': self.reload_config,
-            'on_editable_check_toggled': self.on_editable_check_toggled,
-            'on_config_changed': self.on_config_changed,
-            # commit
-            'on_quit': self.on_quit,
-            'save_and_quit': lambda *args: self.save() or self.do_quit(),
-            'do_quit': self.do_quit,
-            'get_pending_commands': self.get_pending_commands,
-            # main window
-            'update_groups': self.update_groups,
-            'update_options': self.update_options,
-            'change_status': self.change_status,
-            'select_option': self.select_option,
-            'on_options_tv_button_press_event': self.on_options_tv_button_press_event,
-        })
+        for name in {'delay_mode', 'query_package'}:
+            action = Gio.SimpleAction.new_stateful(
+                name, None, GLib.Variant('b', getattr(self, name)))
+
+            def on_action_toggle_func(name):
+                def on_action_toggle(action, value):
+                    action.set_state(value)
+                    setattr(self, name, value.get_boolean())
+
+                return on_action_toggle
+
+            action.connect('change-state', on_action_toggle_func(name))
+            self.main_window.add_action(action)
+
+        self.builder.connect_signals(self)
+
+        self.load_db()
+        # save placeholder text strings
+        self.empty_group = \
+            alternative.Group(self.alternative_label.get_text(), create=True)
+        self.empty_group[self.empty_group.name] = self.link_label.get_text()
+        self.empty_group.description = self.description_label.get_text()
+        self.empty_group._current = False
+
+    hide_on_delete = staticmethod(hide_on_delete)
+    reset_dialog = staticmethod(reset_dialog)
 
     def show(self):
-        '''pretend itself as Gtk.Window'''
-        self.main_window.show()
+        '''Show the main window. Pretend itself as Gtk.Window.'''
+        return self.main_window.show()
 
-    ### config actions begin ###
-    # TODO: allow config file? (may pollute user's home)
-    def reload_config(self, widget):
-        '''reload config when showing preference dialog'''
-        for options in ('altdir', 'admindir', 'log'):
-            self.builder.get_object(options + '_chooser').set_filename(getattr(self.alt_db, options))
+    @property
+    def has_unsaved(self):
+        '''Whether there are unsaved changes'''
+        return self.pending_box.get_visible()
 
-    def on_editable_check_toggled(self, widget):
-        '''show warning when enabling edit feature'''
-        if widget.get_active():
-            # set buttons for edit_warning dialog
-            self.edit_warning.get_widget_for_response(Gtk.ResponseType.OK).show()
-            self.edit_warning.get_widget_for_response(Gtk.ResponseType.YES).hide()
-            self.edit_warning.get_widget_for_response(Gtk.ResponseType.NO).hide()
-            if self.edit_warning.run() == Gtk.ResponseType.CANCEL:
-                widget.set_active(False)
+    # config actions begin #
 
-    def on_config_changed(self, widget):
-        '''auto save config change'''
-        # TODO: save config?
-        print(Gtk.Buildable.get_name(widget), widget.get_active())
-    ### config actions end ###
+    @stateful_property(False)
+    def delay_mode(self, value):
+        return value
 
-    ### commit actions begin ###
+    @stateful_property(False)
+    def query_package(self, value):
+        self.options_column_package.set_visible(value)
+        if value:
+            self.load_options_pkgname()
+        return value
+
+    def load_config(self, widget=None):
+        for option in alternative.Alternative.PATHS:
+            self.builder.get_object(option + '_chooser').set_filename(
+                getattr(self.alt_db, option))
+
+    def on_preferences_dialog_response(self, widget, response_id):
+        self.paths = {
+            option: self.builder.get_object(option + '_chooser').get_filename()
+            for option in alternative.Alternative.PATHS
+        }
+        if any(getattr(self.alt_db, option) != path
+               for option, path in self.paths.items()):
+            self.load_db()
+
+    # config actions end #
+
+    # commit actions begin #
+
     def on_quit(self, *args):
-        '''check for unsaved changes before quitting'''
-        if self.pending_box.get_visible():  # TODO: change not save
+        '''Check for unsaved changes before quitting.'''
+        if self.has_unsaved:
             response_id = self.confirm_closing.run()
             if response_id == Gtk.ResponseType.CANCEL:
                 return True
@@ -186,243 +438,237 @@ class GAlternativesWindow:
                 return self.do_quit()
             if response_id == Gtk.ResponseType.YES:
                 self.do_save()
-                return self.pending_box.get_visible()
+                return self.has_unsaved
         self.do_quit()
 
     def do_quit(self, *args):
-        '''close the window'''
+        '''Close the main window.'''
         self.main_window.destroy()
 
     def on_save(self, *args):
-        if self.confirm_commit.run() == Gtk.ResponseType.OK:
-            self.do_save()
+        self.do_save()
 
-    def do_save(self):
-        '''save changes'''
+    def do_save(self, diff_cmds=None):
+        '''Save changes.'''
         # improve: neat way to reuse differential commands
-        if self.commands is None:
-            logger.warn('No commands supplied')
-            self.commands = self.alt_db.compare(self.alt_db_old)
-        results = self.alt_db.commit(self.commands)
-        if results:
+        if diff_cmds is None:
+            diff_cmds = self.alt_db.compare(self.alt_db_old)
+        returncode, results = self.alt_db.commit(diff_cmds)
+        if returncode:
+            self.on_change()
             model = self.results_tv.get_model()
             model.clear()
-            for cmd, out in zip(friendlize(self.commands), results):
-                model.set(model.append(None), 1, cmd)
-                model.set(model.append(None), 1, out[2])
-            self.commit_failed.run()
-            self.alt_db_old = Alternative()
+            for cmd, result in zip_longest(friendlize(diff_cmds), results):
+                if result:
+                    it = model.append(
+                        None, (STATUS_ICONS[result.returncode != 0], cmd))
+                    for msg in (
+                        _('Run command: ') + ' '.join(result.cmd),
+                        result.out.rstrip(),
+                        result.err.rstrip()
+                    ):
+                        model.append(it, (None, msg))
+                else:
+                    it = model.append(None, (None, cmd))
+            self.commit_failed.show_all()
+            self.alt_db_old = alternative.Alternative(**self.paths)
             self.on_change()
         else:
-            self.alt_db_old = deepcopy(self.alt_db)
-        self.commands = None
+            self.load_db()
 
-    def do_reload(self, *args):
-        self.alt_db = deepcopy(self.alt_db_old)
+    def save_and_quit(self, *args, **kwargs):
+        self.do_save()
+        self.do_quit()
+
+    def load_db(self, *args):
+        self.alt_db = alternative.Alternative(**self.paths)
+        self.alt_db_old = deepcopy(self.alt_db)
         self.pending_box.hide()
-        # TODO: flush all widgets
+        self.load_groups()
 
-    def get_pending_commands(self, widget):
-        commands = self.alt_db.compare(self.alt_db_old)
-        self.commands = commands
-        model = widget.get_model()
-        model.clear()
-        for friend_cmd in friendlize(commands):
-            model.set(model.append(None), 0, friend_cmd)
-    ### commit actions end ###
+    # commit actions end #
 
-    ### detail windows actions begin ###
+    # detail windows actions begin #
     # TODO: windows need a good way for handling (group destruction)
+
+    @advanced
     def add_group(self, widget, data):
-        if self.adding_problem.run() == Gtk.ResponseType.OK:
-            self.show_group_window()
+        self.show_group_window(None)
 
+    @advanced
     def edit_group(self, widget, data):
-        if self.confirm_editable():
-            self.show_group_window(self.group)
+        self.show_group_window(self.group)
 
+    @advanced
     def remove_group(self, widget, data):
-        if self.confirm_editable():
-            if self.group in self.group_windows:
-                self.group_windows[self.group].destory()
-            if self.group in self.option_windows:
-                for win in self.option_windows[self.group].values():
-                    win.destory()
+        del self.alt_db[self.group.name]
+        self.load_groups()
+        self.on_change()
 
-    def show_group_window(self, group=None):
-        if group and group in self.group_windows:
-            window = self.group_windows[group]
-        else:
-            builder = Gtk.Builder.new_from_file(self.group_glade)
-            builder.connect_signals({
-                'open_file': open_file,
-                'on_group_window_close': self.on_group_window_close,
-            })
-            window = builder.get_object('group_window')
-            window.set_title(
-                _('Edit group - {}').format(group.name) if group
-                else _('Add group'))
-            window.group = group
-        if group and group not in self.group_windows:
-            self.group_windows[group] = window
+    def show_group_window(self, group):
+        window = GroupDialog(group, transient_for=self.main_window)
         window.present()
-        # TODO: make window selected
 
-    def on_group_window_close(self, window, event):
-        print(window.group)
-
+    @advanced
     def add_option(self, widget, data):
-        if self.adding_problem.run() == Gtk.ResponseType.OK:
-            self.show_option_window(self.group)
+        self.show_option_window(self.group, None)
 
+    @advanced
     def edit_option(self, widget, data):
-        if self.confirm_editable():
-            self.show_option_window(self.group, option)
+        self.show_option_window(self.group, self.option)
 
+    @advanced
     def remove_option(self, widget, data):
-        if self.confirm_editable():
-            if self.group in self.group_windows:
-                self.option_windows[self.group][self.option].destory()
+        self.load_options()
+        self.on_change()
 
-    def show_option_window(self, group, option=None):
-        if option and option in self.option_windows[group]:
-            window = self.option_windows[group][option]
-        else:
-            builder = Gtk.Builder.new_from_file(self.option_glade)
-            builder.connect_signals({
-                'open_file': open_file,
-                'on_option_window_close': self.on_option_window_close,
-            })
-            window = builder.get_object('group_window')
-            window.set_transient_for(self.main_window)
-            window.set_title(
-                _('Edit option - {}').format(option[group.name]) if option
-                else _('Add option'))
-            window.option = option
-        if option and option not in self.option_windows[group]:
-            self.option_windows[group][option] = window
+    def show_option_window(self, group, option):
+        window = OptionDialog(option, group, transient_for=self.main_window)
         window.present()
 
-    def on_option_window_close(self, window, event):
-        print(window.option)
+    # detail windows actions end #
 
-    def confirm_editable(self):
-        '''show warning dialog before editing or removing group'''
-        self.edit_warning.get_widget_for_response(Gtk.ResponseType.OK).hide()
-        self.edit_warning.get_widget_for_response(Gtk.ResponseType.YES).show()
-        self.edit_warning.get_widget_for_response(Gtk.ResponseType.NO).show()
-        return self.edit_warning.run() != Gtk.ResponseType.CANCEL
-    ### detail windows actions end ###
+    # main window actions begin #
 
-    ### main window actions begin ###
-    def update_groups(self, widget):
-        '''load alternative group into groups_tv when startup'''
-        # widget = self.groups_tv
-        model = widget.get_model()
+    def load_groups(self):
+        # disable edit/remove buttons
+        self.group_edit.set_enabled(False)
+        self.group_remove.set_enabled(False)
+
+        # load alternative group into groups_tv
+        treeview = self.groups_tv
+        selection = treeview.get_selection()
+        selection.unselect_all()  # prevent event trigger
+        model = treeview.get_model()
         model.clear()
-        for alternative in sorted(self.alt_db):
-            model.set(model.append(None), 0, alternative)
+        for group_name in sorted(self.alt_db):
+            model.append((group_name, ))
 
-    def update_options(self, widget):
-        '''load options for selected alternative group into options_tv'''
-        # save current group
+        # clear options_tv
+        if self.group is not None:
+            self.group = self.empty_group
+            self.load_options()
+            self.description_label.set_text(self.empty_group.description)
+            self.group = None
+
+    def click_group(self, widget):
+        '''Load options for selected alternative group into options_tv.'''
         # widget = self.groups_tv.get_selection()
-        groups_model, groups_it = widget.get_selected()
-        group = self.alt_db[groups_model.get_value(groups_it, 0)]
+        model, it = widget.get_selected()
+        if it is None:
+            return
+        group = self.alt_db[model.get_value(it, 0)]
+        if group == self.group:
+            return
 
         # enable buttons
         if not self.group:
-            self.builder.get_object('group_edit_btn').set_sensitive(True)
-            self.builder.get_object('group_remove_btn').set_sensitive(True)
+            self.group_edit.set_enabled(True)
+            self.group_remove.set_enabled(True)
+        # save current group
         self.group = group
+        self.load_options()
+
+    def load_options(self):
+        if self.group is None:
+            return
 
         # set the name of the alternative to the information area
-        name, description = altname_description(group.name)
+        name, description = altname_description(self.group.name)
         self.alternative_label.set_text(name)
-        self.link_label.set_text(group.link)
+        self.link_label.set_text(self.group.link)
         self.description_label.set_text(description)
-        self.status_switch.block = True
-        self.status_switch.set_active(group.status)
-        self.status_switch.set_sensitive(not group.status)
-        self.status_switch.block = False
+        self.status_switch.set_active(self.group.status)
 
         # set columns
-        self.options_tv.get_column(1).set_title(group.name)
-        for i in range(3, self.options_tv.get_n_columns()):
-            self.options_tv.remove_column(self.options_tv.get_column(3))
-        for i in range(1, len(group)):
-            self.options_tv.append_column(Gtk.TreeViewColumn(group[i], Gtk.CellRendererText(), text=i + 2))
+        self.options_tv.get_column(1).set_title(self.group.name)
+        for i in range(4, self.options_tv.get_n_columns()):
+            self.options_tv.remove_column(self.options_tv.get_column(4))
+        for i in range(1, len(self.group)):
+            column = Gtk.TreeViewColumn(
+                self.group[i], Gtk.CellRendererText(), text=i + 3)
+            column.set_resizable(True)
+            self.options_tv.append_column(column)
 
-        options_model = Gtk.ListStore(bool, str, int, *(str for i in range(1, len(group))))
+        # load options_liststore
+        options_model = Gtk.ListStore(
+            bool, int, str, *(str, ) * len(self.group))
         self.options_tv.set_model(options_model)
-        for option in group.options:
-            it = options_model.append(None)
-            options_model.set(
-                it,
-                0, option == group.current,
-                1, option[group.name],
-                2, option.priority
-            )
-            for i in range(1, len(group)):
-                options_model.set(it, i + 2, option[group[i]])
+        for option in self.group.options:
+            options_model.append((
+                option == self.group.current,
+                option.priority,
+                None,
+            ) + option.paths(self.group))
+        if self.query_package:
+            self.load_options_pkgname()
+
+    def load_options_pkgname(self):
+        for record in self.options_tv.get_model():
+            if record[2]:
+                break
+            record[2] = query_package(record[3])
+
+    def load_options_current(self):
+        self.options_tv.get_model().foreach(
+            lambda model, path, it: model.set(
+                it, 0, self.group.current == self.group.options[path[0]]))
 
     def change_status(self, widget, gparam):
-        '''handle click on status_switch
-        When current status is auto, it will block the click action.'''
-        if widget.block:
-            return
-        assert not self.group.status
-        assert widget.get_active()
-        self.group.select()
-        self.options_tv.get_model().foreach(lambda model, path, it:
-            model.set(it, 0, self.group.current == self.group.options[path[0]]))
-        widget.set_sensitive(False)
-        self.on_change(True)
+        '''
+        Handle click on status_switch.
+        When current status is auto, it will block the click action.
+        '''
+        widget.set_sensitive(not widget.get_active())
+        if widget.get_active():
+            self.select_option()
 
-    def select_option(self, widget, path):
-        '''handle click on radio buttons of options'''
-        index = int(path)
-        if self.group.current == self.group.options[index]:
-            return
+    def click_option(self, widget, path):
+        '''Handle click on radio buttons of options.'''
+        self.select_option(int(path))
+
+    def select_option(self, index=None):
+        if index is None:
+            if self.group.status:
+                return
+        else:
+            if not self.group.status and \
+                    self.group.current == self.group.options[index]:
+                return
         self.group.select(index)
-        model = self.options_tv.get_model()
-        model.foreach(lambda model, path, it:
-            model.get(it, 0)[0] and (model.set(it, 0, False) or True))
-        model.set(model.iter_nth_child(None, index), 0, True)
-        self.status_switch.block = True
-        self.status_switch.set_active(False)
-        self.status_switch.set_sensitive(True)
-        self.status_switch.block = False
-        self.on_change(True)
+        self.load_options_current()
+        self.status_switch.set_active(self.group.status)
+        self.on_change(not self.delay_mode)
 
     def on_options_tv_button_press_event(self, treeview, event):
-        if event.button == 3:
+        if event.button == 3 and self.group:
             pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
-            if pthinfo:
-                self.option_index = pthinfo[0][0]
-                self.option_edit_item.set_sensitive(True)
-                self.option_remove_item.set_sensitive(True)
-                self.option_add_item.set_sensitive(bool(self.group))
-                self.options_menu.popup(None, None, None, None, event.button, event.time)
+            self.option = pthinfo and self.group.options[pthinfo[0][0]]
+            pthinfo = bool(pthinfo)
+            self.option_edit.set_enabled(pthinfo)
+            self.option_remove.set_enabled(pthinfo)
+            self.options_menu.popup(None, None, None, None,
+                                    event.button, event.time)
 
     def on_change(self, autosave=False):
-        commands = self.alt_db.compare(self.alt_db_old)
-        self.commands = commands
-        if autosave and len(commands) == 1:
-            self.do_save()
+        diff_cmds = self.alt_db.compare(self.alt_db_old)
+        if autosave and len(diff_cmds) == 1:
+            self.do_save(diff_cmds)
             return
-        if commands:
+        if diff_cmds:
             self.pending_box.show()
         else:
             self.pending_box.hide()
-    ### main window actions end ###
+
+    # main window actions end #
 
 
-class GAlternativesAbout(Gtk.AboutDialog):
-    def __init__(self, *args, **kwargs):
+class AboutDialog(Gtk.AboutDialog):
+    '''About dialog of the application.'''
+    def __init__(self, **kwargs):
         kwargs.update(INFO)
         super(Gtk.AboutDialog, self).__init__(
-            logo=GdkPixbuf and GdkPixbuf.Pixbuf.new_from_file(
+            logo=GdkPixbuf.Pixbuf.new_from_file(
                 locate_appdata(PATHS['icon'], 'galternatives.png')),
             translator_credits=_('translator_credits'),
             **kwargs)

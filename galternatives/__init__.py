@@ -1,5 +1,16 @@
-from __future__ import absolute_import
+'''
+Shared components and constants of the application.
 
+Attributes:
+    PACKAGE: The package name.
+    APPID: Appid for Gtk.Application.
+    INFO: Other info (version, url, etc.) of the application.
+        Also used in Gtk.AboutDialog construction, unknown parameter may
+        cause error.
+    _: Gettext function.
+    logger: Logger for debug and messages.
+
+'''
 import gettext
 import logging
 import gi
@@ -18,7 +29,7 @@ logger = logging.getLogger(PACKAGE)
 APPID = 'org.debiancn.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
-    'version': '0.13.5',
+    'version': '0.14.0',
     'comments': _('A tool to help the administrator select which programs '
                   'provide specific services for the user by default.'),
     'license_type': Gtk.License.GPL_2_0,

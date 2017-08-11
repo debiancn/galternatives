@@ -1,3 +1,12 @@
+'''
+Give readable information for various internal objects.
+
+Attributes:
+    DESC_DIR (str): Directory path where descriptions for alternative groups
+        are stores.
+    DEFAULT_DESCRIPTION (str): Placeholder when no description is found.
+
+'''
 from __future__ import absolute_import
 
 from . import logger, _
@@ -9,13 +18,13 @@ import sys
 import os
 
 
-__all__ = ['altname_description', 'query_pkg', 'friendlize']
+__all__ = ['altname_description', 'query_package', 'friendlize']
+
 
 DESC_DIR = locate_appdata(PATHS['appdata'], 'descriptions', True)
 DEFAULT_DESCRIPTION = _('No description')
 
-# read friendly description from .desktop,
-# although most of them are not available
+
 if sys.version_info >= (3,):
     import configparser
 
@@ -58,9 +67,46 @@ else:
             )
         return (name, DEFAULT_DESCRIPTION)
 
+altname_description.__doc__ = '''
+Find readable group name and its description for given alternative group
+name.
 
-def query_pkg(filename):
-    p = subprocess.Popen(('dpkg', '-S', filename), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+It will try to find proper translated strings, then the untranslated
+name and description. If both failed, the original name will be
+returned, along with a placeholder 'No description' as its description.
+
+Args:
+    name (str): Name of the group.
+    locale (str, optional): Preferred locale. Default to current
+        environment locale.
+
+Returns:
+    Tuple[str, str]: Readable group name and its description.
+
+'''
+
+
+def query_package(filename):
+    '''
+    Query which package provides the file.
+
+    If no package matches, an empty string will be returned. If multiple package
+    match, the first result will be returned.
+
+    In order to make the best guess, use the absolute path of the target file.
+
+    Args:
+        filename (str): Path of the file.
+
+    Returns:
+        str: The package name which provides it.
+
+    Raises:
+        RuntimeError: If ``dpkg`` exits with non-zero code.
+
+    '''
+    p = subprocess.Popen(('dpkg', '-S', filename),
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
     if not out:
         return
@@ -70,14 +116,30 @@ def query_pkg(filename):
 
 
 def friendlize(commands):
+    '''
+    Convert ``update-alternatives`` commands into readable descriptions.
+
+    Args:
+        commands (List[str]): List of commands from
+            ``Alternative.compare()``
+
+    Yields:
+        str: The readable description for the command.
+
+    '''
     for cmd in commands:
         type_ = cmd[0]
         if type_ == 'install':
-            yield _("Install option `{2}' for group `{1}'").format(*cmd)  # XXX
+            yield \
+                _("Install option for group `{2}' with priority {4}, "
+                  "`{3}' for master link").format(*cmd) + \
+                ''.join(_(", `{}' for slave link `{}'").format(path, name)
+                        for __, __, name, path in zip(*((iter(cmd[5:]), ) * 4)))
         elif type_ == 'auto':
-            yield _("Set group `{1}' in auto mode").format(*cmd)
+            yield _("Set group `{1}' to auto mode").format(*cmd)
         elif type_ == 'set':
-            yield _("Set group `{1}' in manual mode, pointed to `{2}'").format(*cmd)
+            yield _(
+                "Set group `{1}' to manual mode, pointed to `{2}'").format(*cmd)
         elif type_ == 'remove':
             yield _("Remove option `{2}' for group `{1}'").format(*cmd)
         elif type_ == 'remove-all':

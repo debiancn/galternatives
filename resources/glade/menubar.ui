@@ -3,17 +3,27 @@
   <menu id="menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">_Preferences</attribute>
+        <attribute name="label" translatable="yes">_Delay mode</attribute>
+        <attribute name="action">win.delay_mode</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Query package (high I/O)</attribute>
+        <attribute name="action">win.query_package</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Working dir...</attribute>
         <attribute name="icon">preferences-system</attribute>
         <attribute name="action">win.preferences</attribute>
       </item>
+    </section>
+    <section>
       <item>
         <attribute name="label" translatable="yes">_About</attribute>
         <attribute name="icon">help-about</attribute>
         <attribute name="action">app.about</attribute>
       </item>
-    </section>
-    <section>
       <item>
         <attribute name="label" translatable="yes">_Quit</attribute>
         <attribute name="icon">application-exit</attribute>
