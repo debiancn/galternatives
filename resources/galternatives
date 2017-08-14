@@ -1,1 +1,6 @@
-#!/usr/bin/python -m galternatives
+#!/usr/bin/python
+import sys
+
+from galternatives.__main__ import main
+
+sys.exit(main())

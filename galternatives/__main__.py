@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import signal
 import sys
 
 # If run as a single file (rather than a module), include the correct path so
@@ -52,13 +53,13 @@ class GAlternativesApp(Gtk.Application):
                         _('Running Alternatives Configurator...'),
                         _('<b>I need your root password to run\n'
                           'the Alternatives Configurator.</b>'),
-                        sys.argv[0]))
+                        __file__))
             # We prefer gksu since this is not the correct way to use pkexec,
             # but by default gksu is not installed
             elif os.access('/usr/bin/pkexec', os.X_OK):
                 # Note: the return code of pkexec does not reveal the state of
                 # permission
-                return os.system('/usr/bin/pkexec "{}"'.format(sys.argv[0]))
+                return os.system('/usr/bin/pkexec "{}"'.format(__file__))
             else:
                 dialog = Gtk.MessageDialog(
                     None, Gtk.DialogFlags.DESTROY_WITH_PARENT,
@@ -107,9 +108,11 @@ the alternatives system, GAlternatives will not work.'''))
         return MainWindow(self)
 
 
-if __name__ == '__main__':
+def main():
     # Allow Ctrl-C to work
-    import signal
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = GAlternativesApp()
-    sys.exit(app.run(sys.argv))
+    return app.run(sys.argv)
+
+if __name__ == '__main__':
+    sys.exit(main())

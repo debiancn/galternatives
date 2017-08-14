@@ -24,11 +24,12 @@ if __name__ == '__main__':
         scripts=['resources/galternatives'],
         packages=[PACKAGE],
         data_files=[
-            ('share/pixmaps', glob('resources/pixmaps/*.png')),
+            ('share/applications', glob('resources/*.desktop')),
             ('share/galternatives/glade',
              glob('resources/glade/*.glade') + glob('resources/glade/*.ui')),
             ('share/galternatives/descriptions',
              glob('resources/descriptions/*.desktop')),
+            ('share/pixmaps', glob('resources/pixmaps/*.png')),
         ] + [
             ('share/locale/{}/LC_MESSAGES'.format(locale), [
                 'resources/locale/{}/LC_MESSAGES/galternatives.mo'.format(
