@@ -29,7 +29,7 @@ logger = logging.getLogger(PACKAGE)
 APPID = 'org.debiancn.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
-    'version': '0.14.0',
+    'version': '0.90.0',
     'comments': _('A tool to help the administrator select which programs '
                   'provide specific services for the user by default.'),
     'license_type': Gtk.License.GPL_2_0,
