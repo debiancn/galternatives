@@ -49,7 +49,8 @@ class GAlternativesApp(Gtk.Application):
             # TODO: other methods to acquire root
             elif os.access('/usr/bin/gksudo', os.X_OK):
                 return os.system(
-                    '/usr/bin/gksudo -t "{}" -m "{}" -u root python "{}"'.format(
+                    '/usr/bin/gksudo -t "{}" -m "{}" -u root python "{}"'
+                    .format(
                         _('Running Alternatives Configurator...'),
                         _('<b>I need your root password to run\n'
                           'the Alternatives Configurator.</b>'),
@@ -107,6 +108,7 @@ def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = GAlternativesApp()
     return app.run(sys.argv)
+
 
 if __name__ == '__main__':
     sys.exit(main())

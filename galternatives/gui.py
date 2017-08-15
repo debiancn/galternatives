@@ -12,11 +12,11 @@ import sys
 from copy import deepcopy
 from functools import wraps
 from itertools import cycle
+from gi.repository import Gio, GLib, Gtk, GdkPixbuf
 if sys.version_info >= (3,):
     from itertools import zip_longest
 else:
     from itertools import izip_longest as zip_longest
-from gi.repository import Gio, GLib, Gtk, GdkPixbuf
 
 
 def hide_on_delete(window, *args):
@@ -448,9 +448,8 @@ class MainWindow(object):
     def on_save(self, *args):
         self.do_save()
 
-    def do_save(self, diff_cmds=None):
+    def do_save(self, diff_cmds=None, autosave=False):
         '''Save changes.'''
-        # improve: neat way to reuse differential commands
         if diff_cmds is None:
             diff_cmds = self.alt_db.compare(self.alt_db_old)
         returncode, results = self.alt_db.commit(diff_cmds)
@@ -473,7 +472,7 @@ class MainWindow(object):
             self.commit_failed.show_all()
             self.alt_db_old = alternative.Alternative(**self.paths)
             self.on_change()
-        else:
+        elif not autosave:
             self.load_db()
 
     def save_and_quit(self, *args, **kwargs):
@@ -653,7 +652,7 @@ class MainWindow(object):
     def on_change(self, autosave=False):
         diff_cmds = self.alt_db.compare(self.alt_db_old)
         if autosave and len(diff_cmds) == 1:
-            self.do_save(diff_cmds)
+            self.do_save(diff_cmds, autosave=True)
             return
         if diff_cmds:
             self.pending_box.show()
@@ -665,11 +664,16 @@ class MainWindow(object):
 
 class AboutDialog(Gtk.AboutDialog):
     '''About dialog of the application.'''
+
+    logo_path = locate_appdata(PATHS['icon'], 'galternatives.png')
+
     def __init__(self, **kwargs):
         kwargs.update(INFO)
+        if self.logo_path is None:
+            logger.warn(_('Logo missing. Is your installation correct?'))
         super(Gtk.AboutDialog, self).__init__(
-            logo=GdkPixbuf.Pixbuf.new_from_file(
-                locate_appdata(PATHS['icon'], 'galternatives.png')),
+            logo=self.logo_path and
+            GdkPixbuf.Pixbuf.new_from_file(self.logo_path),
             translator_credits=_('translator_credits'),
             **kwargs)
         self.connect('response', hide_on_delete)
