@@ -47,19 +47,13 @@ class GAlternativesApp(Gtk.Application):
             if options.contains('normal'):
                 logger.warn('No root detected, but continue as in your wishes')
             # TODO: other methods to acquire root
-            elif os.access('/usr/bin/gksu', os.X_OK):
+            elif os.access('/usr/bin/gksudo', os.X_OK):
                 return os.system(
-                    '/usr/bin/gksu -t "{}" -m "{}" -u root "{}"'.format(
+                    '/usr/bin/gksudo -t "{}" -m "{}" -u root python "{}"'.format(
                         _('Running Alternatives Configurator...'),
                         _('<b>I need your root password to run\n'
                           'the Alternatives Configurator.</b>'),
                         __file__))
-            # We prefer gksu since this is not the correct way to use pkexec,
-            # but by default gksu is not installed
-            elif os.access('/usr/bin/pkexec', os.X_OK):
-                # Note: the return code of pkexec does not reveal the state of
-                # permission
-                return os.system('/usr/bin/pkexec "{}"'.format(__file__))
             else:
                 dialog = Gtk.MessageDialog(
                     None, Gtk.DialogFlags.DESTROY_WITH_PARENT,
