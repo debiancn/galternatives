@@ -9,6 +9,8 @@ from distutils.core import setup
 
 if sys.argv[1] == 'build' or sys.argv[1] == 'install':
     os.system('make -C resources')
+elif sys.argv[1] == 'clean':
+    os.system('make -C resources clean')
 
 if __name__ == '__main__':
     setup(
