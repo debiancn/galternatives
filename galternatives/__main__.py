@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import os
-import signal
 import sys
-
 # If run as a single file (rather than a module), include the correct path so
 # that the package can be imported
 if __name__ == '__main__' and __package__ is None:
@@ -17,7 +15,9 @@ try:
 except ImportError:
     set_logger = None
 
+from distutils import spawn
 from gi.repository import Gio, GLib, Gtk
+import signal
 
 
 class GAlternativesApp(Gtk.Application):
@@ -45,12 +45,16 @@ class GAlternativesApp(Gtk.Application):
         if os.getuid():
             # not root
             if options.contains('normal'):
-                logger.warn('No root detected, but continue as in your wishes')
-            # TODO: other methods to acquire root
-            elif os.access('/usr/bin/gksudo', os.X_OK):
+                logger.warn(_(
+                    'No root detected, but continue as in your wishes'))
+            elif spawn.find_executable('pkexec'):
+                # ok, use pkexec
+                pass
+            elif spawn.find_executable('gksudo'):
+                logger.warn(_("No `pkexec' detected, but found `gksudo'. "
+                              "You should really consider polkit."))
                 return os.system(
-                    '/usr/bin/gksudo -t "{}" -m "{}" -u root python "{}"'
-                    .format(
+                    'gksudo -t "{}" -m "{}" -u root python "{}"'.format(
                         _('Running Alternatives Configurator...'),
                         _('<b>I need your root password to run\n'
                           'the Alternatives Configurator.</b>'),
@@ -62,10 +66,11 @@ class GAlternativesApp(Gtk.Application):
                     _('<b>This program should be run as root and '
                       '<tt>/usr/bin/gksu</tt> is not available.</b>'),
                     use_markup=True,
-                    secondary_text=_('''\
-I am unable to request the password myself without gksu. Unless you have \
-modified your system to explicitly allow your normal user to modify \
-the alternatives system, GAlternatives will not work.'''))
+                    secondary_text=_(
+                        'I am unable to request the password myself without '
+                        'gksu. Unless you have modified your system to '
+                        'explicitly allow your normal user to modify the '
+                        'alternatives system, GAlternatives will not work.'))
                 if dialog.run() != Gtk.ResponseType.OK:
                     return 1
                 dialog.destroy()

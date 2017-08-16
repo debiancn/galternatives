@@ -397,12 +397,14 @@ class Alternative(dict):
                     diff.extend(self[group_name].compare(old_db[group_name]))
         return diff
 
-    def commit(self, diff):
+    def commit(self, diff, executer=None):
         results = []
         for cmd in diff:
             args = list(cmd)
             args[0] = '--' + args[0]
             args.insert(0, self.update_alternatives)
+            if executer:
+                args.insert(0, executer)
             p = subprocess.Popen(
                 args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, err = p.communicate()

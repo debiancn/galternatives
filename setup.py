@@ -7,10 +7,11 @@ import sys
 from distutils.core import setup
 
 
-if sys.argv[1] == 'build' or sys.argv[1] == 'install':
-    os.system('make -C resources')
-elif sys.argv[1] == 'clean':
-    os.system('make -C resources clean')
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'build' or sys.argv[1] == 'install':
+        os.system('make -C resources')
+    elif sys.argv[1] == 'clean':
+        os.system('make -C resources clean')
 
 if __name__ == '__main__':
     setup(
@@ -32,6 +33,7 @@ if __name__ == '__main__':
             ('share/galternatives/descriptions',
              glob('resources/descriptions/*.desktop')),
             ('share/pixmaps', glob('resources/pixmaps/*.png')),
+            ('share/polkit-1/actions', glob('resources/*.policy')),
         ] + [
             ('share/locale/{}/LC_MESSAGES'.format(locale), [
                 'resources/locale/{}/LC_MESSAGES/galternatives.mo'.format(
