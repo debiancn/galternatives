@@ -9,15 +9,19 @@ from .description import *
 from .utils import GtkTemplate, stateful_property
 
 from copy import deepcopy
+from distutils import spawn
 from functools import wraps
 from itertools import cycle
-from gi.repository import Gio, GLib, Gtk, GdkPixbuf
+from gi.repository import Gio, GLib, Gtk, GdkPixbuf, GObject
 import os
 import sys
+import threading
 if sys.version_info >= (3,):
     from itertools import zip_longest
 else:
     from itertools import izip_longest as zip_longest
+
+GObject.threads_init()
 
 
 def hide_on_delete(window, *args):
@@ -320,6 +324,8 @@ class MainWindow(object):
     no_edit_warning = False
     group = None
     paths = {}
+    is_root = not os.getuid()
+    has_pkexec = bool(spawn.find_executable('pkexec'))
 
     def __init__(self, app):
         '''Load alternative database and fetch objects from the builder.'''
@@ -453,9 +459,16 @@ class MainWindow(object):
         '''Save changes.'''
         if diff_cmds is None:
             diff_cmds = self.alt_db.compare(self.alt_db_old)
-        returncode, results = self.alt_db.commit(
-            diff_cmds, 'pkexec' if os.getuid() else None)
+        self.main_window.set_sensitive(False)
+        threading.Thread(target=lambda: GObject.idle_add(
+            self.do_save_callback, diff_cmds, autosave, *self.alt_db.commit(
+                diff_cmds,
+                'pkexec' if not self.is_root and self.has_pkexec else None)
+            )
+        ).start()
 
+    def do_save_callback(self, diff_cmds, autosave, returncode, results):
+        self.main_window.set_sensitive(True)
         if returncode:
             # failed
             model = self.results_tv.get_model()
