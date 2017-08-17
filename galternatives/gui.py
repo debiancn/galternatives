@@ -8,11 +8,12 @@ from .appdata import *
 from .description import *
 from .utils import GtkTemplate, stateful_property
 
-import sys
 from copy import deepcopy
 from functools import wraps
 from itertools import cycle
 from gi.repository import Gio, GLib, Gtk, GdkPixbuf
+import os
+import sys
 if sys.version_info >= (3,):
     from itertools import zip_longest
 else:
@@ -452,9 +453,11 @@ class MainWindow(object):
         '''Save changes.'''
         if diff_cmds is None:
             diff_cmds = self.alt_db.compare(self.alt_db_old)
-        returncode, results = self.alt_db.commit(diff_cmds)
+        returncode, results = self.alt_db.commit(
+            diff_cmds, 'pkexec' if os.getuid() else None)
+
         if returncode:
-            self.on_change()
+            # failed
             model = self.results_tv.get_model()
             model.clear()
             for cmd, result in zip_longest(friendlize(diff_cmds), results):
@@ -470,10 +473,15 @@ class MainWindow(object):
                 else:
                     it = model.append(None, (None, cmd))
             self.commit_failed.show_all()
+
+        if not returncode and not autosave:
+            # succeeded and other fields may also be changed, flush the gui
+            self.load_db()
+        else:
+            # succeeded and only `current' changed, do a quick save
+            # or failed, keep everything
             self.alt_db_old = alternative.Alternative(**self.paths)
             self.on_change()
-        elif not autosave:
-            self.load_db()
 
     def save_and_quit(self, *args, **kwargs):
         self.do_save()
