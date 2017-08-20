@@ -463,8 +463,7 @@ class MainWindow(object):
         threading.Thread(target=lambda: GObject.idle_add(
             self.do_save_callback, diff_cmds, autosave, *self.alt_db.commit(
                 diff_cmds,
-                'pkexec' if not self.is_root and self.has_pkexec else None)
-            )
+                'pkexec' if not self.is_root and self.has_pkexec else None))
         ).start()
 
     def do_save_callback(self, diff_cmds, autosave, returncode, results):

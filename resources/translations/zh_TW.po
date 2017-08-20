@@ -7,60 +7,114 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.13.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-27 11:08+0800\n"
-"PO-Revision-Date: 2017-06-02 16:13+0800\n"
+"POT-Creation-Date: 2017-08-20 19:45+0800\n"
+"PO-Revision-Date: 2017-08-20 19:44+0800\n"
 "Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
+"Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
-#: ../galternatives/main.py:80
-msgid "Unknown/None"
-msgstr "未知/無"
+#: ../../galternatives/description.py:25
+msgid "No description"
+msgstr "無描述"
 
-#: ../galternatives/main.py:167
-msgid "Alternatives"
-msgstr "可選項"
+#: ../../galternatives/description.py:134
+#, python-brace-format
+msgid "Install option for group `{2}' with priority {4}, `{3}' for master link"
+msgstr "為組`{2}'安裝選項 {4}，優先級 {4}，`{3}'用於主連結"
 
-#: ../galternatives/main.py:210
+#: ../../galternatives/description.py:136
+msgid ", `{}' for slave link `{}'"
+msgstr "，`{}'用於從連結`{}'"
+
+#: ../../galternatives/description.py:139
+#, python-brace-format
+msgid "Set group `{1}' to auto mode"
+msgstr "將組`{1}'設為自動模式"
+
+#: ../../galternatives/description.py:142
+#, python-brace-format
+msgid "Set group `{1}' to manual mode, pointed to `{2}'"
+msgstr "將組`{1}'設為手動模式，指向`{2}'"
+
+#: ../../galternatives/description.py:144
+#, python-brace-format
+msgid "Remove option `{2}' for group `{1}'"
+msgstr "刪除組`{1}'的選項`{2}'"
+
+#: ../../galternatives/description.py:146
+#, python-brace-format
+msgid "Remove group `{1}'"
+msgstr "刪除組`{1}'"
+
+#: ../../galternatives/__init__.py:33
 msgid ""
-"The file or directory you selected does not exist.\n"
-"Please select a valid one."
-msgstr ""
-"您選擇的檔案或目錄不存在。\n"
-"請選擇一個有效的項目。"
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default."
+msgstr "幫助管理員選擇為使用者提供特定服務的預設選項的一個工具。"
 
-#: ../galternatives/main.py:257
-msgid "Are you sure you want to remove this option?"
-msgstr "您確定要刪除這個選項嗎？"
+#: ../../galternatives/gui.py:58
+msgid "Select File"
+msgstr "選擇檔案"
 
-#: ../galternatives/main.py:319
-msgid "Choice"
-msgstr "選擇項"
+#: ../../galternatives/gui.py:209
+msgid "Edit group - {}"
+msgstr "編輯組 - {}"
 
-#: ../galternatives/main.py:326
-msgid "Priority"
-msgstr "優先級"
+#: ../../galternatives/gui.py:216
+msgid "Add group"
+msgstr "添加組"
 
-#: ../galternatives/main.py:335 ../galternatives.h:16
-msgid "Options"
-msgstr "可選項"
+#: ../../galternatives/gui.py:272
+msgid "Edit option - {}"
+msgstr "編輯選項 - {}"
 
-#: ../galternatives/main.py:341
-msgid "Name"
-msgstr "名稱"
+#: ../../galternatives/gui.py:279
+msgid "Add option"
+msgstr "添加選項"
 
-#: ../galternatives/main.py:346
-msgid "Slave"
-msgstr "子配置"
+#: ../../galternatives/gui.py:480
+msgid "Run command: "
+msgstr "執行命令："
 
-#: ../galternatives/main.py:487
+#: ../../galternatives/gui.py:693
+msgid "Logo missing. Is your installation correct?"
+msgstr "圖示缺失。您的安裝是否正確？"
+
+#: ../../galternatives/gui.py:697
+msgid "translator_credits"
+msgstr "(由開發者提供)"
+
+#: ../../galternatives/__main__.py:31
+msgid "Enable debug output"
+msgstr "啟用調試輸出"
+
+#: ../../galternatives/__main__.py:34
+msgid "Do not try to acquire root (as normal user)"
+msgstr "不要嘗試獲取 root (以普通使用者執行)"
+
+#: ../../galternatives/__main__.py:40
+msgid "Testing galternatives..."
+msgstr "正在測試 galternatives..."
+
+#: ../../galternatives/__main__.py:49
+msgid "No root detected, but continue as in your wishes"
+msgstr "沒有檢測到 root，但按照您的意願繼續"
+
+#: ../../galternatives/__main__.py:54
+msgid ""
+"No `pkexec' detected, but found `gksudo'. You should really consider polkit."
+msgstr "沒有檢測到`pkexec'，但發現`gksudo'。您應當考慮 polkit。"
+
+#: ../../galternatives/__main__.py:58
 msgid "Running Alternatives Configurator..."
 msgstr "正在執行可選項配置工具..."
 
-#: ../galternatives/main.py:488
+#: ../../galternatives/__main__.py:59
 msgid ""
 "<b>I need your root password to run\n"
 "the Alternatives Configurator.</b>"
@@ -68,147 +122,21 @@ msgstr ""
 "<b>我需要您的 root 密碼來執行\n"
 "可選項配置工具。</b>"
 
-#: ../galternatives/main.py:494
+#: ../../galternatives/__main__.py:66
 msgid ""
-"<b>This program should be run as root and /usr/bin/gksu is not available.</"
-"b>\n"
-"\n"
+"<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
+"available.</b>"
+msgstr ""
+"<b>該程式應當以 root 使用者身分執行，但是 <tt>/usr/bin/gksu</tt> 不可用。</b>"
+
+#: ../../galternatives/__main__.py:70
+msgid ""
 "I am unable to request the password myself without gksu. Unless you have "
 "modified your system to explicitly allow your normal user to modify the "
 "alternatives system, GAlternatives will not work."
 msgstr ""
-"<b>該程式應當以 root 使用者身分執行，但是 /usr/bin/gksu 不可用。</b>\n"
-"\n"
 "沒有 gksu，我無法自行請求密碼。除非您修改了您的系統組態以使得 alternatives 系"
 "統可以允許普通使用者進行修改，GAltarnatives 將無法工作。"
-
-#: ../galternatives/main.py:510
-msgid "Testing galternatives..."
-msgstr "正在測試 galternatives..."
-
-#: ../galternatives/alternative.py:16 ../galternatives.h:15
-msgid "No description"
-msgstr "無描述"
-
-#.
-#. * Arquivo de strings que podem ser traduzidas gerado pelo Glade.
-#. * Adicione esse arquivo ao POTFILE.in do seu projeto.
-#. * NÃO compile esse arquivo como parte de sua aplicação.
-#.
-#: ../galternatives.h:7
-msgid "G Alternatives"
-msgstr "G Alternatives"
-
-#: ../galternatives.h:8
-msgid "_File"
-msgstr "檔案(_F)"
-
-#: ../galternatives.h:9
-msgid "_Help"
-msgstr "幫助(_H)"
-
-#: ../galternatives.h:10
-msgid "_About"
-msgstr "關於(_A)"
-
-#: ../galternatives.h:11
-msgid "Status:"
-msgstr "狀態："
-
-#: ../galternatives.h:12
-msgid "auto"
-msgstr "自動"
-
-#: ../galternatives.h:13
-msgid "manual"
-msgstr "手動"
-
-#: ../galternatives.h:14
-msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
-msgstr "<span size=\"xx-large\" weight=\"bold\">可選項</span>"
-
-#: ../galternatives.h:17
-msgid "Details"
-msgstr "詳細資訊"
-
-#: ../galternatives.h:18
-msgid "Slaves"
-msgstr "子配置"
-
-#: ../galternatives.h:19
-msgid "About G Alternatives"
-msgstr "關於 G Alternatives"
-
-#: ../galternatives.h:20
-msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
-msgstr "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
-
-#: ../galternatives.h:21
-msgid ""
-"A tool to help the administrator select which programs provide specific "
-"services for the user by default.\n"
-"\n"
-"(C) 2003 Gustavo Noronha Silva"
-msgstr ""
-"幫助管理員選擇為使用者提供特定服務的預設選項的一個工具。\n"
-"\n"
-"(C) 2003 Gustavo Noronha Silva"
-
-#: ../galternatives.h:24
-msgid "C_redits"
-msgstr "鳴謝(_R)"
-
-#: ../galternatives.h:25
-msgid "G Alternatives Credits"
-msgstr "G Altarnatives 鳴謝資訊"
-
-#: ../galternatives.h:26
-msgid "Gustavo Noronha Silva <kov@debian.org>"
-msgstr "Gustavo Noronha Silva <kov@debian.org>"
-
-#: ../galternatives.h:27
-msgid "Written by"
-msgstr "作者"
-
-#: ../galternatives.h:28
-msgid "translator_credits"
-msgstr "Yangfl <mmyangfl@gmail.com>"
-
-#: ../galternatives.h:29
-msgid "Translated by"
-msgstr "翻譯貢獻者"
-
-#: ../galternatives.h:30
-msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
-msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
-
-#: ../galternatives.h:31
-msgid "Thanks to"
-msgstr "感謝"
-
-#: ../galternatives.h:32
-msgid "Adding option to alternative"
-msgstr "向可選項列表中添加選項"
-
-#: ../galternatives.h:33
-msgid "Path:"
-msgstr "路徑："
-
-#: ../galternatives.h:34
-msgid "*"
-msgstr "*"
-
-#: ../galternatives.h:35
-msgid "_Browse..."
-msgstr "瀏覽(_B)..."
-
-#: ../galternatives.h:36
-msgid "Priority:"
-msgstr "優先級："
-
-#: ../galternatives.h:37
-msgid "Select File"
-msgstr "選擇檔案"
 
 #: ../galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
@@ -217,3 +145,253 @@ msgstr "可選項配置工具"
 #: ../galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr "配置系統可選項的預設值"
+
+#: ../org.debiancn.galternatives.policy.in.h:1
+msgid "Run update-alternatives tool to modify system alternative selections"
+msgstr "執行 update-alternatives 工具以修改系統可選項"
+
+#: ../org.debiancn.galternatives.policy.in.h:2
+msgid "Authentication is required to run update-alternatives tool"
+msgstr "需要驗證才能執行 update-alternatives 工具"
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:1
+msgid "X Terminal Emulator"
+msgstr "X 終端模擬器"
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:2
+msgid ""
+"Default Terminal Emulator to use when running text-based applications, "
+"mainly from the Debian menu."
+msgstr ""
+"默認終端模擬器，在執行基於文本的應用程式時使用，主要出現在 Debian 選單。"
+
+#: ../glade/edit_dialog.glade.h:1
+msgid "Slaves"
+msgstr "從配置"
+
+#: ../glade/edit_dialog.glade.h:2
+msgid "Nothing will be changed until you add an option."
+msgstr "添加選項之前，不會更改任何內容。"
+
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr "G Alternatives"
+
+#: ../glade/galternatives.glade.h:2
+msgid "Some changes are not saved."
+msgstr "某些更改尚未保存。"
+
+#: ../glade/galternatives.glade.h:3
+msgid "Create"
+msgstr "建立"
+
+#: ../glade/galternatives.glade.h:4
+msgid "_Create"
+msgstr "建立(_C)"
+
+#: ../glade/galternatives.glade.h:5
+msgid "Edit"
+msgstr "編輯"
+
+#: ../glade/galternatives.glade.h:6
+msgid "_Edit"
+msgstr "編輯(_E)"
+
+#: ../glade/galternatives.glade.h:7
+msgid "Remove"
+msgstr "刪除"
+
+#: ../glade/galternatives.glade.h:8
+msgid "_Remove"
+msgstr "刪除(_R)"
+
+#: ../glade/galternatives.glade.h:9
+msgid "Select an alternative group to edit"
+msgstr "選擇要編輯的可選項組"
+
+#: ../glade/galternatives.glade.h:10
+msgid "Groups"
+msgstr "組"
+
+#: ../glade/galternatives.glade.h:11
+msgid "Auto:"
+msgstr "自動："
+
+#: ../glade/galternatives.glade.h:12
+msgid "Auto mode"
+msgstr "自動模式"
+
+#: ../glade/galternatives.glade.h:13
+msgid "Alternative"
+msgstr "可選項"
+
+#: ../glade/galternatives.glade.h:14
+msgid "Choose an alternative group"
+msgstr "選擇一個可選項組"
+
+#: ../glade/galternatives.glade.h:15
+msgid "Priority"
+msgstr "優先級"
+
+#: ../glade/galternatives.glade.h:16
+msgid "Package"
+msgstr "套件"
+
+#: ../glade/galternatives.glade.h:17
+msgid "Are you sure to quit now?"
+msgstr "您確定現在退出嗎？"
+
+#: ../glade/galternatives.glade.h:18
+msgid "Alternative settings editing is advanced feature."
+msgstr "編輯可選項設置是高級功能。"
+
+#: ../glade/galternatives.glade.h:19
+msgid ""
+"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
+"corresponding packages.\n"
+"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
+"editing may break your system."
+msgstr ""
+"這些是由 <tt>dpkg</tt> 管理，由相應的軟件包提供。\n"
+"<b>警告！</b>此功能不穩定，可能包含錯誤。手動編輯可能會破壞您的系統。"
+
+#: ../glade/galternatives.glade.h:21
+msgid "Show this dialog next time."
+msgstr "下次顯示此對話框。"
+
+#: ../glade/galternatives.glade.h:22
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: ../glade/galternatives.glade.h:23
+msgid "See update-alternatives(1) \"OPTIONS\" section for details"
+msgstr "詳細信息參見 update-alternatives(1) “OPTIONS”一節"
+
+#: ../glade/galternatives.glade.h:24
+msgid "Paths"
+msgstr "路徑"
+
+#: ../glade/galternatives.glade.h:25
+msgid "Commit failed"
+msgstr "提交失敗"
+
+#: ../glade/galternatives.glade.h:26
+msgid "An error has occurred. The results are:"
+msgstr "發生了錯誤。結果為："
+
+#: ../glade/galternatives.glade.h:27
+msgid "Icon"
+msgstr "圖示"
+
+#: ../glade/galternatives.glade.h:28
+msgid "Messages"
+msgstr "消息"
+
+#: ../glade/galternatives.glade.h:29
+msgid "Be careful! Your system may be already in an unstable state."
+msgstr "小心！您的系統可能已經處於不穩定狀態。"
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr "延遲模式(_D)"
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr "查詢軟體套件(高 I/O)(_P)"
+
+#: ../glade/menubar.glade.h:3
+msgid "_Working dir..."
+msgstr "工作目錄...(_W)"
+
+#: ../glade/menubar.glade.h:4
+msgid "_About"
+msgstr "關於(_A)"
+
+#: ../glade/menubar.glade.h:5
+msgid "_Quit"
+msgstr "退出(_Q)"
+
+#~ msgid "Unknown/None"
+#~ msgstr "未知/無"
+
+#~ msgid ""
+#~ "The file or directory you selected does not exist.\n"
+#~ "Please select a valid one."
+#~ msgstr ""
+#~ "您選擇的檔案或目錄不存在。\n"
+#~ "請選擇一個有效的項目。"
+
+#~ msgid "Are you sure you want to remove this option?"
+#~ msgstr "您確定要刪除這個選項嗎？"
+
+#~ msgid "Choice"
+#~ msgstr "選擇項"
+
+#~ msgid "Options"
+#~ msgstr "可選項"
+
+#~ msgid "Name"
+#~ msgstr "名稱"
+
+#~ msgid "Slave"
+#~ msgstr "子配置"
+
+#~ msgid "_File"
+#~ msgstr "檔案(_F)"
+
+#~ msgid "_Help"
+#~ msgstr "幫助(_H)"
+
+#~ msgid "Status:"
+#~ msgstr "狀態："
+
+#~ msgid "auto"
+#~ msgstr "自動"
+
+#~ msgid "manual"
+#~ msgstr "手動"
+
+#~ msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+#~ msgstr "<span size=\"xx-large\" weight=\"bold\">可選項</span>"
+
+#~ msgid "Details"
+#~ msgstr "詳細資訊"
+
+#~ msgid "About G Alternatives"
+#~ msgstr "關於 G Alternatives"
+
+#~ msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+#~ msgstr "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+
+#~ msgid "C_redits"
+#~ msgstr "鳴謝(_R)"
+
+#~ msgid "G Alternatives Credits"
+#~ msgstr "G Altarnatives 鳴謝資訊"
+
+#~ msgid "Gustavo Noronha Silva <kov@debian.org>"
+#~ msgstr "Gustavo Noronha Silva <kov@debian.org>"
+
+#~ msgid "Written by"
+#~ msgstr "作者"
+
+#~ msgid "Translated by"
+#~ msgstr "翻譯貢獻者"
+
+#~ msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+#~ msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+
+#~ msgid "Thanks to"
+#~ msgstr "感謝"
+
+#~ msgid "Adding option to alternative"
+#~ msgstr "向可選項列表中添加選項"
+
+#~ msgid "*"
+#~ msgstr "*"
+
+#~ msgid "_Browse..."
+#~ msgstr "瀏覽(_B)..."
+
+#~ msgid "Priority:"
+#~ msgstr "優先級："
