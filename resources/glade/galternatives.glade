@@ -437,8 +437,8 @@
     <property name="transient_for">main_window</property>
     <property name="message_type">question</property>
     <property name="buttons">cancel</property>
-    <property name="text" translatable="yes">Some changes not saved.</property>
-    <property name="secondary_text" translatable="yes">The following changes have not been applied since last commit:</property>
+    <property name="text" translatable="yes">Some changes are not saved.</property>
+    <property name="secondary_text" translatable="yes">Are you sure to quit now?</property>
     <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
     <signal name="response" handler="hide_on_delete" swapped="no"/>
     <signal name="show" handler="reset_dialog" swapped="no"/>
@@ -502,8 +502,9 @@
     <property name="transient_for">main_window</property>
     <property name="message_type">warning</property>
     <property name="buttons">ok-cancel</property>
-    <property name="text" translatable="yes">Editing alternative settings may not what you want.</property>
-    <property name="secondary_text" translatable="yes">Those are meant to be managed by &lt;tt&gt;dpkg&lt;/tt&gt; and provided by their corresponding packages. Editing is only provided as an advanced feture. Manual editing may break your system.</property>
+    <property name="text" translatable="yes">Alternative settings editing is advanced feature.</property>
+    <property name="secondary_text" translatable="yes">Those are meant to be managed by &lt;tt&gt;dpkg&lt;/tt&gt; and provided by their corresponding packages.
+&lt;b&gt;Warning!&lt;/b&gt; This feature is not stable and may contain bugs. Manual editing may break your system.</property>
     <property name="secondary_use_markup">True</property>
     <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
     <signal name="response" handler="hide_on_delete" swapped="no"/>
@@ -605,7 +606,6 @@
                   <object class="GtkGrid" id="path_grid">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="tooltip_text" translatable="yes"> </property>
                     <property name="margin_top">6</property>
                     <property name="row_spacing">2</property>
                     <property name="column_spacing">2</property>
@@ -614,7 +614,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">ALTDIR</property>
+                        <property name="label">ALTDIR</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -626,7 +626,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">ADMINDIR</property>
+                        <property name="label">ADMINDIR</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -662,7 +662,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">LOG</property>
+                        <property name="label">LOG</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -859,7 +859,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_top">6</property>
-            <property name="label" translatable="yes">Please contact your system administrator.</property>
+            <property name="label" translatable="yes">Be careful! Your system may be already in an unstable state.</property>
           </object>
           <packing>
             <property name="expand">False</property>

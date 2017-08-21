@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.13.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-27 11:08+0800\n"
+"POT-Creation-Date: 2017-08-20 19:45+0800\n"
 "PO-Revision-Date: 2009-10-07 19:41+GMT\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -18,51 +18,108 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../galternatives/main.py:80
-msgid "Unknown/None"
-msgstr "Unbekannt/Keine"
+#: ../../galternatives/description.py:25
+msgid "No description"
+msgstr "Keine Beschreibung"
 
-#: ../galternatives/main.py:167
-msgid "Alternatives"
-msgstr "Alternativen"
-
-#: ../galternatives/main.py:210
-msgid ""
-"The file or directory you selected does not exist.\n"
-"Please select a valid one."
+#: ../../galternatives/description.py:134
+#, python-brace-format
+msgid "Install option for group `{2}' with priority {4}, `{3}' for master link"
 msgstr ""
-"Die Datei oder das Verzeichnis, das Sie ausgewählt haben, existiert nicht.\n"
-"Bitte wählen Sie ein gültiges."
 
-#: ../galternatives/main.py:257
-msgid "Are you sure you want to remove this option?"
-msgstr "Sind Sie sicher, dass Sie diese Option entfernen möchten?"
+#: ../../galternatives/description.py:136
+msgid ", `{}' for slave link `{}'"
+msgstr ""
 
-#: ../galternatives/main.py:319
-msgid "Choice"
-msgstr "Auswahl"
+#: ../../galternatives/description.py:139
+#, python-brace-format
+msgid "Set group `{1}' to auto mode"
+msgstr ""
 
-#: ../galternatives/main.py:326
-msgid "Priority"
-msgstr "Priorität"
+#: ../../galternatives/description.py:142
+#, python-brace-format
+msgid "Set group `{1}' to manual mode, pointed to `{2}'"
+msgstr ""
 
-#: ../galternatives/main.py:335 ../galternatives.h:16
-msgid "Options"
-msgstr "Optionen"
+#: ../../galternatives/description.py:144
+#, python-brace-format
+msgid "Remove option `{2}' for group `{1}'"
+msgstr ""
 
-#: ../galternatives/main.py:341
-msgid "Name"
-msgstr "Name"
+#: ../../galternatives/description.py:146
+#, python-brace-format
+msgid "Remove group `{1}'"
+msgstr ""
 
-#: ../galternatives/main.py:346
-msgid "Slave"
-msgstr "Slave"
+#: ../../galternatives/__init__.py:33
+#, fuzzy
+msgid ""
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default."
+msgstr ""
+"Ein Werkzeug, das dem Administrator hilft, Programme auszuwählen, die dem "
+"Benutzer spezielle Dienste als Vorgabe bereitstellen.\n"
+"\n"
+"(C) 2003 Gustavo Noronha Silva"
 
-#: ../galternatives/main.py:487
+#: ../../galternatives/gui.py:58
+msgid "Select File"
+msgstr "Datei auswählen"
+
+#: ../../galternatives/gui.py:209
+msgid "Edit group - {}"
+msgstr ""
+
+#: ../../galternatives/gui.py:216
+msgid "Add group"
+msgstr ""
+
+#: ../../galternatives/gui.py:272
+msgid "Edit option - {}"
+msgstr ""
+
+#: ../../galternatives/gui.py:279
+msgid "Add option"
+msgstr ""
+
+#: ../../galternatives/gui.py:480
+msgid "Run command: "
+msgstr ""
+
+#: ../../galternatives/gui.py:693
+msgid "Logo missing. Is your installation correct?"
+msgstr ""
+
+#: ../../galternatives/gui.py:697
+msgid "translator_credits"
+msgstr "Chris Leick <c.leick@vollbio.de>"
+
+#: ../../galternatives/__main__.py:31
+msgid "Enable debug output"
+msgstr ""
+
+#: ../../galternatives/__main__.py:34
+msgid "Do not try to acquire root (as normal user)"
+msgstr ""
+
+#: ../../galternatives/__main__.py:40
+msgid "Testing galternatives..."
+msgstr "galternatives wird getestet ..."
+
+#: ../../galternatives/__main__.py:49
+msgid "No root detected, but continue as in your wishes"
+msgstr ""
+
+#: ../../galternatives/__main__.py:54
+msgid ""
+"No `pkexec' detected, but found `gksudo'. You should really consider polkit."
+msgstr ""
+
+#: ../../galternatives/__main__.py:58
 msgid "Running Alternatives Configurator..."
 msgstr "Alternativen-Einrichter wird ausgeführt ..."
 
-#: ../galternatives/main.py:488
+#: ../../galternatives/__main__.py:59
 msgid ""
 "<b>I need your root password to run\n"
 "the Alternatives Configurator.</b>"
@@ -70,12 +127,15 @@ msgstr ""
 "<b>Ihr root-Passwort wird zur Ausführung\n"
 "des Alternativen-Einrichters benötigt.</b>"
 
-#: ../galternatives/main.py:494
+#: ../../galternatives/__main__.py:66
+msgid ""
+"<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
+"available.</b>"
+msgstr ""
+
+#: ../../galternatives/__main__.py:70
 #, fuzzy
 msgid ""
-"<b>This program should be run as root and /usr/bin/gksu is not available.</"
-"b>\n"
-"\n"
 "I am unable to request the password myself without gksu. Unless you have "
 "modified your system to explicitly allow your normal user to modify the "
 "alternatives system, GAlternatives will not work."
@@ -88,135 +148,6 @@ msgstr ""
 "wird das Alternativen-System zu verändern, wird GAlternatives nicht "
 "funktionieren."
 
-#: ../galternatives/main.py:510
-msgid "Testing galternatives..."
-msgstr "galternatives wird getestet ..."
-
-#: ../galternatives/alternative.py:16 ../galternatives.h:15
-msgid "No description"
-msgstr "Keine Beschreibung"
-
-#.
-#. * Arquivo de strings que podem ser traduzidas gerado pelo Glade.
-#. * Adicione esse arquivo ao POTFILE.in do seu projeto.
-#. * NÃO compile esse arquivo como parte de sua aplicação.
-#.
-#: ../galternatives.h:7
-msgid "G Alternatives"
-msgstr "G-Alternatives"
-
-#: ../galternatives.h:8
-msgid "_File"
-msgstr "_Datei"
-
-#: ../galternatives.h:9
-msgid "_Help"
-msgstr "_Hilfe"
-
-#: ../galternatives.h:10
-msgid "_About"
-msgstr "_Über"
-
-#: ../galternatives.h:11
-msgid "Status:"
-msgstr "Status:"
-
-#: ../galternatives.h:12
-msgid "auto"
-msgstr "automatisch"
-
-#: ../galternatives.h:13
-msgid "manual"
-msgstr "manuell"
-
-#: ../galternatives.h:14
-msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
-msgstr "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
-
-#: ../galternatives.h:17
-msgid "Details"
-msgstr "Details"
-
-#: ../galternatives.h:18
-msgid "Slaves"
-msgstr "Slaves"
-
-#: ../galternatives.h:19
-msgid "About G Alternatives"
-msgstr "Über G-Alternatives"
-
-#: ../galternatives.h:20
-msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
-msgstr "<span size=\"xx-large\" weight=\"bold\">G-Alternatives</span>"
-
-#: ../galternatives.h:21
-msgid ""
-"A tool to help the administrator select which programs provide specific "
-"services for the user by default.\n"
-"\n"
-"(C) 2003 Gustavo Noronha Silva"
-msgstr ""
-"Ein Werkzeug, das dem Administrator hilft, Programme auszuwählen, die dem "
-"Benutzer spezielle Dienste als Vorgabe bereitstellen.\n"
-"\n"
-"(C) 2003 Gustavo Noronha Silva"
-
-#: ../galternatives.h:24
-msgid "C_redits"
-msgstr "_Danksagungen"
-
-#: ../galternatives.h:25
-msgid "G Alternatives Credits"
-msgstr "G-Alternatives Danksagungen"
-
-#: ../galternatives.h:26
-msgid "Gustavo Noronha Silva <kov@debian.org>"
-msgstr "Gustavo Noronha Silva <kov@debian.org>"
-
-#: ../galternatives.h:27
-msgid "Written by"
-msgstr "Geschrieben von"
-
-#: ../galternatives.h:28
-msgid "translator_credits"
-msgstr "Chris Leick <c.leick@vollbio.de>"
-
-#: ../galternatives.h:29
-msgid "Translated by"
-msgstr "Übersetzt von"
-
-#: ../galternatives.h:30
-msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
-msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
-
-#: ../galternatives.h:31
-msgid "Thanks to"
-msgstr "Dank an"
-
-#: ../galternatives.h:32
-msgid "Adding option to alternative"
-msgstr "Option zur Alternative hinzufügen"
-
-#: ../galternatives.h:33
-msgid "Path:"
-msgstr "Pfad:"
-
-#: ../galternatives.h:34
-msgid "*"
-msgstr "*"
-
-#: ../galternatives.h:35
-msgid "_Browse..."
-msgstr "_Durchstöbern ..."
-
-#: ../galternatives.h:36
-msgid "Priority:"
-msgstr "Priorität:"
-
-#: ../galternatives.h:37
-msgid "Select File"
-msgstr "Datei auswählen"
-
 #: ../galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
 msgstr "Alternativeneinrichter"
@@ -224,3 +155,253 @@ msgstr "Alternativeneinrichter"
 #: ../galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr "Die Standard-Alternativen des Systems einrichten."
+
+#: ../org.debiancn.galternatives.policy.in.h:1
+msgid "Run update-alternatives tool to modify system alternative selections"
+msgstr ""
+
+#: ../org.debiancn.galternatives.policy.in.h:2
+msgid "Authentication is required to run update-alternatives tool"
+msgstr ""
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:1
+msgid "X Terminal Emulator"
+msgstr ""
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:2
+msgid ""
+"Default Terminal Emulator to use when running text-based applications, "
+"mainly from the Debian menu."
+msgstr ""
+
+#: ../glade/edit_dialog.glade.h:1
+msgid "Slaves"
+msgstr "Slaves"
+
+#: ../glade/edit_dialog.glade.h:2
+msgid "Nothing will be changed until you add an option."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr "G-Alternatives"
+
+#: ../glade/galternatives.glade.h:2
+msgid "Some changes are not saved."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:3
+msgid "Create"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:4
+msgid "_Create"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:5
+msgid "Edit"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:6
+msgid "_Edit"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:7
+msgid "Remove"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:8
+msgid "_Remove"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:9
+msgid "Select an alternative group to edit"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:10
+msgid "Groups"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:11
+msgid "Auto:"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:12
+msgid "Auto mode"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:13
+#, fuzzy
+msgid "Alternative"
+msgstr "Alternativen"
+
+#: ../glade/galternatives.glade.h:14
+msgid "Choose an alternative group"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:15
+msgid "Priority"
+msgstr "Priorität"
+
+#: ../glade/galternatives.glade.h:16
+msgid "Package"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:17
+msgid "Are you sure to quit now?"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:18
+msgid "Alternative settings editing is advanced feature."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:19
+msgid ""
+"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
+"corresponding packages.\n"
+"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
+"editing may break your system."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:21
+msgid "Show this dialog next time."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:22
+msgid "Preferences"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:23
+msgid "See update-alternatives(1) \"OPTIONS\" section for details"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:24
+#, fuzzy
+msgid "Paths"
+msgstr "Pfad:"
+
+#: ../glade/galternatives.glade.h:25
+msgid "Commit failed"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:26
+msgid "An error has occurred. The results are:"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:27
+msgid "Icon"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:28
+msgid "Messages"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:29
+msgid "Be careful! Your system may be already in an unstable state."
+msgstr ""
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr ""
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr ""
+
+#: ../glade/menubar.glade.h:3
+msgid "_Working dir..."
+msgstr ""
+
+#: ../glade/menubar.glade.h:4
+msgid "_About"
+msgstr "_Über"
+
+#: ../glade/menubar.glade.h:5
+msgid "_Quit"
+msgstr ""
+
+#~ msgid "Unknown/None"
+#~ msgstr "Unbekannt/Keine"
+
+#~ msgid ""
+#~ "The file or directory you selected does not exist.\n"
+#~ "Please select a valid one."
+#~ msgstr ""
+#~ "Die Datei oder das Verzeichnis, das Sie ausgewählt haben, existiert "
+#~ "nicht.\n"
+#~ "Bitte wählen Sie ein gültiges."
+
+#~ msgid "Are you sure you want to remove this option?"
+#~ msgstr "Sind Sie sicher, dass Sie diese Option entfernen möchten?"
+
+#~ msgid "Choice"
+#~ msgstr "Auswahl"
+
+#~ msgid "Options"
+#~ msgstr "Optionen"
+
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#~ msgid "Slave"
+#~ msgstr "Slave"
+
+#~ msgid "_File"
+#~ msgstr "_Datei"
+
+#~ msgid "_Help"
+#~ msgstr "_Hilfe"
+
+#~ msgid "Status:"
+#~ msgstr "Status:"
+
+#~ msgid "auto"
+#~ msgstr "automatisch"
+
+#~ msgid "manual"
+#~ msgstr "manuell"
+
+#~ msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+#~ msgstr "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+
+#~ msgid "Details"
+#~ msgstr "Details"
+
+#~ msgid "About G Alternatives"
+#~ msgstr "Über G-Alternatives"
+
+#~ msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+#~ msgstr "<span size=\"xx-large\" weight=\"bold\">G-Alternatives</span>"
+
+#~ msgid "C_redits"
+#~ msgstr "_Danksagungen"
+
+#~ msgid "G Alternatives Credits"
+#~ msgstr "G-Alternatives Danksagungen"
+
+#~ msgid "Gustavo Noronha Silva <kov@debian.org>"
+#~ msgstr "Gustavo Noronha Silva <kov@debian.org>"
+
+#~ msgid "Written by"
+#~ msgstr "Geschrieben von"
+
+#~ msgid "Translated by"
+#~ msgstr "Übersetzt von"
+
+#~ msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+#~ msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+
+#~ msgid "Thanks to"
+#~ msgstr "Dank an"
+
+#~ msgid "Adding option to alternative"
+#~ msgstr "Option zur Alternative hinzufügen"
+
+#~ msgid "*"
+#~ msgstr "*"
+
+#~ msgid "_Browse..."
+#~ msgstr "_Durchstöbern ..."
+
+#~ msgid "Priority:"
+#~ msgstr "Priorität:"
