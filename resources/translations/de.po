@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.13.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-20 19:45+0800\n"
+"POT-Creation-Date: 2017-08-21 16:51+0800\n"
 "PO-Revision-Date: 2009-10-07 19:41+GMT\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -66,31 +66,48 @@ msgstr ""
 msgid "Select File"
 msgstr "Datei auswählen"
 
-#: ../../galternatives/gui.py:209
+#: ../../galternatives/gui.py:199 ../../galternatives/gui.py:258
+msgid "Name"
+msgstr "Name"
+
+#: ../../galternatives/gui.py:200
+msgid "Link"
+msgstr ""
+
+#: ../../galternatives/gui.py:208
 msgid "Edit group - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:216
+#: ../../galternatives/gui.py:215
 msgid "Add group"
 msgstr ""
 
-#: ../../galternatives/gui.py:272
+#: ../../galternatives/gui.py:254 ../../galternatives/gui.py:259
+#, fuzzy
+msgid "Path"
+msgstr "Pfad:"
+
+#: ../../galternatives/gui.py:255 ../glade/galternatives.glade.h:14
+msgid "Priority"
+msgstr "Priorität"
+
+#: ../../galternatives/gui.py:271
 msgid "Edit option - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:279
+#: ../../galternatives/gui.py:278
 msgid "Add option"
 msgstr ""
 
-#: ../../galternatives/gui.py:480
+#: ../../galternatives/gui.py:482
 msgid "Run command: "
 msgstr ""
 
-#: ../../galternatives/gui.py:693
+#: ../../galternatives/gui.py:697
 msgid "Logo missing. Is your installation correct?"
 msgstr ""
 
-#: ../../galternatives/gui.py:697
+#: ../../galternatives/gui.py:701
 msgid "translator_credits"
 msgstr "Chris Leick <c.leick@vollbio.de>"
 
@@ -187,64 +204,60 @@ msgid "G Alternatives"
 msgstr "G-Alternatives"
 
 #: ../glade/galternatives.glade.h:2
-msgid "Some changes are not saved."
-msgstr ""
-
-#: ../glade/galternatives.glade.h:3
 msgid "Create"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:4
+#: ../glade/galternatives.glade.h:3
 msgid "_Create"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:5
+#: ../glade/galternatives.glade.h:4
 msgid "Edit"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:6
+#: ../glade/galternatives.glade.h:5
 msgid "_Edit"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:7
+#: ../glade/galternatives.glade.h:6
 msgid "Remove"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:8
+#: ../glade/galternatives.glade.h:7
 msgid "_Remove"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:9
+#: ../glade/galternatives.glade.h:8
 msgid "Select an alternative group to edit"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:10
+#: ../glade/galternatives.glade.h:9
 msgid "Groups"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:11
+#: ../glade/galternatives.glade.h:10
 msgid "Auto:"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:12
+#: ../glade/galternatives.glade.h:11
 msgid "Auto mode"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:13
+#: ../glade/galternatives.glade.h:12
 #, fuzzy
 msgid "Alternative"
 msgstr "Alternativen"
 
-#: ../glade/galternatives.glade.h:14
+#: ../glade/galternatives.glade.h:13
 msgid "Choose an alternative group"
 msgstr ""
 
 #: ../glade/galternatives.glade.h:15
-msgid "Priority"
-msgstr "Priorität"
+msgid "Package"
+msgstr ""
 
 #: ../glade/galternatives.glade.h:16
-msgid "Package"
+msgid "Some changes are not saved."
 msgstr ""
 
 #: ../glade/galternatives.glade.h:17
@@ -289,14 +302,6 @@ msgid "An error has occurred. The results are:"
 msgstr ""
 
 #: ../glade/galternatives.glade.h:27
-msgid "Icon"
-msgstr ""
-
-#: ../glade/galternatives.glade.h:28
-msgid "Messages"
-msgstr ""
-
-#: ../glade/galternatives.glade.h:29
 msgid "Be careful! Your system may be already in an unstable state."
 msgstr ""
 
@@ -309,14 +314,18 @@ msgid "Query _package (high I/O)"
 msgstr ""
 
 #: ../glade/menubar.glade.h:3
-msgid "_Working dir..."
+msgid "_Use polkit"
 msgstr ""
 
 #: ../glade/menubar.glade.h:4
+msgid "_Working dir..."
+msgstr ""
+
+#: ../glade/menubar.glade.h:5
 msgid "_About"
 msgstr "_Über"
 
-#: ../glade/menubar.glade.h:5
+#: ../glade/menubar.glade.h:6
 msgid "_Quit"
 msgstr ""
 
@@ -339,9 +348,6 @@ msgstr ""
 
 #~ msgid "Options"
 #~ msgstr "Optionen"
-
-#~ msgid "Name"
-#~ msgstr "Name"
 
 #~ msgid "Slave"
 #~ msgstr "Slave"

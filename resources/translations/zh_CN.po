@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.13.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-20 19:45+0800\n"
-"PO-Revision-Date: 2017-08-20 19:45+0800\n"
+"POT-Creation-Date: 2017-08-21 16:51+0800\n"
+"PO-Revision-Date: 2017-08-21 16:51+0800\n"
 "Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
 "Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_CN\n"
@@ -62,31 +62,47 @@ msgstr "帮助管理员选择为用户提供特定服务的默认选项的一个
 msgid "Select File"
 msgstr "选择文件"
 
-#: ../../galternatives/gui.py:209
+#: ../../galternatives/gui.py:199 ../../galternatives/gui.py:258
+msgid "Name"
+msgstr "名称"
+
+#: ../../galternatives/gui.py:200
+msgid "Link"
+msgstr "链接"
+
+#: ../../galternatives/gui.py:208
 msgid "Edit group - {}"
 msgstr "编辑组 - {}"
 
-#: ../../galternatives/gui.py:216
+#: ../../galternatives/gui.py:215
 msgid "Add group"
 msgstr "添加组"
 
-#: ../../galternatives/gui.py:272
+#: ../../galternatives/gui.py:254 ../../galternatives/gui.py:259
+msgid "Path"
+msgstr "路径"
+
+#: ../../galternatives/gui.py:255 ../glade/galternatives.glade.h:14
+msgid "Priority"
+msgstr "优先级"
+
+#: ../../galternatives/gui.py:271
 msgid "Edit option - {}"
 msgstr "编辑选项 - {}"
 
-#: ../../galternatives/gui.py:279
+#: ../../galternatives/gui.py:278
 msgid "Add option"
 msgstr "添加选项"
 
-#: ../../galternatives/gui.py:480
+#: ../../galternatives/gui.py:482
 msgid "Run command: "
 msgstr "运行命令："
 
-#: ../../galternatives/gui.py:693
+#: ../../galternatives/gui.py:697
 msgid "Logo missing. Is your installation correct?"
 msgstr "图标缺失。您的安装是否正确？"
 
-#: ../../galternatives/gui.py:697
+#: ../../galternatives/gui.py:701
 msgid "translator_credits"
 msgstr "(由开发者提供)"
 
@@ -179,64 +195,60 @@ msgid "G Alternatives"
 msgstr "G Alternatives"
 
 #: ../glade/galternatives.glade.h:2
-msgid "Some changes are not saved."
-msgstr "某些更改尚未保存。"
-
-#: ../glade/galternatives.glade.h:3
 msgid "Create"
 msgstr "创建"
 
-#: ../glade/galternatives.glade.h:4
+#: ../glade/galternatives.glade.h:3
 msgid "_Create"
 msgstr "创建(_C)"
 
-#: ../glade/galternatives.glade.h:5
+#: ../glade/galternatives.glade.h:4
 msgid "Edit"
 msgstr "编辑"
 
-#: ../glade/galternatives.glade.h:6
+#: ../glade/galternatives.glade.h:5
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ../glade/galternatives.glade.h:7
+#: ../glade/galternatives.glade.h:6
 msgid "Remove"
 msgstr "删除"
 
-#: ../glade/galternatives.glade.h:8
+#: ../glade/galternatives.glade.h:7
 msgid "_Remove"
 msgstr "删除(_R)"
 
-#: ../glade/galternatives.glade.h:9
+#: ../glade/galternatives.glade.h:8
 msgid "Select an alternative group to edit"
 msgstr "选择要编辑的可选项组"
 
-#: ../glade/galternatives.glade.h:10
+#: ../glade/galternatives.glade.h:9
 msgid "Groups"
 msgstr "组"
 
-#: ../glade/galternatives.glade.h:11
+#: ../glade/galternatives.glade.h:10
 msgid "Auto:"
 msgstr "自动："
 
-#: ../glade/galternatives.glade.h:12
+#: ../glade/galternatives.glade.h:11
 msgid "Auto mode"
 msgstr "自动模式"
 
-#: ../glade/galternatives.glade.h:13
+#: ../glade/galternatives.glade.h:12
 msgid "Alternative"
 msgstr "可选项"
 
-#: ../glade/galternatives.glade.h:14
+#: ../glade/galternatives.glade.h:13
 msgid "Choose an alternative group"
 msgstr "选择一个可选项组"
 
 #: ../glade/galternatives.glade.h:15
-msgid "Priority"
-msgstr "优先级"
-
-#: ../glade/galternatives.glade.h:16
 msgid "Package"
 msgstr "包"
+
+#: ../glade/galternatives.glade.h:16
+msgid "Some changes are not saved."
+msgstr "某些更改尚未保存。"
 
 #: ../glade/galternatives.glade.h:17
 msgid "Are you sure to quit now?"
@@ -281,14 +293,6 @@ msgid "An error has occurred. The results are:"
 msgstr "发生了错误。结果为："
 
 #: ../glade/galternatives.glade.h:27
-msgid "Icon"
-msgstr "图标"
-
-#: ../glade/galternatives.glade.h:28
-msgid "Messages"
-msgstr "信息"
-
-#: ../glade/galternatives.glade.h:29
 msgid "Be careful! Your system may be already in an unstable state."
 msgstr "小心！您的系统可能已经处于不稳定状态。"
 
@@ -301,16 +305,26 @@ msgid "Query _package (high I/O)"
 msgstr "查询软件包(高 I/O)(_P)"
 
 #: ../glade/menubar.glade.h:3
+msgid "_Use polkit"
+msgstr "使用 polkit(_U)"
+
+#: ../glade/menubar.glade.h:4
 msgid "_Working dir..."
 msgstr "工作目录...(_W)"
 
-#: ../glade/menubar.glade.h:4
+#: ../glade/menubar.glade.h:5
 msgid "_About"
 msgstr "关于(_A)"
 
-#: ../glade/menubar.glade.h:5
+#: ../glade/menubar.glade.h:6
 msgid "_Quit"
 msgstr "退出(_Q)"
+
+#~ msgid "Icon"
+#~ msgstr "图标"
+
+#~ msgid "Messages"
+#~ msgstr "信息"
 
 #~ msgid "Unknown/None"
 #~ msgstr "未知/无"
@@ -330,9 +344,6 @@ msgstr "退出(_Q)"
 
 #~ msgid "Options"
 #~ msgstr "可选项"
-
-#~ msgid "Name"
-#~ msgstr "名称"
 
 #~ msgid "Slave"
 #~ msgstr "子配置"

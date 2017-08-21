@@ -12,7 +12,7 @@ Build-Depends-Indep:
  gettext,
  intltool,
  python,
-Standards-Version: 4.0.0
+Standards-Version: 4.0.1
 Vcs-Git: https://anonscm.debian.org/git/collab-maint/galternatives.git
 Vcs-Browser: https://anonscm.debian.org/git/collab-maint/galternatives.git
 X-Python-Version: >= 2.7
@@ -25,6 +25,8 @@ Depends:
  ${misc:Depends},
  ${python:Depends},
 Recommends:
+ policykit-1,
+Suggests:
  gksu,
 Description: graphical setup tool for the alternatives system
  A GUI to help the system administrator to choose what program

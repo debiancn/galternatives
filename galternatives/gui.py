@@ -93,19 +93,18 @@ class EditDialog(Gtk.Dialog):
             setattr(self, widget_id, self.get_template_child(widget_id))
 
     def _init_edit_dialog(self):
-        for i, (field_name, widget_class) in enumerate(self.REQUIRES):
+        for i, (field_name, label_name, widget_class) in enumerate(self.REQUIRES):
             widget = widget_class()
             setattr(self, field_name.lower(), widget)
-            self.requires.attach(Gtk.Label(label=_(field_name)), 0, i, 1, 1)
+            self.requires.attach(Gtk.Label(label=label_name), 0, i, 1, 1)
             self.requires.attach(widget, 1, i, 1, 1)
         self.requires.show_all()
 
         self.slaves_entries = []
-        for i, (column_name, widget_class) in enumerate(self.SLAVES):
-            column_name = _(column_name)
+        for i, (column_name, label_name, widget_class) in enumerate(self.SLAVES):
             # slaves_tv
             column = Gtk.TreeViewColumn(
-                column_name, Gtk.CellRendererText(),
+                label_name, Gtk.CellRendererText(),
                 text=2 * i, background=2 * i + 1)
             column.set_resizable(True)
             self.slaves_tv.append_column(column)
@@ -115,7 +114,7 @@ class EditDialog(Gtk.Dialog):
             widget.connect('changed', self.on_slave_fields_changed)
             self.slaves_entries.append(widget)
             box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-            box.pack_start(Gtk.Label(label=column_name), False, False, 0)
+            box.pack_start(Gtk.Label(label=label_name), False, False, 0)
             box.pack_start(widget, True, True, 0)
             self.slave_fields.pack_start(box, False, False, 0)
         self.slave_fields.show_all()
@@ -173,7 +172,7 @@ class EditDialog(Gtk.Dialog):
     @GtkTemplate.Callback
     def on_delete_event(self, window, event):
         validated = True
-        for (field_name, widget_class) in self.REQUIRES:
+        for (field_name, _, widget_class) in self.REQUIRES:
             widget = getattr(self, field_name.lower())
             if not widget.get_text():
                 self.requires_set_vaild(widget, False)
@@ -197,8 +196,8 @@ class EditDialog(Gtk.Dialog):
 
 class GroupDialog(EditDialog):
     REQUIRES = (
-        ('Name', Gtk.Entry),
-        ('Link', FileEntry),
+        ('Name', _('Name'), Gtk.Entry),
+        ('Link', _('Link'), FileEntry),
     )
     SLAVES = REQUIRES
 
@@ -252,12 +251,12 @@ class GroupDialog(EditDialog):
 
 class OptionDialog(EditDialog):
     REQUIRES = (
-        ('Path', FileEntry),
-        ('Priority', Gtk.SpinButton),
+        ('Path', _('Path'), FileEntry),
+        ('Priority', _('Priority'), Gtk.SpinButton),
     )
     SLAVES = (
-        ('Name', Gtk.Entry),
-        ('Path', FileEntry),
+        ('Name', _('Name'), Gtk.Entry),
+        ('Path', _('Path'), FileEntry),
     )
 
     def __init__(self, option=None, group=None, *args, **kwargs):
@@ -368,7 +367,7 @@ class MainWindow(object):
             self.main_window.add_action(action)
             setattr(self, name.replace('.', '_'), action)
 
-        for name in {'delay_mode', 'query_package'}:
+        for name in {'delay_mode', 'query_package', 'use_polkit'}:
             action = Gio.SimpleAction.new_stateful(
                 name, None, GLib.Variant('b', getattr(self, name)))
 
@@ -417,6 +416,10 @@ class MainWindow(object):
             self.load_options_pkgname()
         return value
 
+    @stateful_property(constructor=lambda self: not self.is_root and self.has_pkexec)
+    def use_polkit(self, value):
+        return value
+
     def load_config(self, widget=None):
         for option in alternative.Alternative.PATHS:
             self.builder.get_object(option + '_chooser').set_filename(
@@ -463,7 +466,7 @@ class MainWindow(object):
         threading.Thread(target=lambda: GObject.idle_add(
             self.do_save_callback, diff_cmds, autosave, *self.alt_db.commit(
                 diff_cmds,
-                'pkexec' if not self.is_root and self.has_pkexec else None))
+                'pkexec' if self.use_polkit else None))
         ).start()
 
     def do_save_callback(self, diff_cmds, autosave, returncode, results):
@@ -476,12 +479,13 @@ class MainWindow(object):
                 if result:
                     it = model.append(
                         None, (STATUS_ICONS[result.returncode != 0], cmd))
-                    for msg in (
-                        _('Run command: ') + ' '.join(result.cmd),
-                        result.out.rstrip(),
-                        result.err.rstrip()
-                    ):
-                        model.append(it, (None, msg))
+                    model.append(it, (None, _('Run command: ') + ' '.join(result.cmd)))
+                    out = result.out.rstrip()
+                    if out:
+                        model.append(it, (None, out))
+                    err = result.err.rstrip()
+                    if err:
+                        model.append(it, (None, err))
                 else:
                     it = model.append(None, (None, cmd))
             self.commit_failed.show_all()
