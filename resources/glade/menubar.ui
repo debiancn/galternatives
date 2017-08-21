@@ -10,6 +10,10 @@
         <attribute name="label" translatable="yes">Query _package (high I/O)</attribute>
         <attribute name="action">win.query_package</attribute>
       </item>
+      <item>
+        <attribute name="label" translatable="yes">_Use polkit</attribute>
+        <attribute name="action">win.use_polkit</attribute>
+      </item>
     </section>
     <section>
       <item>

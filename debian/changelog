@@ -1,11 +1,13 @@
-galternatives (0.13.5+nmu4.1) unstable; urgency=medium
+galternatives (0.13.6) unstable; urgency=medium
 
-  * Non-maintainer upload.
+  * Adopt package. (Closes: #856289)
+  * Fix the bug that properties subwindow become blank.
+    (Closes: #325172)
   * Apply "wrap-and-sort -abst".
   * d/compat: bump to v10.
   * d/menu: drop obsoleted xpm file and menu file.
   * debian/control:
-    + Bump Standards-Version to 3.9.8. (No change needed)
+    + Bump Standards-Version to 3.9.8. (No changes needed)
     + Bump dependency to debhelper to 10~.
     + Write collab-maint url for Vcs-*.
   * d/copyright: rewrite with machine-readable format.
@@ -17,10 +19,10 @@ galternatives (0.13.5+nmu4.1) unstable; urgency=medium
     + Refresh translations.
     + Add Simplified Chinese translation.
   * add a .gitignore file for .mo files.
-  * bump "galternatives" python package version to 0.13.5.
+  * bump "galternatives" python package version to 0.13.6.
   * remove obsoleted line for "list-mos.sh" in setup.py.
 
- -- Boyuan Yang <073plan@gmail.com>  Fri, 27 Jan 2017 11:12:47 +0800
+ -- Boyuan Yang <073plan@gmail.com>  Tue, 13 Jun 2017 08:56:48 +0800
 
 galternatives (0.13.5+nmu4) unstable; urgency=medium
 
