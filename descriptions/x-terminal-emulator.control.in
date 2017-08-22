@@ -1,6 +1,0 @@
-[Alternative Entry]
-Encoding=UTF-8
-Name=X Terminal Emulator
-Description=Default Terminal Emulator to use when running text-based applications, mainly from the Debian menu.
-Type=Application
-Icon=x-terminal-emulator

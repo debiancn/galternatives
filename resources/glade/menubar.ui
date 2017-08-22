@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface domain="galternatives">
+  <menu id="menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Delay mode</attribute>
+        <attribute name="action">win.delay_mode</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Query _package (high I/O)</attribute>
+        <attribute name="action">win.query_package</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Use polkit</attribute>
+        <attribute name="action">win.use_polkit</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Working dir...</attribute>
+        <attribute name="icon">preferences-system</attribute>
+        <attribute name="action">win.preferences</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_About</attribute>
+        <attribute name="icon">help-about</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Quit</attribute>
+        <attribute name="icon">application-exit</attribute>
+        <attribute name="action">win.quit</attribute>
+        <attribute name="accel">&lt;Primary&gt;q</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>

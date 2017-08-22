@@ -3,6 +3,7 @@ Source: http://beterraba.no-ip.org/galternatives/
 
 Files: *
 Copyright: 2003-2006, Gustavo Noronha Silva <kov@debian.org>
+           2017, Yangfl <mmyangfl@gmail.com>
 License: GPL-1+
 
 Files: debian/*

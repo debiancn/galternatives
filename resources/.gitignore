@@ -1,0 +1,6 @@
+*.mo
+*.h
+*.desktop
+*~
+POTFILES.in
+locale/

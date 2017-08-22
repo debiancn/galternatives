@@ -1,0 +1,411 @@
+# Swedish translation of galternatives.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the galternatives package.
+# Daniel Nylander <po@danielnylander.se>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: galternatives 0.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-21 16:51+0800\n"
+"PO-Revision-Date: 2006-01-14 17:19+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../galternatives/description.py:25
+msgid "No description"
+msgstr "Ingen beskrivning"
+
+#: ../../galternatives/description.py:134
+#, python-brace-format
+msgid "Install option for group `{2}' with priority {4}, `{3}' for master link"
+msgstr ""
+
+#: ../../galternatives/description.py:136
+msgid ", `{}' for slave link `{}'"
+msgstr ""
+
+#: ../../galternatives/description.py:139
+#, python-brace-format
+msgid "Set group `{1}' to auto mode"
+msgstr ""
+
+#: ../../galternatives/description.py:142
+#, python-brace-format
+msgid "Set group `{1}' to manual mode, pointed to `{2}'"
+msgstr ""
+
+#: ../../galternatives/description.py:144
+#, python-brace-format
+msgid "Remove option `{2}' for group `{1}'"
+msgstr ""
+
+#: ../../galternatives/description.py:146
+#, python-brace-format
+msgid "Remove group `{1}'"
+msgstr ""
+
+#: ../../galternatives/__init__.py:33
+#, fuzzy
+msgid ""
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default."
+msgstr ""
+"Ett verktyg att hjälpa administratören att välja vilka program som ger "
+"specifika tjänster för användarna som standard.\n"
+"\n"
+"(C) 2003 Gustavo Noronha Silva"
+
+#: ../../galternatives/gui.py:58
+msgid "Select File"
+msgstr "Välj fil"
+
+#: ../../galternatives/gui.py:199 ../../galternatives/gui.py:258
+msgid "Name"
+msgstr "Namn"
+
+#: ../../galternatives/gui.py:200
+msgid "Link"
+msgstr ""
+
+#: ../../galternatives/gui.py:208
+msgid "Edit group - {}"
+msgstr ""
+
+#: ../../galternatives/gui.py:215
+msgid "Add group"
+msgstr ""
+
+#: ../../galternatives/gui.py:254 ../../galternatives/gui.py:259
+#, fuzzy
+msgid "Path"
+msgstr "Sökväg:"
+
+#: ../../galternatives/gui.py:255 ../glade/galternatives.glade.h:14
+msgid "Priority"
+msgstr "Prioritet"
+
+#: ../../galternatives/gui.py:271
+msgid "Edit option - {}"
+msgstr ""
+
+#: ../../galternatives/gui.py:278
+msgid "Add option"
+msgstr ""
+
+#: ../../galternatives/gui.py:482
+msgid "Run command: "
+msgstr ""
+
+#: ../../galternatives/gui.py:697
+msgid "Logo missing. Is your installation correct?"
+msgstr ""
+
+#: ../../galternatives/gui.py:701
+msgid "translator_credits"
+msgstr ""
+"Daniel Nylander <po@danielnylander.se>\n"
+"Skicka synpunkter på översättningen till <tp-sv@listor.tp-sv.se>"
+
+#: ../../galternatives/__main__.py:31
+msgid "Enable debug output"
+msgstr ""
+
+#: ../../galternatives/__main__.py:34
+msgid "Do not try to acquire root (as normal user)"
+msgstr ""
+
+#: ../../galternatives/__main__.py:40
+msgid "Testing galternatives..."
+msgstr "Testar galternatives..."
+
+#: ../../galternatives/__main__.py:49
+msgid "No root detected, but continue as in your wishes"
+msgstr ""
+
+#: ../../galternatives/__main__.py:54
+msgid ""
+"No `pkexec' detected, but found `gksudo'. You should really consider polkit."
+msgstr ""
+
+#: ../../galternatives/__main__.py:58
+msgid "Running Alternatives Configurator..."
+msgstr "Kör Alternativkonfiguratorn..."
+
+#: ../../galternatives/__main__.py:59
+msgid ""
+"<b>I need your root password to run\n"
+"the Alternatives Configurator.</b>"
+msgstr ""
+"<b>Jag behöver ditt root-lösenord för\n"
+"att köra Alternativkonfiguratorn.</b>"
+
+#: ../../galternatives/__main__.py:66
+msgid ""
+"<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
+"available.</b>"
+msgstr ""
+
+#: ../../galternatives/__main__.py:70
+#, fuzzy
+msgid ""
+"I am unable to request the password myself without gksu. Unless you have "
+"modified your system to explicitly allow your normal user to modify the "
+"alternatives system, GAlternatives will not work."
+msgstr ""
+"<b>Detta program bör köras som root och /usr/bin/gksu är inte tillgänglig.</"
+"b>\n"
+"\n"
+"Jag kan inte begära lösenordet själv utan gksu. Om du inte har modifierat "
+"ditt system att specifikt tillåta din normala användare att modifiera "
+"alterativsystemet kommer GAlternatives inte att fungera."
+
+#: ../galternatives.desktop.in.h:1
+msgid "Alternatives Configurator"
+msgstr "Alternativkonfiguratorn"
+
+#: ../galternatives.desktop.in.h:2
+msgid "Configure the system default alternatives"
+msgstr "Konfigurera systemets standardalternativ"
+
+#: ../org.debian.experimental.galternatives.policy.in.h:1
+msgid "Run update-alternatives tool to modify system alternative selections"
+msgstr ""
+
+#: ../org.debian.experimental.galternatives.policy.in.h:2
+msgid "Authentication is required to run update-alternatives tool"
+msgstr ""
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:1
+msgid "X Terminal Emulator"
+msgstr ""
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:2
+msgid ""
+"Default Terminal Emulator to use when running text-based applications, "
+"mainly from the Debian menu."
+msgstr ""
+
+#: ../glade/edit_dialog.glade.h:1
+msgid "Slaves"
+msgstr "Slavar"
+
+#: ../glade/edit_dialog.glade.h:2
+msgid "Nothing will be changed until you add an option."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr "G Alternatives"
+
+#: ../glade/galternatives.glade.h:2
+msgid "Create"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:3
+msgid "_Create"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:4
+msgid "Edit"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:5
+msgid "_Edit"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:6
+msgid "Remove"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:7
+msgid "_Remove"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:8
+msgid "Select an alternative group to edit"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:9
+msgid "Groups"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:10
+msgid "Auto:"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:11
+msgid "Auto mode"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:12
+#, fuzzy
+msgid "Alternative"
+msgstr "Alternativ"
+
+#: ../glade/galternatives.glade.h:13
+msgid "Choose an alternative group"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:15
+msgid "Package"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:16
+msgid "Some changes are not saved."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:17
+msgid "Are you sure to quit now?"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:18
+msgid "Alternative settings editing is advanced feature."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:19
+msgid ""
+"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
+"corresponding packages.\n"
+"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
+"editing may break your system."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:21
+msgid "Show this dialog next time."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:22
+msgid "Preferences"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:23
+msgid "See update-alternatives(1) \"OPTIONS\" section for details"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:24
+#, fuzzy
+msgid "Paths"
+msgstr "Sökväg:"
+
+#: ../glade/galternatives.glade.h:25
+msgid "Commit failed"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:26
+msgid "An error has occurred. The results are:"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:27
+msgid "Be careful! Your system may be already in an unstable state."
+msgstr ""
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr ""
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr ""
+
+#: ../glade/menubar.glade.h:3
+msgid "_Use polkit"
+msgstr ""
+
+#: ../glade/menubar.glade.h:4
+msgid "_Working dir..."
+msgstr ""
+
+#: ../glade/menubar.glade.h:5
+msgid "_About"
+msgstr "_Om"
+
+#: ../glade/menubar.glade.h:6
+msgid "_Quit"
+msgstr ""
+
+#~ msgid "Unknown/None"
+#~ msgstr "Okänd/Ingen"
+
+#~ msgid ""
+#~ "The file or directory you selected does not exist.\n"
+#~ "Please select a valid one."
+#~ msgstr ""
+#~ "Filen eller katalogen du valde existerar inte.\n"
+#~ "Välj en giltig."
+
+#~ msgid "Are you sure you want to remove this option?"
+#~ msgstr "Är du säker att du vill ta bort detta alternativ?"
+
+#~ msgid "Choice"
+#~ msgstr "Val"
+
+#~ msgid "Options"
+#~ msgstr "Alternativ"
+
+#~ msgid "Slave"
+#~ msgstr "Slav"
+
+#~ msgid "_File"
+#~ msgstr "_Arkiv"
+
+#~ msgid "_Help"
+#~ msgstr "_Hjälp"
+
+#~ msgid "Status:"
+#~ msgstr "Status:"
+
+#~ msgid "auto"
+#~ msgstr "auto"
+
+#~ msgid "manual"
+#~ msgstr "manuell"
+
+#~ msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+#~ msgstr "<span size=\"xx-large\" weight=\"bold\">Alternativ</span>"
+
+#~ msgid "Details"
+#~ msgstr "Detaljer"
+
+#~ msgid "About G Alternatives"
+#~ msgstr "Om G Alternatives"
+
+#~ msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+#~ msgstr "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+
+#~ msgid "C_redits"
+#~ msgstr "Med_verkande"
+
+#~ msgid "G Alternatives Credits"
+#~ msgstr "Medverkande i G Alternatives"
+
+#~ msgid "Gustavo Noronha Silva <kov@debian.org>"
+#~ msgstr "Gustavo Noronha Silva <kov@debian.org>"
+
+#~ msgid "Written by"
+#~ msgstr "Skrivet av"
+
+#~ msgid "Translated by"
+#~ msgstr "Översatt av"
+
+#~ msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+#~ msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+
+#~ msgid "Thanks to"
+#~ msgstr "Tack till"
+
+#~ msgid "Adding option to alternative"
+#~ msgstr "Lägger till nytt alternativ"
+
+#~ msgid "*"
+#~ msgstr "*"
+
+#~ msgid "_Browse..."
+#~ msgstr "_Bläddra..."
+
+#~ msgid "Priority:"
+#~ msgstr "Prioritet:"

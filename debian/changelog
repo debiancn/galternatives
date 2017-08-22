@@ -1,3 +1,9 @@
+galternatives (0.90.0~exp1) experimental; urgency=medium
+
+  * Major rewrite and migration to glade3.
+
+ -- Boyuan Yang <073plan@gmail.com>  Tue, 22 Aug 2017 13:56:29 +0800
+
 galternatives (0.13.6) unstable; urgency=medium
 
   * Adopt package. (Closes: #856289)

@@ -1,1 +1,5 @@
-*.mo
+__pycache__/
+*.py[cod]
+
+build/
+.pybuild/

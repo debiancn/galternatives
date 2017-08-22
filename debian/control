@@ -4,15 +4,15 @@ Priority: optional
 Maintainer: Debian Chinese Team <chinese-developers@lists.alioth.debian.org>
 Uploaders:
  Boyuan Yang <073plan@gmail.com>,
+ Yangfl <mmyangfl@gmail.com>,
 Build-Depends:
- debhelper (>= 10~),
+ debhelper (>= 10),
 Build-Depends-Indep:
  dh-python,
  gettext,
  intltool,
  python,
- python-glade2,
-Standards-Version: 3.9.8
+Standards-Version: 4.0.1
 Vcs-Git: https://anonscm.debian.org/git/collab-maint/galternatives.git
 Vcs-Browser: https://anonscm.debian.org/git/collab-maint/galternatives.git
 X-Python-Version: >= 2.7
@@ -20,10 +20,13 @@ X-Python-Version: >= 2.7
 Package: galternatives
 Architecture: all
 Depends:
- python-glade2,
+ gir1.2-gtk-3.0,
+ python-gi,
  ${misc:Depends},
  ${python:Depends},
 Recommends:
+ policykit-1,
+Suggests:
  gksu,
 Description: graphical setup tool for the alternatives system
  A GUI to help the system administrator to choose what program

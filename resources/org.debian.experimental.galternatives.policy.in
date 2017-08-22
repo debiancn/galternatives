@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+
+<policyconfig>
+
+  <vendor>Galternatives</vendor>
+  <vendor_url>https://tracker.debian.org/pkg/galternatives</vendor_url>
+  <icon_name>galternatives</icon_name>
+
+  <action id="org.debian.experimental.galternatives.update-alternatives">
+    <_description>Run update-alternatives tool to modify system alternative selections</_description>
+    <_message>Authentication is required to run update-alternatives tool</_message>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/update-alternatives</annotate>
+  </action>
+
+</policyconfig>

@@ -1,0 +1,413 @@
+# translation of fr.po to French
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: galternatives 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-21 16:51+0800\n"
+"PO-Revision-Date: 2005-02-20 08:20+0100\n"
+"Last-Translator: Sebastien Bacher <seb128@debian.org>\n"
+"Language-Team: French <debian-l10n-french@lists.debian.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: ../../galternatives/description.py:25
+msgid "No description"
+msgstr "Aucune description"
+
+#: ../../galternatives/description.py:134
+#, python-brace-format
+msgid "Install option for group `{2}' with priority {4}, `{3}' for master link"
+msgstr ""
+
+#: ../../galternatives/description.py:136
+msgid ", `{}' for slave link `{}'"
+msgstr ""
+
+#: ../../galternatives/description.py:139
+#, python-brace-format
+msgid "Set group `{1}' to auto mode"
+msgstr ""
+
+#: ../../galternatives/description.py:142
+#, python-brace-format
+msgid "Set group `{1}' to manual mode, pointed to `{2}'"
+msgstr ""
+
+#: ../../galternatives/description.py:144
+#, python-brace-format
+msgid "Remove option `{2}' for group `{1}'"
+msgstr ""
+
+#: ../../galternatives/description.py:146
+#, python-brace-format
+msgid "Remove group `{1}'"
+msgstr ""
+
+#: ../../galternatives/__init__.py:33
+#, fuzzy
+msgid ""
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default."
+msgstr ""
+"Outil qui assiste l'administrateur dans le choix des programmes qui "
+"assureront par défaut une fonction donnée.\n"
+"\n"
+"(C) 2003 Gustavo Noronha Silva"
+
+#: ../../galternatives/gui.py:58
+msgid "Select File"
+msgstr "Choix d'un fichier"
+
+#: ../../galternatives/gui.py:199 ../../galternatives/gui.py:258
+msgid "Name"
+msgstr "Nom"
+
+#: ../../galternatives/gui.py:200
+msgid "Link"
+msgstr ""
+
+#: ../../galternatives/gui.py:208
+msgid "Edit group - {}"
+msgstr ""
+
+#: ../../galternatives/gui.py:215
+msgid "Add group"
+msgstr ""
+
+#: ../../galternatives/gui.py:254 ../../galternatives/gui.py:259
+#, fuzzy
+msgid "Path"
+msgstr "Chemin :"
+
+#: ../../galternatives/gui.py:255 ../glade/galternatives.glade.h:14
+msgid "Priority"
+msgstr "Priorité"
+
+#: ../../galternatives/gui.py:271
+msgid "Edit option - {}"
+msgstr ""
+
+#: ../../galternatives/gui.py:278
+msgid "Add option"
+msgstr ""
+
+#: ../../galternatives/gui.py:482
+msgid "Run command: "
+msgstr ""
+
+#: ../../galternatives/gui.py:697
+msgid "Logo missing. Is your installation correct?"
+msgstr ""
+
+#: ../../galternatives/gui.py:701
+msgid "translator_credits"
+msgstr "Remerciements pour les traductions"
+
+#: ../../galternatives/__main__.py:31
+msgid "Enable debug output"
+msgstr ""
+
+#: ../../galternatives/__main__.py:34
+msgid "Do not try to acquire root (as normal user)"
+msgstr ""
+
+#: ../../galternatives/__main__.py:40
+msgid "Testing galternatives..."
+msgstr "Vérification de galternatives..."
+
+#: ../../galternatives/__main__.py:49
+msgid "No root detected, but continue as in your wishes"
+msgstr ""
+
+#: ../../galternatives/__main__.py:54
+msgid ""
+"No `pkexec' detected, but found `gksudo'. You should really consider polkit."
+msgstr ""
+
+#: ../../galternatives/__main__.py:58
+msgid "Running Alternatives Configurator..."
+msgstr "Exécution du configurateur d'alternatives..."
+
+#: ../../galternatives/__main__.py:59
+msgid ""
+"<b>I need your root password to run\n"
+"the Alternatives Configurator.</b>"
+msgstr ""
+"<b>Le mot de passe du superutilisateur est nécessaire pour lancer le "
+"configurateur d'alternatives.</b>"
+
+#: ../../galternatives/__main__.py:66
+msgid ""
+"<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
+"available.</b>"
+msgstr ""
+
+#: ../../galternatives/__main__.py:70
+#, fuzzy
+msgid ""
+"I am unable to request the password myself without gksu. Unless you have "
+"modified your system to explicitly allow your normal user to modify the "
+"alternatives system, GAlternatives will not work."
+msgstr ""
+"<b>Ce programme doit s'exécuter avec les privilèges du superutilisateur et /"
+"usr/bin/gksu n'est pas disponible.</b>\n"
+"\n"
+"Il n'est pas possible de demander le mot de passe du superutilisateur sans "
+"ce programme. Il ne sera pas possible d'utiliser GAlternatives à moins "
+"d'autoriser les utilisateurs non privilégiés à modifier le système "
+"d'alternatives."
+
+#: ../galternatives.desktop.in.h:1
+msgid "Alternatives Configurator"
+msgstr "Configurateur d'alternatives"
+
+#: ../galternatives.desktop.in.h:2
+msgid "Configure the system default alternatives"
+msgstr "Configuration des alternatives par défaut du système"
+
+#: ../org.debian.experimental.galternatives.policy.in.h:1
+msgid "Run update-alternatives tool to modify system alternative selections"
+msgstr ""
+
+#: ../org.debian.experimental.galternatives.policy.in.h:2
+msgid "Authentication is required to run update-alternatives tool"
+msgstr ""
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:1
+msgid "X Terminal Emulator"
+msgstr "Émulateur de terminal X"
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:2
+msgid ""
+"Default Terminal Emulator to use when running text-based applications, "
+"mainly from the Debian menu."
+msgstr ""
+"Émulateur de terminal par défaut à utiliser pour lancer des applications en "
+"mode texte, principalement à partir du menu Debian."
+
+#: ../glade/edit_dialog.glade.h:1
+msgid "Slaves"
+msgstr "Liens secondaires"
+
+#: ../glade/edit_dialog.glade.h:2
+msgid "Nothing will be changed until you add an option."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr "G Alternatives"
+
+#: ../glade/galternatives.glade.h:2
+msgid "Create"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:3
+msgid "_Create"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:4
+msgid "Edit"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:5
+msgid "_Edit"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:6
+msgid "Remove"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:7
+msgid "_Remove"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:8
+msgid "Select an alternative group to edit"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:9
+msgid "Groups"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:10
+msgid "Auto:"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:11
+msgid "Auto mode"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:12
+#, fuzzy
+msgid "Alternative"
+msgstr "Alternatives"
+
+#: ../glade/galternatives.glade.h:13
+msgid "Choose an alternative group"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:15
+msgid "Package"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:16
+msgid "Some changes are not saved."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:17
+msgid "Are you sure to quit now?"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:18
+msgid "Alternative settings editing is advanced feature."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:19
+msgid ""
+"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
+"corresponding packages.\n"
+"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
+"editing may break your system."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:21
+msgid "Show this dialog next time."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:22
+msgid "Preferences"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:23
+msgid "See update-alternatives(1) \"OPTIONS\" section for details"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:24
+#, fuzzy
+msgid "Paths"
+msgstr "Chemin :"
+
+#: ../glade/galternatives.glade.h:25
+msgid "Commit failed"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:26
+msgid "An error has occurred. The results are:"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:27
+msgid "Be careful! Your system may be already in an unstable state."
+msgstr ""
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr ""
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr ""
+
+#: ../glade/menubar.glade.h:3
+msgid "_Use polkit"
+msgstr ""
+
+#: ../glade/menubar.glade.h:4
+msgid "_Working dir..."
+msgstr ""
+
+#: ../glade/menubar.glade.h:5
+msgid "_About"
+msgstr "À _propos"
+
+#: ../glade/menubar.glade.h:6
+msgid "_Quit"
+msgstr ""
+
+#~ msgid "Unknown/None"
+#~ msgstr "Inconnu/Aucun"
+
+#~ msgid ""
+#~ "The file or directory you selected does not exist.\n"
+#~ "Please select a valid one."
+#~ msgstr ""
+#~ "Le fichier ou répertoire choisi n'existe pas.\n"
+#~ "Veuillez choisir un chemin valable."
+
+#~ msgid "Are you sure you want to remove this option?"
+#~ msgstr "Voulez-vous vraiment supprimer cette option ?"
+
+#~ msgid "Choice"
+#~ msgstr "Choix"
+
+#~ msgid "Options"
+#~ msgstr "Options"
+
+#~ msgid "Slave"
+#~ msgstr "Lien secondaire"
+
+#~ msgid "_File"
+#~ msgstr "_Fichier"
+
+#~ msgid "_Help"
+#~ msgstr "_Aide"
+
+#~ msgid "Status:"
+#~ msgstr "État :"
+
+#~ msgid "auto"
+#~ msgstr "auto"
+
+#~ msgid "manual"
+#~ msgstr "manuel"
+
+#~ msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+#~ msgstr "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
+
+#~ msgid "Details"
+#~ msgstr "Détails"
+
+#~ msgid "About G Alternatives"
+#~ msgstr "À propos de G Alternatives"
+
+#~ msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+#~ msgstr "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
+
+#~ msgid "C_redits"
+#~ msgstr "_Remerciements"
+
+#~ msgid "G Alternatives Credits"
+#~ msgstr "Remerciements pour G Alternatives"
+
+#~ msgid "Gustavo Noronha Silva <kov@debian.org>"
+#~ msgstr "Gustavo Noronha Silva <kov@debian.org>"
+
+#~ msgid "Written by"
+#~ msgstr "Écrit par"
+
+#~ msgid "Translated by"
+#~ msgstr "Traduit par"
+
+#~ msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+#~ msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
+
+#~ msgid "Thanks to"
+#~ msgstr "Merci à"
+
+#~ msgid "Adding option to alternative"
+#~ msgstr "Ajouter une option à l'alternative"
+
+#~ msgid "*"
+#~ msgstr "*"
+
+#~ msgid "_Browse..."
+#~ msgstr "_Parcourir..."
+
+#~ msgid "Priority:"
+#~ msgstr "Priorité :"
