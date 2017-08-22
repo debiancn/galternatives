@@ -26,7 +26,7 @@ gettext.textdomain(PACKAGE)
 
 logger = logging.getLogger(PACKAGE)
 
-APPID = 'org.debiancn.' + PACKAGE
+APPID = 'org.debian.experimental.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
     'version': '0.90.0',

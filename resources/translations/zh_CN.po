@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: galternatives 0.13.5\n"
+"Project-Id-Version: galternatives 0.90.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-21 16:51+0800\n"
 "PO-Revision-Date: 2017-08-21 16:51+0800\n"
