@@ -162,11 +162,11 @@ msgstr "可選項配置工具"
 msgid "Configure the system default alternatives"
 msgstr "配置系統可選項的預設值"
 
-#: ../org.debiancn.galternatives.policy.in.h:1
+#: ../org.debian.experimental.galternatives.policy.in.h:1
 msgid "Run update-alternatives tool to modify system alternative selections"
 msgstr "執行 update-alternatives 工具以修改系統可選項"
 
-#: ../org.debiancn.galternatives.policy.in.h:2
+#: ../org.debian.experimental.galternatives.policy.in.h:2
 msgid "Authentication is required to run update-alternatives tool"
 msgstr "需要驗證才能執行 update-alternatives 工具"
 

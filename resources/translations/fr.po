@@ -172,11 +172,11 @@ msgstr "Configurateur d'alternatives"
 msgid "Configure the system default alternatives"
 msgstr "Configuration des alternatives par défaut du système"
 
-#: ../org.debiancn.galternatives.policy.in.h:1
+#: ../org.debian.experimental.galternatives.policy.in.h:1
 msgid "Run update-alternatives tool to modify system alternative selections"
 msgstr ""
 
-#: ../org.debiancn.galternatives.policy.in.h:2
+#: ../org.debian.experimental.galternatives.policy.in.h:2
 msgid "Authentication is required to run update-alternatives tool"
 msgstr ""
 

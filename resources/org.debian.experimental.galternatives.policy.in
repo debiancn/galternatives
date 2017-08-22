@@ -9,7 +9,7 @@
   <vendor_url>https://tracker.debian.org/pkg/galternatives</vendor_url>
   <icon_name>galternatives</icon_name>
 
-  <action id="org.debiancn.galternatives.update-alternatives">
+  <action id="org.debian.experimental.galternatives.update-alternatives">
     <_description>Run update-alternatives tool to modify system alternative selections</_description>
     <_message>Authentication is required to run update-alternatives tool</_message>
     <defaults>
