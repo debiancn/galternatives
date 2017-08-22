@@ -7,12 +7,14 @@ Uploaders:
  Yangfl <mmyangfl@gmail.com>,
 Build-Depends:
  debhelper (>= 10),
+ python-gi,
+ gir1.2-gtk-3.0,
 Build-Depends-Indep:
  dh-python,
  gettext,
  intltool,
  python,
-Standards-Version: 4.0.1
+Standards-Version: 4.1.0
 Vcs-Git: https://anonscm.debian.org/git/collab-maint/galternatives.git
 Vcs-Browser: https://anonscm.debian.org/git/collab-maint/galternatives.git
 X-Python-Version: >= 2.7
