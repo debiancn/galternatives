@@ -41,7 +41,7 @@ INFO = {
     'license_type': 'GPL_2_0',
     'copyright': '''(C) 2003-2006 Gustavo Noronha Silva
 (C) 2017 Boyuan Yang''',
-    'website': 'https://alioth.debian.org/projects/galternatives/',
+    'website': 'https://tracker.debian.org/pkg/galternatives',
     'authors': (
         'Gustavo Noronha Silva <kov@debian.org>',
         'Leandro A. F. Pereira <leandro@linuxmag.com.br>',

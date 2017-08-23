@@ -3,4 +3,4 @@
 export PYBUILD_INSTALL_ARGS=--install-scripts=/usr/sbin
 
 %:
-	dh $@ --with python2 --buildsystem=pybuild
+	dh $@ --with python3 --buildsystem=pybuild

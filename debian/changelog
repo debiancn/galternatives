@@ -1,3 +1,11 @@
+galternatives (0.90.0) unstable; urgency=medium
+
+  * Add a new svg icon.
+  * Add support for XDG path.
+  * Port to python3.
+
+ -- Boyuan Yang <073plan@gmail.com>  Wed, 23 Aug 2017 20:25:20 +0800
+
 galternatives (0.90.0~exp1) experimental; urgency=medium
 
   * Major rewrite and migration to glade3.
