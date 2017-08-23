@@ -112,7 +112,7 @@ def query_package(filename):
         return
     if p.returncode:
         raise RuntimeError("`dpkg' returned with code {}".format(p.returncode))
-    return out.split(': ')[0]
+    return out.decode().split(': ')[0]
 
 
 def friendlize(commands):
