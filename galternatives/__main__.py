@@ -79,9 +79,9 @@ class GAlternativesApp(Gtk.Application):
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
-        self.set_app_menu(Gtk.Builder.new_from_file(locate_appdata(
-            PATHS['appdata'], 'glade/menubar.ui'
-        )).get_object('menu'))
+        self.set_app_menu(
+            Gtk.Builder.new_from_file(get_data_path('glade/menubar.ui'))
+            .get_object('menu'))
 
         # Cannot use add_action_entries()
         # see https://bugzilla.gnome.org/show_bug.cgi?id=678655

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-21 16:51+0800\n"
+"POT-Creation-Date: 2017-08-23 16:35+0800\n"
 "PO-Revision-Date: 2006-04-09 15:33+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Remove group `{1}'"
 msgstr ""
 
-#: ../../galternatives/__init__.py:33
+#: ../../galternatives/__init__.py:39
 #, fuzzy
 msgid ""
 "A tool to help the administrator select which programs provide specific "
@@ -64,48 +64,48 @@ msgstr ""
 msgid "Select File"
 msgstr "Výběr souboru"
 
-#: ../../galternatives/gui.py:199 ../../galternatives/gui.py:258
+#: ../../galternatives/gui.py:204 ../../galternatives/gui.py:267
 msgid "Name"
 msgstr "Jméno"
 
-#: ../../galternatives/gui.py:200
+#: ../../galternatives/gui.py:205
 msgid "Link"
 msgstr ""
 
-#: ../../galternatives/gui.py:208
+#: ../../galternatives/gui.py:213
 msgid "Edit group - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:215
+#: ../../galternatives/gui.py:220
 msgid "Add group"
 msgstr ""
 
-#: ../../galternatives/gui.py:254 ../../galternatives/gui.py:259
+#: ../../galternatives/gui.py:263 ../../galternatives/gui.py:268
 #, fuzzy
 msgid "Path"
 msgstr "Cesta:"
 
-#: ../../galternatives/gui.py:255 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:264 ../glade/galternatives.glade.h:14
 msgid "Priority"
 msgstr "Priorita"
 
-#: ../../galternatives/gui.py:271
+#: ../../galternatives/gui.py:280
 msgid "Edit option - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:278
+#: ../../galternatives/gui.py:287
 msgid "Add option"
 msgstr ""
 
-#: ../../galternatives/gui.py:482
+#: ../../galternatives/gui.py:495
 msgid "Run command: "
 msgstr ""
 
-#: ../../galternatives/gui.py:697
+#: ../../galternatives/gui.py:715
 msgid "Logo missing. Is your installation correct?"
 msgstr ""
 
-#: ../../galternatives/gui.py:701
+#: ../../galternatives/gui.py:719
 msgid "translator_credits"
 msgstr "Miroslav Kuře <kurem@debian.cz>"
 
@@ -193,7 +193,7 @@ msgid "Slaves"
 msgstr "Závislosti"
 
 #: ../glade/edit_dialog.glade.h:2
-msgid "Nothing will be changed until you add an option."
+msgid "No changes will be made until you add an option."
 msgstr ""
 
 #: ../glade/galternatives.glade.h:1

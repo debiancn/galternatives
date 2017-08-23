@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.90.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-21 16:51+0800\n"
-"PO-Revision-Date: 2017-08-21 16:51+0800\n"
+"POT-Creation-Date: 2017-08-23 16:35+0800\n"
+"PO-Revision-Date: 2017-08-23 16:35+0800\n"
 "Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
 "Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_CN\n"
@@ -52,7 +52,7 @@ msgstr "删除组`{1}'的选项`{2}'"
 msgid "Remove group `{1}'"
 msgstr "删除组`{1}'"
 
-#: ../../galternatives/__init__.py:33
+#: ../../galternatives/__init__.py:39
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
@@ -62,47 +62,47 @@ msgstr "帮助管理员选择为用户提供特定服务的默认选项的一个
 msgid "Select File"
 msgstr "选择文件"
 
-#: ../../galternatives/gui.py:199 ../../galternatives/gui.py:258
+#: ../../galternatives/gui.py:204 ../../galternatives/gui.py:267
 msgid "Name"
 msgstr "名称"
 
-#: ../../galternatives/gui.py:200
+#: ../../galternatives/gui.py:205
 msgid "Link"
 msgstr "链接"
 
-#: ../../galternatives/gui.py:208
+#: ../../galternatives/gui.py:213
 msgid "Edit group - {}"
 msgstr "编辑组 - {}"
 
-#: ../../galternatives/gui.py:215
+#: ../../galternatives/gui.py:220
 msgid "Add group"
 msgstr "添加组"
 
-#: ../../galternatives/gui.py:254 ../../galternatives/gui.py:259
+#: ../../galternatives/gui.py:263 ../../galternatives/gui.py:268
 msgid "Path"
 msgstr "路径"
 
-#: ../../galternatives/gui.py:255 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:264 ../glade/galternatives.glade.h:14
 msgid "Priority"
 msgstr "优先级"
 
-#: ../../galternatives/gui.py:271
+#: ../../galternatives/gui.py:280
 msgid "Edit option - {}"
 msgstr "编辑选项 - {}"
 
-#: ../../galternatives/gui.py:278
+#: ../../galternatives/gui.py:287
 msgid "Add option"
 msgstr "添加选项"
 
-#: ../../galternatives/gui.py:482
+#: ../../galternatives/gui.py:495
 msgid "Run command: "
 msgstr "运行命令："
 
-#: ../../galternatives/gui.py:697
+#: ../../galternatives/gui.py:715
 msgid "Logo missing. Is your installation correct?"
 msgstr "图标缺失。您的安装是否正确？"
 
-#: ../../galternatives/gui.py:701
+#: ../../galternatives/gui.py:719
 msgid "translator_credits"
 msgstr "(由开发者提供)"
 
@@ -187,7 +187,7 @@ msgid "Slaves"
 msgstr "从配置"
 
 #: ../glade/edit_dialog.glade.h:2
-msgid "Nothing will be changed until you add an option."
+msgid "No changes will be made until you add an option."
 msgstr "添加选项之前，不会更改任何内容。"
 
 #: ../glade/galternatives.glade.h:1

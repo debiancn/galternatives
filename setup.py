@@ -32,7 +32,8 @@ if __name__ == '__main__':
              glob('resources/glade/*.glade') + glob('resources/glade/*.ui')),
             ('share/galternatives/descriptions',
              glob('resources/descriptions/*.desktop')),
-            ('share/pixmaps', glob('resources/pixmaps/*.png')),
+            ('share/icons/hicolor/48x48/apps', glob('resources/icons/*.png')),
+            ('share/icons/hicolor/scalable/apps', glob('resources/icons/*.svg')),
             ('share/polkit-1/actions', glob('resources/*.policy')),
         ] + [
             ('share/locale/{}/LC_MESSAGES'.format(locale), [

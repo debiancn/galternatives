@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<gresources>
-  <gresource prefix="/org/debian/experimental/galternatives">
-    <file preprocess="xml-stripblanks">galternatives.glade</file>
-  </gresource>
-</gresources>

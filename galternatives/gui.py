@@ -11,8 +11,8 @@ from .utils import GtkTemplate, stateful_property
 from copy import deepcopy
 from distutils import spawn
 from functools import wraps
-from itertools import cycle
 from gi.repository import Gio, GLib, Gtk, GdkPixbuf, GObject
+from itertools import cycle
 import os
 import sys
 import threading
@@ -44,7 +44,7 @@ def reset_dialog(dialog, *args):
     btn_cancel.grab_default()
 
 
-@GtkTemplate(ui=locate_appdata(PATHS['appdata'], 'glade/file_entry.glade'))
+@GtkTemplate(ui=get_data_path('glade/file_entry.glade'))
 class FileEntry(Gtk.Box):
     def __init__(self, **kwargs):
         super(FileEntry, self).__init__(**kwargs)
@@ -79,7 +79,7 @@ class FileEntry(Gtk.Box):
 
 # can't inherit GtkTemplate, need workaround
 
-@GtkTemplate(ui=locate_appdata(PATHS['appdata'], 'glade/edit_dialog.glade'))
+@GtkTemplate(ui=get_data_path('glade/edit_dialog.glade'))
 class EditDialog(Gtk.Dialog):
     slave_it = None
 
@@ -172,6 +172,7 @@ class EditDialog(Gtk.Dialog):
     @GtkTemplate.Callback
     def on_delete_event(self, window, event):
         validated = True
+        empty = True
         for (field_name, _, widget_class) in self.REQUIRES:
             widget = getattr(self, field_name.lower())
             if not widget.get_text():
@@ -179,12 +180,16 @@ class EditDialog(Gtk.Dialog):
                 validated = False
             else:
                 self.requires_set_vaild(widget, True)
+                empty = False
         for row in self.slaves_model:
             if not row[0]:
                 row[1] = 'red'
                 validated = False
             elif row[1]:
                 row[1] = None
+                empty = False
+        if self.is_creating and empty:
+            return
         if not validated:
             return True
         return self.on_close(window, event)
@@ -214,6 +219,10 @@ class GroupDialog(EditDialog):
         else:
             self.set_title(_('Add group'))
             self.new_group_warning.show()
+
+    @property
+    def is_creating(self):
+        return not isinstance(self.group, alternative.Group)
 
     def on_close(self, window, event):
         main_instance = self.get_transient_for().main_instance
@@ -281,6 +290,10 @@ class OptionDialog(EditDialog):
                 self.slaves_model.append(
                     (slave_name, None, None, None))
 
+    @property
+    def is_creating(self):
+        return not isinstance(self.option, alternative.Option)
+
     def on_close(self, window, event):
         main_instance = self.get_transient_for().main_instance
         if self.option is None:
@@ -329,8 +342,8 @@ class MainWindow(object):
     def __init__(self, app):
         '''Load alternative database and fetch objects from the builder.'''
         # glade XML
-        self.builder = Gtk.Builder.new_from_file(locate_appdata(
-            PATHS['appdata'], 'glade/galternatives.glade'))
+        self.builder = Gtk.Builder.new_from_file(
+            get_data_path('glade/galternatives.glade'))
         for widget_id in {
             # main window
             'main_window',
@@ -689,15 +702,20 @@ class MainWindow(object):
 class AboutDialog(Gtk.AboutDialog):
     '''About dialog of the application.'''
 
-    logo_path = locate_appdata(PATHS['icon'], 'galternatives.png')
+    logo_path = get_icon_path('galternatives')
 
     def __init__(self, **kwargs):
         kwargs.update(INFO)
+        if kwargs['license_type']:
+            if hasattr(Gtk.License, kwargs['license_type']):
+                kwargs['license_type'] = getattr(Gtk.License, kwargs['license_type'])
+            else:
+                logger.warn("`license_type' incorrect!")
         if self.logo_path is None:
             logger.warn(_('Logo missing. Is your installation correct?'))
-        super(Gtk.AboutDialog, self).__init__(
+        super(AboutDialog, self).__init__(
             logo=self.logo_path and
-            GdkPixbuf.Pixbuf.new_from_file(self.logo_path),
+            GdkPixbuf.Pixbuf.new_from_file_at_scale(self.logo_path, 48, -1, True),
             translator_credits=_('translator_credits'),
             **kwargs)
         self.connect('response', hide_on_delete)

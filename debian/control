@@ -5,13 +5,9 @@ Maintainer: Debian Chinese Team <chinese-developers@lists.alioth.debian.org>
 Uploaders:
  Boyuan Yang <073plan@gmail.com>,
  Yangfl <mmyangfl@gmail.com>,
-Build-Depends:
- debhelper (>= 10),
- python-gi,
- gir1.2-gtk-3.0,
+Build-Depends: debhelper (>= 10)
 Build-Depends-Indep:
  dh-python,
- gettext,
  intltool,
  python,
 Standards-Version: 4.1.0
@@ -24,6 +20,7 @@ Architecture: all
 Depends:
  gir1.2-gtk-3.0,
  python-gi,
+ python-xdg,
  ${misc:Depends},
  ${python:Depends},
 Recommends:

@@ -21,7 +21,7 @@ import os
 __all__ = ['altname_description', 'query_package', 'friendlize']
 
 
-DESC_DIR = locate_appdata(PATHS['appdata'], 'descriptions', True)
+DESC_DIR = get_data_path('descriptions', True)
 DEFAULT_DESCRIPTION = _('No description')
 
 

@@ -242,7 +242,7 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Nothing will be changed until you add an option.</property>
+                <property name="label" translatable="yes">No changes will be made until you add an option.</property>
               </object>
               <packing>
                 <property name="expand">False</property>
