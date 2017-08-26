@@ -386,16 +386,19 @@ class Alternative(dict):
                 diff.append(('remove-all', group_name))
         for group_name in self:
             if dict.__getitem__(self, group_name):
+                # item has been accessed
                 if group_name in self._moves or \
                         set(old_db[group_name]) - set(self[group_name]):
+                    # group moved or more links than old one, reconstruct
                     if group_name in self._moves and \
                             self._moves[group_name] in old_db and \
                             self._moves[group_name] in self:
                         diff.append(('remove-all', self._moves[group_name]))
-                    else:
+                    elif group_name in old_db:
                         diff.append(('remove-all', group_name))
                     diff.extend(self[group_name].compare())
                 else:
+                    # simply add difference
                     diff.extend(self[group_name].compare(old_db[group_name]))
         return diff
 
