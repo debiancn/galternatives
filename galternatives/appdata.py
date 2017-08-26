@@ -15,7 +15,7 @@ import xdg.BaseDirectory
 import xdg.IconTheme
 
 
-__all__ = ['get_data_path', 'get_icon_path']
+__all__ = ['get_data_path', 'get_icon_path', 'LOGO_PATH']
 
 
 PATHS = [
@@ -60,10 +60,15 @@ def get_data_path(filenames, is_dir=False):
 
 
 def get_icon_path(iconname):
-    path = xdg.IconTheme.getIconPath('galternatives')
+    path = xdg.IconTheme.getIconPath(iconname)
     if path:
         return path
     for extensions in ['png', 'svg', 'xpm']:
         path = get_data_path('icons/{}.{}'.format(iconname, extensions))
         if path:
             return path
+
+
+LOGO_PATH = get_icon_path(PACKAGE)
+if LOGO_PATH is None:
+    logger.warn(_('Logo missing. Is your installation correct?'))

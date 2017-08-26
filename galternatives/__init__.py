@@ -11,8 +11,11 @@ Attributes:
     logger: Logger for debug and messages.
 
 '''
+from __future__ import print_function
+
 import gettext
 import logging
+import sys
 
 
 PACKAGE = 'galternatives'
@@ -49,3 +52,7 @@ INFO = {
         'Yangfl <mmyangfl@gmail.com>',
     ),
 }
+
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)

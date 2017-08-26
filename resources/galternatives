@@ -1,7 +1,5 @@
 #!/usr/bin/python
-from galternatives.__main__ import main
-
-import sys
+import runpy
 
 
-sys.exit(main())
+runpy.run_module('galternatives', run_name='__main__', alter_sys=True)

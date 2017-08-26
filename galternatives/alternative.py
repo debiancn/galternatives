@@ -118,7 +118,9 @@ class Option(dict):
         return id(self)
 
     def paths(self, group):
-        return tuple(self[group[i]] if group[i] in self else '' for i in range(len(group)) )
+        return tuple(
+            self[group[i]] if group[i] in self else ''
+            for i in range(len(group)))
 
 
 class Group(list, object):

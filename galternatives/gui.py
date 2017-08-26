@@ -16,6 +16,7 @@ from itertools import cycle
 import os
 import sys
 import threading
+import xdg.Config
 if sys.version_info >= (3,):
     from itertools import zip_longest
 else:
@@ -93,7 +94,8 @@ class EditDialog(Gtk.Dialog):
             setattr(self, widget_id, self.get_template_child(widget_id))
 
     def _init_edit_dialog(self):
-        for i, (field_name, label_name, widget_class) in enumerate(self.REQUIRES):
+        for i, (field_name, label_name, widget_class) in \
+                enumerate(self.REQUIRES):
             widget = widget_class()
             setattr(self, field_name.lower(), widget)
             self.requires.attach(Gtk.Label(label=label_name), 0, i, 1, 1)
@@ -101,7 +103,8 @@ class EditDialog(Gtk.Dialog):
         self.requires.show_all()
 
         self.slaves_entries = []
-        for i, (column_name, label_name, widget_class) in enumerate(self.SLAVES):
+        for i, (column_name, label_name, widget_class) in \
+                enumerate(self.SLAVES):
             # slaves_tv
             column = Gtk.TreeViewColumn(
                 label_name, Gtk.CellRendererText(),
@@ -194,7 +197,8 @@ class EditDialog(Gtk.Dialog):
             return True
         return self.on_close(window, event)
 
-    def requires_set_vaild(self, widget, status):
+    @staticmethod
+    def requires_set_vaild(widget, status):
         widget.set_icon_from_icon_name(
             Gtk.EntryIconPosition.SECONDARY, None if status else 'dialog-error')
 
@@ -334,13 +338,16 @@ del icontheme
 
 class MainWindow(object):
     no_edit_warning = False
-    group = None
-    paths = {}
-    is_root = not os.getuid()
-    has_pkexec = bool(spawn.find_executable('pkexec'))
+    delay_mode = False
+    group_cleaning = False
 
-    def __init__(self, app):
+    def __init__(self, app, paths={}, group=None):
         '''Load alternative database and fetch objects from the builder.'''
+        self.paths = paths
+        self.group = alternative.Group(group, create=True) if group else None
+        self.use_polkit = app.use_polkit if app else \
+            os.getuid() and bool(spawn.find_executable('pkexec'))
+
         # glade XML
         self.builder = Gtk.Builder.new_from_file(
             get_data_path('glade/galternatives.glade'))
@@ -359,10 +366,20 @@ class MainWindow(object):
         }:
             setattr(self, widget_id, self.builder.get_object(widget_id))
         self.main_window.set_application(app)
+        self.main_window.set_icon_from_file(LOGO_PATH)
         self.main_window.main_instance = self
-        self.options_menu.insert_action_group('win', self.main_window)
 
-        # actions and signals
+        # save placeholder text strings
+        self.empty_group = \
+            alternative.Group(self.alternative_label.get_text(), create=True)
+        self.empty_group[self.empty_group.name] = self.link_label.get_text()
+        self.empty_group.description = self.description_label.get_text()
+        self.empty_group._current = False
+
+        # signals
+        self.builder.connect_signals(self)
+        # actions
+        self.options_menu.insert_action_group('win', self.main_window)
         for name, activate in {
             ('preferences', lambda *args: self.preferences_dialog.show()),
             ('quit', self.on_quit),
@@ -379,7 +396,6 @@ class MainWindow(object):
             action.connect('activate', activate)
             self.main_window.add_action(action)
             setattr(self, name.replace('.', '_'), action)
-
         for name in {'delay_mode', 'query_package', 'use_polkit'}:
             action = Gio.SimpleAction.new_stateful(
                 name, None, GLib.Variant('b', getattr(self, name)))
@@ -394,15 +410,7 @@ class MainWindow(object):
             action.connect('change-state', on_action_toggle_func(name))
             self.main_window.add_action(action)
 
-        self.builder.connect_signals(self)
-
         self.load_db()
-        # save placeholder text strings
-        self.empty_group = \
-            alternative.Group(self.alternative_label.get_text(), create=True)
-        self.empty_group[self.empty_group.name] = self.link_label.get_text()
-        self.empty_group.description = self.description_label.get_text()
-        self.empty_group._current = False
 
     hide_on_delete = staticmethod(hide_on_delete)
     reset_dialog = staticmethod(reset_dialog)
@@ -410,6 +418,9 @@ class MainWindow(object):
     def show(self):
         '''Show the main window. Pretend itself as Gtk.Window.'''
         return self.main_window.show()
+
+    def destroy(self):
+        return self.main_window.destroy()
 
     @property
     def has_unsaved(self):
@@ -419,18 +430,10 @@ class MainWindow(object):
     # config actions begin #
 
     @stateful_property(False)
-    def delay_mode(self, value):
-        return value
-
-    @stateful_property(False)
     def query_package(self, value):
         self.options_column_package.set_visible(value)
         if value:
             self.load_options_pkgname()
-        return value
-
-    @stateful_property(constructor=lambda self: not self.is_root and self.has_pkexec)
-    def use_polkit(self, value):
         return value
 
     def load_config(self, widget=None):
@@ -492,7 +495,8 @@ class MainWindow(object):
                 if result:
                     it = model.append(
                         None, (STATUS_ICONS[result.returncode != 0], cmd))
-                    model.append(it, (None, _('Run command: ') + ' '.join(result.cmd)))
+                    model.append(it, (
+                        None, _('Run command: ') + ' '.join(result.cmd)))
                     out = result.out.rstrip()
                     if out:
                         model.append(it, (None, out))
@@ -567,21 +571,34 @@ class MainWindow(object):
     # main window actions begin #
 
     def load_groups(self):
-        # disable edit/remove buttons
-        self.group_edit.set_enabled(False)
-        self.group_remove.set_enabled(False)
+        next_group = None
 
         # load alternative group into groups_tv
         treeview = self.groups_tv
         selection = treeview.get_selection()
-        selection.unselect_all()  # prevent event trigger
         model = treeview.get_model()
+        self.group_cleaning = True
         model.clear()
+        self.group_cleaning = False
         for group_name in sorted(self.alt_db):
-            model.append((group_name, ))
+            it = model.append((group_name, ))
+            if self.group and self.group.name == group_name:
+                # clear self.group first to prevent same-tab reloading problem
+                self.group = None
+                selection.select_iter(it)
+                # by this time self.group has been changed
+                treeview.scroll_to_cell(model.get_path(it))
+                # then disable this code block
+                next_group = self.group
+                self.group = None
 
-        # clear options_tv
-        if self.group is not None:
+        self.group = next_group
+
+        if self.group is None:
+            # disable edit/remove buttons
+            self.group_edit.set_enabled(False)
+            self.group_remove.set_enabled(False)
+            # clear options_tv
             self.group = self.empty_group
             self.load_options()
             self.description_label.set_text(self.empty_group.description)
@@ -590,6 +607,8 @@ class MainWindow(object):
     def click_group(self, widget):
         '''Load options for selected alternative group into options_tv.'''
         # widget = self.groups_tv.get_selection()
+        if self.group_cleaning:
+            return
         model, it = widget.get_selected()
         if it is None:
             return
@@ -701,21 +720,17 @@ class MainWindow(object):
 
 class AboutDialog(Gtk.AboutDialog):
     '''About dialog of the application.'''
-
-    logo_path = get_icon_path('galternatives')
-
     def __init__(self, **kwargs):
         kwargs.update(INFO)
         if kwargs['license_type']:
             if hasattr(Gtk.License, kwargs['license_type']):
-                kwargs['license_type'] = getattr(Gtk.License, kwargs['license_type'])
+                kwargs['license_type'] = \
+                    getattr(Gtk.License, kwargs['license_type'])
             else:
                 logger.warn("`license_type' incorrect!")
-        if self.logo_path is None:
-            logger.warn(_('Logo missing. Is your installation correct?'))
         super(AboutDialog, self).__init__(
-            logo=self.logo_path and
-            GdkPixbuf.Pixbuf.new_from_file_at_scale(self.logo_path, 48, -1, True),
+            logo=LOGO_PATH and GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                LOGO_PATH, xdg.Config.icon_size, -1, True),
             translator_credits=_('translator_credits'),
             **kwargs)
         self.connect('response', hide_on_delete)
