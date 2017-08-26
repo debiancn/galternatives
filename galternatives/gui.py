@@ -97,6 +97,7 @@ class EditDialog(Gtk.Dialog):
         for i, (field_name, label_name, widget_class) in \
                 enumerate(self.REQUIRES):
             widget = widget_class()
+            widget.set_hexpand(True)
             setattr(self, field_name.lower(), widget)
             self.requires.attach(Gtk.Label(label=label_name), 0, i, 1, 1)
             self.requires.attach(widget, 1, i, 1, 1)
