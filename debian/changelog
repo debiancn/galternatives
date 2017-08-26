@@ -4,9 +4,9 @@ galternatives (0.90.0) unstable; urgency=medium
   * Add support for XDG path.
   * Port to python3. (Closes: #872989)
   * Add some useful command line arguments.
-  * Various fixes.
+  * Various bug fixes and enhancement.
 
- -- Boyuan Yang <073plan@gmail.com>  Sat, 26 Aug 2017 20:43:04 +0800
+ -- Boyuan Yang <073plan@gmail.com>  Sat, 26 Aug 2017 22:55:00 +0800
 
 galternatives (0.90.0~exp1) experimental; urgency=medium
 

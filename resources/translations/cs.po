@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-23 16:35+0800\n"
+"POT-Creation-Date: 2017-08-26 23:06+0800\n"
 "PO-Revision-Date: 2006-04-09 15:33+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -15,6 +15,79 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../../galternatives/app.py:29
+msgid "Enable debug output"
+msgstr ""
+
+#: ../../galternatives/app.py:32
+msgid "Do not try to acquire root (as normal user)"
+msgstr ""
+
+#: ../../galternatives/app.py:35
+msgid "Specifies the alternatives directory"
+msgstr ""
+
+#: ../../galternatives/app.py:38
+msgid "Specifies the administrative directory"
+msgstr ""
+
+#: ../../galternatives/app.py:41
+msgid "Specifies the log file"
+msgstr ""
+
+#: ../../galternatives/app.py:48
+msgid "Testing galternatives..."
+msgstr "Testuji galternatives..."
+
+#: ../../galternatives/app.py:57
+msgid "No root detected, but continue as in your wishes"
+msgstr ""
+
+#: ../../galternatives/app.py:61
+msgid ""
+"No `pkexec' detected, but found `gksudo'. You should really consider polkit."
+msgstr ""
+
+#: ../../galternatives/app.py:65
+msgid "Running Alternatives Configurator..."
+msgstr "Spouštím nastavení alternativ..."
+
+#: ../../galternatives/app.py:66
+msgid ""
+"<b>I need your root password to run\n"
+"the Alternatives Configurator.</b>"
+msgstr ""
+"<b>Pro spuštění editoru alternativ\n"
+"potřebuji heslo uživatele root.</b>"
+
+#: ../../galternatives/app.py:73
+msgid ""
+"<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
+"available.</b>"
+msgstr ""
+
+#: ../../galternatives/app.py:77
+#, fuzzy
+msgid ""
+"I am unable to request the password myself without gksu. Unless you have "
+"modified your system to explicitly allow your normal user to modify the "
+"alternatives system, GAlternatives will not work."
+msgstr ""
+"<b>Tento program by měl být spuštěn pod uživatelem root, ovšem /usr/bin/gksu "
+"není dostupný.</b>\n"
+"\n"
+"Bez gksu si neumím vyžádat heslo. Pokud jste explicitně nezměnili systém "
+"tak, abyste mohli zasahovat do systému alternativ jako běžný uživatel, "
+"GAlternatives nebude fungovat."
+
+#: ../../galternatives/app.py:96
+msgid "Specifying more than one group not allowed"
+msgstr ""
+
+#: ../../galternatives/app.py:101
+msgid "No such group"
+msgstr ""
 
 #: ../../galternatives/description.py:25
 msgid "No description"
@@ -49,7 +122,11 @@ msgstr ""
 msgid "Remove group `{1}'"
 msgstr ""
 
-#: ../../galternatives/__init__.py:39
+#: ../../galternatives/appdata.py:74
+msgid "Logo missing. Is your installation correct?"
+msgstr ""
+
+#: ../../galternatives/__init__.py:42
 #, fuzzy
 msgid ""
 "A tool to help the administrator select which programs provide specific "
@@ -60,107 +137,50 @@ msgstr ""
 "\n"
 "(C) 2003 Gustavo Noronha Silva"
 
-#: ../../galternatives/gui.py:58
+#: ../../galternatives/gui.py:59
 msgid "Select File"
 msgstr "Výběr souboru"
 
-#: ../../galternatives/gui.py:204 ../../galternatives/gui.py:267
+#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:272
 msgid "Name"
 msgstr "Jméno"
 
-#: ../../galternatives/gui.py:205
+#: ../../galternatives/gui.py:210
 msgid "Link"
 msgstr ""
 
-#: ../../galternatives/gui.py:213
+#: ../../galternatives/gui.py:218
 msgid "Edit group - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:220
+#: ../../galternatives/gui.py:225
 msgid "Add group"
 msgstr ""
 
-#: ../../galternatives/gui.py:263 ../../galternatives/gui.py:268
+#: ../../galternatives/gui.py:268 ../../galternatives/gui.py:273
 #, fuzzy
 msgid "Path"
 msgstr "Cesta:"
 
-#: ../../galternatives/gui.py:264 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:269 ../glade/galternatives.glade.h:14
 msgid "Priority"
 msgstr "Priorita"
 
-#: ../../galternatives/gui.py:280
+#: ../../galternatives/gui.py:285
 msgid "Edit option - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:287
+#: ../../galternatives/gui.py:292
 msgid "Add option"
 msgstr ""
 
-#: ../../galternatives/gui.py:495
+#: ../../galternatives/gui.py:500
 msgid "Run command: "
 msgstr ""
 
-#: ../../galternatives/gui.py:715
-msgid "Logo missing. Is your installation correct?"
-msgstr ""
-
-#: ../../galternatives/gui.py:719
+#: ../../galternatives/gui.py:735
 msgid "translator_credits"
 msgstr "Miroslav Kuře <kurem@debian.cz>"
-
-#: ../../galternatives/__main__.py:31
-msgid "Enable debug output"
-msgstr ""
-
-#: ../../galternatives/__main__.py:34
-msgid "Do not try to acquire root (as normal user)"
-msgstr ""
-
-#: ../../galternatives/__main__.py:40
-msgid "Testing galternatives..."
-msgstr "Testuji galternatives..."
-
-#: ../../galternatives/__main__.py:49
-msgid "No root detected, but continue as in your wishes"
-msgstr ""
-
-#: ../../galternatives/__main__.py:54
-msgid ""
-"No `pkexec' detected, but found `gksudo'. You should really consider polkit."
-msgstr ""
-
-#: ../../galternatives/__main__.py:58
-msgid "Running Alternatives Configurator..."
-msgstr "Spouštím nastavení alternativ..."
-
-#: ../../galternatives/__main__.py:59
-msgid ""
-"<b>I need your root password to run\n"
-"the Alternatives Configurator.</b>"
-msgstr ""
-"<b>Pro spuštění editoru alternativ\n"
-"potřebuji heslo uživatele root.</b>"
-
-#: ../../galternatives/__main__.py:66
-msgid ""
-"<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
-"available.</b>"
-msgstr ""
-
-#: ../../galternatives/__main__.py:70
-#, fuzzy
-msgid ""
-"I am unable to request the password myself without gksu. Unless you have "
-"modified your system to explicitly allow your normal user to modify the "
-"alternatives system, GAlternatives will not work."
-msgstr ""
-"<b>Tento program by měl být spuštěn pod uživatelem root, ovšem /usr/bin/gksu "
-"není dostupný.</b>\n"
-"\n"
-"Bez gksu si neumím vyžádat heslo. Pokud jste explicitně nezměnili systém "
-"tak, abyste mohli zasahovat do systému alternativ jako běžný uživatel, "
-"GAlternatives nebude fungovat."
 
 #: ../galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
@@ -169,6 +189,10 @@ msgstr "Nastavení alternativ"
 #: ../galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr "Nastaví výchozí alternativy pro celý systém"
+
+#: ../galternatives.desktop.in.h:3
+msgid "Alternatives;GAlternatives;Debian;"
+msgstr ""
 
 #: ../org.debian.experimental.galternatives.policy.in.h:1
 msgid "Run update-alternatives tool to modify system alternative selections"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.90.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-23 16:35+0800\n"
+"POT-Creation-Date: 2017-08-26 23:06+0800\n"
 "PO-Revision-Date: 2017-08-23 16:35+0800\n"
 "Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
 "Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
@@ -17,6 +17,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Gtranslator 2.91.7\n"
+
+#: ../../galternatives/app.py:29
+msgid "Enable debug output"
+msgstr "啟用調試輸出"
+
+#: ../../galternatives/app.py:32
+msgid "Do not try to acquire root (as normal user)"
+msgstr "不要嘗試獲取 root (以普通使用者執行)"
+
+#: ../../galternatives/app.py:35
+msgid "Specifies the alternatives directory"
+msgstr ""
+
+#: ../../galternatives/app.py:38
+msgid "Specifies the administrative directory"
+msgstr ""
+
+#: ../../galternatives/app.py:41
+msgid "Specifies the log file"
+msgstr ""
+
+#: ../../galternatives/app.py:48
+msgid "Testing galternatives..."
+msgstr "正在測試 galternatives..."
+
+#: ../../galternatives/app.py:57
+msgid "No root detected, but continue as in your wishes"
+msgstr "沒有檢測到 root，但按照您的意願繼續"
+
+#: ../../galternatives/app.py:61
+msgid ""
+"No `pkexec' detected, but found `gksudo'. You should really consider polkit."
+msgstr "沒有檢測到`pkexec'，但發現`gksudo'。您應當考慮 polkit。"
+
+#: ../../galternatives/app.py:65
+msgid "Running Alternatives Configurator..."
+msgstr "正在執行可選項配置工具..."
+
+#: ../../galternatives/app.py:66
+msgid ""
+"<b>I need your root password to run\n"
+"the Alternatives Configurator.</b>"
+msgstr ""
+"<b>我需要您的 root 密碼來執行\n"
+"可選項配置工具。</b>"
+
+#: ../../galternatives/app.py:73
+msgid ""
+"<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
+"available.</b>"
+msgstr ""
+"<b>該程式應當以 root 使用者身分執行，但是 <tt>/usr/bin/gksu</tt> 不可用。</b>"
+
+#: ../../galternatives/app.py:77
+msgid ""
+"I am unable to request the password myself without gksu. Unless you have "
+"modified your system to explicitly allow your normal user to modify the "
+"alternatives system, GAlternatives will not work."
+msgstr ""
+"沒有 gksu，我無法自行請求密碼。除非您修改了您的系統組態以使得 alternatives 系"
+"統可以允許普通使用者進行修改，GAltarnatives 將無法工作。"
+
+#: ../../galternatives/app.py:96
+msgid "Specifying more than one group not allowed"
+msgstr ""
+
+#: ../../galternatives/app.py:101
+msgid "No such group"
+msgstr ""
 
 #: ../../galternatives/description.py:25
 msgid "No description"
@@ -51,108 +120,59 @@ msgstr "刪除組`{1}'的選項`{2}'"
 msgid "Remove group `{1}'"
 msgstr "刪除組`{1}'"
 
-#: ../../galternatives/__init__.py:39
+#: ../../galternatives/appdata.py:74
+msgid "Logo missing. Is your installation correct?"
+msgstr "圖示缺失。您的安裝是否正確？"
+
+#: ../../galternatives/__init__.py:42
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
 msgstr "幫助管理員選擇為使用者提供特定服務的預設選項的一個工具。"
 
-#: ../../galternatives/gui.py:58
+#: ../../galternatives/gui.py:59
 msgid "Select File"
 msgstr "選擇檔案"
 
-#: ../../galternatives/gui.py:204 ../../galternatives/gui.py:267
+#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:272
 msgid "Name"
 msgstr "名稱"
 
-#: ../../galternatives/gui.py:205
+#: ../../galternatives/gui.py:210
 msgid "Link"
 msgstr "連結"
 
-#: ../../galternatives/gui.py:213
+#: ../../galternatives/gui.py:218
 msgid "Edit group - {}"
 msgstr "編輯組 - {}"
 
-#: ../../galternatives/gui.py:220
+#: ../../galternatives/gui.py:225
 msgid "Add group"
 msgstr "添加組"
 
-#: ../../galternatives/gui.py:263 ../../galternatives/gui.py:268
+#: ../../galternatives/gui.py:268 ../../galternatives/gui.py:273
 msgid "Path"
 msgstr "路徑"
 
-#: ../../galternatives/gui.py:264 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:269 ../glade/galternatives.glade.h:14
 msgid "Priority"
 msgstr "優先級"
 
-#: ../../galternatives/gui.py:280
+#: ../../galternatives/gui.py:285
 msgid "Edit option - {}"
 msgstr "編輯選項 - {}"
 
-#: ../../galternatives/gui.py:287
+#: ../../galternatives/gui.py:292
 msgid "Add option"
 msgstr "添加選項"
 
-#: ../../galternatives/gui.py:495
+#: ../../galternatives/gui.py:500
 msgid "Run command: "
 msgstr "執行命令："
 
-#: ../../galternatives/gui.py:715
-msgid "Logo missing. Is your installation correct?"
-msgstr "圖示缺失。您的安裝是否正確？"
-
-#: ../../galternatives/gui.py:719
+#: ../../galternatives/gui.py:735
 msgid "translator_credits"
 msgstr "(由開發者提供)"
-
-#: ../../galternatives/__main__.py:31
-msgid "Enable debug output"
-msgstr "啟用調試輸出"
-
-#: ../../galternatives/__main__.py:34
-msgid "Do not try to acquire root (as normal user)"
-msgstr "不要嘗試獲取 root (以普通使用者執行)"
-
-#: ../../galternatives/__main__.py:40
-msgid "Testing galternatives..."
-msgstr "正在測試 galternatives..."
-
-#: ../../galternatives/__main__.py:49
-msgid "No root detected, but continue as in your wishes"
-msgstr "沒有檢測到 root，但按照您的意願繼續"
-
-#: ../../galternatives/__main__.py:54
-msgid ""
-"No `pkexec' detected, but found `gksudo'. You should really consider polkit."
-msgstr "沒有檢測到`pkexec'，但發現`gksudo'。您應當考慮 polkit。"
-
-#: ../../galternatives/__main__.py:58
-msgid "Running Alternatives Configurator..."
-msgstr "正在執行可選項配置工具..."
-
-#: ../../galternatives/__main__.py:59
-msgid ""
-"<b>I need your root password to run\n"
-"the Alternatives Configurator.</b>"
-msgstr ""
-"<b>我需要您的 root 密碼來執行\n"
-"可選項配置工具。</b>"
-
-#: ../../galternatives/__main__.py:66
-msgid ""
-"<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
-"available.</b>"
-msgstr ""
-"<b>該程式應當以 root 使用者身分執行，但是 <tt>/usr/bin/gksu</tt> 不可用。</b>"
-
-#: ../../galternatives/__main__.py:70
-msgid ""
-"I am unable to request the password myself without gksu. Unless you have "
-"modified your system to explicitly allow your normal user to modify the "
-"alternatives system, GAlternatives will not work."
-msgstr ""
-"沒有 gksu，我無法自行請求密碼。除非您修改了您的系統組態以使得 alternatives 系"
-"統可以允許普通使用者進行修改，GAltarnatives 將無法工作。"
 
 #: ../galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
@@ -161,6 +181,10 @@ msgstr "可選項配置工具"
 #: ../galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr "配置系統可選項的預設值"
+
+#: ../galternatives.desktop.in.h:3
+msgid "Alternatives;GAlternatives;Debian;"
+msgstr ""
 
 #: ../org.debian.experimental.galternatives.policy.in.h:1
 msgid "Run update-alternatives tool to modify system alternative selections"

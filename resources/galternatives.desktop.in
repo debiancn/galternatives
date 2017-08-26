@@ -2,6 +2,7 @@
 Version=1.0
 _Name=Alternatives Configurator
 _Comment=Configure the system default alternatives
+_Keywords=Alternatives;GAlternatives;Debian;
 Type=Application
 Exec=/usr/sbin/galternatives
 Icon=galternatives
