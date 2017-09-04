@@ -15,7 +15,6 @@ import os
 
 
 class GAlternativesApp(Gtk.Application):
-    debug = False
     use_polkit = False
     target_group = None
 
@@ -42,7 +41,8 @@ class GAlternativesApp(Gtk.Application):
         # BUG: Gtk.Application.add_option_group() not working
 
     def do_handle_local_options(self, options):
-        self.debug = options.contains('debug')
+        if not self.debug:
+            self.debug = bool(options.contains('debug'))
         if set_logger:
             set_logger(PACKAGE, self.debug)
             logger.debug(_('Testing galternatives...'))
@@ -82,13 +82,23 @@ class GAlternativesApp(Gtk.Application):
                     return 1
                 dialog.destroy()
 
-        self.paths = {
-            option: ''.join(map(chr, options.lookup_value(option)))[:-1]
-            for option in alternative.Alternative.PATHS
-            if options.contains(option)
-        }
+        self.paths = {}
+        for option in alternative.Alternative.PATHS:
+            value = options.lookup_value(option)
+            if value:
+                value = value.unpack()
+                value.pop()
+                self.paths[option] = bytearray(value).decode('utf-8')
 
         return -1
+
+    def do_local_command_line(self, arguments):
+        self.debug = False
+        for i, arg in enumerate(arguments):
+            if arg.startswith('-dd'):
+                self.debug = 2
+                break
+        return Gtk.Application.do_local_command_line(self, arguments)
 
     def do_command_line(self, command_line):
         args = command_line.get_arguments()
@@ -120,6 +130,8 @@ class GAlternativesApp(Gtk.Application):
             self.add_action(action)
 
     def do_activate(self):
+        if self.debug > 1:
+            self.window.edit_warning_show_check.set_active(False)
         self.window.show()
 
     def on_about(self, action, param):

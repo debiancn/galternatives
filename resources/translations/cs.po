@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-26 23:06+0800\n"
+"POT-Creation-Date: 2017-09-04 19:48+0800\n"
 "PO-Revision-Date: 2006-04-09 15:33+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../galternatives/app.py:29
+#: ../../galternatives/app.py:28
 msgid "Enable debug output"
 msgstr ""
 
-#: ../../galternatives/app.py:32
+#: ../../galternatives/app.py:31
 msgid "Do not try to acquire root (as normal user)"
 msgstr ""
 
-#: ../../galternatives/app.py:35
+#: ../../galternatives/app.py:34
 msgid "Specifies the alternatives directory"
 msgstr ""
 
-#: ../../galternatives/app.py:38
+#: ../../galternatives/app.py:37
 msgid "Specifies the administrative directory"
 msgstr ""
 
-#: ../../galternatives/app.py:41
+#: ../../galternatives/app.py:40
 msgid "Specifies the log file"
 msgstr ""
 
@@ -66,26 +66,24 @@ msgid ""
 "<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
 "available.</b>"
 msgstr ""
+"<b>Tento program by měl být spuštěn pod uživatelem root, ovšem <tt>/usr/bin/"
+"gksu</tt> není dostupný.</b>"
 
 #: ../../galternatives/app.py:77
-#, fuzzy
 msgid ""
 "I am unable to request the password myself without gksu. Unless you have "
 "modified your system to explicitly allow your normal user to modify the "
 "alternatives system, GAlternatives will not work."
 msgstr ""
-"<b>Tento program by měl být spuštěn pod uživatelem root, ovšem /usr/bin/gksu "
-"není dostupný.</b>\n"
-"\n"
 "Bez gksu si neumím vyžádat heslo. Pokud jste explicitně nezměnili systém "
 "tak, abyste mohli zasahovat do systému alternativ jako běžný uživatel, "
 "GAlternatives nebude fungovat."
 
-#: ../../galternatives/app.py:96
+#: ../../galternatives/app.py:106
 msgid "Specifying more than one group not allowed"
 msgstr ""
 
-#: ../../galternatives/app.py:101
+#: ../../galternatives/app.py:111
 msgid "No such group"
 msgstr ""
 
@@ -127,58 +125,54 @@ msgid "Logo missing. Is your installation correct?"
 msgstr ""
 
 #: ../../galternatives/__init__.py:42
-#, fuzzy
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
 msgstr ""
 "Nástroj, který pomáhá administrátorovi vybrat výchozí programy, které mají "
-"uživatelům poskytovat dané služby.\n"
-"\n"
-"(C) 2003 Gustavo Noronha Silva"
+"uživatelům poskytovat dané služby."
 
-#: ../../galternatives/gui.py:59
+#: ../../galternatives/gui.py:58
 msgid "Select File"
 msgstr "Výběr souboru"
 
-#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:272
+#: ../../galternatives/gui.py:208 ../../galternatives/gui.py:271
 msgid "Name"
 msgstr "Jméno"
 
-#: ../../galternatives/gui.py:210
+#: ../../galternatives/gui.py:209
 msgid "Link"
 msgstr ""
 
-#: ../../galternatives/gui.py:218
+#: ../../galternatives/gui.py:217
 msgid "Edit group - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:225
+#: ../../galternatives/gui.py:224
 msgid "Add group"
 msgstr ""
 
-#: ../../galternatives/gui.py:268 ../../galternatives/gui.py:273
-#, fuzzy
+#: ../../galternatives/gui.py:267 ../../galternatives/gui.py:272
 msgid "Path"
-msgstr "Cesta:"
+msgstr "Cesta"
 
-#: ../../galternatives/gui.py:269 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:268 ../glade/galternatives.glade.h:14
 msgid "Priority"
 msgstr "Priorita"
 
-#: ../../galternatives/gui.py:285
+#: ../../galternatives/gui.py:284
 msgid "Edit option - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:292
+#: ../../galternatives/gui.py:291
 msgid "Add option"
 msgstr ""
 
-#: ../../galternatives/gui.py:500
+#: ../../galternatives/gui.py:496
 msgid "Run command: "
 msgstr ""
 
-#: ../../galternatives/gui.py:735
+#: ../../galternatives/gui.py:731
 msgid "translator_credits"
 msgstr "Miroslav Kuře <kurem@debian.cz>"
 

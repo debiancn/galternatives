@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.90.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-26 23:06+0800\n"
-"PO-Revision-Date: 2017-08-23 16:35+0800\n"
+"POT-Creation-Date: 2017-09-04 19:48+0800\n"
+"PO-Revision-Date: 2017-09-04 20:03+0800\n"
 "Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
 "Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_TW\n"
@@ -18,25 +18,25 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: ../../galternatives/app.py:29
+#: ../../galternatives/app.py:28
 msgid "Enable debug output"
 msgstr "啟用調試輸出"
 
-#: ../../galternatives/app.py:32
+#: ../../galternatives/app.py:31
 msgid "Do not try to acquire root (as normal user)"
 msgstr "不要嘗試獲取 root (以普通使用者執行)"
 
-#: ../../galternatives/app.py:35
+#: ../../galternatives/app.py:34
 msgid "Specifies the alternatives directory"
-msgstr ""
+msgstr "指定可選項(alternatives)目錄"
 
-#: ../../galternatives/app.py:38
+#: ../../galternatives/app.py:37
 msgid "Specifies the administrative directory"
-msgstr ""
+msgstr "指定管理目錄"
 
-#: ../../galternatives/app.py:41
+#: ../../galternatives/app.py:40
 msgid "Specifies the log file"
-msgstr ""
+msgstr "指定日誌檔案"
 
 #: ../../galternatives/app.py:48
 msgid "Testing galternatives..."
@@ -79,13 +79,13 @@ msgstr ""
 "沒有 gksu，我無法自行請求密碼。除非您修改了您的系統組態以使得 alternatives 系"
 "統可以允許普通使用者進行修改，GAltarnatives 將無法工作。"
 
-#: ../../galternatives/app.py:96
+#: ../../galternatives/app.py:106
 msgid "Specifying more than one group not allowed"
-msgstr ""
+msgstr "不允許同時指定多個組"
 
-#: ../../galternatives/app.py:101
+#: ../../galternatives/app.py:111
 msgid "No such group"
-msgstr ""
+msgstr "沒有這樣的組"
 
 #: ../../galternatives/description.py:25
 msgid "No description"
@@ -130,47 +130,47 @@ msgid ""
 "services for the user by default."
 msgstr "幫助管理員選擇為使用者提供特定服務的預設選項的一個工具。"
 
-#: ../../galternatives/gui.py:59
+#: ../../galternatives/gui.py:58
 msgid "Select File"
 msgstr "選擇檔案"
 
-#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:272
+#: ../../galternatives/gui.py:208 ../../galternatives/gui.py:271
 msgid "Name"
 msgstr "名稱"
 
-#: ../../galternatives/gui.py:210
+#: ../../galternatives/gui.py:209
 msgid "Link"
 msgstr "連結"
 
-#: ../../galternatives/gui.py:218
+#: ../../galternatives/gui.py:217
 msgid "Edit group - {}"
 msgstr "編輯組 - {}"
 
-#: ../../galternatives/gui.py:225
+#: ../../galternatives/gui.py:224
 msgid "Add group"
 msgstr "添加組"
 
-#: ../../galternatives/gui.py:268 ../../galternatives/gui.py:273
+#: ../../galternatives/gui.py:267 ../../galternatives/gui.py:272
 msgid "Path"
 msgstr "路徑"
 
-#: ../../galternatives/gui.py:269 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:268 ../glade/galternatives.glade.h:14
 msgid "Priority"
 msgstr "優先級"
 
-#: ../../galternatives/gui.py:285
+#: ../../galternatives/gui.py:284
 msgid "Edit option - {}"
 msgstr "編輯選項 - {}"
 
-#: ../../galternatives/gui.py:292
+#: ../../galternatives/gui.py:291
 msgid "Add option"
 msgstr "添加選項"
 
-#: ../../galternatives/gui.py:500
+#: ../../galternatives/gui.py:496
 msgid "Run command: "
 msgstr "執行命令："
 
-#: ../../galternatives/gui.py:735
+#: ../../galternatives/gui.py:731
 msgid "translator_credits"
 msgstr "(由開發者提供)"
 
@@ -184,7 +184,7 @@ msgstr "配置系統可選項的預設值"
 
 #: ../galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
-msgstr ""
+msgstr "可選項;配置;Debian;"
 
 #: ../org.debian.experimental.galternatives.policy.in.h:1
 msgid "Run update-alternatives tool to modify system alternative selections"

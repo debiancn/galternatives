@@ -1,6 +1,6 @@
 # Translation of galternatives to German
 # Copyright (C) 2003 Gustavo Noronha Silva <kov@debian.org>.
-# This file is distributed under the same license as the galternatives 
+# This file is distributed under the same license as the galternatives
 # package.
 # Chris Leick <c.leick@vollbio.de>, 2009.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.13.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-26 23:06+0800\n"
+"POT-Creation-Date: 2017-09-04 19:48+0800\n"
 "PO-Revision-Date: 2009-10-07 19:41+GMT\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../galternatives/app.py:29
+#: ../../galternatives/app.py:28
 msgid "Enable debug output"
 msgstr ""
 
-#: ../../galternatives/app.py:32
+#: ../../galternatives/app.py:31
 msgid "Do not try to acquire root (as normal user)"
 msgstr ""
 
-#: ../../galternatives/app.py:35
+#: ../../galternatives/app.py:34
 msgid "Specifies the alternatives directory"
 msgstr ""
 
-#: ../../galternatives/app.py:38
+#: ../../galternatives/app.py:37
 msgid "Specifies the administrative directory"
 msgstr ""
 
-#: ../../galternatives/app.py:41
+#: ../../galternatives/app.py:40
 msgid "Specifies the log file"
 msgstr ""
 
@@ -68,27 +68,25 @@ msgid ""
 "<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
 "available.</b>"
 msgstr ""
+"<b>Dieses Programm sollte als root ausgeführt werden und <tt>/usr/bin/gksu</"
+"tt> ist nicht verfügbar.</b>"
 
 #: ../../galternatives/app.py:77
-#, fuzzy
 msgid ""
 "I am unable to request the password myself without gksu. Unless you have "
 "modified your system to explicitly allow your normal user to modify the "
 "alternatives system, GAlternatives will not work."
 msgstr ""
-"<b>Dieses Programm sollte als root ausgeführt werden und /usr/bin/gksu ist "
-"nicht verfügbar.</b>\n"
-"\n"
 "Das Passwort kann ohne gksu nicht abgefragt werden. Sofern Sie Ihr System "
 "nicht so geändert haben, dass ihrem normalen Benutzer ausdrücklich erlaubt "
 "wird das Alternativen-System zu verändern, wird GAlternatives nicht "
 "funktionieren."
 
-#: ../../galternatives/app.py:96
+#: ../../galternatives/app.py:106
 msgid "Specifying more than one group not allowed"
 msgstr ""
 
-#: ../../galternatives/app.py:101
+#: ../../galternatives/app.py:111
 msgid "No such group"
 msgstr ""
 
@@ -130,58 +128,54 @@ msgid "Logo missing. Is your installation correct?"
 msgstr ""
 
 #: ../../galternatives/__init__.py:42
-#, fuzzy
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
 msgstr ""
 "Ein Werkzeug, das dem Administrator hilft, Programme auszuwählen, die dem "
-"Benutzer spezielle Dienste als Vorgabe bereitstellen.\n"
-"\n"
-"(C) 2003 Gustavo Noronha Silva"
+"Benutzer spezielle Dienste als Vorgabe bereitstellen."
 
-#: ../../galternatives/gui.py:59
+#: ../../galternatives/gui.py:58
 msgid "Select File"
 msgstr "Datei auswählen"
 
-#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:272
+#: ../../galternatives/gui.py:208 ../../galternatives/gui.py:271
 msgid "Name"
 msgstr "Name"
 
-#: ../../galternatives/gui.py:210
+#: ../../galternatives/gui.py:209
 msgid "Link"
 msgstr ""
 
-#: ../../galternatives/gui.py:218
+#: ../../galternatives/gui.py:217
 msgid "Edit group - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:225
+#: ../../galternatives/gui.py:224
 msgid "Add group"
 msgstr ""
 
-#: ../../galternatives/gui.py:268 ../../galternatives/gui.py:273
-#, fuzzy
+#: ../../galternatives/gui.py:267 ../../galternatives/gui.py:272
 msgid "Path"
-msgstr "Pfad:"
+msgstr "Pfad"
 
-#: ../../galternatives/gui.py:269 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:268 ../glade/galternatives.glade.h:14
 msgid "Priority"
 msgstr "Priorität"
 
-#: ../../galternatives/gui.py:285
+#: ../../galternatives/gui.py:284
 msgid "Edit option - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:292
+#: ../../galternatives/gui.py:291
 msgid "Add option"
 msgstr ""
 
-#: ../../galternatives/gui.py:500
+#: ../../galternatives/gui.py:496
 msgid "Run command: "
 msgstr ""
 
-#: ../../galternatives/gui.py:735
+#: ../../galternatives/gui.py:731
 msgid "translator_credits"
 msgstr "Chris Leick <c.leick@vollbio.de>"
 

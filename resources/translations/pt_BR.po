@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-26 23:06+0800\n"
+"POT-Creation-Date: 2017-09-04 19:48+0800\n"
 "PO-Revision-Date: 2004-12-08 00:07-0200\n"
 "Last-Translator: Gustavo Noronha Silva <kov@debina.org>\n"
 "Language-Team: Debian Brasil <debian-l10n-portuguese@lists.debian.org>\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../galternatives/app.py:29
+#: ../../galternatives/app.py:28
 msgid "Enable debug output"
 msgstr ""
 
-#: ../../galternatives/app.py:32
+#: ../../galternatives/app.py:31
 msgid "Do not try to acquire root (as normal user)"
 msgstr ""
 
-#: ../../galternatives/app.py:35
+#: ../../galternatives/app.py:34
 msgid "Specifies the alternatives directory"
 msgstr ""
 
-#: ../../galternatives/app.py:38
+#: ../../galternatives/app.py:37
 msgid "Specifies the administrative directory"
 msgstr ""
 
-#: ../../galternatives/app.py:41
+#: ../../galternatives/app.py:40
 msgid "Specifies the log file"
 msgstr ""
 
@@ -66,26 +66,24 @@ msgid ""
 "<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
 "available.</b>"
 msgstr ""
+"<b>Esse programa deve ser executado como root e o <tt>/usr/bin/gksu</tt> não "
+"está disponível.</b>"
 
 #: ../../galternatives/app.py:77
-#, fuzzy
 msgid ""
 "I am unable to request the password myself without gksu. Unless you have "
 "modified your system to explicitly allow your normal user to modify the "
 "alternatives system, GAlternatives will not work."
 msgstr ""
-"<b>Esse programa deve ser executado como root e o /usr/bin/gksu não está "
-"disponível.</b>\n"
-"\n"
 "Não consigo pedir a senha de root eu mesmo sem o gksu. A menos que você "
 "tenha modificado seu sistema explicitamente para permitir que seu usuário "
 "comum modifique o sistema de alternatives o GAlternatives não funcionará."
 
-#: ../../galternatives/app.py:96
+#: ../../galternatives/app.py:106
 msgid "Specifying more than one group not allowed"
 msgstr ""
 
-#: ../../galternatives/app.py:101
+#: ../../galternatives/app.py:111
 msgid "No such group"
 msgstr ""
 
@@ -127,58 +125,54 @@ msgid "Logo missing. Is your installation correct?"
 msgstr ""
 
 #: ../../galternatives/__init__.py:42
-#, fuzzy
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
 msgstr ""
 "Uma ferramenta para ajudar o administrador a selecionar que programas "
-"fornecem serviços específicos para o usuário por padrão.\n"
-"\n"
-"(C) 2003 Gustavo Noronha Silva"
+"fornecem serviços específicos para o usuário por padrão."
 
-#: ../../galternatives/gui.py:59
+#: ../../galternatives/gui.py:58
 msgid "Select File"
 msgstr "Selecionar Arquivo"
 
-#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:272
+#: ../../galternatives/gui.py:208 ../../galternatives/gui.py:271
 msgid "Name"
 msgstr "Nome"
 
-#: ../../galternatives/gui.py:210
+#: ../../galternatives/gui.py:209
 msgid "Link"
 msgstr ""
 
-#: ../../galternatives/gui.py:218
+#: ../../galternatives/gui.py:217
 msgid "Edit group - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:225
+#: ../../galternatives/gui.py:224
 msgid "Add group"
 msgstr ""
 
-#: ../../galternatives/gui.py:268 ../../galternatives/gui.py:273
-#, fuzzy
+#: ../../galternatives/gui.py:267 ../../galternatives/gui.py:272
 msgid "Path"
-msgstr "Caminho:"
+msgstr "Caminho"
 
-#: ../../galternatives/gui.py:269 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:268 ../glade/galternatives.glade.h:14
 msgid "Priority"
 msgstr "Prioridade"
 
-#: ../../galternatives/gui.py:285
+#: ../../galternatives/gui.py:284
 msgid "Edit option - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:292
+#: ../../galternatives/gui.py:291
 msgid "Add option"
 msgstr ""
 
-#: ../../galternatives/gui.py:500
+#: ../../galternatives/gui.py:496
 msgid "Run command: "
 msgstr ""
 
-#: ../../galternatives/gui.py:735
+#: ../../galternatives/gui.py:731
 msgid "translator_credits"
 msgstr "Gustavo Noronha Silva <kov@debian.org>"
 

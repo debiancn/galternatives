@@ -11,8 +11,7 @@ from .utils import GtkTemplate, stateful_property
 from copy import deepcopy
 from distutils import spawn
 from functools import wraps
-from gi.repository import Gio, GLib, Gtk, GdkPixbuf, GObject
-from itertools import cycle
+from gi.repository import GdkPixbuf, Gio, GLib, Gtk, GObject
 import os
 import sys
 import threading
@@ -148,11 +147,11 @@ class EditDialog(Gtk.Dialog):
     @GtkTemplate.Callback
     def on_click_slave(self, widget):
         model, it = widget.get_selected()
+        self.slave_it = it
         if it is None:
             return
-        self.slave_it = it
-        for widget, text in zip(
-                self.slaves_entries, model[it][::2] if it else cycle('')):
+        for widget, text in zip_longest(
+                self.slaves_entries, model[it][::2] if it else ()):
             widget.set_text(text or '')
 
     def on_slave_fields_changed(self, widget):
@@ -319,10 +318,8 @@ class OptionDialog(EditDialog):
 def advanced(f):
     @wraps(f)
     def wrapper(self, *args, **kwargs):
-        if self.no_edit_warning:
-            return f(self, *args, **kwargs)
-        elif self.edit_warning.run() != Gtk.ResponseType.CANCEL:
-            self.no_edit_warning = not self.edit_warning_show_check.get_active()
+        if not self.edit_warning_show_check.get_active() or \
+                self.edit_warning.run() != Gtk.ResponseType.CANCEL:
             return f(self, *args, **kwargs)
     return wrapper
 
@@ -338,7 +335,6 @@ del icontheme
 
 
 class MainWindow(object):
-    no_edit_warning = False
     delay_mode = False
     group_cleaning = False
 
@@ -358,8 +354,7 @@ class MainWindow(object):
             'pending_box', 'groups_tv',
             'alternative_label', 'link_label', 'description_label',
             'status_switch', 'options_tv', 'options_column_package',
-            'options_menu', 'option_edit_item', 'option_remove_item',
-            'option_add_item',
+            'options_menu',
             # dialogs and messages
             'preferences_dialog',
             'edit_warning', 'edit_warning_show_check',
@@ -381,6 +376,7 @@ class MainWindow(object):
         self.builder.connect_signals(self)
         # actions
         self.options_menu.insert_action_group('win', self.main_window)
+        self.actions = {}
         for name, activate in {
             ('preferences', lambda *args: self.preferences_dialog.show()),
             ('quit', self.on_quit),
@@ -396,7 +392,7 @@ class MainWindow(object):
             action = Gio.SimpleAction(name=name)
             action.connect('activate', activate)
             self.main_window.add_action(action)
-            setattr(self, name.replace('.', '_'), action)
+            self.actions[name] = action
         for name in {'delay_mode', 'query_package', 'use_polkit'}:
             action = Gio.SimpleAction.new_stateful(
                 name, None, GLib.Variant('b', getattr(self, name)))
@@ -597,8 +593,8 @@ class MainWindow(object):
 
         if self.group is None:
             # disable edit/remove buttons
-            self.group_edit.set_enabled(False)
-            self.group_remove.set_enabled(False)
+            self.actions['group.edit'].set_enabled(False)
+            self.actions['group.remove'].set_enabled(False)
             # clear options_tv
             self.group = self.empty_group
             self.load_options()
@@ -619,8 +615,8 @@ class MainWindow(object):
 
         # enable buttons
         if not self.group:
-            self.group_edit.set_enabled(True)
-            self.group_remove.set_enabled(True)
+            self.actions['group.edit'].set_enabled(True)
+            self.actions['group.remove'].set_enabled(True)
         # save current group
         self.group = group
         self.load_options()
@@ -701,8 +697,8 @@ class MainWindow(object):
             pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
             self.option = pthinfo and self.group.options[pthinfo[0][0]]
             pthinfo = bool(pthinfo)
-            self.option_edit.set_enabled(pthinfo)
-            self.option_remove.set_enabled(pthinfo)
+            self.actions['option.edit'].set_enabled(pthinfo)
+            self.actions['option.remove'].set_enabled(pthinfo)
             self.options_menu.popup(None, None, None, None,
                                     event.button, event.time)
 
@@ -723,7 +719,7 @@ class AboutDialog(Gtk.AboutDialog):
     '''About dialog of the application.'''
     def __init__(self, **kwargs):
         kwargs.update(INFO)
-        if kwargs['license_type']:
+        if 'license_type' in kwargs and isinstance(kwargs['license_type'], str):
             if hasattr(Gtk.License, kwargs['license_type']):
                 kwargs['license_type'] = \
                     getattr(Gtk.License, kwargs['license_type'])

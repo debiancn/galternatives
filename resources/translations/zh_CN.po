@@ -8,34 +8,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.90.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-26 23:06+0800\n"
-"PO-Revision-Date: 2017-08-26 23:08+0800\n"
-"Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
-"Language-Team: <debian-l10n-chinese@lists.debian.org>\n"
+"POT-Creation-Date: 2017-09-04 19:48+0800\n"
+"PO-Revision-Date: 2017-09-04 20:03+0800\n"
+"Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
+"Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
-#: ../../galternatives/app.py:29
+#: ../../galternatives/app.py:28
 msgid "Enable debug output"
 msgstr "启用调试输出"
 
-#: ../../galternatives/app.py:32
+#: ../../galternatives/app.py:31
 msgid "Do not try to acquire root (as normal user)"
-msgstr "不要尝试获取 root（以普通用户运行）"
+msgstr "不要尝试获取 root (以普通用户运行)"
 
-#: ../../galternatives/app.py:35
+#: ../../galternatives/app.py:34
 msgid "Specifies the alternatives directory"
-msgstr "指定可选项（alternatives）目录"
+msgstr "指定可选项(alternatives)目录"
 
-#: ../../galternatives/app.py:38
+#: ../../galternatives/app.py:37
 msgid "Specifies the administrative directory"
 msgstr "指定管理目录"
 
-#: ../../galternatives/app.py:41
+#: ../../galternatives/app.py:40
 msgid "Specifies the log file"
 msgstr "指定日志文件"
 
@@ -80,11 +80,11 @@ msgstr ""
 "没有 gksu，我无法自行请求密码。除非您修改了您的系统配置以使得 alternatives 系"
 "统可以允许普通用户进行修改，GAltarnatives 将无法工作。"
 
-#: ../../galternatives/app.py:96
+#: ../../galternatives/app.py:106
 msgid "Specifying more than one group not allowed"
 msgstr "不允许同时指定多个组"
 
-#: ../../galternatives/app.py:101
+#: ../../galternatives/app.py:111
 msgid "No such group"
 msgstr "没有这样的组"
 
@@ -131,47 +131,47 @@ msgid ""
 "services for the user by default."
 msgstr "帮助管理员选择为用户提供特定服务的默认选项的一个工具。"
 
-#: ../../galternatives/gui.py:59
+#: ../../galternatives/gui.py:58
 msgid "Select File"
 msgstr "选择文件"
 
-#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:272
+#: ../../galternatives/gui.py:208 ../../galternatives/gui.py:271
 msgid "Name"
 msgstr "名称"
 
-#: ../../galternatives/gui.py:210
+#: ../../galternatives/gui.py:209
 msgid "Link"
 msgstr "链接"
 
-#: ../../galternatives/gui.py:218
+#: ../../galternatives/gui.py:217
 msgid "Edit group - {}"
 msgstr "编辑组 - {}"
 
-#: ../../galternatives/gui.py:225
+#: ../../galternatives/gui.py:224
 msgid "Add group"
 msgstr "添加组"
 
-#: ../../galternatives/gui.py:268 ../../galternatives/gui.py:273
+#: ../../galternatives/gui.py:267 ../../galternatives/gui.py:272
 msgid "Path"
 msgstr "路径"
 
-#: ../../galternatives/gui.py:269 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:268 ../glade/galternatives.glade.h:14
 msgid "Priority"
 msgstr "优先级"
 
-#: ../../galternatives/gui.py:285
+#: ../../galternatives/gui.py:284
 msgid "Edit option - {}"
 msgstr "编辑选项 - {}"
 
-#: ../../galternatives/gui.py:292
+#: ../../galternatives/gui.py:291
 msgid "Add option"
 msgstr "添加选项"
 
-#: ../../galternatives/gui.py:500
+#: ../../galternatives/gui.py:496
 msgid "Run command: "
 msgstr "运行命令："
 
-#: ../../galternatives/gui.py:735
+#: ../../galternatives/gui.py:731
 msgid "translator_credits"
 msgstr "(由开发者提供)"
 
