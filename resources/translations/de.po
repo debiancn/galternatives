@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.13.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-04 19:48+0800\n"
+"POT-Creation-Date: 2017-10-17 17:35+0800\n"
 "PO-Revision-Date: 2009-10-07 19:41+GMT\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -189,14 +189,6 @@ msgstr "Die Standard-Alternativen des Systems einrichten."
 
 #: ../galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
-msgstr ""
-
-#: ../org.debian.experimental.galternatives.policy.in.h:1
-msgid "Run update-alternatives tool to modify system alternative selections"
-msgstr ""
-
-#: ../org.debian.experimental.galternatives.policy.in.h:2
-msgid "Authentication is required to run update-alternatives tool"
 msgstr ""
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1

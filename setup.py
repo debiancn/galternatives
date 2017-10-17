@@ -34,7 +34,6 @@ if __name__ == '__main__':
              glob('resources/descriptions/*.desktop')),
             ('share/icons/hicolor/48x48/apps', glob('resources/icons/*.png')),
             ('share/icons/hicolor/scalable/apps', glob('resources/icons/*.svg')),
-            ('share/polkit-1/actions', glob('resources/*.policy')),
         ] + [
             ('share/locale/{}/LC_MESSAGES'.format(locale), [
                 'resources/locale/{}/LC_MESSAGES/galternatives.mo'.format(

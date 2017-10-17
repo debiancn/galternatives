@@ -1,7 +1,5 @@
 DESKTOP_SRC := $(wildcard *.desktop.in)
 DESKTOP := $(DESKTOP_SRC:.in=)
-POLICY_SRC := $(wildcard *.policy.in)
-POLICY := $(POLICY_SRC:.in=)
 DESC_SRC := $(wildcard descriptions/*.desktop.in)
 DESC := $(DESC_SRC:.in=)
 GLADE := $(wildcard glade/*.glade)
@@ -17,13 +15,10 @@ space +=
 
 # all
 
-all: $(DESKTOP) $(POLICY) $(DESC) $(TRANSLATION)
+all: $(DESKTOP) $(DESC) $(TRANSLATION)
 
 %.desktop: %.desktop.in
 	intltool-merge -d translations $< $@
-
-%.policy: %.policy.in
-	intltool-merge -x translations $< $@
 
 locale/%/LC_MESSAGES/galternatives.mo: translations/%.po
 	mkdir -p $(dir $@)
@@ -34,11 +29,10 @@ locale/%/LC_MESSAGES/galternatives.mo: translations/%.po
 extract: translations/POTFILES.in
 	(cd translations; intltool-update -g galternatives -p)
 
-translations/POTFILES.in: $(SRC) $(DESKTOP_SRC) $(POLICY_SRC) $(DESC_SRC) $(GLADE)
+translations/POTFILES.in: $(SRC) $(DESKTOP_SRC) $(DESC_SRC) $(GLADE)
 	echo '[encoding: UTF-8]' > $@
 	echo $(subst $(space),\\n,$(SRC)) >> $@
 	echo $(subst $(space),\\n,$(DESKTOP_SRC)) >> $@
-	echo $(subst $(space),\\n,$(POLICY_SRC)) >> $@
 	echo $(subst $(space),\\n,$(DESC_SRC)) >> $@
 	echo $(subst $(space),\\n,$(GLADE)) >> $@
 
@@ -56,5 +50,5 @@ update: $(TRANSLATION_SRC:.po=.update.po)
 # clean
 
 clean:
-	rm -f $(DESKTOP) $(POLICY) $(DESC) $(UI:.ui=.glade) translations/POTFILES.in
+	rm -f $(DESKTOP) $(DESC) $(UI:.ui=.glade) translations/POTFILES.in
 	rm -rf locale

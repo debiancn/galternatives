@@ -1,3 +1,9 @@
+galternatives (0.92) unstable; urgency=medium
+
+  * Drop polkit policy file; provided by dpkg (>= 1.19.0.1).
+
+ -- Boyuan Yang <073plan@gmail.com>  Tue, 17 Oct 2017 17:34:32 +0800
+
 galternatives (0.91) unstable; urgency=medium
 
   * New release.

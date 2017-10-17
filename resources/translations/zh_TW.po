@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.90.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-04 19:48+0800\n"
+"POT-Creation-Date: 2017-10-17 17:35+0800\n"
 "PO-Revision-Date: 2017-09-04 20:03+0800\n"
 "Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
 "Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
@@ -186,14 +186,6 @@ msgstr "配置系統可選項的預設值"
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr "可選項;配置;Debian;"
 
-#: ../org.debian.experimental.galternatives.policy.in.h:1
-msgid "Run update-alternatives tool to modify system alternative selections"
-msgstr "執行 update-alternatives 工具以修改系統可選項"
-
-#: ../org.debian.experimental.galternatives.policy.in.h:2
-msgid "Authentication is required to run update-alternatives tool"
-msgstr "需要驗證才能執行 update-alternatives 工具"
-
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1
 msgid "X Terminal Emulator"
 msgstr "X 終端模擬器"
@@ -342,6 +334,12 @@ msgstr "關於(_A)"
 #: ../glade/menubar.glade.h:6
 msgid "_Quit"
 msgstr "退出(_Q)"
+
+#~ msgid "Run update-alternatives tool to modify system alternative selections"
+#~ msgstr "執行 update-alternatives 工具以修改系統可選項"
+
+#~ msgid "Authentication is required to run update-alternatives tool"
+#~ msgstr "需要驗證才能執行 update-alternatives 工具"
 
 #~ msgid "Icon"
 #~ msgstr "圖示"
