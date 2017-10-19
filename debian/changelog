@@ -1,3 +1,9 @@
+galternatives (0.92.1) unstable; urgency=medium
+
+  * Add de translation provided by Chris Leick. (Closes: #879067)
+
+ -- Boyuan Yang <073plan@gmail.com>  Thu, 19 Oct 2017 09:18:15 +0800
+
 galternatives (0.92) unstable; urgency=medium
 
   * Drop polkit policy file; provided by dpkg (>= 1.19.0.1).
