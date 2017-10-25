@@ -2,15 +2,16 @@
 # Copyright (C) 2003, Gustavo Noronha Silva <kov@debian.org>
 # This file is distributed under the same license as the galternatives package.
 # Yangfl <mmyangfl@gmail.com>, 2017.
+# Gavin Lai <gavin09@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: galternatives 0.90.0\n"
+"Project-Id-Version: galternatives 0.92.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-17 17:35+0800\n"
-"PO-Revision-Date: 2017-09-04 20:03+0800\n"
-"Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
-"Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
+"PO-Revision-Date: 2017-10-22 22:03+0800\n"
+"Last-Translator: Gavin Lai <gavin09@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,7 +123,7 @@ msgstr "刪除組`{1}'"
 
 #: ../../galternatives/appdata.py:74
 msgid "Logo missing. Is your installation correct?"
-msgstr "圖示缺失。您的安裝是否正確？"
+msgstr "圖示遺失。您的安裝是否正確？"
 
 #: ../../galternatives/__init__.py:42
 msgid ""
@@ -271,7 +272,7 @@ msgstr "您確定現在退出嗎？"
 
 #: ../glade/galternatives.glade.h:18
 msgid "Alternative settings editing is advanced feature."
-msgstr "編輯可選項設置是高級功能。"
+msgstr "編輯可選項設置是進階功能。"
 
 #: ../glade/galternatives.glade.h:19
 msgid ""
@@ -293,7 +294,7 @@ msgstr "偏好設定"
 
 #: ../glade/galternatives.glade.h:23
 msgid "See update-alternatives(1) \"OPTIONS\" section for details"
-msgstr "詳細信息參見 update-alternatives(1) “OPTIONS”一節"
+msgstr "詳細資訊參照 update-alternatives(1) “OPTIONS”章節"
 
 #: ../glade/galternatives.glade.h:24
 msgid "Paths"
