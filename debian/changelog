@@ -157,7 +157,7 @@ galternatives (0.13.1) unstable; urgency=low
   * QA Upload
   * Add Swedish and Czech translations (Closes: #348058, #361665)
   * Move Debhelper and CDBS to Build-Depends
-  * Conforms with new Standards Version 
+  * Conforms with new Standards Version
 
  -- Michael Ablassmeier <abi@debian.org>  Wed, 17 May 2006 14:48:10 +0200
 
@@ -175,7 +175,7 @@ galternatives (0.12) unstable; urgency=low
   * translations/fr.po:
   - updated by Christian Perrier <bubulle@debian.org> (Closes: #298520)
   * galternatives/main.py:
-  - accepted patch by Kazuhiro NISHIYAMA <zn@mbf.nifty.com> to sort 
+  - accepted patch by Kazuhiro NISHIYAMA <zn@mbf.nifty.com> to sort
     by priority and right-align it (Closes: #301002)
   * debian/control:
   - increased Standards-Version with no changes
@@ -186,7 +186,7 @@ galternatives (0.11) unstable; urgency=low
 
   * New release
   * galternatives/main.py, galternatives/galternatives:
-  - look for /usr/bin/gksu before using it when being ran by a 
+  - look for /usr/bin/gksu before using it when being ran by a
     normal user and, if it is not found, show a dialog saying
     things are probably not work.
   * debian/control:
@@ -232,7 +232,7 @@ galternatives (0.8) unstable; urgency=low
 
   * New release
   * galternatives/main.py:
-  - fixed problems with toggle buttons and manual/auto 
+  - fixed problems with toggle buttons and manual/auto
     menu not behaving (Closes: #254350, #254406)
   * debian/control:
   - added python to Build-Depends-Indep (Closes: 254141)
