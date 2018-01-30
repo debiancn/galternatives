@@ -1,8 +1,18 @@
 galternatives (0.92.2) unstable; urgency=medium
 
-  * Remove gksu support
+  [ Yangfl ]
+  * New upstream release.
+    + Remove gksu support.
+    + Mark python3 as default python version.
+    + Various improvement.
 
- -- Yangfl <mmyangfl@gmail.com>  Tue, 30 Jan 2018 22:06:58 +0800
+  [ Boyuan Yang ]
+  * d/control: Bump Standards-Version to 4.1.3.
+  * d/control: Move Vcs to Salsa platform.
+  * d/control: Bump debhelper compat to v11.
+  * d/copyright: Refresh information.
+
+ -- Boyuan Yang <073plan@gmail.com>  Wed, 31 Jan 2018 00:11:57 +0800
 
 galternatives (0.92.1) unstable; urgency=medium
 
