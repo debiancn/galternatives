@@ -1,11 +1,54 @@
 .TH "galternatives" "1"
-.SH "NAME"
+.SH NAME
 galternatives \- A front-end to the update-alternatives
-.SH "SYNOPSIS"
-\fBgalternatives
-.SH "DESCRIPTION"
+
+
+.SH SYNOPSIS
 .B galternatives
-is a front-end to the Debian update-alternatives tools. galternatives allows the user to specify a preferred application to handle commonly-used commands.
-.SH "AUTHOR"
+.RI [ OPTIONS "...] [" "Alternative Group" ]
+
+
+.SH DESCRIPTION
+.B galternatives
+is a front-end to the Debian
+.B update-alternatives
+tools. galternatives allows the user to specify a preferred application to handle commonly-used commands.
+
+
+.SH OPTIONS
+
+.TP
+.B \-h, \-\-help
+Show help options
+
+.TP
+.B \-d, \-\-debug
+Enable debug output
+
+.TP
+.B \-n, \-\-normal
+Do not try to acquire root (as normal user)
+
+.TP
+.BR \-\-altdir " \fIALTDIR\fR"
+Specify the alternatives directory
+
+.TP
+.BR \-\-admindir " \fIADMINDIR\fR"
+Specify the administrative directory
+
+.TP
+.BR \-\-log " \fILOG\fR"
+Specify the log file
+
+
+.SH AUTHOR
 .PP
-This manual page was written by Andrew Burton adb@iinet.net.au for the \fBDebian GNU/Linux\fP system (but may be used by others).
+This manual page is written by
+.MT adb@\:iinet.net.au
+Andrew Burton
+.ME ,
+.MT mmyangfl@\:gmail.com
+Yangfl
+.ME
+for the Debian Project (but may be used by others).

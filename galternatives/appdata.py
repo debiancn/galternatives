@@ -8,11 +8,14 @@ Attributes:
         globally.
 
 '''
-from . import logger, PACKAGE
+from . import _, logger, PACKAGE
 
 import os
-import xdg.BaseDirectory
-import xdg.IconTheme
+try:
+    import xdg.BaseDirectory
+    import xdg.IconTheme
+except ImportError:
+    xdg = None
 
 
 __all__ = ['get_data_path', 'get_icon_path', 'LOGO_PATH']
@@ -22,7 +25,9 @@ PATHS = [
     os.path.join(os.path.dirname(os.path.realpath(__file__)), 'resources'),
     os.path.join(os.path.dirname(
         os.path.dirname(os.path.realpath(__file__))), 'resources'),
-] + list(xdg.BaseDirectory.load_data_paths(PACKAGE))
+]
+if xdg:
+    PATHS.extend(xdg.BaseDirectory.load_data_paths(PACKAGE))
 
 
 def get_data_path(filenames, is_dir=False):
@@ -60,9 +65,10 @@ def get_data_path(filenames, is_dir=False):
 
 
 def get_icon_path(iconname):
-    path = xdg.IconTheme.getIconPath(iconname)
-    if path:
-        return path
+    if xdg:
+        path = xdg.IconTheme.getIconPath(iconname)
+        if path:
+            return path
     for extensions in ['png', 'svg', 'xpm']:
         path = get_data_path('icons/{}.{}'.format(iconname, extensions))
         if path:

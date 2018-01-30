@@ -1,3 +1,9 @@
+galternatives (0.92.2) unstable; urgency=medium
+
+  * Remove gksu support
+
+ -- Yangfl <mmyangfl@gmail.com>  Tue, 30 Jan 2018 22:06:58 +0800
+
 galternatives (0.92.1) unstable; urgency=medium
 
   * Add de translation provided by Chris Leick. (Closes: #879067)

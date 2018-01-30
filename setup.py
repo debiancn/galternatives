@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from galternatives import PACKAGE, INFO
 
 from glob import glob

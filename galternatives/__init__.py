@@ -38,18 +38,20 @@ except ImportError:
 APPID = 'org.debian.experimental.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
-    'version': '0.92.1',
+    'version': '0.92.2',
     'comments': _('A tool to help the administrator select which programs '
                   'provide specific services for the user by default.'),
     'license_type': 'GPL_2_0',
     'copyright': '''(C) 2003-2006 Gustavo Noronha Silva
 (C) 2017 Boyuan Yang''',
-    'website': 'https://tracker.debian.org/pkg/galternatives',
+    'website': 'https://salsa.debian.org/chinese-team/galternatives',
     'authors': (
         'Gustavo Noronha Silva <kov@debian.org>',
-        'Leandro A. F. Pereira <leandro@linuxmag.com.br>',
         'Boyuan Yang <073plan@gmail.com>',
         'Yangfl <mmyangfl@gmail.com>',
+    ),
+    'artists': (
+        'Leandro A. F. Pereira <leandro@linuxmag.com.br>',
     ),
 }
 

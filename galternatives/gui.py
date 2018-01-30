@@ -15,7 +15,12 @@ from gi.repository import GdkPixbuf, Gio, GLib, Gtk, GObject
 import os
 import sys
 import threading
-import xdg.Config
+try:
+    import xdg.Config
+except ImportError:
+    class xdg:
+        class Config:
+            icon_size = 48
 if sys.version_info >= (3,):
     from itertools import zip_longest
 else:

@@ -31,13 +31,13 @@ class GAlternativesApp(Gtk.Application):
             _('Do not try to acquire root (as normal user)'), None)
         self.add_main_option(
             'altdir', 0, GLib.OptionFlags.NONE, GLib.OptionArg.FILENAME,
-            _('Specifies the alternatives directory'), None)
+            _('Specify the alternatives directory'), None)
         self.add_main_option(
             'admindir', 0, GLib.OptionFlags.NONE, GLib.OptionArg.FILENAME,
-            _('Specifies the administrative directory'), None)
+            _('Specify the administrative directory'), None)
         self.add_main_option(
             'log', 0, GLib.OptionFlags.NONE, GLib.OptionArg.FILENAME,
-            _('Specifies the log file'), None)
+            _('Specify the log file'), None)
         # BUG: Gtk.Application.add_option_group() not working
 
     def do_handle_local_options(self, options):
@@ -57,27 +57,19 @@ class GAlternativesApp(Gtk.Application):
                     'No root detected, but continue as in your wishes'))
             elif spawn.find_executable('pkexec'):
                 self.use_polkit = True
-            elif spawn.find_executable('gksudo'):
-                logger.warn(_("No `pkexec' detected, but found `gksudo'. "
-                              "You should really consider polkit."))
-                return os.system(
-                    'gksudo -t "{}" -m "{}" -u root python "{}"'.format(
-                        _('Running Alternatives Configurator...'),
-                        _('<b>I need your root password to run\n'
-                          'the Alternatives Configurator.</b>'),
-                        __file__))
             else:
                 dialog = Gtk.MessageDialog(
                     None, Gtk.DialogFlags.DESTROY_WITH_PARENT,
                     Gtk.MessageType.WARNING, Gtk.ButtonsType.OK_CANCEL,
-                    _('<b>This program should be run as root and '
-                      '<tt>/usr/bin/gksu</tt> is not available.</b>'),
+                    _('<b><tt>pkexec</tt> required for privileged '
+                      'operations.</b>'),
                     use_markup=True,
                     secondary_text=_(
-                        'I am unable to request the password myself without '
-                        'gksu. Unless you have modified your system to '
-                        'explicitly allow your normal user to modify the '
-                        'alternatives system, GAlternatives will not work.'))
+                        'The program needs pkexec to perform privileged '
+                        'alternatives system modifications under normal user. '
+                        'Unless you have modified your system to explicitly '
+                        'allow your normal user to do so, GAlternatives will '
+                        'not work.'))
                 if dialog.run() != Gtk.ResponseType.OK:
                     return 1
                 dialog.destroy()
