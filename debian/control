@@ -6,7 +6,7 @@ Uploaders:
  Boyuan Yang <073plan@gmail.com>,
  Yangfl <mmyangfl@gmail.com>,
 Build-Depends:
- debhelper (>= 11),
+ debhelper (>= 11~),
  dh-python,
  intltool,
  python3,

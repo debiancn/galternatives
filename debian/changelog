@@ -1,3 +1,10 @@
+galternatives (0.92.3) unstable; urgency=medium
+
+  * Add Danish translation (by scootergrisen).
+  * Fix translation_credit information for fr.po.
+
+ -- Boyuan Yang <073plan@gmail.com>  Fri, 23 Mar 2018 15:22:06 +0800
+
 galternatives (0.92.2) unstable; urgency=medium
 
   [ Yangfl ]
