@@ -12,9 +12,11 @@ Debian.
 Requirements
 -------------
 Gtk+ >= 3.10  
-python-gi  
+python3
+python3-gi  
 gettext (for i18n support)
 
 License
 ---------
-GPL-1+
+GPL-1+ for the whole project. See `LICENSE.GPL-1`, `LICENSE.GPL-2` and `LICENSE.GPL-3`
+for full license text. GPL-2 is chosen as the representative (`LICENSE` file).
