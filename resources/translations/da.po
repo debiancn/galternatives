@@ -1,0 +1,322 @@
+# Danish translation for G Alternatives
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the galternatives package.
+# scootergrisen, 2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: galternatives\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-27 13:51+0800\n"
+"PO-Revision-Date: 2018-03-21 17:55+0200\n"
+"Last-Translator: scootergrisen\n"
+"Language-Team: Danish\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../galternatives/app.py:28
+msgid "Enable debug output"
+msgstr "Aktivér fejlretningsoutput"
+
+#: ../../galternatives/app.py:31
+msgid "Do not try to acquire root (as normal user)"
+msgstr "Prøv ikke på at bruge root (som normal bruger)"
+
+#: ../../galternatives/app.py:34
+msgid "Specify the alternatives directory"
+msgstr "Angiv mappe til alternativer"
+
+#: ../../galternatives/app.py:37
+msgid "Specify the administrative directory"
+msgstr "Angiv mappe til administration"
+
+#: ../../galternatives/app.py:40
+msgid "Specify the log file"
+msgstr "Angiv logfilen"
+
+#: ../../galternatives/app.py:48
+msgid "Testing galternatives..."
+msgstr "Tester galternatives..."
+
+#: ../../galternatives/app.py:57
+msgid "No root detected, but continue as in your wishes"
+msgstr "Ingen rod registreret, men fortsæt som i dine ønsker"
+
+#: ../../galternatives/app.py:64
+msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
+msgstr "<b><tt>pkexec</tt> kræves til privilegerede handlinger.</b>"
+
+#: ../../galternatives/app.py:68
+msgid ""
+"The program needs pkexec to perform privileged alternatives system "
+"modifications under normal user. Unless you have modified your system to "
+"explicitly allow your normal user to do so, GAlternatives will not work."
+msgstr ""
+"Programmet har brug for pkexec til at udføre privilegerede ændringer af "
+"alternativer-systemet. Med mindre du ændret dit system til eksplicit at "
+"tillade din normale bruger at gøre det, så virker GAlternatives ikke."
+
+#: ../../galternatives/app.py:98
+msgid "Specifying more than one group not allowed"
+msgstr "Det er ikke tilladt at angive mere end én gruppe"
+
+#: ../../galternatives/app.py:103
+msgid "No such group"
+msgstr "Ingen sådan gruppe"
+
+#: ../../galternatives/description.py:25
+msgid "No description"
+msgstr "Ingen beskrivelse"
+
+#: ../../galternatives/description.py:134
+#, python-brace-format
+msgid "Install option for group `{2}' with priority {4}, `{3}' for master link"
+msgstr ""
+"Installer tilvalg for gruppen `{2}' med prioriteten {4}, `{3}' for "
+"hovedlinket"
+
+#: ../../galternatives/description.py:136
+msgid ", `{}' for slave link `{}'"
+msgstr ", `{}' til slavelinket `{}'"
+
+#: ../../galternatives/description.py:139
+#, python-brace-format
+msgid "Set group `{1}' to auto mode"
+msgstr "Sæt gruppen `{1}' til automatisk tilstand"
+
+#: ../../galternatives/description.py:142
+#, python-brace-format
+msgid "Set group `{1}' to manual mode, pointed to `{2}'"
+msgstr "Sæt gruppen `{1}' til manuel tilstand, pegede på `{2}'"
+
+#: ../../galternatives/description.py:144
+#, python-brace-format
+msgid "Remove option `{2}' for group `{1}'"
+msgstr "Fjern tilvalget `{2}' for gruppen `{1}'"
+
+#: ../../galternatives/description.py:146
+#, python-brace-format
+msgid "Remove group `{1}'"
+msgstr "Fjern gruppen `{1}'"
+
+#: ../../galternatives/appdata.py:80
+msgid "Logo missing. Is your installation correct?"
+msgstr "Logo mangler. Er din installation korrekt?"
+
+#: ../../galternatives/__init__.py:42
+msgid ""
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default."
+msgstr ""
+"Et værktøj som hjælper administratoren til at vælge hvilke programmer der, "
+"som standard, giver bestemte tjenester til brugeren."
+
+#: ../../galternatives/gui.py:63
+msgid "Select File"
+msgstr "Vælg fil"
+
+#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:276
+msgid "Name"
+msgstr "Navn"
+
+#: ../../galternatives/gui.py:214
+msgid "Link"
+msgstr "Link"
+
+#: ../../galternatives/gui.py:222
+msgid "Edit group - {}"
+msgstr "Rediger gruppe - {}"
+
+#: ../../galternatives/gui.py:229
+msgid "Add group"
+msgstr "Tilføj gruppe"
+
+#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
+msgid "Path"
+msgstr "Sti"
+
+#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:14
+msgid "Priority"
+msgstr "Prioritet"
+
+#: ../../galternatives/gui.py:289
+msgid "Edit option - {}"
+msgstr "Rediger tilvalg - {}"
+
+#: ../../galternatives/gui.py:296
+msgid "Add option"
+msgstr "Tilføj tilvalg"
+
+#: ../../galternatives/gui.py:501
+msgid "Run command: "
+msgstr "Kør kommando: "
+
+#: ../../galternatives/gui.py:736
+msgid "translator_credits"
+msgstr "scootergrisen"
+
+#: ../galternatives.desktop.in.h:1
+msgid "Alternatives Configurator"
+msgstr "Alternativer-konfigurator"
+
+#: ../galternatives.desktop.in.h:2
+msgid "Configure the system default alternatives"
+msgstr "Konfigurer systemets standardalternativer"
+
+#: ../galternatives.desktop.in.h:3
+msgid "Alternatives;GAlternatives;Debian;"
+msgstr "Alternativer;GAlternatives;Debian;"
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:1
+msgid "X Terminal Emulator"
+msgstr "X-terminalemulator"
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:2
+msgid ""
+"Default Terminal Emulator to use when running text-based applications, "
+"mainly from the Debian menu."
+msgstr ""
+"Standard terminalemulator som skal bruges når tekstbaserede programmer køres, "
+"primært fra Debian-menuen."
+
+#: ../glade/edit_dialog.glade.h:1
+msgid "Slaves"
+msgstr "Slaver"
+
+#: ../glade/edit_dialog.glade.h:2
+msgid "No changes will be made until you add an option."
+msgstr "Der foretages ingen ændringer inden du tilføjer et tilvalg."
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr "_Forsinkelsestilstand"
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr "Forespørg _pakke (høj I/O)"
+
+#: ../glade/menubar.glade.h:3
+msgid "_Use polkit"
+msgstr "_Brug polkit"
+
+#: ../glade/menubar.glade.h:4
+msgid "_Working dir..."
+msgstr "_Arbejdsmappe..."
+
+#: ../glade/menubar.glade.h:5
+msgid "_About"
+msgstr "_Om"
+
+#: ../glade/menubar.glade.h:6
+msgid "_Quit"
+msgstr "_Afslut"
+
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr "G Alternatives"
+
+#: ../glade/galternatives.glade.h:2
+msgid "Create"
+msgstr "Opret"
+
+#: ../glade/galternatives.glade.h:3
+msgid "_Create"
+msgstr "_Opret"
+
+#: ../glade/galternatives.glade.h:4
+msgid "Edit"
+msgstr "Rediger"
+
+#: ../glade/galternatives.glade.h:5
+msgid "_Edit"
+msgstr "_Rediger"
+
+#: ../glade/galternatives.glade.h:6
+msgid "Remove"
+msgstr "Fjern"
+
+#: ../glade/galternatives.glade.h:7
+msgid "_Remove"
+msgstr "_Fjern"
+
+#: ../glade/galternatives.glade.h:8
+msgid "Select an alternative group to edit"
+msgstr "Vælg en alternativ-gruppe at redigere"
+
+#: ../glade/galternatives.glade.h:9
+msgid "Groups"
+msgstr "Grupper"
+
+#: ../glade/galternatives.glade.h:10
+msgid "Auto:"
+msgstr "Automatisk:"
+
+#: ../glade/galternatives.glade.h:11
+msgid "Auto mode"
+msgstr "Automatisk tilstand"
+
+#: ../glade/galternatives.glade.h:12
+msgid "Alternative"
+msgstr "Alternativ"
+
+#: ../glade/galternatives.glade.h:13
+msgid "Choose an alternative group"
+msgstr "Vælg en alternativ-gruppe"
+
+#: ../glade/galternatives.glade.h:15
+msgid "Package"
+msgstr "Pakke"
+
+#: ../glade/galternatives.glade.h:16
+msgid "Some changes are not saved."
+msgstr "Nogle ændringer gemmes ikke."
+
+#: ../glade/galternatives.glade.h:17
+msgid "Are you sure to quit now?"
+msgstr "Er du sikker på, at du vil afslutte nu?"
+
+#: ../glade/galternatives.glade.h:18
+msgid "Alternative settings editing is advanced feature."
+msgstr "Redigering af alternative indstillinger er en avanceret funktionalitet."
+
+#: ../glade/galternatives.glade.h:19
+msgid ""
+"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
+"corresponding packages.\n"
+"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
+"editing may break your system."
+msgstr ""
+"De er tiltænkt til at blive håndteret af <tt>dpkg</tt> og leveret af deres "
+"tilhørende pakker.\n"
+"<b>Advarsel!</b> Funktionaliteten er ikke stabil og kan indeholde fejl. "
+"Manuel redigering kan ødelægge dit system."
+
+#: ../glade/galternatives.glade.h:21
+msgid "Show this dialog next time."
+msgstr "Vis dialogen næste gang."
+
+#: ../glade/galternatives.glade.h:22
+msgid "Preferences"
+msgstr "Præferencer"
+
+#: ../glade/galternatives.glade.h:23
+msgid "See update-alternatives(1) \"OPTIONS\" section for details"
+msgstr "Se \"OPTIONS\"-afsnittet i update-alternatives(1) for detaljer"
+
+#: ../glade/galternatives.glade.h:24
+msgid "Paths"
+msgstr "Stier"
+
+#: ../glade/galternatives.glade.h:25
+msgid "Commit failed"
+msgstr "Gennemførsel mislykkedes"
+
+#: ../glade/galternatives.glade.h:26
+msgid "An error has occurred. The results are:"
+msgstr "Der opstod en fejl. Resultaterne er:"
+
+#: ../glade/galternatives.glade.h:27
+msgid "Be careful! Your system may be already in an unstable state."
+msgstr "Pas på! Dit system er allerede i en ustabil tilstand."
