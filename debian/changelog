@@ -2,6 +2,8 @@ galternatives (0.92.3) unstable; urgency=medium
 
   * Add Danish translation (by scootergrisen).
   * Fix translation_credit information for fr.po.
+  * d/control: Add runtime dependency python3-distutils.
+    Closes: #894142.
 
  -- Boyuan Yang <073plan@gmail.com>  Fri, 23 Mar 2018 15:22:06 +0800
 
