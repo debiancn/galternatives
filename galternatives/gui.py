@@ -9,10 +9,10 @@ from .description import *
 from .utils import GtkTemplate, stateful_property
 
 from copy import deepcopy
-from distutils import spawn
 from functools import wraps
 from gi.repository import GdkPixbuf, Gio, GLib, Gtk, GObject
 import os
+import shutil
 import sys
 import threading
 try:
@@ -348,7 +348,7 @@ class MainWindow(object):
         self.paths = paths
         self.group = alternative.Group(group, create=True) if group else None
         self.use_polkit = app.use_polkit if app else \
-            os.getuid() and bool(spawn.find_executable('pkexec'))
+            os.getuid() and bool(shutil.which('pkexec'))
 
         # glade XML
         self.builder = Gtk.Builder.new_from_file(

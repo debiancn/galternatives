@@ -9,8 +9,8 @@ try:
 except ImportError:
     set_logger = None
 
-from distutils import spawn
 from gi.repository import Gio, GLib, Gtk
+import shutil
 import os
 
 
@@ -55,7 +55,7 @@ class GAlternativesApp(Gtk.Application):
             if options.contains('normal'):
                 logger.warn(_(
                     'No root detected, but continue as in your wishes'))
-            elif spawn.find_executable('pkexec'):
+            elif shutil.which('pkexec'):
                 self.use_polkit = True
             else:
                 dialog = Gtk.MessageDialog(
