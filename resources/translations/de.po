@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.92.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-27 13:51+0800\n"
+"POT-Creation-Date: 2018-05-06 12:47+0800\n"
 "PO-Revision-Date: 2017-10-18 22:43+GMT\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -77,31 +77,35 @@ msgid "No description"
 msgstr "keine Beschreibung"
 
 #: ../../galternatives/description.py:134
-#, python-brace-format
-msgid "Install option for group `{2}' with priority {4}, `{3}' for master link"
-msgstr ""
-"Installationsoption für Gruppe »{2}« mit Priorität {4}, »{3}« für Haupt-Link"
+#, fuzzy, python-brace-format
+msgid "Install option `{3}' for group `{2}'"
+msgstr "entfernt Option »{2}« für Gruppe »{1}«"
+
+#: ../../galternatives/description.py:135
+#, fuzzy, python-brace-format
+msgid "Priority: {4}"
+msgstr "Priorität"
 
 #: ../../galternatives/description.py:136
-msgid ", `{}' for slave link `{}'"
-msgstr ", »{}« für Slave-Link »{}«"
+msgid "Slave `{}': `{}'"
+msgstr ""
 
-#: ../../galternatives/description.py:139
+#: ../../galternatives/description.py:141
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr "setzt Gruppe »{1}« auf automatischen Modus"
 
-#: ../../galternatives/description.py:142
+#: ../../galternatives/description.py:145
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr "setzt Gruppe »{1}« auf manuellen Modus, verweist auf »{2}«"
 
-#: ../../galternatives/description.py:144
+#: ../../galternatives/description.py:150
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr "entfernt Option »{2}« für Gruppe »{1}«"
 
-#: ../../galternatives/description.py:146
+#: ../../galternatives/description.py:153
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr "entfernt Gruppe »{1}«"
@@ -122,7 +126,7 @@ msgstr ""
 msgid "Select File"
 msgstr "Datei auswählen"
 
-#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:276
+#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:280
 msgid "Name"
 msgstr "Name"
 
@@ -138,27 +142,27 @@ msgstr "Gruppe bearbeiten - {}"
 msgid "Add group"
 msgstr "Gruppe hinzufügen"
 
-#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
+#: ../../galternatives/gui.py:276 ../../galternatives/gui.py:281
 msgid "Path"
 msgstr "Pfad"
 
-#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:277 ../glade/galternatives.glade.h:16
 msgid "Priority"
 msgstr "Priorität"
 
-#: ../../galternatives/gui.py:289
+#: ../../galternatives/gui.py:293
 msgid "Edit option - {}"
 msgstr "Option bearbeiten - {}"
 
-#: ../../galternatives/gui.py:296
+#: ../../galternatives/gui.py:300
 msgid "Add option"
 msgstr "Option hinzufügen"
 
-#: ../../galternatives/gui.py:501
+#: ../../galternatives/gui.py:527
 msgid "Run command: "
 msgstr "Befehl ausführen: "
 
-#: ../../galternatives/gui.py:736
+#: ../../galternatives/gui.py:791
 msgid "translator_credits"
 msgstr "Chris Leick <c.leick@vollbio.de>"
 
@@ -195,30 +199,6 @@ msgid "No changes will be made until you add an option."
 msgstr ""
 "Es werden keine Änderungen vorgenommen, bis Sie eine Option hinzufügen."
 
-#: ../glade/menubar.glade.h:1
-msgid "_Delay mode"
-msgstr "_verzögerter Modus"
-
-#: ../glade/menubar.glade.h:2
-msgid "Query _package (high I/O)"
-msgstr "_Paket abfragen (hohe E/A)"
-
-#: ../glade/menubar.glade.h:3
-msgid "_Use polkit"
-msgstr "Pol_kit verwenden"
-
-#: ../glade/menubar.glade.h:4
-msgid "_Working dir..."
-msgstr "_Arbeitsverzeichnis …"
-
-#: ../glade/menubar.glade.h:5
-msgid "_About"
-msgstr "_Über"
-
-#: ../glade/menubar.glade.h:6
-msgid "_Quit"
-msgstr "Been_den"
-
 #: ../glade/galternatives.glade.h:1
 msgid "G Alternatives"
 msgstr "G Alternatives"
@@ -248,46 +228,54 @@ msgid "_Remove"
 msgstr "ent_fernen"
 
 #: ../glade/galternatives.glade.h:8
+msgid "Find"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:9
+msgid "_Find"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:10
 msgid "Select an alternative group to edit"
 msgstr "Wählen Sie eine Alternativengruppe zum Bearbeiten."
 
-#: ../glade/galternatives.glade.h:9
+#: ../glade/galternatives.glade.h:11
 msgid "Groups"
 msgstr "Gruppen"
 
-#: ../glade/galternatives.glade.h:10
+#: ../glade/galternatives.glade.h:12
 msgid "Auto:"
 msgstr "automatisch:"
 
-#: ../glade/galternatives.glade.h:11
+#: ../glade/galternatives.glade.h:13
 msgid "Auto mode"
 msgstr "automatischer Modus"
 
-#: ../glade/galternatives.glade.h:12
+#: ../glade/galternatives.glade.h:14
 msgid "Alternative"
 msgstr "Alternative"
 
-#: ../glade/galternatives.glade.h:13
+#: ../glade/galternatives.glade.h:15
 msgid "Choose an alternative group"
 msgstr "Wählen Sie eine Alternativengruppe."
 
-#: ../glade/galternatives.glade.h:15
+#: ../glade/galternatives.glade.h:17
 msgid "Package"
 msgstr "Paket"
 
-#: ../glade/galternatives.glade.h:16
+#: ../glade/galternatives.glade.h:18
 msgid "Some changes are not saved."
 msgstr "Einige Änderungen sind nicht gesichert."
 
-#: ../glade/galternatives.glade.h:17
+#: ../glade/galternatives.glade.h:19
 msgid "Are you sure to quit now?"
 msgstr "Sind Sie sicher, dass Sie nun beenden möchten?"
 
-#: ../glade/galternatives.glade.h:18
+#: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
 msgstr "Bearbeiten der Alternativen ist eine fortgeschrittene Funktionalität."
 
-#: ../glade/galternatives.glade.h:19
+#: ../glade/galternatives.glade.h:21
 msgid ""
 "Those are meant to be managed by <tt>dpkg</tt> and provided by their "
 "corresponding packages.\n"
@@ -299,36 +287,69 @@ msgstr ""
 "<b>Warnung!</b> Diese Funktionalität ist nicht stabil und kann Fehler "
 "enthalten. Manuelles Bearbeiten kann Ihr System zerstören."
 
-#: ../glade/galternatives.glade.h:21
+#: ../glade/galternatives.glade.h:23
 msgid "Show this dialog next time."
 msgstr "diesen Dialog nächstes Mal anzeigen"
 
-#: ../glade/galternatives.glade.h:22
+#: ../glade/galternatives.glade.h:24
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: ../glade/galternatives.glade.h:23
+#: ../glade/galternatives.glade.h:25
 msgid "See update-alternatives(1) \"OPTIONS\" section for details"
 msgstr ""
 "Einzelheiten finden sie im Abschnitt »OPTIONEN« von update-alternatives(1)."
 
-#: ../glade/galternatives.glade.h:24
+#: ../glade/galternatives.glade.h:26
 msgid "Paths"
 msgstr "Pfade"
 
-#: ../glade/galternatives.glade.h:25
+#: ../glade/galternatives.glade.h:27
 msgid "Commit failed"
 msgstr "Übergabe fehlgeschlagen"
 
-#: ../glade/galternatives.glade.h:26
+#: ../glade/galternatives.glade.h:28
 msgid "An error has occurred. The results are:"
 msgstr "Ein Fehler ist aufgetreten. Die Ergebnisse sind:"
 
-#: ../glade/galternatives.glade.h:27
+#: ../glade/galternatives.glade.h:29
 msgid "Be careful! Your system may be already in an unstable state."
 msgstr ""
 "Seien Sie vorsichtig. Ihr System könnte bereits in einem instabilen Zustand "
 "sein."
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr "_verzögerter Modus"
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr "_Paket abfragen (hohe E/A)"
+
+#: ../glade/menubar.glade.h:3
+msgid "_Use polkit"
+msgstr "Pol_kit verwenden"
+
+#: ../glade/menubar.glade.h:4
+msgid "_Working dir..."
+msgstr "_Arbeitsverzeichnis …"
+
+#: ../glade/menubar.glade.h:5
+msgid "_About"
+msgstr "_Über"
+
+#: ../glade/menubar.glade.h:6
+msgid "_Quit"
+msgstr "Been_den"
+
+#~ msgid ""
+#~ "Install option for group `{2}' with priority {4}, `{3}' for master link"
+#~ msgstr ""
+#~ "Installationsoption für Gruppe »{2}« mit Priorität {4}, »{3}« für Haupt-"
+#~ "Link"
+
+#~ msgid ", `{}' for slave link `{}'"
+#~ msgstr ", »{}« für Slave-Link »{}«"
 
 # https://de.wikipedia.org/wiki/Polkit
 #~ msgid ""

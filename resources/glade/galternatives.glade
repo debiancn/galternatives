@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.0 -->
+<!-- Generated with glade 3.22.1 -->
 <!--*- mode: xml -*-->
 <interface domain="galternatives">
   <requires lib="gtk+" version="3.4"/>
@@ -9,6 +9,10 @@
       <column type="gchararray"/>
     </columns>
   </object>
+  <object class="GtkTreeModelFilter" id="groups_tv_filter">
+    <property name="child_model">groups_liststore</property>
+  </object>
+  <object class="GtkAccelGroup" id="main_accelgroup"/>
   <object class="GtkListStore" id="options_liststore">
     <columns>
       <!-- column-name Current -->
@@ -26,7 +30,13 @@
     <property name="title" translatable="yes">G Alternatives</property>
     <property name="default_width">640</property>
     <property name="default_height">480</property>
+    <accel-groups>
+      <group name="main_accelgroup"/>
+    </accel-groups>
     <signal name="delete-event" handler="on_quit" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkBox" id="main_window_box">
         <property name="visible">True</property>
@@ -91,11 +101,39 @@
                         <property name="homogeneous">True</property>
                       </packing>
                     </child>
+                    <child>
+                      <object class="GtkToggleToolButton" id="group_find_btn">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Find</property>
+                        <property name="action_name">win.group.find</property>
+                        <property name="label" translatable="yes">_Find</property>
+                        <property name="use_underline">True</property>
+                        <property name="stock_id">gtk-find</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="group_find_entry">
+                    <property name="can_focus">True</property>
+                    <property name="has_frame">False</property>
+                    <property name="primary_icon_stock">gtk-find</property>
+                    <signal name="changed" handler="on_group_find_entry_changed" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
@@ -109,9 +147,10 @@
                         <property name="tooltip_text" translatable="yes">Select an alternative group to edit</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
-                        <property name="model">groups_liststore</property>
+                        <property name="model">groups_tv_filter</property>
                         <property name="headers_clickable">False</property>
                         <property name="expander_column">groups_column</property>
+                        <property name="enable_search">False</property>
                         <child internal-child="selection">
                           <object class="GtkTreeSelection">
                             <signal name="changed" handler="click_group" swapped="no"/>
@@ -134,7 +173,7 @@
                   <packing>
                     <property name="expand">True</property>
                     <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -291,6 +330,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="model">options_liststore</property>
+                        <property name="enable_search">False</property>
                         <property name="enable_tree_lines">True</property>
                         <signal name="button-press-event" handler="on_options_tv_button_press_event" swapped="no"/>
                         <child internal-child="selection">
@@ -443,6 +483,9 @@
     <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
     <signal name="response" handler="hide_on_delete" swapped="no"/>
     <signal name="show" handler="reset_dialog" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -510,6 +553,9 @@
     <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
     <signal name="response" handler="hide_on_delete" swapped="no"/>
     <signal name="show" handler="reset_dialog" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -559,6 +605,9 @@
     <signal name="response" handler="hide_on_delete" swapped="no"/>
     <signal name="response" handler="on_preferences_dialog_response" swapped="no"/>
     <signal name="show" handler="load_config" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox" id="preferences_dialog_box">
         <property name="can_focus">False</property>
@@ -787,6 +836,9 @@
     <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
     <signal name="response" handler="hide_on_delete" swapped="no"/>
     <signal name="show" handler="reset_dialog" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>

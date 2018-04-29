@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-27 13:51+0800\n"
+"POT-Creation-Date: 2018-05-06 12:47+0800\n"
 "PO-Revision-Date: 2004-01-26 13:43+0100\n"
 "Last-Translator: Ricardo Mones Lastra <mones@aic.uniovi.es>\n"
 "Language-Team: \n"
@@ -69,29 +69,34 @@ msgstr "Sin descripción"
 
 #: ../../galternatives/description.py:134
 #, python-brace-format
-msgid "Install option for group `{2}' with priority {4}, `{3}' for master link"
+msgid "Install option `{3}' for group `{2}'"
 msgstr ""
+
+#: ../../galternatives/description.py:135
+#, fuzzy, python-brace-format
+msgid "Priority: {4}"
+msgstr "Prioridad:"
 
 #: ../../galternatives/description.py:136
-msgid ", `{}' for slave link `{}'"
+msgid "Slave `{}': `{}'"
 msgstr ""
 
-#: ../../galternatives/description.py:139
+#: ../../galternatives/description.py:141
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr ""
 
-#: ../../galternatives/description.py:142
+#: ../../galternatives/description.py:145
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr ""
 
-#: ../../galternatives/description.py:144
+#: ../../galternatives/description.py:150
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr ""
 
-#: ../../galternatives/description.py:146
+#: ../../galternatives/description.py:153
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr ""
@@ -112,7 +117,7 @@ msgstr ""
 msgid "Select File"
 msgstr ""
 
-#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:276
+#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:280
 msgid "Name"
 msgstr "Nombre"
 
@@ -128,27 +133,27 @@ msgstr ""
 msgid "Add group"
 msgstr ""
 
-#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
+#: ../../galternatives/gui.py:276 ../../galternatives/gui.py:281
 msgid "Path"
 msgstr "Ruta"
 
-#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:277 ../glade/galternatives.glade.h:16
 msgid "Priority"
 msgstr "Prioridad"
 
-#: ../../galternatives/gui.py:289
+#: ../../galternatives/gui.py:293
 msgid "Edit option - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:296
+#: ../../galternatives/gui.py:300
 msgid "Add option"
 msgstr ""
 
-#: ../../galternatives/gui.py:501
+#: ../../galternatives/gui.py:527
 msgid "Run command: "
 msgstr ""
 
-#: ../../galternatives/gui.py:736
+#: ../../galternatives/gui.py:791
 msgid "translator_credits"
 msgstr "Ricardo Mones <mones@aic.uniovi.es>"
 
@@ -184,30 +189,6 @@ msgstr "Esclavos"
 msgid "No changes will be made until you add an option."
 msgstr ""
 
-#: ../glade/menubar.glade.h:1
-msgid "_Delay mode"
-msgstr ""
-
-#: ../glade/menubar.glade.h:2
-msgid "Query _package (high I/O)"
-msgstr ""
-
-#: ../glade/menubar.glade.h:3
-msgid "_Use polkit"
-msgstr ""
-
-#: ../glade/menubar.glade.h:4
-msgid "_Working dir..."
-msgstr ""
-
-#: ../glade/menubar.glade.h:5
-msgid "_About"
-msgstr "_Acerca de"
-
-#: ../glade/menubar.glade.h:6
-msgid "_Quit"
-msgstr ""
-
 #: ../glade/galternatives.glade.h:1
 msgid "G Alternatives"
 msgstr "G Alternatives"
@@ -237,47 +218,55 @@ msgid "_Remove"
 msgstr ""
 
 #: ../glade/galternatives.glade.h:8
-msgid "Select an alternative group to edit"
+msgid "Find"
 msgstr ""
 
 #: ../glade/galternatives.glade.h:9
-msgid "Groups"
+msgid "_Find"
 msgstr ""
 
 #: ../glade/galternatives.glade.h:10
-msgid "Auto:"
+msgid "Select an alternative group to edit"
 msgstr ""
 
 #: ../glade/galternatives.glade.h:11
-msgid "Auto mode"
+msgid "Groups"
 msgstr ""
 
 #: ../glade/galternatives.glade.h:12
+msgid "Auto:"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:13
+msgid "Auto mode"
+msgstr ""
+
+#: ../glade/galternatives.glade.h:14
 #, fuzzy
 msgid "Alternative"
 msgstr "Alternativas"
 
-#: ../glade/galternatives.glade.h:13
+#: ../glade/galternatives.glade.h:15
 msgid "Choose an alternative group"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:15
+#: ../glade/galternatives.glade.h:17
 msgid "Package"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:16
+#: ../glade/galternatives.glade.h:18
 msgid "Some changes are not saved."
 msgstr ""
 
-#: ../glade/galternatives.glade.h:17
+#: ../glade/galternatives.glade.h:19
 msgid "Are you sure to quit now?"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:18
+#: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
 msgstr ""
 
-#: ../glade/galternatives.glade.h:19
+#: ../glade/galternatives.glade.h:21
 msgid ""
 "Those are meant to be managed by <tt>dpkg</tt> and provided by their "
 "corresponding packages.\n"
@@ -285,33 +274,57 @@ msgid ""
 "editing may break your system."
 msgstr ""
 
-#: ../glade/galternatives.glade.h:21
+#: ../glade/galternatives.glade.h:23
 msgid "Show this dialog next time."
 msgstr ""
 
-#: ../glade/galternatives.glade.h:22
+#: ../glade/galternatives.glade.h:24
 msgid "Preferences"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:23
+#: ../glade/galternatives.glade.h:25
 msgid "See update-alternatives(1) \"OPTIONS\" section for details"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:24
+#: ../glade/galternatives.glade.h:26
 #, fuzzy
 msgid "Paths"
 msgstr "Ruta:"
 
-#: ../glade/galternatives.glade.h:25
+#: ../glade/galternatives.glade.h:27
 msgid "Commit failed"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:26
+#: ../glade/galternatives.glade.h:28
 msgid "An error has occurred. The results are:"
 msgstr ""
 
-#: ../glade/galternatives.glade.h:27
+#: ../glade/galternatives.glade.h:29
 msgid "Be careful! Your system may be already in an unstable state."
+msgstr ""
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr ""
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr ""
+
+#: ../glade/menubar.glade.h:3
+msgid "_Use polkit"
+msgstr ""
+
+#: ../glade/menubar.glade.h:4
+msgid "_Working dir..."
+msgstr ""
+
+#: ../glade/menubar.glade.h:5
+msgid "_About"
+msgstr "_Acerca de"
+
+#: ../glade/menubar.glade.h:6
+msgid "_Quit"
 msgstr ""
 
 #~ msgid "Running Alternatives Configurator..."
@@ -396,6 +409,3 @@ msgstr ""
 #, fuzzy
 #~ msgid "_Browse..."
 #~ msgstr "Navegar..."
-
-#~ msgid "Priority:"
-#~ msgstr "Prioridad:"

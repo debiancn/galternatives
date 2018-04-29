@@ -30,7 +30,7 @@ logger = logging.getLogger(PACKAGE)
 try:
     import gi
     gi.require_version('Gtk', '3.0')
-except ImportError:
+except (ImportError, AttributeError):
     # in some cases gi is not installed since we only want to get INFO
     logger.warn('gi is not installed, assuming you only want to get info for '
                 'this application.')
@@ -38,12 +38,12 @@ except ImportError:
 APPID = 'org.debian.experimental.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
-    'version': '0.92.5',
+    'version': '1.0.0',
     'comments': _('A tool to help the administrator select which programs '
                   'provide specific services for the user by default.'),
     'license_type': 'GPL_2_0',
     'copyright': '''(C) 2003-2006 Gustavo Noronha Silva
-(C) 2017 Boyuan Yang''',
+(C) 2017-2018 Boyuan Yang''',
     'website': 'https://salsa.debian.org/chinese-team/galternatives',
     'authors': (
         'Gustavo Noronha Silva <kov@debian.org>',

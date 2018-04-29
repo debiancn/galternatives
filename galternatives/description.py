@@ -124,23 +124,31 @@ def friendlize(commands):
             ``Alternative.compare()``
 
     Yields:
-        str: The readable description for the command.
+        List[str]: The readable description for the command.
 
     '''
     for cmd in commands:
         type_ = cmd[0]
         if type_ == 'install':
-            yield \
-                _("Install option for group `{2}' with priority {4}, "
-                  "`{3}' for master link").format(*cmd) + \
-                ''.join(_(", `{}' for slave link `{}'").format(path, name)
-                        for __, __, name, path in zip(*((iter(cmd[5:]), ) * 4)))
+            yield (
+                _("Install option `{3}' for group `{2}'").format(*cmd),
+                _('Priority: {4}').format(*cmd),
+                *(_("Slave `{}': `{}'").format(name, path)
+                  for __, __, name, path in zip(*((iter(cmd[5:]), ) * 4))),
+            )
         elif type_ == 'auto':
-            yield _("Set group `{1}' to auto mode").format(*cmd)
+            yield (
+                _("Set group `{1}' to auto mode").format(*cmd),
+            )
         elif type_ == 'set':
-            yield _(
-                "Set group `{1}' to manual mode, pointed to `{2}'").format(*cmd)
+            yield (
+                _("Set group `{1}' to manual mode, pointed to `{2}'")
+                .format(*cmd),
+            )
         elif type_ == 'remove':
-            yield _("Remove option `{2}' for group `{1}'").format(*cmd)
+            yield (
+                _("Remove option `{2}' for group `{1}'").format(*cmd), )
         elif type_ == 'remove-all':
-            yield _("Remove group `{1}'").format(*cmd)
+            yield (
+                _("Remove group `{1}'").format(*cmd),
+            )

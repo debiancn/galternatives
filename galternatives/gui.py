@@ -238,6 +238,7 @@ class GroupDialog(EditDialog):
         name = self.name.get_text()
         reload_groups_p = False
         slaves_diff = {}
+
         if self.group is None:
             self.group = alternative.Group(name, create=True)
             main_instance.alt_db.add(self.group)
@@ -247,12 +248,14 @@ class GroupDialog(EditDialog):
             main_instance.alt_db.move(self.group.name, name)
             reload_groups_p = True
         self.group.link = self.link.get_text()
+
         slaves = set()
         for i, row in enumerate(self.slaves_model):
-            if self.group[i] != row[0]:
-                slaves_diff[self.group[i]] = row[0]
-            self.group[row[0]] = row[2]
-            slaves.add(row[0])
+            new_slave = row[0]
+            if self.group[i + 1] != new_slave:
+                slaves_diff[self.group[i + 1]] = new_slave
+            self.group[new_slave] = row[2]
+            slaves.add(new_slave)
         for old_slave in self.group[1:]:
             if old_slave not in slaves:
                 del self.group[old_slave]
@@ -260,6 +263,7 @@ class GroupDialog(EditDialog):
             option.update({
                 slaves_diff[k]: v for k, v in option.items() if k in slaves_diff
             })
+
         if reload_groups_p:
             main_instance.load_groups()
         else:
@@ -336,12 +340,14 @@ for icon_name in ('dialog-ok', 'dialog-error'):
         STATUS_ICONS.append(icontheme.load_icon(icon_name, 8, 0))
     except GLib.Error:
         STATUS_ICONS.append(None)
+STATUS_ICONS.append(None)
 del icontheme
 
 
 class MainWindow(object):
     delay_mode = False
     group_cleaning = False
+    group_filter_pattern = ''
 
     def __init__(self, app, paths={}, group=None):
         '''Load alternative database and fetch objects from the builder.'''
@@ -355,8 +361,9 @@ class MainWindow(object):
             get_data_path('glade/galternatives.glade'))
         for widget_id in {
             # main window
-            'main_window',
+            'main_window', 'main_accelgroup',
             'pending_box', 'groups_tv',
+            'group_find_btn', 'group_find_entry', 'groups_tv_filter',
             'alternative_label', 'link_label', 'description_label',
             'status_switch', 'options_tv', 'options_column_package',
             'options_menu',
@@ -388,6 +395,7 @@ class MainWindow(object):
             ('group.add', self.add_group),
             ('group.edit', self.edit_group),
             ('group.remove', self.remove_group),
+            ('group.find', self.find_group),
             ('option.add', self.add_option),
             ('option.edit', self.edit_option),
             ('option.remove', self.remove_option),
@@ -411,6 +419,21 @@ class MainWindow(object):
 
             action.connect('change-state', on_action_toggle_func(name))
             self.main_window.add_action(action)
+        # workaround https://stackoverflow.com/questions/19657017
+        self.builder.get_object('group_add_btn').get_child().add_accelerator(
+            'clicked', self.main_accelgroup,
+            *Gtk.accelerator_parse('Insert'), Gtk.AccelFlags.VISIBLE)
+        self.builder.get_object('group_edit_btn').get_child().add_accelerator(
+            'clicked', self.main_accelgroup,
+            *Gtk.accelerator_parse('Return'), Gtk.AccelFlags.VISIBLE)
+        self.builder.get_object('group_remove_btn').get_child().add_accelerator(
+            'clicked', self.main_accelgroup,
+            *Gtk.accelerator_parse('Delete'), Gtk.AccelFlags.VISIBLE)
+        self.group_find_btn.get_child().add_accelerator(
+            'clicked', self.main_accelgroup,
+            *Gtk.accelerator_parse('<Control>f'), Gtk.AccelFlags.VISIBLE)
+        # model filter
+        self.groups_tv_filter.set_visible_func(self.group_filter)
 
         self.load_db()
 
@@ -494,19 +517,20 @@ class MainWindow(object):
             model = self.results_tv.get_model()
             model.clear()
             for cmd, result in zip_longest(friendlize(diff_cmds), results):
-                if result:
-                    it = model.append(
-                        None, (STATUS_ICONS[result.returncode != 0], cmd))
+                it = model.append(
+                    None, (STATUS_ICONS[result.returncode != 0 if result else 2], cmd[0]))
+                for info in cmd[1:]:
                     model.append(it, (
-                        None, _('Run command: ') + ' '.join(result.cmd)))
+                        None, '    ' + info))
+                if result:
+                    model.append(it, (
+                        None, '  ' + _('Run command: ') + ' '.join(result.cmd)))
                     out = result.out.rstrip()
                     if out:
-                        model.append(it, (None, out))
+                        model.append(it, (None, '  ' + out))
                     err = result.err.rstrip()
                     if err:
-                        model.append(it, (None, err))
-                else:
-                    it = model.append(None, (None, cmd))
+                        model.append(it, (None, '  ' + err))
             self.commit_failed.show_all()
 
         if not returncode and not autosave:
@@ -551,6 +575,24 @@ class MainWindow(object):
         window = GroupDialog(group, transient_for=self.main_window)
         window.present()
 
+    def find_group(self, widget, data):
+        if self.group_find_btn.get_active():
+            self.group_find_entry.show()
+            self.group_find_entry.grab_focus()
+        else:
+            self.group_find_entry.hide()
+            self.group_find_entry.set_text('')
+
+    def on_group_find_entry_changed(self, widget):
+        self.group_filter_pattern = widget.get_text()
+        self.group_cleaning = True
+        self.groups_tv_filter.refilter()
+        self.group_cleaning = False
+        self.click_group()
+
+    def group_filter(self, model, iter, data):
+        return self.group_filter_pattern in model[iter][0]
+
     @advanced
     def add_option(self, widget, data):
         self.show_option_window(self.group, None)
@@ -573,27 +615,30 @@ class MainWindow(object):
     # main window actions begin #
 
     def load_groups(self):
-        next_group = None
-
         # load alternative group into groups_tv
         treeview = self.groups_tv
         selection = treeview.get_selection()
-        model = treeview.get_model()
+        modelfilter = treeview.get_model()
+        model = modelfilter.get_model()
+
         self.group_cleaning = True
         model.clear()
+        if self.group_find_btn.get_active():
+            self.group_find_btn.set_active(False)
         self.group_cleaning = False
+
+        next_group = None
         for group_name in sorted(self.alt_db):
             it = model.append((group_name, ))
             if self.group and self.group.name == group_name:
                 # clear self.group first to prevent same-tab reloading problem
                 self.group = None
-                selection.select_iter(it)
+                path = model.get_path(it)
+                treeview.set_cursor(path)
                 # by this time self.group has been changed
-                treeview.scroll_to_cell(model.get_path(it))
-                # then disable this code block
+                # disable this code block
                 next_group = self.group
                 self.group = None
-
         self.group = next_group
 
         if self.group is None:
@@ -606,13 +651,23 @@ class MainWindow(object):
             self.description_label.set_text(self.empty_group.description)
             self.group = None
 
-    def click_group(self, widget):
+    def click_group(self, widget=None):
         '''Load options for selected alternative group into options_tv.'''
-        # widget = self.groups_tv.get_selection()
         if self.group_cleaning:
             return
+        if widget is None:
+            widget = self.groups_tv.get_selection()
         model, it = widget.get_selected()
         if it is None:
+            if self.group:
+                for row in model:
+                    if row[0] == self.group.name:
+                        it = row.iter
+                        path = model.get_path(it)
+                        self.group_cleaning = True
+                        self.groups_tv.set_cursor(path)
+                        self.group_cleaning = False
+                        break
             return
         group = self.alt_db[model.get_value(it, 0)]
         if group == self.group:

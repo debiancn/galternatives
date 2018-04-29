@@ -277,6 +277,9 @@ class Group(list, object):
     def __hash__(self):
         return id(self)
 
+    def items(self):
+        return [(link, self[link]) for link in self]
+
     def find_option(self, path):
         for option in self.options:
             if option[self.name] == path:
@@ -316,6 +319,10 @@ class Group(list, object):
                 # no old, old in auto, old current not the same
                 res.append(('set', self.name, self.current[self.name]))
         return res
+
+
+def list_starts_with(l, prefix):
+    return l[:len(prefix)] == prefix
 
 
 class Alternative(dict):
@@ -388,7 +395,8 @@ class Alternative(dict):
             if dict.__getitem__(self, group_name):
                 # item has been accessed
                 if group_name in self._moves or \
-                        set(old_db[group_name]) - set(self[group_name]):
+                        not list_starts_with(self[group_name].items(),
+                                             old_db[group_name].items()):
                     # group moved or more links than old one, reconstruct
                     if group_name in self._moves and \
                             self._moves[group_name] in old_db and \

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.92.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-27 13:51+0800\n"
-"PO-Revision-Date: 2018-01-27 00:18+0800\n"
+"POT-Creation-Date: 2018-05-06 12:47+0800\n"
+"PO-Revision-Date: 2018-05-06 12:48+0800\n"
 "Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
 "Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_CN\n"
@@ -74,29 +74,34 @@ msgstr "无描述"
 
 #: ../../galternatives/description.py:134
 #, python-brace-format
-msgid "Install option for group `{2}' with priority {4}, `{3}' for master link"
-msgstr "为组`{2}'安装选项 {4}，优先级 {4}，`{3}'用于主链接"
+msgid "Install option `{3}' for group `{2}'"
+msgstr "为组`{2}'安装选项 {4}"
+
+#: ../../galternatives/description.py:135
+#, python-brace-format
+msgid "Priority: {4}"
+msgstr "优先级：{4}"
 
 #: ../../galternatives/description.py:136
-msgid ", `{}' for slave link `{}'"
-msgstr "，`{}'用于从链接`{}'"
+msgid "Slave `{}': `{}'"
+msgstr "从链接`{}'：`{}'"
 
-#: ../../galternatives/description.py:139
+#: ../../galternatives/description.py:141
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr "将组`{1}'设为自动模式"
 
-#: ../../galternatives/description.py:142
+#: ../../galternatives/description.py:145
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr "将组`{1}'设为手动模式，指向`{2}'"
 
-#: ../../galternatives/description.py:144
+#: ../../galternatives/description.py:150
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr "删除组`{1}'的选项`{2}'"
 
-#: ../../galternatives/description.py:146
+#: ../../galternatives/description.py:153
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr "删除组`{1}'"
@@ -115,7 +120,7 @@ msgstr "帮助管理员选择为用户提供特定服务的默认选项的一个
 msgid "Select File"
 msgstr "选择文件"
 
-#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:276
+#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:280
 msgid "Name"
 msgstr "名称"
 
@@ -131,27 +136,27 @@ msgstr "编辑组 - {}"
 msgid "Add group"
 msgstr "添加组"
 
-#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
+#: ../../galternatives/gui.py:276 ../../galternatives/gui.py:281
 msgid "Path"
 msgstr "路径"
 
-#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:14
+#: ../../galternatives/gui.py:277 ../glade/galternatives.glade.h:16
 msgid "Priority"
 msgstr "优先级"
 
-#: ../../galternatives/gui.py:289
+#: ../../galternatives/gui.py:293
 msgid "Edit option - {}"
 msgstr "编辑选项 - {}"
 
-#: ../../galternatives/gui.py:296
+#: ../../galternatives/gui.py:300
 msgid "Add option"
 msgstr "添加选项"
 
-#: ../../galternatives/gui.py:501
+#: ../../galternatives/gui.py:527
 msgid "Run command: "
 msgstr "运行命令："
 
-#: ../../galternatives/gui.py:736
+#: ../../galternatives/gui.py:791
 msgid "translator_credits"
 msgstr "(由开发者提供)"
 
@@ -186,30 +191,6 @@ msgstr "从配置"
 msgid "No changes will be made until you add an option."
 msgstr "添加选项之前，不会更改任何内容。"
 
-#: ../glade/menubar.glade.h:1
-msgid "_Delay mode"
-msgstr "延迟模式(_D)"
-
-#: ../glade/menubar.glade.h:2
-msgid "Query _package (high I/O)"
-msgstr "查询软件包(高 I/O)(_P)"
-
-#: ../glade/menubar.glade.h:3
-msgid "_Use polkit"
-msgstr "使用 polkit(_U)"
-
-#: ../glade/menubar.glade.h:4
-msgid "_Working dir..."
-msgstr "工作目录...(_W)"
-
-#: ../glade/menubar.glade.h:5
-msgid "_About"
-msgstr "关于(_A)"
-
-#: ../glade/menubar.glade.h:6
-msgid "_Quit"
-msgstr "退出(_Q)"
-
 #: ../glade/galternatives.glade.h:1
 msgid "G Alternatives"
 msgstr "G Alternatives"
@@ -239,46 +220,54 @@ msgid "_Remove"
 msgstr "删除(_R)"
 
 #: ../glade/galternatives.glade.h:8
+msgid "Find"
+msgstr "查找"
+
+#: ../glade/galternatives.glade.h:9
+msgid "_Find"
+msgstr "查找(_F)"
+
+#: ../glade/galternatives.glade.h:10
 msgid "Select an alternative group to edit"
 msgstr "选择要编辑的可选项组"
 
-#: ../glade/galternatives.glade.h:9
+#: ../glade/galternatives.glade.h:11
 msgid "Groups"
 msgstr "组"
 
-#: ../glade/galternatives.glade.h:10
+#: ../glade/galternatives.glade.h:12
 msgid "Auto:"
 msgstr "自动："
 
-#: ../glade/galternatives.glade.h:11
+#: ../glade/galternatives.glade.h:13
 msgid "Auto mode"
 msgstr "自动模式"
 
-#: ../glade/galternatives.glade.h:12
+#: ../glade/galternatives.glade.h:14
 msgid "Alternative"
 msgstr "可选项"
 
-#: ../glade/galternatives.glade.h:13
+#: ../glade/galternatives.glade.h:15
 msgid "Choose an alternative group"
 msgstr "选择一个可选项组"
 
-#: ../glade/galternatives.glade.h:15
+#: ../glade/galternatives.glade.h:17
 msgid "Package"
 msgstr "包"
 
-#: ../glade/galternatives.glade.h:16
+#: ../glade/galternatives.glade.h:18
 msgid "Some changes are not saved."
 msgstr "某些更改尚未保存。"
 
-#: ../glade/galternatives.glade.h:17
+#: ../glade/galternatives.glade.h:19
 msgid "Are you sure to quit now?"
 msgstr "您确定现在退出吗？"
 
-#: ../glade/galternatives.glade.h:18
+#: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
 msgstr "编辑可选项设置是高级功能。"
 
-#: ../glade/galternatives.glade.h:19
+#: ../glade/galternatives.glade.h:21
 msgid ""
 "Those are meant to be managed by <tt>dpkg</tt> and provided by their "
 "corresponding packages.\n"
@@ -288,33 +277,64 @@ msgstr ""
 "这些是由 <tt>dpkg</tt> 管理，由相应的软件包提供。\n"
 "<b>警告！</b>此功能不稳定，可能包含错误。手动编辑可能会破坏您的系统。"
 
-#: ../glade/galternatives.glade.h:21
+#: ../glade/galternatives.glade.h:23
 msgid "Show this dialog next time."
 msgstr "下次显示此对话框。"
 
-#: ../glade/galternatives.glade.h:22
+#: ../glade/galternatives.glade.h:24
 msgid "Preferences"
 msgstr "首选项"
 
-#: ../glade/galternatives.glade.h:23
+#: ../glade/galternatives.glade.h:25
 msgid "See update-alternatives(1) \"OPTIONS\" section for details"
 msgstr "详细信息参见 update-alternatives(1) “OPTIONS”一节"
 
-#: ../glade/galternatives.glade.h:24
+#: ../glade/galternatives.glade.h:26
 msgid "Paths"
 msgstr "路径"
 
-#: ../glade/galternatives.glade.h:25
+#: ../glade/galternatives.glade.h:27
 msgid "Commit failed"
 msgstr "提交失败"
 
-#: ../glade/galternatives.glade.h:26
+#: ../glade/galternatives.glade.h:28
 msgid "An error has occurred. The results are:"
 msgstr "发生了错误。结果为："
 
-#: ../glade/galternatives.glade.h:27
+#: ../glade/galternatives.glade.h:29
 msgid "Be careful! Your system may be already in an unstable state."
 msgstr "小心！您的系统可能已经处于不稳定状态。"
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr "延迟模式(_D)"
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr "查询软件包(高 I/O)(_P)"
+
+#: ../glade/menubar.glade.h:3
+msgid "_Use polkit"
+msgstr "使用 polkit(_U)"
+
+#: ../glade/menubar.glade.h:4
+msgid "_Working dir..."
+msgstr "工作目录...(_W)"
+
+#: ../glade/menubar.glade.h:5
+msgid "_About"
+msgstr "关于(_A)"
+
+#: ../glade/menubar.glade.h:6
+msgid "_Quit"
+msgstr "退出(_Q)"
+
+#~ msgid ""
+#~ "Install option for group `{2}' with priority {4}, `{3}' for master link"
+#~ msgstr "为组`{2}'安装选项 {4}，优先级 {4}，`{3}'用于主链接"
+
+#~ msgid ", `{}' for slave link `{}'"
+#~ msgstr "，`{}'用于从链接`{}'"
 
 #~ msgid ""
 #~ "No `pkexec' detected, but found `gksudo'. You should really consider "
@@ -428,6 +448,3 @@ msgstr "小心！您的系统可能已经处于不稳定状态。"
 
 #~ msgid "_Browse..."
 #~ msgstr "浏览(_B)..."
-
-#~ msgid "Priority:"
-#~ msgstr "优先级："
