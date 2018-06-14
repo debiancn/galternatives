@@ -1,3 +1,12 @@
+galternatives (1.0.0) unstable; urgency=medium
+
+  * New stable release.
+    - Add feature to search entries.
+  * No longer install executable into sbin directory.
+  * d/copyright: Refresh copyright information.
+
+ -- Boyuan Yang <073plan@gmail.com>  Thu, 14 Jun 2018 12:17:38 +0800
+
 galternatives (0.92.4) unstable; urgency=medium
 
   * Avoid runtime dependency on distutils.
@@ -330,4 +339,3 @@ galternatives (0.1) experimental; urgency=low
   * Initial release.
 
  -- Gustavo Noronha Silva <kov@debian.org>  Sat, 15 Nov 2003 09:37:01 -0200
-

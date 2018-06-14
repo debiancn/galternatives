@@ -8,4 +8,6 @@ include /usr/share/dpkg/pkg-info.mk
 	dh $@ --with python3 --buildsystem=pybuild
 
 override_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	python3 -c "import galternatives; assert galternatives.INFO['version'] == '$(DEB_VERSION_UPSTREAM)'"
+endif
