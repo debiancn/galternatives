@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=java
+_Comment=Default Java Runtime.
+Type=Application
+Exec=/usr/bin/java
+Icon=java

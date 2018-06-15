@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=convert
+_Comment=ImageMagick command-line processing tool.
+Type=Application
+Exec=/usr/bin/convert
+Icon=display-im6.q16

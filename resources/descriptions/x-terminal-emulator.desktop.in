@@ -3,5 +3,5 @@ Version=1.0
 _Name=X Terminal Emulator
 _Comment=Default Terminal Emulator to use when running text-based applications, e.g. from desktop-neutral mailcap entries.
 Type=Application
-Exec=/etc/alternatives/x-terminal-emulator
-Icon=x-terminal-emulator
+Exec=/usr/bin/x-terminal-emulator
+Icon=utilities-terminal

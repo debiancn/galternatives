@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=editor
+_Comment=Default command line editor, usually called by `editor` command.
+Type=Application
+Exec=/usr/bin/editor
+Icon=accessories-text-editor

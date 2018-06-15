@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=jar
+_Comment=Creates an archive for classes and resources, and manipulate or restore individual classes or resources from an archive.
+Type=Application
+Exec=/usr/bin/jar
+Icon=text-x-java

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+_Name=Gnome WWW Browser
+_Comment=Default WWW Browser for GNOME Desktop Environment.
+Type=Application
+Exec=/usr/bin/gnome-www-browser
+Icon=internet-web-browser

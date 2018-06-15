@@ -1,0 +1,6 @@
+[Desktop Entry]
+Version=1.0
+_Name=X Cursor Theme
+_Comment=Default Cursor Theme that helps various aspects of GUI navigation and manipulation.
+Type=Application
+Exec=xdg-open /usr/share/icons/default

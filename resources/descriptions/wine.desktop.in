@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=Wine
+_Comment=Compatibility layer for Microsoft Windows programs.
+Type=Application
+Exec=/usr/bin/wine
+Icon=wine

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+_Name=Desktop Background
+_Comment=Default desktop wallpaper.
+Type=Application
+Exec=xdg-open /usr/share/images/desktop-base/desktop-background
+Icon=preferences-desktop-wallpaper

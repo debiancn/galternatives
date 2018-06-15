@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+_Name=X WWW Browser
+_Comment=Default WWW Browser to launch URLs and browse the Internet.
+Type=Application
+Exec=/usr/bin/x-www-browser
+Icon=internet-web-browser

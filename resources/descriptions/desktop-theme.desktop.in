@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+_Name=Desktop Theme
+_Comment=Default desktop theme.
+Type=Application
+Exec=xdg-open /usr/share/desktop-base/active-theme
+Icon=preferences-desktop-theme

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=cpp
+_Comment=C Preprocessor.
+Type=Application
+Exec=/lib/cpp
+Icon=text-x-csrc

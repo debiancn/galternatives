@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=UnRAR
+_Comment=Extractor for RAR archives.
+Type=Application
+Exec=/usr/bin/unrar
+Icon=application-x-rar

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+_Name=Google Chrome
+_Comment=Default Release Channel of Google Chrome to use.
+Type=Application
+Exec=/usr/bin/google-chrome
+Icon=google-chrome
