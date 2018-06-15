@@ -364,7 +364,8 @@ class MainWindow(object):
             'main_window', 'main_accelgroup',
             'pending_box', 'groups_tv',
             'group_find_btn', 'group_find_entry', 'groups_tv_filter',
-            'alternative_label', 'link_label', 'description_label',
+            'group_icon', 'alternative_label',
+            'link_label', 'description_label',
             'status_switch', 'options_tv', 'options_column_package',
             'options_menu',
             # dialogs and messages
@@ -692,10 +693,12 @@ class MainWindow(object):
             return
 
         # set the name of the alternative to the information area
-        name, description = altname_description(self.group.name)
+        name, description, icon = altname_description(self.group.name)
         self.alternative_label.set_text(name)
         self.link_label.set_text(self.group.link)
         self.description_label.set_text(description)
+        self.group_icon.set_from_icon_name(
+            icon, self.group_icon.get_icon_name()[1])
         self.status_switch.set_active(self.group.status)
 
         # set columns

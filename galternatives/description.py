@@ -23,6 +23,7 @@ __all__ = ['altname_description', 'query_package', 'friendlize']
 
 DESC_DIR = get_data_path('descriptions', True)
 DEFAULT_DESCRIPTION = _('No description')
+DEFAULT_ICON = 'dialog-question'
 
 
 if sys.version_info >= (3,):
@@ -40,9 +41,11 @@ if sys.version_info >= (3,):
                 name,
                 section.get('Comment[{}]'.format(locale)) or
                 section.get('Comment') or
-                DEFAULT_DESCRIPTION
+                DEFAULT_DESCRIPTION,
+                section.get('Icon') or
+                DEFAULT_ICON,
             )
-        return (name, DEFAULT_DESCRIPTION)
+        return (name, DEFAULT_DESCRIPTION, DEFAULT_ICON)
 else:
     import ConfigParser
 
@@ -64,8 +67,11 @@ else:
                 config.has_option('Desktop Entry', 'Comment') and
                 config.get('Desktop Entry', 'Comment') or
                 DEFAULT_DESCRIPTION,
+                config.has_option('Desktop Entry', 'Icon') and
+                config.get('Desktop Entry', 'Icon') or
+                DEFAULT_ICON,
             )
-        return (name, DEFAULT_DESCRIPTION)
+        return (name, DEFAULT_DESCRIPTION, DEFAULT_ICON)
 
 altname_description.__doc__ = '''
 Find readable group name and its description for given alternative group
