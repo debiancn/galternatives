@@ -15,7 +15,18 @@ try:
     import xdg.BaseDirectory
     import xdg.IconTheme
 except ImportError:
-    xdg = None
+    class xdg:
+        class BaseDirectory:
+            @staticmethod
+            def load_data_paths(resource):
+                yield '/usr/share/' + resource
+
+        class IconTheme:
+            @staticmethod
+            def getIconPath(iconname):
+                path = f'/usr/share/icons/hicolor/48x48/apps/{iconname}.png'
+                if os.path.isfile(path):
+                    return path
 
 
 __all__ = ['get_data_path', 'get_icon_path', 'LOGO_PATH']
@@ -25,9 +36,8 @@ PATHS = [
     os.path.join(os.path.dirname(os.path.realpath(__file__)), 'resources'),
     os.path.join(os.path.dirname(
         os.path.dirname(os.path.realpath(__file__))), 'resources'),
+    *xdg.BaseDirectory.load_data_paths(PACKAGE)
 ]
-if xdg:
-    PATHS.extend(xdg.BaseDirectory.load_data_paths(PACKAGE))
 
 
 def get_data_path(filenames, is_dir=False):
@@ -65,10 +75,9 @@ def get_data_path(filenames, is_dir=False):
 
 
 def get_icon_path(iconname):
-    if xdg:
-        path = xdg.IconTheme.getIconPath(iconname)
-        if path:
-            return path
+    path = xdg.IconTheme.getIconPath(iconname)
+    if path:
+        return path
     for extensions in ['png', 'svg', 'xpm']:
         path = get_data_path('icons/{}.{}'.format(iconname, extensions))
         if path:

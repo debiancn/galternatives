@@ -10,7 +10,7 @@ from .utils import GtkTemplate, stateful_property
 
 from copy import deepcopy
 from functools import wraps
-from gi.repository import GdkPixbuf, Gio, GLib, Gtk, GObject
+from gi.repository import GdkPixbuf, Gdk, Gio, GLib, Gtk, GObject
 import os
 import shutil
 import sys
@@ -517,8 +517,9 @@ class MainWindow(object):
             model = self.results_tv.get_model()
             model.clear()
             for cmd, result in zip_longest(friendlize(diff_cmds), results):
-                it = model.append(
-                    None, (STATUS_ICONS[result.returncode != 0 if result else 2], cmd[0]))
+                it = model.append(None, (
+                    STATUS_ICONS[result.returncode != 0 if result else 2],
+                    cmd[0]))
                 for info in cmd[1:]:
                     model.append(it, (
                         None, '    ' + info))
@@ -589,6 +590,11 @@ class MainWindow(object):
         self.groups_tv_filter.refilter()
         self.group_cleaning = False
         self.click_group()
+
+    def on_group_find_entry_key_release_event(self, widget, event):
+        if event.keyval == Gdk.KEY_Escape:
+            self.group_find_btn.set_active(False)
+            self.find_group(None, None)
 
     def group_filter(self, model, iter, data):
         return self.group_filter_pattern in model[iter][0]
