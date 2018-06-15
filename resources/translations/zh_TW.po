@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.92.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-06 12:47+0800\n"
-"PO-Revision-Date: 2018-05-06 12:49+0800\n"
+"POT-Creation-Date: 2018-06-15 20:04+0800\n"
+"PO-Revision-Date: 2018-06-15 20:14+0800\n"
 "Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
 "Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_TW\n"
@@ -44,8 +44,8 @@ msgid "Testing galternatives..."
 msgstr "正在測試 galternatives..."
 
 #: ../../galternatives/app.py:57
-msgid "No root detected, but continue as in your wishes"
-msgstr "沒有檢測到 root，但按照您的意願繼續"
+msgid "No root privileges detected, but continuing anyway"
+msgstr "沒有檢測到 root，但仍繼續"
 
 #: ../../galternatives/app.py:64
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
@@ -72,41 +72,41 @@ msgstr "沒有這樣的組"
 msgid "No description"
 msgstr "無描述"
 
-#: ../../galternatives/description.py:134
+#: ../../galternatives/description.py:140
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
 msgstr "為組`{2}'安裝選項 {4}"
 
-#: ../../galternatives/description.py:135
+#: ../../galternatives/description.py:141
 #, python-brace-format
 msgid "Priority: {4}"
 msgstr "優先級：{4}"
 
-#: ../../galternatives/description.py:136
+#: ../../galternatives/description.py:142
 msgid "Slave `{}': `{}'"
 msgstr "從連結`{}'：`{}'"
 
-#: ../../galternatives/description.py:141
+#: ../../galternatives/description.py:147
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr "將組`{1}'設為自動模式"
 
-#: ../../galternatives/description.py:145
+#: ../../galternatives/description.py:151
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr "將組`{1}'設為手動模式，指向`{2}'"
 
-#: ../../galternatives/description.py:150
+#: ../../galternatives/description.py:156
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr "刪除組`{1}'的選項`{2}'"
 
-#: ../../galternatives/description.py:153
+#: ../../galternatives/description.py:159
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr "刪除組`{1}'"
 
-#: ../../galternatives/appdata.py:80
+#: ../../galternatives/appdata.py:89
 msgid "Logo missing. Is your installation correct?"
 msgstr "圖示遺失。您的安裝是否正確？"
 
@@ -152,11 +152,11 @@ msgstr "編輯選項 - {}"
 msgid "Add option"
 msgstr "添加選項"
 
-#: ../../galternatives/gui.py:527
+#: ../../galternatives/gui.py:529
 msgid "Run command: "
 msgstr "執行命令："
 
-#: ../../galternatives/gui.py:791
+#: ../../galternatives/gui.py:800
 msgid "translator_credits"
 msgstr "(由開發者提供)"
 
@@ -172,16 +172,98 @@ msgstr "配置系統可選項的預設值"
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr "可選項;配置;Debian;"
 
+#: ../descriptions/x-www-browser.desktop.in.h:1
+msgid "X WWW Browser"
+msgstr "X 網路瀏覽器"
+
+#: ../descriptions/x-www-browser.desktop.in.h:2
+msgid "Default WWW Browser to launch URLs and browse the Internet."
+msgstr "預設網路瀏覽器，用於開啟 URL 或瀏覽網際網路。"
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:1
+msgid "X Cursor Theme"
+msgstr "X 游標主題"
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr "預設游標主題，用於 GUI 各導航和操作中。"
+
+#: ../descriptions/cpp.desktop.in.h:1
+msgid "C Preprocessor."
+msgstr "C 前處理器。"
+
+#: ../descriptions/wine.desktop.in.h:1
+msgid "Compatibility layer for Microsoft Windows programs."
+msgstr "Microsoft Windows 程式相容層。"
+
+#: ../descriptions/desktop-theme.desktop.in.h:1
+msgid "Desktop Theme"
+msgstr "桌面主題"
+
+#: ../descriptions/desktop-theme.desktop.in.h:2
+msgid "Default desktop theme."
+msgstr "預設桌面主題。"
+
+#: ../descriptions/google-chrome.desktop.in.h:1
+msgid "Google Chrome"
+msgstr "Google Chrome"
+
+#: ../descriptions/google-chrome.desktop.in.h:2
+msgid "Default Release Channel of Google Chrome to use."
+msgstr "要預設使用的 Google Chrome 釋出版本。"
+
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1
 msgid "X Terminal Emulator"
 msgstr "X 終端模擬器"
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:2
 msgid ""
-"Default Terminal Emulator to use when running text-based applications, "
-"mainly from the Debian menu."
+"Default Terminal Emulator to use when running text-based applications, e.g. "
+"from desktop-neutral mailcap entries."
 msgstr ""
-"默認終端模擬器，在執行基於文本的應用程式時使用，主要出現在 Debian 選單。"
+"預設終端模擬器，在執行基於文字的應用程式時使用，如各桌面環境通用的 mailcap "
+"項。"
+
+#: ../descriptions/desktop-background.desktop.in.h:1
+msgid "Desktop Background"
+msgstr "桌面背景"
+
+#: ../descriptions/desktop-background.desktop.in.h:2
+msgid "Default desktop wallpaper."
+msgstr "預設桌面桌布。"
+
+#: ../descriptions/unrar.desktop.in.h:1
+msgid "Extractor for RAR archives."
+msgstr "RAR 歸檔提取器。"
+
+#: ../descriptions/editor.desktop.in.h:1
+msgid "Default command line editor, usually called by `editor` command."
+msgstr "預設的命令列編輯器，通常由`editor`命令呼叫。"
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:1
+msgid "Gnome WWW Browser"
+msgstr "Gnome 網路瀏覽器"
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:2
+msgid "Default WWW Browser for GNOME Desktop Environment."
+msgstr "用於 GNOME 桌面環境的預設網路瀏覽器。"
+
+#: ../descriptions/java.desktop.in.h:1
+msgid "Default Java Runtime."
+msgstr "預設 Java 執行時。"
+
+#: ../descriptions/jar.desktop.in.h:1
+msgid ""
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
+msgstr ""
+"建立類和資源的檔案，或處理檔案中的單個類或資源或者從檔案中還原單個類或資源。"
+
+#: ../descriptions/convert.desktop.in.h:1
+msgid "ImageMagick command-line processing tool."
+msgstr "ImageMagick 命令列處理工具。"
 
 #: ../glade/edit_dialog.glade.h:1
 msgid "Slaves"
@@ -260,7 +342,7 @@ msgid "Some changes are not saved."
 msgstr "某些更改尚未保存。"
 
 #: ../glade/galternatives.glade.h:19
-msgid "Are you sure to quit now?"
+msgid "Are you sure you want to quit now?"
 msgstr "您確定現在退出嗎？"
 
 #: ../glade/galternatives.glade.h:20

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-06 12:47+0800\n"
+"POT-Creation-Date: 2018-06-15 20:04+0800\n"
 "PO-Revision-Date: 2006-01-14 17:19+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -41,7 +41,7 @@ msgid "Testing galternatives..."
 msgstr "Testar galternatives..."
 
 #: ../../galternatives/app.py:57
-msgid "No root detected, but continue as in your wishes"
+msgid "No root privileges detected, but continuing anyway"
 msgstr ""
 
 #: ../../galternatives/app.py:64
@@ -71,41 +71,41 @@ msgstr ""
 msgid "No description"
 msgstr "Ingen beskrivning"
 
-#: ../../galternatives/description.py:134
+#: ../../galternatives/description.py:140
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
 msgstr ""
 
-#: ../../galternatives/description.py:135
+#: ../../galternatives/description.py:141
 #, fuzzy, python-brace-format
 msgid "Priority: {4}"
 msgstr "Prioritet:"
 
-#: ../../galternatives/description.py:136
+#: ../../galternatives/description.py:142
 msgid "Slave `{}': `{}'"
 msgstr ""
 
-#: ../../galternatives/description.py:141
+#: ../../galternatives/description.py:147
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr ""
 
-#: ../../galternatives/description.py:145
+#: ../../galternatives/description.py:151
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr ""
 
-#: ../../galternatives/description.py:150
+#: ../../galternatives/description.py:156
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr ""
 
-#: ../../galternatives/description.py:153
+#: ../../galternatives/description.py:159
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr ""
 
-#: ../../galternatives/appdata.py:80
+#: ../../galternatives/appdata.py:89
 msgid "Logo missing. Is your installation correct?"
 msgstr ""
 
@@ -153,11 +153,11 @@ msgstr ""
 msgid "Add option"
 msgstr ""
 
-#: ../../galternatives/gui.py:527
+#: ../../galternatives/gui.py:529
 msgid "Run command: "
 msgstr ""
 
-#: ../../galternatives/gui.py:791
+#: ../../galternatives/gui.py:800
 msgid "translator_credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -175,14 +175,94 @@ msgstr "Konfigurera systemets standardalternativ"
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr ""
 
+#: ../descriptions/x-www-browser.desktop.in.h:1
+msgid "X WWW Browser"
+msgstr ""
+
+#: ../descriptions/x-www-browser.desktop.in.h:2
+msgid "Default WWW Browser to launch URLs and browse the Internet."
+msgstr ""
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:1
+msgid "X Cursor Theme"
+msgstr ""
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr ""
+
+#: ../descriptions/cpp.desktop.in.h:1
+msgid "C Preprocessor."
+msgstr ""
+
+#: ../descriptions/wine.desktop.in.h:1
+msgid "Compatibility layer for Microsoft Windows programs."
+msgstr ""
+
+#: ../descriptions/desktop-theme.desktop.in.h:1
+msgid "Desktop Theme"
+msgstr ""
+
+#: ../descriptions/desktop-theme.desktop.in.h:2
+msgid "Default desktop theme."
+msgstr ""
+
+#: ../descriptions/google-chrome.desktop.in.h:1
+msgid "Google Chrome"
+msgstr ""
+
+#: ../descriptions/google-chrome.desktop.in.h:2
+msgid "Default Release Channel of Google Chrome to use."
+msgstr ""
+
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1
 msgid "X Terminal Emulator"
 msgstr ""
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:2
 msgid ""
-"Default Terminal Emulator to use when running text-based applications, "
-"mainly from the Debian menu."
+"Default Terminal Emulator to use when running text-based applications, e.g. "
+"from desktop-neutral mailcap entries."
+msgstr ""
+
+#: ../descriptions/desktop-background.desktop.in.h:1
+msgid "Desktop Background"
+msgstr ""
+
+#: ../descriptions/desktop-background.desktop.in.h:2
+msgid "Default desktop wallpaper."
+msgstr ""
+
+#: ../descriptions/unrar.desktop.in.h:1
+msgid "Extractor for RAR archives."
+msgstr ""
+
+#: ../descriptions/editor.desktop.in.h:1
+msgid "Default command line editor, usually called by `editor` command."
+msgstr ""
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:1
+msgid "Gnome WWW Browser"
+msgstr ""
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:2
+msgid "Default WWW Browser for GNOME Desktop Environment."
+msgstr ""
+
+#: ../descriptions/java.desktop.in.h:1
+msgid "Default Java Runtime."
+msgstr ""
+
+#: ../descriptions/jar.desktop.in.h:1
+msgid ""
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
+msgstr ""
+
+#: ../descriptions/convert.desktop.in.h:1
+msgid "ImageMagick command-line processing tool."
 msgstr ""
 
 #: ../glade/edit_dialog.glade.h:1
@@ -263,8 +343,9 @@ msgid "Some changes are not saved."
 msgstr ""
 
 #: ../glade/galternatives.glade.h:19
-msgid "Are you sure to quit now?"
-msgstr ""
+#, fuzzy
+msgid "Are you sure you want to quit now?"
+msgstr "Är du säker att du vill ta bort detta alternativ?"
 
 #: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
@@ -357,9 +438,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Filen eller katalogen du valde existerar inte.\n"
 #~ "Välj en giltig."
-
-#~ msgid "Are you sure you want to remove this option?"
-#~ msgstr "Är du säker att du vill ta bort detta alternativ?"
 
 #~ msgid "Choice"
 #~ msgstr "Val"

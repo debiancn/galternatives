@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 0.92.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-06 12:47+0800\n"
+"POT-Creation-Date: 2018-06-15 20:04+0800\n"
 "PO-Revision-Date: 2017-10-18 22:43+GMT\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -46,7 +46,8 @@ msgid "Testing galternatives..."
 msgstr "GAlternatives wird getestet …"
 
 #: ../../galternatives/app.py:57
-msgid "No root detected, but continue as in your wishes"
+#, fuzzy
+msgid "No root privileges detected, but continuing anyway"
 msgstr "Root nicht entdeckt, es wird jedoch wie gewünscht fortgefahren"
 
 #: ../../galternatives/app.py:64
@@ -76,41 +77,41 @@ msgstr "keine derartige Gruppe"
 msgid "No description"
 msgstr "keine Beschreibung"
 
-#: ../../galternatives/description.py:134
+#: ../../galternatives/description.py:140
 #, fuzzy, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
 msgstr "entfernt Option »{2}« für Gruppe »{1}«"
 
-#: ../../galternatives/description.py:135
+#: ../../galternatives/description.py:141
 #, fuzzy, python-brace-format
 msgid "Priority: {4}"
 msgstr "Priorität"
 
-#: ../../galternatives/description.py:136
+#: ../../galternatives/description.py:142
 msgid "Slave `{}': `{}'"
 msgstr ""
 
-#: ../../galternatives/description.py:141
+#: ../../galternatives/description.py:147
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr "setzt Gruppe »{1}« auf automatischen Modus"
 
-#: ../../galternatives/description.py:145
+#: ../../galternatives/description.py:151
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr "setzt Gruppe »{1}« auf manuellen Modus, verweist auf »{2}«"
 
-#: ../../galternatives/description.py:150
+#: ../../galternatives/description.py:156
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr "entfernt Option »{2}« für Gruppe »{1}«"
 
-#: ../../galternatives/description.py:153
+#: ../../galternatives/description.py:159
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr "entfernt Gruppe »{1}«"
 
-#: ../../galternatives/appdata.py:80
+#: ../../galternatives/appdata.py:89
 msgid "Logo missing. Is your installation correct?"
 msgstr "Logo fehlt. Ist Ihre Installation korrekt?"
 
@@ -158,11 +159,11 @@ msgstr "Option bearbeiten - {}"
 msgid "Add option"
 msgstr "Option hinzufügen"
 
-#: ../../galternatives/gui.py:527
+#: ../../galternatives/gui.py:529
 msgid "Run command: "
 msgstr "Befehl ausführen: "
 
-#: ../../galternatives/gui.py:791
+#: ../../galternatives/gui.py:800
 msgid "translator_credits"
 msgstr "Chris Leick <c.leick@vollbio.de>"
 
@@ -178,17 +179,98 @@ msgstr "die Standard-Alternativen des Systems einrichten"
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr "Alternativen;GAlternatives;Debian;"
 
+#: ../descriptions/x-www-browser.desktop.in.h:1
+msgid "X WWW Browser"
+msgstr ""
+
+#: ../descriptions/x-www-browser.desktop.in.h:2
+msgid "Default WWW Browser to launch URLs and browse the Internet."
+msgstr ""
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:1
+msgid "X Cursor Theme"
+msgstr ""
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr ""
+
+#: ../descriptions/cpp.desktop.in.h:1
+msgid "C Preprocessor."
+msgstr ""
+
+#: ../descriptions/wine.desktop.in.h:1
+msgid "Compatibility layer for Microsoft Windows programs."
+msgstr ""
+
+#: ../descriptions/desktop-theme.desktop.in.h:1
+msgid "Desktop Theme"
+msgstr ""
+
+#: ../descriptions/desktop-theme.desktop.in.h:2
+msgid "Default desktop theme."
+msgstr ""
+
+#: ../descriptions/google-chrome.desktop.in.h:1
+msgid "Google Chrome"
+msgstr ""
+
+#: ../descriptions/google-chrome.desktop.in.h:2
+msgid "Default Release Channel of Google Chrome to use."
+msgstr ""
+
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1
 msgid "X Terminal Emulator"
 msgstr "X-Terminal-Emulator"
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:2
+#, fuzzy
 msgid ""
-"Default Terminal Emulator to use when running text-based applications, "
-"mainly from the Debian menu."
+"Default Terminal Emulator to use when running text-based applications, e.g. "
+"from desktop-neutral mailcap entries."
 msgstr ""
 "Standard-Terminal-Emulator, der bei der Ausführung textbasierter "
 "Anwendungen, vorwiegend aus dem Debian-Menü, verwendet werden soll."
+
+#: ../descriptions/desktop-background.desktop.in.h:1
+msgid "Desktop Background"
+msgstr ""
+
+#: ../descriptions/desktop-background.desktop.in.h:2
+msgid "Default desktop wallpaper."
+msgstr ""
+
+#: ../descriptions/unrar.desktop.in.h:1
+msgid "Extractor for RAR archives."
+msgstr ""
+
+#: ../descriptions/editor.desktop.in.h:1
+msgid "Default command line editor, usually called by `editor` command."
+msgstr ""
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:1
+msgid "Gnome WWW Browser"
+msgstr ""
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:2
+msgid "Default WWW Browser for GNOME Desktop Environment."
+msgstr ""
+
+#: ../descriptions/java.desktop.in.h:1
+msgid "Default Java Runtime."
+msgstr ""
+
+#: ../descriptions/jar.desktop.in.h:1
+msgid ""
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
+msgstr ""
+
+#: ../descriptions/convert.desktop.in.h:1
+msgid "ImageMagick command-line processing tool."
+msgstr ""
 
 #: ../glade/edit_dialog.glade.h:1
 msgid "Slaves"
@@ -268,7 +350,8 @@ msgid "Some changes are not saved."
 msgstr "Einige Änderungen sind nicht gesichert."
 
 #: ../glade/galternatives.glade.h:19
-msgid "Are you sure to quit now?"
+#, fuzzy
+msgid "Are you sure you want to quit now?"
 msgstr "Sind Sie sicher, dass Sie nun beenden möchten?"
 
 #: ../glade/galternatives.glade.h:20
