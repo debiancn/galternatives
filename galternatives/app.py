@@ -54,7 +54,7 @@ class GAlternativesApp(Gtk.Application):
             # not root
             if options.contains('normal'):
                 logger.warn(_(
-                    'No root detected, but continue as in your wishes'))
+                    'No root privileges detected, but continuing anyway'))
             elif shutil.which('pkexec'):
                 self.use_polkit = True
             else:

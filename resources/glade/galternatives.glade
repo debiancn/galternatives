@@ -479,7 +479,7 @@
     <property name="message_type">question</property>
     <property name="buttons">cancel</property>
     <property name="text" translatable="yes">Some changes are not saved.</property>
-    <property name="secondary_text" translatable="yes">Are you sure to quit now?</property>
+    <property name="secondary_text" translatable="yes">Are you sure you want to quit now?</property>
     <signal name="delete-event" handler="hide_on_delete" swapped="no"/>
     <signal name="response" handler="hide_on_delete" swapped="no"/>
     <signal name="show" handler="reset_dialog" swapped="no"/>
