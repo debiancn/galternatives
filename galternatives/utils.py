@@ -109,9 +109,9 @@ def get_template_child(widget, name):
 
     :returns:
         A widget with "name" and "widget_type" in the template clases widget
-        hiearchy or None if it was not found.
+        hierarchy or None if it was not found.
 
-    This method will recursively search the widget hiearchy so it is a good idea
+    This method will recursively search the widget hierarchy so it is a good idea
     to cache the results on a instance variable.
     """
     # Explicitly use gtk_buildable_get_name() because it is masked by

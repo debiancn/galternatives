@@ -32,14 +32,14 @@ GObject.threads_init()
 def hide_on_delete(window, *args):
     '''
     Warpper for Gtk.Widget.hide_on_delete, but allow superfluous arguments.
-    Used for singal callback.
+    Used for signal callback.
     '''
     return Gtk.Widget.hide_on_delete(window)
 
 
 def reset_dialog(dialog, *args):
     '''
-    Select cancel button as default when reshow the dialog. Used for singal
+    Select cancel button as default when reshow the dialog. Used for signal
     callback.
     '''
     btn_cancel = \
