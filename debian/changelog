@@ -4,8 +4,9 @@ galternatives (1.0.1) unstable; urgency=medium
     + Add more descriptions to alternative groups.
     + Fix some typos.
     + Add function to exit searching with Esc button.
+  * debian/control: Bump Standards-Version to 4.2.0 (no changes needed).
 
- -- Boyuan Yang <073plan@gmail.com>  Fri, 17 Aug 2018 11:15:15 -0400
+ -- Boyuan Yang <073plan@gmail.com>  Fri, 17 Aug 2018 11:23:16 -0400
 
 galternatives (1.0.0) unstable; urgency=medium
 
