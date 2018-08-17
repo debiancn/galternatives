@@ -38,7 +38,7 @@ except (ImportError, AttributeError):
 APPID = 'org.debian.experimental.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
-    'version': '1.0.0',
+    'version': '1.0.1',
     'comments': _('A tool to help the administrator select which programs '
                   'provide specific services for the user by default.'),
     'license_type': 'GPL_2_0',
