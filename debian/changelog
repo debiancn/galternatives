@@ -1,3 +1,12 @@
+galternatives (1.0.1) unstable; urgency=medium
+
+  * New stable release.
+    + Add more descriptions to alternative groups.
+    + Fix some typos.
+    + Add function to exit searching with Esc button.
+
+ -- Boyuan Yang <073plan@gmail.com>  Fri, 17 Aug 2018 11:15:15 -0400
+
 galternatives (1.0.0) unstable; urgency=medium
 
   * New stable release.
