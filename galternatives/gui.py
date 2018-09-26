@@ -6,7 +6,7 @@ from __future__ import absolute_import
 from . import logger, _, PACKAGE, INFO, alternative
 from .appdata import *
 from .description import *
-from .utils import GtkTemplate, stateful_property
+from .utils import stateful_property
 
 from copy import deepcopy
 from functools import wraps
@@ -49,14 +49,12 @@ def reset_dialog(dialog, *args):
     btn_cancel.grab_default()
 
 
-@GtkTemplate(ui=get_data_path('glade/file_entry.glade'))
+@Gtk.Template.from_file(get_data_path('glade/file_entry.glade'))
 class FileEntry(Gtk.Box):
-    def __init__(self, **kwargs):
-        super(FileEntry, self).__init__(**kwargs)
-        self.init_template()
-        self.entry = self.get_template_child('entry')
+    __gtype_name__ = 'FileEntry'
+    entry = Gtk.Template.Child('entry')
 
-    @GtkTemplate.Callback
+    @Gtk.Template.Callback('open_file')
     def open_file(self, button):
         '''Select a file and fill the entry with the path.'''
         file_chooser = Gtk.FileChooserDialog(
@@ -84,18 +82,16 @@ class FileEntry(Gtk.Box):
 
 # can't inherit GtkTemplate, need workaround
 
-@GtkTemplate(ui=get_data_path('glade/edit_dialog.glade'))
+@Gtk.Template.from_file(get_data_path('glade/edit_dialog.glade'))
 class EditDialog(Gtk.Dialog):
+    __gtype_name__ = 'EditDialog'
     slave_it = None
 
-    def __init__(self, *args, **kwargs):
-        super(EditDialog, self).__init__(**kwargs)
-        self.init_template()
-        for widget_id in {
-            'requires', 'slaves_tv', 'slave_fields', 'slaves_edit',
-            'new_group_warning'
-        }:
-            setattr(self, widget_id, self.get_template_child(widget_id))
+    requires = Gtk.Template.Child('requires')
+    slaves_tv = Gtk.Template.Child('slaves_tv')
+    slave_fields = Gtk.Template.Child('slave_fields')
+    slaves_edit = Gtk.Template.Child('slaves_edit')
+    new_group_warning = Gtk.Template.Child('new_group_warning')
 
     def _init_edit_dialog(self):
         for i, (field_name, label_name, widget_class) in \
@@ -138,18 +134,18 @@ class EditDialog(Gtk.Dialog):
         else:
             return super(EditDialog, cls).__new__(cls, *args, **kwargs)
 
-    @GtkTemplate.Callback
+    @Gtk.Template.Callback('add_row')
     def add_row(self, button):
         self.slaves_model.append((None, ) * len(self.SLAVES) * 2)
 
-    @GtkTemplate.Callback
+    @Gtk.Template.Callback('remove_row')
     def remove_row(self, button):
         model, it = self.slaves_tv.get_selection().get_selected()
         del model[it]
         for widget in self.slaves_entries:
             widget.set_text('')
 
-    @GtkTemplate.Callback
+    @Gtk.Template.Callback('on_click_slave')
     def on_click_slave(self, widget):
         model, it = widget.get_selected()
         self.slave_it = it
@@ -165,7 +161,7 @@ class EditDialog(Gtk.Dialog):
         self.slaves_model[self.slave_it][2 * widget.i_column] = \
             widget.get_text()
 
-    @GtkTemplate.Callback
+    @Gtk.Template.Callback('on_response')
     def on_response(self, window, response_id):
         # only bind to cancel button
         # dialog response can not be cancelled, thus not suitable for validation
@@ -173,11 +169,11 @@ class EditDialog(Gtk.Dialog):
             # do not emit delete-event
             self.destroy()
 
-    @GtkTemplate.Callback
+    @Gtk.Template.Callback('close')
     def close(self, *args):
         return super(EditDialog, self).close()
 
-    @GtkTemplate.Callback
+    @Gtk.Template.Callback('on_delete_event')
     def on_delete_event(self, window, event):
         validated = True
         empty = True

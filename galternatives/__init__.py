@@ -29,6 +29,8 @@ logger = logging.getLogger(PACKAGE)
 # set gtk version for the whole module
 try:
     import gi
+    gi.require_version('Gdk', '3.0')
+    gi.require_version('GdkPixbuf', '2.0')
     gi.require_version('Gtk', '3.0')
 except (ImportError, AttributeError):
     # in some cases gi is not installed since we only want to get INFO
@@ -38,7 +40,7 @@ except (ImportError, AttributeError):
 APPID = 'org.debian.experimental.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
-    'version': '1.0.1',
+    'version': '1.0.2',
     'comments': _('A tool to help the administrator select which programs '
                   'provide specific services for the user by default.'),
     'license_type': 'GPL_2_0',
