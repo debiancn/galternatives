@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-15 20:04+0800\n"
-"PO-Revision-Date: 2018-03-21 17:55+0200\n"
+"PO-Revision-Date: 2018-10-19 23:58+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish\n"
 "Language: da\n"
@@ -41,9 +41,8 @@ msgid "Testing galternatives..."
 msgstr "Tester galternatives..."
 
 #: ../../galternatives/app.py:57
-#, fuzzy
 msgid "No root privileges detected, but continuing anyway"
-msgstr "Ingen rod registreret, men fortsæt som i dine ønsker"
+msgstr "Ingen root-privilegier registreret, men fortsætter alligevel"
 
 #: ../../galternatives/app.py:64
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
@@ -72,18 +71,18 @@ msgid "No description"
 msgstr "Ingen beskrivelse"
 
 #: ../../galternatives/description.py:140
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
-msgstr "Fjern tilvalget `{2}' for gruppen `{1}'"
+msgstr "Installer tilvalget `{3}' for gruppen `{2}'"
 
 #: ../../galternatives/description.py:141
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Priority: {4}"
-msgstr "Prioritet"
+msgstr "Prioritet: {4}"
 
 #: ../../galternatives/description.py:142
 msgid "Slave `{}': `{}'"
-msgstr ""
+msgstr "Slave `{}': `{}'"
 
 #: ../../galternatives/description.py:147
 #, python-brace-format
@@ -175,96 +174,100 @@ msgstr "Alternativer;GAlternatives;Debian;"
 
 #: ../descriptions/x-www-browser.desktop.in.h:1
 msgid "X WWW Browser"
-msgstr ""
+msgstr "X WWW-browser"
 
 #: ../descriptions/x-www-browser.desktop.in.h:2
 msgid "Default WWW Browser to launch URLs and browse the Internet."
-msgstr ""
+msgstr "Standard WWW-browser til at starte URL'er og gennemse internettet."
 
 #: ../descriptions/x-cursor-theme.desktop.in.h:1
 msgid "X Cursor Theme"
-msgstr ""
+msgstr "X-markørtema"
 
 #: ../descriptions/x-cursor-theme.desktop.in.h:2
 msgid ""
 "Default Cursor Theme that helps various aspects of GUI navigation and "
 "manipulation."
 msgstr ""
+"Standard markørtema som hjælper diverse aspekter af GUI-navigation og "
+"-manipulation."
 
 #: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
-msgstr ""
+msgstr "C-preprocessor."
 
 #: ../descriptions/wine.desktop.in.h:1
 msgid "Compatibility layer for Microsoft Windows programs."
-msgstr ""
+msgstr "Kompatibilitetslager til Microsoft Windows-programmer."
 
 #: ../descriptions/desktop-theme.desktop.in.h:1
 msgid "Desktop Theme"
-msgstr ""
+msgstr "Skrivebordstema"
 
 #: ../descriptions/desktop-theme.desktop.in.h:2
 msgid "Default desktop theme."
-msgstr ""
+msgstr "Standard skrivebordstema."
 
 #: ../descriptions/google-chrome.desktop.in.h:1
 msgid "Google Chrome"
-msgstr ""
+msgstr "Google Chrome"
 
 #: ../descriptions/google-chrome.desktop.in.h:2
 msgid "Default Release Channel of Google Chrome to use."
-msgstr ""
+msgstr "Standard udgivelseskanel som skal bruges til Google Chrome."
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1
 msgid "X Terminal Emulator"
 msgstr "X-terminalemulator"
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:2
-#, fuzzy
 msgid ""
 "Default Terminal Emulator to use when running text-based applications, e.g. "
 "from desktop-neutral mailcap entries."
 msgstr ""
-"Standard terminalemulator som skal bruges når tekstbaserede programmer "
-"køres, primært fra Debian-menuen."
+"Standard terminalemulator som skal bruges når der køres tekstbaserede "
+"programmer, f.eks. fra skrivebordsneutrale mailcap-punkter."
 
 #: ../descriptions/desktop-background.desktop.in.h:1
 msgid "Desktop Background"
-msgstr ""
+msgstr "Skrivebordsbaggrund"
 
 #: ../descriptions/desktop-background.desktop.in.h:2
 msgid "Default desktop wallpaper."
-msgstr ""
+msgstr "Standard skrivebordstapet."
 
 #: ../descriptions/unrar.desktop.in.h:1
 msgid "Extractor for RAR archives."
-msgstr ""
+msgstr "Udpakker til RAR-arkiver."
 
 #: ../descriptions/editor.desktop.in.h:1
 msgid "Default command line editor, usually called by `editor` command."
 msgstr ""
+"Standard kommandolinjeeditor, som typisk kaldes med `editor`-kommandoen."
 
 #: ../descriptions/gnome-www-browser.desktop.in.h:1
 msgid "Gnome WWW Browser"
-msgstr ""
+msgstr "Gnome WWW-browser"
 
 #: ../descriptions/gnome-www-browser.desktop.in.h:2
 msgid "Default WWW Browser for GNOME Desktop Environment."
-msgstr ""
+msgstr "Standard WWW-browser til GNOME-skrivebordsmiljø."
 
 #: ../descriptions/java.desktop.in.h:1
 msgid "Default Java Runtime."
-msgstr ""
+msgstr "Standard Java runtime."
 
 #: ../descriptions/jar.desktop.in.h:1
 msgid ""
 "Creates an archive for classes and resources, and manipulate or restore "
 "individual classes or resources from an archive."
 msgstr ""
+"Oprettet et arkiv til klasser og ressourcer, og manipulerer eller gendanner "
+"enkelte klasser eller ressourcer fra et arkiv."
 
 #: ../descriptions/convert.desktop.in.h:1
 msgid "ImageMagick command-line processing tool."
-msgstr ""
+msgstr "ImageMagick-behandlingsværktøj til kommandolinjen."
 
 #: ../glade/edit_dialog.glade.h:1
 msgid "Slaves"
@@ -304,11 +307,11 @@ msgstr "_Fjern"
 
 #: ../glade/galternatives.glade.h:8
 msgid "Find"
-msgstr ""
+msgstr "Find"
 
 #: ../glade/galternatives.glade.h:9
 msgid "_Find"
-msgstr ""
+msgstr "_Find"
 
 #: ../glade/galternatives.glade.h:10
 msgid "Select an alternative group to edit"
@@ -343,14 +346,12 @@ msgid "Some changes are not saved."
 msgstr "Nogle ændringer gemmes ikke."
 
 #: ../glade/galternatives.glade.h:19
-#, fuzzy
 msgid "Are you sure you want to quit now?"
 msgstr "Er du sikker på, at du vil afslutte nu?"
 
 #: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
-msgstr ""
-"Redigering af alternative indstillinger er en avanceret funktionalitet."
+msgstr "Redigering af alternative indstillinger er en avanceret funktionalitet."
 
 #: ../glade/galternatives.glade.h:21
 msgid ""
@@ -415,12 +416,3 @@ msgstr "_Om"
 #: ../glade/menubar.glade.h:6
 msgid "_Quit"
 msgstr "_Afslut"
-
-#~ msgid ""
-#~ "Install option for group `{2}' with priority {4}, `{3}' for master link"
-#~ msgstr ""
-#~ "Installer tilvalg for gruppen `{2}' med prioriteten {4}, `{3}' for "
-#~ "hovedlinket"
-
-#~ msgid ", `{}' for slave link `{}'"
-#~ msgstr ", `{}' til slavelinket `{}'"
