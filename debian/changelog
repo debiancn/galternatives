@@ -1,3 +1,15 @@
+galternatives (1.0.2) unstable; urgency=medium
+
+  * New stable release.
+    + Replace homemade GtkTemplate with Gtk.Template.
+    + Update da.po translation.
+  * debian/control:
+    + Add new dependency gir1.2-gdkpixbuf-2.0.
+    + Bump Standards-Version to 4.2.1 (no changes needed).
+    + Update my uploader email address and use the @debian.org one.
+
+ -- Boyuan Yang <byang@debian.org>  Mon, 05 Nov 2018 11:23:48 -0500
+
 galternatives (1.0.1) unstable; urgency=medium
 
   * New stable release.

@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Debian Chinese Team <chinese-developers@lists.alioth.debian.org>
 Uploaders:
- Boyuan Yang <073plan@gmail.com>,
+ Boyuan Yang <byang@debian.org>,
  Yangfl <mmyangfl@gmail.com>,
 Build-Depends:
  debhelper (>= 11~),
@@ -11,7 +11,7 @@ Build-Depends:
  intltool,
  python3,
  python3-distutils,
-Standards-Version: 4.2.0
+Standards-Version: 4.2.1
 Vcs-Git: https://salsa.debian.org/chinese-team/galternatives.git
 Vcs-Browser: https://salsa.debian.org/chinese-team/galternatives
 X-Python3-Version: >= 3.6
@@ -20,6 +20,7 @@ Package: galternatives
 Architecture: all
 Depends:
  gir1.2-gtk-3.0,
+ gir1.2-gdkpixbuf-2.0,
  python3-gi,
  ${misc:Depends},
  ${python3:Depends},
