@@ -20,8 +20,8 @@ X-Python3-Version: >= 3.6
 Package: galternatives
 Architecture: all
 Depends:
- gir1.2-gtk-3.0,
  gir1.2-gdkpixbuf-2.0,
+ gir1.2-gtk-3.0,
  python3-gi,
  ${misc:Depends},
  ${python3:Depends},
