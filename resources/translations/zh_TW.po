@@ -75,7 +75,7 @@ msgstr "無描述"
 #: ../../galternatives/description.py:140
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
-msgstr "為組`{2}'安裝選項 {4}"
+msgstr "為組`{2}'安裝選項`{3}'"
 
 #: ../../galternatives/description.py:141
 #, python-brace-format
