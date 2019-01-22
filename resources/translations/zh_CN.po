@@ -1,12 +1,12 @@
 # Simplified Chinese translation for G Alternatives.
 # Copyright (C) 2003, Gustavo Noronha Silva <kov@debian.org>
 # This file is distributed under the same license as the galternatives package.
-# Boyuan Yang <073plan@gmail.com>, 2017.
+# Boyuan Yang <073plan@gmail.com>, 2017, 2019.
 # Yangfl <mmyangfl@gmail.com>, 2017, 2018.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: galternatives 0.92.1\n"
+"Project-Id-Version: galternatives 1.0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-15 20:04+0800\n"
 "PO-Revision-Date: 2018-06-15 20:11+0800\n"

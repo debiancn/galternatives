@@ -16,6 +16,11 @@ python3
 python3-gi  
 gettext (for i18n support)
 
+Packaging repository
+------------------------
+
+* Official packaging and development repository: [Salsa chinese-team/galternatives](https://salsa.debian.org/chinese-team/galternatives)
+
 License
 ---------
 GPL-1+ for the whole project. See `LICENSE.GPL-1`, `LICENSE.GPL-2` and `LICENSE.GPL-3`

@@ -40,12 +40,12 @@ except (ImportError, AttributeError):
 APPID = 'org.debian.experimental.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
-    'version': '1.0.2',
+    'version': '1.0.3',
     'comments': _('A tool to help the administrator select which programs '
                   'provide specific services for the user by default.'),
     'license_type': 'GPL_2_0',
     'copyright': '''(C) 2003-2006 Gustavo Noronha Silva
-(C) 2017-2018 Boyuan Yang''',
+(C) 2017-2019 Boyuan Yang''',
     'website': 'https://salsa.debian.org/chinese-team/galternatives',
     'authors': (
         'Gustavo Noronha Silva <kov@debian.org>',
