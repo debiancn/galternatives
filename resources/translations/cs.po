@@ -8,64 +8,64 @@ msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-15 20:04+0800\n"
-"PO-Revision-Date: 2006-04-09 15:33+0200\n"
-"Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
+"PO-Revision-Date: 2019-02-01 13:35+0100\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../galternatives/app.py:28
 msgid "Enable debug output"
-msgstr ""
+msgstr "Zapnout ladící výstup"
 
 #: ../../galternatives/app.py:31
 msgid "Do not try to acquire root (as normal user)"
-msgstr ""
+msgstr "Nepokoušet se získat oprávnění správce (coby běžný uživatele)"
 
 #: ../../galternatives/app.py:34
 msgid "Specify the alternatives directory"
-msgstr ""
+msgstr "Zadejte složku alternativ"
 
 #: ../../galternatives/app.py:37
 msgid "Specify the administrative directory"
-msgstr ""
+msgstr "Zadejte složku pro správu"
 
 #: ../../galternatives/app.py:40
 msgid "Specify the log file"
-msgstr ""
+msgstr "Zadejte soubor pro záznam událostí"
 
 #: ../../galternatives/app.py:48
 msgid "Testing galternatives..."
-msgstr "Testuji galternatives..."
+msgstr "Testování galternatives…"
 
 #: ../../galternatives/app.py:57
 msgid "No root privileges detected, but continuing anyway"
-msgstr ""
+msgstr "Nezjištěno oprávnění správce, ale pokračuje se i tak"
 
 #: ../../galternatives/app.py:64
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
-msgstr ""
+msgstr "<b>Pro privilegované operace je zapotřebí <tt>pkexec</tt>.</b>"
 
 #: ../../galternatives/app.py:68
-#, fuzzy
 msgid ""
-"The program needs pkexec to perform privileged alternatives system "
-"modifications under normal user. Unless you have modified your system to "
-"explicitly allow your normal user to do so, GAlternatives will not work."
+"The program needs pkexec to perform privileged alternatives system modifications under "
+"normal user. Unless you have modified your system to explicitly allow your normal user "
+"to do so, GAlternatives will not work."
 msgstr ""
-"Bez gksu si neumím vyžádat heslo. Pokud jste explicitně nezměnili systém "
-"tak, abyste mohli zasahovat do systému alternativ jako běžný uživatel, "
-"GAlternatives nebude fungovat."
+"Aplikace vyžaduje pkexec pro provádění privilegovaných úprav systémových alternativ pod "
+"běžným uživatelem. Pokud jste svůj systém neupravili tak, aby toto mohl dělat i běžný "
+"uživatel, GAlternatives nebude fungovat."
 
 #: ../../galternatives/app.py:98
 msgid "Specifying more than one group not allowed"
-msgstr ""
+msgstr "Zadání více než jedné skupiny není možné"
 
 #: ../../galternatives/app.py:103
 msgid "No such group"
-msgstr ""
+msgstr "Žádná taková skupina"
 
 #: ../../galternatives/description.py:25
 msgid "No description"
@@ -74,48 +74,48 @@ msgstr "Bez popisu"
 #: ../../galternatives/description.py:140
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
-msgstr ""
+msgstr "Nainstalovat volbu `{3}' pro skupinu `{2}'"
 
 #: ../../galternatives/description.py:141
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Priority: {4}"
-msgstr "Priorita:"
+msgstr "Priorita: {4}"
 
 #: ../../galternatives/description.py:142
 msgid "Slave `{}': `{}'"
-msgstr ""
+msgstr "Podřízené `{}': `{}'"
 
 #: ../../galternatives/description.py:147
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
-msgstr ""
+msgstr "Nastavit skupinu `{1}' na automatický režim"
 
 #: ../../galternatives/description.py:151
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
-msgstr ""
+msgstr "Nastavit skupinu `{1}' do ručního režimu, odkazující na `{2}'"
 
 #: ../../galternatives/description.py:156
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
-msgstr ""
+msgstr "Odebrat volbu `{2}' pro skupinu `{1}'"
 
 #: ../../galternatives/description.py:159
 #, python-brace-format
 msgid "Remove group `{1}'"
-msgstr ""
+msgstr "Odebrat skupinu `{1}'"
 
 #: ../../galternatives/appdata.py:89
 msgid "Logo missing. Is your installation correct?"
-msgstr ""
+msgstr "Chybí logo. Je vaše instalace v pořádku?"
 
 #: ../../galternatives/__init__.py:42
 msgid ""
-"A tool to help the administrator select which programs provide specific "
-"services for the user by default."
+"A tool to help the administrator select which programs provide specific services for "
+"the user by default."
 msgstr ""
-"Nástroj, který pomáhá administrátorovi vybrat výchozí programy, které mají "
-"uživatelům poskytovat dané služby."
+"Nástroj, který správci pomáhá vybrat výchozí programy, které mají uživatelům poskytovat "
+"dané služby."
 
 #: ../../galternatives/gui.py:63
 msgid "Select File"
@@ -123,23 +123,23 @@ msgstr "Výběr souboru"
 
 #: ../../galternatives/gui.py:213 ../../galternatives/gui.py:280
 msgid "Name"
-msgstr "Jméno"
+msgstr "Název"
 
 #: ../../galternatives/gui.py:214
 msgid "Link"
-msgstr ""
+msgstr "Odkaz"
 
 #: ../../galternatives/gui.py:222
 msgid "Edit group - {}"
-msgstr ""
+msgstr "Upravit skupinu – {}"
 
 #: ../../galternatives/gui.py:229
 msgid "Add group"
-msgstr ""
+msgstr "Přidat skupinu"
 
 #: ../../galternatives/gui.py:276 ../../galternatives/gui.py:281
 msgid "Path"
-msgstr "Cesta"
+msgstr "Popis umístění"
 
 #: ../../galternatives/gui.py:277 ../glade/galternatives.glade.h:16
 msgid "Priority"
@@ -147,19 +147,19 @@ msgstr "Priorita"
 
 #: ../../galternatives/gui.py:293
 msgid "Edit option - {}"
-msgstr ""
+msgstr "Upravit volbu – {}"
 
 #: ../../galternatives/gui.py:300
 msgid "Add option"
-msgstr ""
+msgstr "Přidat volbu"
 
 #: ../../galternatives/gui.py:529
 msgid "Run command: "
-msgstr ""
+msgstr "Spustit příkaz: "
 
 #: ../../galternatives/gui.py:800
 msgid "translator_credits"
-msgstr "Miroslav Kuře <kurem@debian.cz>"
+msgstr "Miroslav Kuře <kurem@debian.cz>, Pavel Borecki <pavel.borecki@gmail.com>"
 
 #: ../galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
@@ -167,109 +167,100 @@ msgstr "Nastavení alternativ"
 
 #: ../galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
-msgstr "Nastaví výchozí alternativy pro celý systém"
+msgstr "Nastavit výchozí alternativy pro celý systém"
 
 #: ../galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
-msgstr ""
+msgstr "Alternativy;GAlternatives;Debian;"
 
 #: ../descriptions/x-www-browser.desktop.in.h:1
 msgid "X WWW Browser"
-msgstr ""
+msgstr "Webový prohlížeč pro grafické prostředí"
 
 #: ../descriptions/x-www-browser.desktop.in.h:2
 msgid "Default WWW Browser to launch URLs and browse the Internet."
-msgstr ""
+msgstr "Výchozí webový prohlížeč pro spouštění URL adres a procházení webu."
 
 #: ../descriptions/x-cursor-theme.desktop.in.h:1
 msgid "X Cursor Theme"
-msgstr ""
+msgstr "Motiv vzhledu kurzoru grafického prostředí"
 
-#: ../descriptions/x-cursor-theme.desktop.in.h:2
-msgid ""
-"Default Cursor Theme that helps various aspects of GUI navigation and "
-"manipulation."
-msgstr ""
-
-#: ../descriptions/cpp.desktop.in.h:1
+#: ../descriptions/x-cursor-theme.desktop.in.h:2 ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
-msgstr ""
+msgstr "Předzpracování jazyka C."
 
 #: ../descriptions/wine.desktop.in.h:1
 msgid "Compatibility layer for Microsoft Windows programs."
-msgstr ""
+msgstr "Vrstva pro kompatibilitu s aplikacemi pro Microsoft Windows."
 
 #: ../descriptions/desktop-theme.desktop.in.h:1
 msgid "Desktop Theme"
-msgstr ""
+msgstr "Motiv vzhledu pracovního prostředí"
 
 #: ../descriptions/desktop-theme.desktop.in.h:2
 msgid "Default desktop theme."
-msgstr ""
+msgstr "Výchozí motiv vzhledu pracovního prostředí."
 
 #: ../descriptions/google-chrome.desktop.in.h:1
 msgid "Google Chrome"
-msgstr ""
+msgstr "Google Chrome"
 
 #: ../descriptions/google-chrome.desktop.in.h:2
 msgid "Default Release Channel of Google Chrome to use."
-msgstr ""
+msgstr "Výchozí kanál vydání Google Chrome, který použít."
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1
 msgid "X Terminal Emulator"
-msgstr ""
+msgstr "Emulátor terminálu pro grafické prostředí"
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:2
-msgid ""
-"Default Terminal Emulator to use when running text-based applications, e.g. "
-"from desktop-neutral mailcap entries."
-msgstr ""
-
 #: ../descriptions/desktop-background.desktop.in.h:1
 msgid "Desktop Background"
-msgstr ""
+msgstr "Pozadí plochy"
 
 #: ../descriptions/desktop-background.desktop.in.h:2
 msgid "Default desktop wallpaper."
-msgstr ""
+msgstr "Výchozí pozadí plochy."
 
 #: ../descriptions/unrar.desktop.in.h:1
 msgid "Extractor for RAR archives."
-msgstr ""
+msgstr "Rozbalování RAR archivů."
 
 #: ../descriptions/editor.desktop.in.h:1
 msgid "Default command line editor, usually called by `editor` command."
-msgstr ""
+msgstr "Výchozí editor v příkazovém řádku, obvykle volaný příkazem `editor`."
 
 #: ../descriptions/gnome-www-browser.desktop.in.h:1
 msgid "Gnome WWW Browser"
-msgstr ""
+msgstr "Webový prohlížeč pro Gnome"
 
 #: ../descriptions/gnome-www-browser.desktop.in.h:2
 msgid "Default WWW Browser for GNOME Desktop Environment."
-msgstr ""
+msgstr "Výchozí webový prohlížeč pro pracovní prostředí GNOME."
 
 #: ../descriptions/java.desktop.in.h:1
 msgid "Default Java Runtime."
-msgstr ""
+msgstr "Výchozí běhové prostředí pro Java."
 
 #: ../descriptions/jar.desktop.in.h:1
 msgid ""
-"Creates an archive for classes and resources, and manipulate or restore "
-"individual classes or resources from an archive."
+"Creates an archive for classes and resources, and manipulate or restore individual "
+"classes or resources from an archive."
 msgstr ""
+"Vytváří archiv pro třídy a prostředky a manipuluje nebo obnovuje jednotlivé třídy nebo "
+"prostředky z archivu."
 
 #: ../descriptions/convert.desktop.in.h:1
 msgid "ImageMagick command-line processing tool."
-msgstr ""
+msgstr "Nástroj typu ImageMagick pro zpracování z příkazového řádku."
 
 #: ../glade/edit_dialog.glade.h:1
 msgid "Slaves"
-msgstr "Závislosti"
+msgstr "Podřízené"
 
 #: ../glade/edit_dialog.glade.h:2
 msgid "No changes will be made until you add an option."
-msgstr ""
+msgstr "Dokud nepřidáte volbu, nebudou učiněny žádné změny."
 
 #: ../glade/galternatives.glade.h:1
 msgid "G Alternatives"
@@ -277,155 +268,144 @@ msgstr "G Alternativy"
 
 #: ../glade/galternatives.glade.h:2
 msgid "Create"
-msgstr ""
+msgstr "Vytvořit"
 
 #: ../glade/galternatives.glade.h:3
 msgid "_Create"
-msgstr ""
+msgstr "_Vytvořit"
 
 #: ../glade/galternatives.glade.h:4
 msgid "Edit"
-msgstr ""
+msgstr "Upravit"
 
 #: ../glade/galternatives.glade.h:5
 msgid "_Edit"
-msgstr ""
+msgstr "_Upravit"
 
 #: ../glade/galternatives.glade.h:6
 msgid "Remove"
-msgstr ""
+msgstr "Odebrat"
 
 #: ../glade/galternatives.glade.h:7
 msgid "_Remove"
-msgstr ""
+msgstr "Odeb_rat"
 
 #: ../glade/galternatives.glade.h:8
 msgid "Find"
-msgstr ""
+msgstr "Najít"
 
 #: ../glade/galternatives.glade.h:9
 msgid "_Find"
-msgstr ""
+msgstr "_Najít"
 
 #: ../glade/galternatives.glade.h:10
 msgid "Select an alternative group to edit"
-msgstr ""
+msgstr "Vyberte skupinu alternativ, kterou chcete upravit"
 
 #: ../glade/galternatives.glade.h:11
 msgid "Groups"
-msgstr ""
+msgstr "Skupiny"
 
 #: ../glade/galternatives.glade.h:12
 msgid "Auto:"
-msgstr ""
+msgstr "Automaticky:"
 
 #: ../glade/galternatives.glade.h:13
 msgid "Auto mode"
-msgstr ""
+msgstr "Automatický režim"
 
 #: ../glade/galternatives.glade.h:14
-#, fuzzy
 msgid "Alternative"
 msgstr "Alternativy"
 
 #: ../glade/galternatives.glade.h:15
 msgid "Choose an alternative group"
-msgstr ""
+msgstr "Zvolte skupinu alternativ"
 
 #: ../glade/galternatives.glade.h:17
 msgid "Package"
-msgstr ""
+msgstr "Balíček"
 
 #: ../glade/galternatives.glade.h:18
 msgid "Some changes are not saved."
-msgstr ""
+msgstr "Některé změny nebyly uloženy."
 
 #: ../glade/galternatives.glade.h:19
-#, fuzzy
 msgid "Are you sure you want to quit now?"
-msgstr "Jste si jisti, že chcete tuto možnost odstranit?"
+msgstr "Opravdu nyní chcete ukončit?"
 
 #: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
-msgstr ""
+msgstr "Upravování nastavení alternativ je pokročilá funkce."
 
-#: ../glade/galternatives.glade.h:21
-msgid ""
-"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
-"corresponding packages.\n"
-"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
-"editing may break your system."
-msgstr ""
-
-#: ../glade/galternatives.glade.h:23
+#: ../glade/galternatives.glade.h:21 ../glade/galternatives.glade.h:23
 msgid "Show this dialog next time."
-msgstr ""
+msgstr "Zobrazit tento dialog i příště."
 
 #: ../glade/galternatives.glade.h:24
 msgid "Preferences"
-msgstr ""
+msgstr "Předvolby"
 
 #: ../glade/galternatives.glade.h:25
 msgid "See update-alternatives(1) \"OPTIONS\" section for details"
-msgstr ""
+msgstr "Podrobnosti naleznete v manuálové stránce update-alternatives(1), v sekci „VOLBY“"
 
 #: ../glade/galternatives.glade.h:26
-#, fuzzy
 msgid "Paths"
-msgstr "Cesta:"
+msgstr "Popisy umístění"
 
 #: ../glade/galternatives.glade.h:27
 msgid "Commit failed"
-msgstr ""
+msgstr "Použití se nezdařilo"
 
 #: ../glade/galternatives.glade.h:28
 msgid "An error has occurred. The results are:"
-msgstr ""
+msgstr "Došlo k chybě. Výsledky jsou:"
 
 #: ../glade/galternatives.glade.h:29
 msgid "Be careful! Your system may be already in an unstable state."
-msgstr ""
+msgstr "Buďte opatrní! Váš systém už může být v nestabilním stavu."
 
 #: ../glade/menubar.glade.h:1
 msgid "_Delay mode"
-msgstr ""
+msgstr "Režim pro_dlevy"
 
 #: ../glade/menubar.glade.h:2
 msgid "Query _package (high I/O)"
-msgstr ""
+msgstr "Dotázat _balíček (vytíží vstup/výstup datového úložiště)"
 
 #: ../glade/menubar.glade.h:3
 msgid "_Use polkit"
-msgstr ""
+msgstr "Vy_užít polkit"
 
 #: ../glade/menubar.glade.h:4
 msgid "_Working dir..."
-msgstr ""
+msgstr "Praco_vní složka…"
 
 #: ../glade/menubar.glade.h:5
 msgid "_About"
-msgstr "_O programu"
+msgstr "O _aplikaci"
 
 #: ../glade/menubar.glade.h:6
 msgid "_Quit"
-msgstr ""
+msgstr "_Ukončit"
 
 #~ msgid "Running Alternatives Configurator..."
-#~ msgstr "Spouštím nastavení alternativ..."
+#~ msgstr "Spouštění nastavení alternativ…"
 
 #~ msgid ""
 #~ "<b>I need your root password to run\n"
 #~ "the Alternatives Configurator.</b>"
 #~ msgstr ""
 #~ "<b>Pro spuštění editoru alternativ\n"
-#~ "potřebuji heslo uživatele root.</b>"
+#~ "je zapotřebí heslo správce.</b>"
 
 #~ msgid ""
-#~ "<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
-#~ "available.</b>"
+#~ "<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not available.</"
+#~ "b>"
 #~ msgstr ""
-#~ "<b>Tento program by měl být spuštěn pod uživatelem root, ovšem <tt>/usr/"
-#~ "bin/gksu</tt> není dostupný.</b>"
+#~ "<b>Tato aplikace by měla být spuštěna pod správce, ale <tt>/usr/bin/gksu</tt> není k "
+#~ "dispozici.</b>"
 
 #~ msgid "Unknown/None"
 #~ msgstr "Neznámý/Žádný"
@@ -444,7 +424,7 @@ msgstr ""
 #~ msgstr "Volby"
 
 #~ msgid "Slave"
-#~ msgstr "Závislost"
+#~ msgstr "Podřízené"
 
 #~ msgid "_File"
 #~ msgstr "_Soubor"
@@ -456,10 +436,10 @@ msgstr ""
 #~ msgstr "Stav:"
 
 #~ msgid "auto"
-#~ msgstr "automatický"
+#~ msgstr "automaticky"
 
 #~ msgid "manual"
-#~ msgstr "ruční"
+#~ msgstr "ručně"
 
 #~ msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
 #~ msgstr "<span size=\"xx-large\" weight=\"bold\">Alternativa</span>"
@@ -468,16 +448,16 @@ msgstr ""
 #~ msgstr "Podrobnosti"
 
 #~ msgid "About G Alternatives"
-#~ msgstr "O G Alternativách"
+#~ msgstr "O aplikace G Alternativy"
 
 #~ msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
 #~ msgstr "<span size=\"xx-large\" weight=\"bold\">G Alternativy</span>"
 
 #~ msgid "C_redits"
-#~ msgstr "Uznání"
+#~ msgstr "Zásluhy"
 
 #~ msgid "G Alternatives Credits"
-#~ msgstr "G Alternativy - uznání"
+#~ msgstr "G Alternativy – zásluhy"
 
 #~ msgid "Gustavo Noronha Silva <kov@debian.org>"
 #~ msgstr "Gustavo Noronha Silva <kov@debian.org>"
@@ -495,10 +475,10 @@ msgstr ""
 #~ msgstr "Poděkování"
 
 #~ msgid "Adding option to alternative"
-#~ msgstr "Přidání alternativy"
+#~ msgstr "Přidání volby do alternativ"
 
 #~ msgid "*"
 #~ msgstr "*"
 
 #~ msgid "_Browse..."
-#~ msgstr "_Procházet..."
+#~ msgstr "_Procházet…"
