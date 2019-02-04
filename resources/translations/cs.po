@@ -51,13 +51,13 @@ msgstr "<b>Pro privilegované operace je zapotřebí <tt>pkexec</tt>.</b>"
 
 #: ../../galternatives/app.py:68
 msgid ""
-"The program needs pkexec to perform privileged alternatives system modifications under "
-"normal user. Unless you have modified your system to explicitly allow your normal user "
-"to do so, GAlternatives will not work."
+"The program needs pkexec to perform privileged alternatives system "
+"modifications under normal user. Unless you have modified your system to "
+"explicitly allow your normal user to do so, GAlternatives will not work."
 msgstr ""
-"Aplikace vyžaduje pkexec pro provádění privilegovaných úprav systémových alternativ pod "
-"běžným uživatelem. Pokud jste svůj systém neupravili tak, aby toto mohl dělat i běžný "
-"uživatel, GAlternatives nebude fungovat."
+"Aplikace vyžaduje pkexec pro provádění privilegovaných úprav systémových "
+"alternativ pod běžným uživatelem. Pokud jste svůj systém neupravili tak, aby "
+"toto mohl dělat i běžný uživatel, GAlternatives nebude fungovat."
 
 #: ../../galternatives/app.py:98
 msgid "Specifying more than one group not allowed"
@@ -111,11 +111,11 @@ msgstr "Chybí logo. Je vaše instalace v pořádku?"
 
 #: ../../galternatives/__init__.py:42
 msgid ""
-"A tool to help the administrator select which programs provide specific services for "
-"the user by default."
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default."
 msgstr ""
-"Nástroj, který správci pomáhá vybrat výchozí programy, které mají uživatelům poskytovat "
-"dané služby."
+"Nástroj, který správci pomáhá vybrat výchozí programy, které mají uživatelům "
+"poskytovat dané služby."
 
 #: ../../galternatives/gui.py:63
 msgid "Select File"
@@ -159,7 +159,8 @@ msgstr "Spustit příkaz: "
 
 #: ../../galternatives/gui.py:800
 msgid "translator_credits"
-msgstr "Miroslav Kuře <kurem@debian.cz>, Pavel Borecki <pavel.borecki@gmail.com>"
+msgstr ""
+"Miroslav Kuře <kurem@debian.cz>, Pavel Borecki <pavel.borecki@gmail.com>"
 
 #: ../galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
@@ -185,7 +186,13 @@ msgstr "Výchozí webový prohlížeč pro spouštění URL adres a procházení
 msgid "X Cursor Theme"
 msgstr "Motiv vzhledu kurzoru grafického prostředí"
 
-#: ../descriptions/x-cursor-theme.desktop.in.h:2 ../descriptions/cpp.desktop.in.h:1
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr ""
+
+#: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
 msgstr "Předzpracování jazyka C."
 
@@ -214,6 +221,11 @@ msgid "X Terminal Emulator"
 msgstr "Emulátor terminálu pro grafické prostředí"
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:2
+msgid ""
+"Default Terminal Emulator to use when running text-based applications, e.g. "
+"from desktop-neutral mailcap entries."
+msgstr ""
+
 #: ../descriptions/desktop-background.desktop.in.h:1
 msgid "Desktop Background"
 msgstr "Pozadí plochy"
@@ -244,11 +256,11 @@ msgstr "Výchozí běhové prostředí pro Java."
 
 #: ../descriptions/jar.desktop.in.h:1
 msgid ""
-"Creates an archive for classes and resources, and manipulate or restore individual "
-"classes or resources from an archive."
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
 msgstr ""
-"Vytváří archiv pro třídy a prostředky a manipuluje nebo obnovuje jednotlivé třídy nebo "
-"prostředky z archivu."
+"Vytváří archiv pro třídy a prostředky a manipuluje nebo obnovuje jednotlivé "
+"třídy nebo prostředky z archivu."
 
 #: ../descriptions/convert.desktop.in.h:1
 msgid "ImageMagick command-line processing tool."
@@ -338,7 +350,15 @@ msgstr "Opravdu nyní chcete ukončit?"
 msgid "Alternative settings editing is advanced feature."
 msgstr "Upravování nastavení alternativ je pokročilá funkce."
 
-#: ../glade/galternatives.glade.h:21 ../glade/galternatives.glade.h:23
+#: ../glade/galternatives.glade.h:21
+msgid ""
+"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
+"corresponding packages.\n"
+"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
+"editing may break your system."
+msgstr ""
+
+#: ../glade/galternatives.glade.h:23
 msgid "Show this dialog next time."
 msgstr "Zobrazit tento dialog i příště."
 
@@ -348,7 +368,9 @@ msgstr "Předvolby"
 
 #: ../glade/galternatives.glade.h:25
 msgid "See update-alternatives(1) \"OPTIONS\" section for details"
-msgstr "Podrobnosti naleznete v manuálové stránce update-alternatives(1), v sekci „VOLBY“"
+msgstr ""
+"Podrobnosti naleznete v manuálové stránce update-alternatives(1), v sekci "
+"„VOLBY“"
 
 #: ../glade/galternatives.glade.h:26
 msgid "Paths"
@@ -401,11 +423,11 @@ msgstr "_Ukončit"
 #~ "je zapotřebí heslo správce.</b>"
 
 #~ msgid ""
-#~ "<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not available.</"
-#~ "b>"
+#~ "<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
+#~ "available.</b>"
 #~ msgstr ""
-#~ "<b>Tato aplikace by měla být spuštěna pod správce, ale <tt>/usr/bin/gksu</tt> není k "
-#~ "dispozici.</b>"
+#~ "<b>Tato aplikace by měla být spuštěna pod správce, ale <tt>/usr/bin/gksu</"
+#~ "tt> není k dispozici.</b>"
 
 #~ msgid "Unknown/None"
 #~ msgstr "Neznámý/Žádný"

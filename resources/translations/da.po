@@ -189,8 +189,8 @@ msgid ""
 "Default Cursor Theme that helps various aspects of GUI navigation and "
 "manipulation."
 msgstr ""
-"Standard markørtema som hjælper diverse aspekter af GUI-navigation og "
-"-manipulation."
+"Standard markørtema som hjælper diverse aspekter af GUI-navigation og -"
+"manipulation."
 
 #: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
@@ -351,7 +351,8 @@ msgstr "Er du sikker på, at du vil afslutte nu?"
 
 #: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
-msgstr "Redigering af alternative indstillinger er en avanceret funktionalitet."
+msgstr ""
+"Redigering af alternative indstillinger er en avanceret funktionalitet."
 
 #: ../glade/galternatives.glade.h:21
 msgid ""
