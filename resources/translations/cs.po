@@ -190,7 +190,9 @@ msgstr "Motiv vzhledu kurzoru grafického prostředí"
 msgid ""
 "Default Cursor Theme that helps various aspects of GUI navigation and "
 "manipulation."
-msgstr ""
+msgstr
+"Výchozí motiv vzhledu kurzoru který pomáhá různým aspektům pohybu a "
+"manipulace v grafickém uživatelském rozhraní."
 
 #: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
@@ -225,6 +227,8 @@ msgid ""
 "Default Terminal Emulator to use when running text-based applications, e.g. "
 "from desktop-neutral mailcap entries."
 msgstr ""
+"Výchozí emulátor terminálu který použít pro spouštění na textu založených "
+"aplikací, např. z položek vůči pracovnímu prostředí neutrálního mailcap."
 
 #: ../descriptions/desktop-background.desktop.in.h:1
 msgid "Desktop Background"
@@ -357,6 +361,10 @@ msgid ""
 "<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
 "editing may break your system."
 msgstr ""
+"Jejich správa je zamýšlena nástrojem <tt>dpkg</tt> a a poskytována "
+"balíčky, ze kterých pocházejí.\n"
+"<b>Varování!</b> Tato funkce není odladěná a může mít chyby. Ruční "
+"úprava může váš systém rozbít."
 
 #: ../glade/galternatives.glade.h:23
 msgid "Show this dialog next time."
@@ -436,8 +444,8 @@ msgstr "_Ukončit"
 #~ "The file or directory you selected does not exist.\n"
 #~ "Please select a valid one."
 #~ msgstr ""
-#~ "Zvolený soubor nebo adresář neexistuje.\n"
-#~ "Vyberte prosím nějaký existující."
+#~ "Zvolený soubor nebo složka neexistuje.\n"
+#~ "Vyberte nějaký existující."
 
 #~ msgid "Choice"
 #~ msgstr "Výběr"
