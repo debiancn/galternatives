@@ -190,7 +190,7 @@ msgstr "Motiv vzhledu kurzoru grafického prostředí"
 msgid ""
 "Default Cursor Theme that helps various aspects of GUI navigation and "
 "manipulation."
-msgstr
+msgstr ""
 "Výchozí motiv vzhledu kurzoru který pomáhá různým aspektům pohybu a "
 "manipulace v grafickém uživatelském rozhraní."
 
