@@ -1,3 +1,13 @@
+galternatives (1.0.4) UNRELEASED; urgency=medium
+
+  * New maintenance release.
+  * Add/update translations, with thanks to:
+    - Czech, Pavel Borecki.
+    - Dutch, Frans Spiesschaert (Closes: #921944).
+    - German, Chris Leick (Closes: #922510).
+
+ -- Yangfl <mmyangfl@gmail.com>  Wed, 20 Feb 2019 14:57:01 +0800
+
 galternatives (1.0.3) unstable; urgency=medium
 
   * New stable release.

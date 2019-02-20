@@ -1,54 +1,55 @@
-# Translation of galternatives to German
-# Copyright (C) 2003 Gustavo Noronha Silva <kov@debian.org>.
-# This file is distributed under the same license as the galternatives
-# package.
-# Chris Leick <c.leick@vollbio.de>, 2009, 2017, 2019.
+# Dutch translation of galternatives.pot
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the galternatives package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Frans Spiesschaert <Frans.Spiesschaert@yucom.be>, 2019.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: galternatives 1.0.3\n"
+"Project-Id-Version: galternatives_1.0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-15 20:04+0800\n"
-"PO-Revision-Date: 2019-02-16 10:35+GMT\n"
-"Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
-"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2019-01-31 20:15+0100\n"
+"Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
+"Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: ../../galternatives/app.py:28
 msgid "Enable debug output"
-msgstr "Ausgabe zur Fehlersuche aktivieren"
+msgstr "Debug-uitvoer aanzetten"
 
 #: ../../galternatives/app.py:31
 msgid "Do not try to acquire root (as normal user)"
-msgstr "nicht versuchen, Root zu werden (als normaler Benutzer)"
+msgstr "Geen beheerdersrechten proberen te verwerven (als gewone gebruiker)"
 
 #: ../../galternatives/app.py:34
 msgid "Specify the alternatives directory"
-msgstr "Alternativen-Verzeichnis angeben"
+msgstr "De alternatieven-map opgeven"
 
 #: ../../galternatives/app.py:37
 msgid "Specify the administrative directory"
-msgstr "Verwaltungsverzeichnis angeben"
+msgstr "De beheersmap opgeven"
 
 #: ../../galternatives/app.py:40
 msgid "Specify the log file"
-msgstr "Protokolldatei angeben"
+msgstr "Het logbestand opgeven"
 
 #: ../../galternatives/app.py:48
 msgid "Testing galternatives..."
-msgstr "GAlternatives wird getestet …"
+msgstr "galternatives wordt getest..."
 
 #: ../../galternatives/app.py:57
 msgid "No root privileges detected, but continuing anyway"
-msgstr "keine Root-Rechte entdeckt, es wird jedoch wie gewünscht fortgefahren"
+msgstr "Geen beheerdersrechten gevonden, maar we gaan toch door"
 
 #: ../../galternatives/app.py:64
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
-msgstr "<b>Für Rechtetransaktionen ist <tt>pkexec</tt> erforderlich.</b>"
+msgstr "<b><tt>pkexec</tt> is vereist voor bevoorrechte bewerkingen.</b>"
 
 #: ../../galternatives/app.py:68
 msgid ""
@@ -56,76 +57,76 @@ msgid ""
 "modifications under normal user. Unless you have modified your system to "
 "explicitly allow your normal user to do so, GAlternatives will not work."
 msgstr ""
-"Das Programm benötigt Pkexec, um privilegiert Änderungen am "
-"Alternativensystem als normaler Benutzer durchzuführen. Sofern Sie Ihr "
-"System nicht so geändert haben, dass normalen Benutzern ausdrücklich erlaubt "
-"wird, das zu tun, wird GAlternatives nicht funktionieren."
+"Het programma heeft pkexec nodig om als gewone gebruiker geprivilegieerde "
+"wijzigingen aan het alternatievensysteem uit te voeren. Tenzij u uw systeem "
+"aanpaste om uw gewone gebruiker expliciet toe te staan om dit toch te doen, "
+"zal GAlternatives niet werken."
 
 #: ../../galternatives/app.py:98
 msgid "Specifying more than one group not allowed"
-msgstr "Es ist nicht erlaubt, mehr als eine Gruppe anzugeben."
+msgstr "Meer dan één groep opgeven, wordt niet toegestaan"
 
 #: ../../galternatives/app.py:103
 msgid "No such group"
-msgstr "keine derartige Gruppe"
+msgstr "Geen dergelijke groep"
 
 #: ../../galternatives/description.py:25
 msgid "No description"
-msgstr "keine Beschreibung"
+msgstr "Geen beschrijving"
 
 #: ../../galternatives/description.py:140
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
-msgstr "Installationsoption »{3}« für Gruppe »{2}«"
+msgstr "Installatieoptie `{3}' voor groep `{2}'"
 
 #: ../../galternatives/description.py:141
 #, python-brace-format
 msgid "Priority: {4}"
-msgstr "Priorität: {4}"
+msgstr "Prioriteit: {4}"
 
 #: ../../galternatives/description.py:142
 msgid "Slave `{}': `{}'"
-msgstr "Slave `{}': `{}'"
+msgstr "Slaaf `{}': `{}'"
 
 #: ../../galternatives/description.py:147
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
-msgstr "setzt Gruppe »{1}« auf automatischen Modus"
+msgstr "Groep `{1}' instellen op auto-modus"
 
 #: ../../galternatives/description.py:151
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
-msgstr "setzt Gruppe »{1}« auf manuellen Modus, verweist auf »{2}«"
+msgstr "Groep `{1}' instellen op handmatige modus, verwees naar `{2}'"
 
 #: ../../galternatives/description.py:156
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
-msgstr "entfernt Option »{2}« für Gruppe »{1}«"
+msgstr "Optie `{2}' voor groep `{1}' verwijderen"
 
 #: ../../galternatives/description.py:159
 #, python-brace-format
 msgid "Remove group `{1}'"
-msgstr "entfernt Gruppe »{1}«"
+msgstr "Groep `{1}' verwijderen"
 
 #: ../../galternatives/appdata.py:89
 msgid "Logo missing. Is your installation correct?"
-msgstr "Logo fehlt. Ist Ihre Installation korrekt?"
+msgstr "Logo ontbreekt. Is uw installatie correct?"
 
 #: ../../galternatives/__init__.py:42
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
 msgstr ""
-"ein Werkzeug, das dem Administrator hilft, Programme auszuwählen, die dem "
-"Benutzer spezielle Dienste als Vorgabe bereitstellen"
+"Een hulpmiddelen om de beheerder te helpen bij het selecteren welk programma "
+"standaard welke specifieke diensten levert aan de gebruiker."
 
 #: ../../galternatives/gui.py:63
 msgid "Select File"
-msgstr "Datei auswählen"
+msgstr "Bestand selecteren"
 
 #: ../../galternatives/gui.py:213 ../../galternatives/gui.py:280
 msgid "Name"
-msgstr "Name"
+msgstr "Naam"
 
 #: ../../galternatives/gui.py:214
 msgid "Link"
@@ -133,84 +134,84 @@ msgstr "Link"
 
 #: ../../galternatives/gui.py:222
 msgid "Edit group - {}"
-msgstr "Gruppe bearbeiten - {}"
+msgstr "Groep - {} bewerken"
 
 #: ../../galternatives/gui.py:229
 msgid "Add group"
-msgstr "Gruppe hinzufügen"
+msgstr "Groep toevoegen"
 
 #: ../../galternatives/gui.py:276 ../../galternatives/gui.py:281
 msgid "Path"
-msgstr "Pfad"
+msgstr "Pad"
 
 #: ../../galternatives/gui.py:277 ../glade/galternatives.glade.h:16
 msgid "Priority"
-msgstr "Priorität"
+msgstr "Prioriteit"
 
 #: ../../galternatives/gui.py:293
 msgid "Edit option - {}"
-msgstr "Option bearbeiten - {}"
+msgstr "Optie - {} bewerken"
 
 #: ../../galternatives/gui.py:300
 msgid "Add option"
-msgstr "Option hinzufügen"
+msgstr "Optie toevoegen"
 
 #: ../../galternatives/gui.py:529
 msgid "Run command: "
-msgstr "Befehl ausführen: "
+msgstr "Commando uitvoeren:"
 
 #: ../../galternatives/gui.py:800
 msgid "translator_credits"
-msgstr "Chris Leick <c.leick@vollbio.de>"
+msgstr "Frans Spiesschaert <Frans.Spiesschaert@yucom.be>"
 
 #: ../galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
-msgstr "Alternativeneinrichter"
+msgstr "Alternatievenconfigurator"
 
 #: ../galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
-msgstr "die Standard-Alternativen des Systems einrichten"
+msgstr "De standaardalternatieven van het systeem configureren"
 
 #: ../galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
-msgstr "Alternativen;GAlternatives;Debian;"
+msgstr "Alternatives;GAlternatives;Debian;"
 
 #: ../descriptions/x-www-browser.desktop.in.h:1
 msgid "X WWW Browser"
-msgstr "X-WWW-Browser"
+msgstr "X WWW-browser"
 
 #: ../descriptions/x-www-browser.desktop.in.h:2
 msgid "Default WWW Browser to launch URLs and browse the Internet."
 msgstr ""
-"Standard-WWW-Browser zum Starten von URLs und zum Durchstöbern des Internets"
+"Standaard WWW-browser om URL's op te vragen en te browsen op het internet."
 
 #: ../descriptions/x-cursor-theme.desktop.in.h:1
 msgid "X Cursor Theme"
-msgstr "X-Cursor-Theme"
+msgstr "X cursor-stijl"
 
 #: ../descriptions/x-cursor-theme.desktop.in.h:2
 msgid ""
 "Default Cursor Theme that helps various aspects of GUI navigation and "
 "manipulation."
 msgstr ""
-"Standard-Curso-Theme, das bei vielen Aspekten der GUI-Navigation und "
-"Veränderung hilft"
+"Standaard cursor-stijl die ondersteunend werkt bij verschillende aspecten "
+"van navigeren en manipuleren in de grafische gebruikersomgeving."
 
 #: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
-msgstr "C-Präprozessor"
+msgstr "C-preprocessor."
 
 #: ../descriptions/wine.desktop.in.h:1
 msgid "Compatibility layer for Microsoft Windows programs."
-msgstr "Kompatibilitätsschicht für Microsoft-Windows-Programme"
+msgstr "Compatibiliteitslaag voor programma's van Microsoft Windows."
 
 #: ../descriptions/desktop-theme.desktop.in.h:1
 msgid "Desktop Theme"
-msgstr "Desktop-Theme"
+msgstr "Bureaubladstijl"
 
 #: ../descriptions/desktop-theme.desktop.in.h:2
 msgid "Default desktop theme."
-msgstr "Standard-Desktop-Theme"
+msgstr "Standaard bureaubladstijl."
 
 #: ../descriptions/google-chrome.desktop.in.h:1
 msgid "Google Chrome"
@@ -218,70 +219,70 @@ msgstr "Google Chrome"
 
 #: ../descriptions/google-chrome.desktop.in.h:2
 msgid "Default Release Channel of Google Chrome to use."
-msgstr ""
-"Standard-Veröffentlichungskanal von Google Chrome, der benutzt werden soll"
+msgstr "Te gebruiken standaard releasekanaal van Google Chrome."
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1
 msgid "X Terminal Emulator"
-msgstr "X-Terminal-Emulator"
+msgstr "X-terminalemulator"
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:2
 msgid ""
 "Default Terminal Emulator to use when running text-based applications, e.g. "
 "from desktop-neutral mailcap entries."
 msgstr ""
-"Standard-Terminal-Emulator, der bei der Ausführung textbasierter Anwendungen "
-"verwendet werden soll, z.B. von Desktop-unabhängigen Mailcap-Einträgen"
+"Standaard terminalemulator die gebruikt wordt bij het uitvoeren van "
+"tekstgeoriënteerde applicaties, bijv. van desktopneutrale mailcap-elementen."
 
 #: ../descriptions/desktop-background.desktop.in.h:1
 msgid "Desktop Background"
-msgstr "Desktop-Hintergrund"
+msgstr "Bureaubladachtergrond"
 
 #: ../descriptions/desktop-background.desktop.in.h:2
 msgid "Default desktop wallpaper."
-msgstr "Standard Desktop-Hintergrundbild"
+msgstr "Standaard bureaubladachtergrond."
 
 #: ../descriptions/unrar.desktop.in.h:1
 msgid "Extractor for RAR archives."
-msgstr "Entpacker für RAR-Archive"
+msgstr "Uitpakker van RAR-archieven."
 
 #: ../descriptions/editor.desktop.in.h:1
 msgid "Default command line editor, usually called by `editor` command."
 msgstr ""
-"Standard-Befehlzeileneditor, üblicherweise mit dem Befehl »editor« aufgerufen"
+"Standaard editor voor de commandoregel, welke gewoonlijk met het commando "
+"`editor` gestart wordt."
 
 #: ../descriptions/gnome-www-browser.desktop.in.h:1
 msgid "Gnome WWW Browser"
-msgstr "Gnome-WWW-Browser"
+msgstr "Gnome WWW-browser"
 
 #: ../descriptions/gnome-www-browser.desktop.in.h:2
 msgid "Default WWW Browser for GNOME Desktop Environment."
-msgstr "Standard-WWW-Browser der GNOME-Desktop-Umgebung"
+msgstr "Standaard WWW-browser voor de grafische werkomgeving GNOME."
 
 #: ../descriptions/java.desktop.in.h:1
 msgid "Default Java Runtime."
-msgstr "Standard-Java-Laufzeitumgebung"
+msgstr "Standaard Java Runtime."
 
 #: ../descriptions/jar.desktop.in.h:1
 msgid ""
 "Creates an archive for classes and resources, and manipulate or restore "
 "individual classes or resources from an archive."
 msgstr ""
-"erstellt ein Archiv für Klassen und Ressourcen und verändert individuelle "
-"Klassen und Ressourcen aus einem Archiv oder stellt sie wieder her."
+"Creëert een archief van klassen en hulpbronnen, en manipuleert of herstelt "
+"individuele klassen of hulpbronnen vanuit een archief."
 
 #: ../descriptions/convert.desktop.in.h:1
 msgid "ImageMagick command-line processing tool."
-msgstr "ImageMagick-Befehlszeilenverarbeitungswerkzeug"
+msgstr "ImageMagick, hulpmiddel voor beeldbewerkingen aan de commandoregel."
 
 #: ../glade/edit_dialog.glade.h:1
 msgid "Slaves"
-msgstr "Slaves"
+msgstr "Slaven"
 
 #: ../glade/edit_dialog.glade.h:2
 msgid "No changes will be made until you add an option."
 msgstr ""
-"Es werden keine Änderungen vorgenommen, bis Sie eine Option hinzufügen."
+"Er zullen geen veranderingen doorgevoerd worden totdat u een optie toevoegt."
 
 #: ../glade/galternatives.glade.h:1
 msgid "G Alternatives"
@@ -289,75 +290,76 @@ msgstr "G Alternatives"
 
 #: ../glade/galternatives.glade.h:2
 msgid "Create"
-msgstr "erstellen"
+msgstr "Creëren"
 
 #: ../glade/galternatives.glade.h:3
 msgid "_Create"
-msgstr "_erstellen"
+msgstr "_Creëren"
 
 #: ../glade/galternatives.glade.h:4
 msgid "Edit"
-msgstr "bearbeiten"
+msgstr "Bewerken"
 
 #: ../glade/galternatives.glade.h:5
 msgid "_Edit"
-msgstr "_bearbeiten"
+msgstr "_Bewerken"
 
 #: ../glade/galternatives.glade.h:6
 msgid "Remove"
-msgstr "entfernen"
+msgstr "Verwijderen"
 
 #: ../glade/galternatives.glade.h:7
 msgid "_Remove"
-msgstr "ent_fernen"
+msgstr "Ver_wijderen"
 
 #: ../glade/galternatives.glade.h:8
 msgid "Find"
-msgstr "finden"
+msgstr "Zoeken"
 
 #: ../glade/galternatives.glade.h:9
 msgid "_Find"
-msgstr "fin_den"
+msgstr "_Zoeken"
 
 #: ../glade/galternatives.glade.h:10
 msgid "Select an alternative group to edit"
-msgstr "Wählen Sie eine Alternativengruppe zum Bearbeiten."
+msgstr "Een alternatievengroep selecteren om te bewerken"
 
 #: ../glade/galternatives.glade.h:11
 msgid "Groups"
-msgstr "Gruppen"
+msgstr "Groepen"
 
 #: ../glade/galternatives.glade.h:12
 msgid "Auto:"
-msgstr "automatisch:"
+msgstr "Auto:"
 
 #: ../glade/galternatives.glade.h:13
 msgid "Auto mode"
-msgstr "automatischer Modus"
+msgstr "Auto-modus"
 
 #: ../glade/galternatives.glade.h:14
 msgid "Alternative"
-msgstr "Alternative"
+msgstr "Alternatief"
 
 #: ../glade/galternatives.glade.h:15
 msgid "Choose an alternative group"
-msgstr "Wählen Sie eine Alternativengruppe."
+msgstr "Een alternatievengroep kiezen"
 
 #: ../glade/galternatives.glade.h:17
 msgid "Package"
-msgstr "Paket"
+msgstr "Pakket"
 
 #: ../glade/galternatives.glade.h:18
 msgid "Some changes are not saved."
-msgstr "Einige Änderungen sind nicht gesichert."
+msgstr "Sommige veranderingen werden niet opgeslagen."
 
 #: ../glade/galternatives.glade.h:19
 msgid "Are you sure you want to quit now?"
-msgstr "Sind Sie sicher, dass Sie nun beenden möchten?"
+msgstr "Bent u zeker dat u nu wilt afsluiten?"
 
 #: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
-msgstr "Bearbeiten der Alternativen ist eine fortgeschrittene Funktionalität."
+msgstr ""
+"Het bewerken van instellingen voor alternatieven is een geavanceerde functie."
 
 #: ../glade/galternatives.glade.h:21
 msgid ""
@@ -366,62 +368,61 @@ msgid ""
 "<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
 "editing may break your system."
 msgstr ""
-"Diese sind dazu gedacht, durch <tt>Dpkg</tt> verwaltet und von den "
-"zugehörigen Paketen bereitgestellt zu werden.\n"
-"<b>Warnung!</b> Diese Funktionalität ist nicht stabil und kann Fehler "
-"enthalten. Manuelles Bearbeiten kann Ihr System zerstören."
+"Deze zijn bedoeld om beheerd te worden door <tt>dpkg</tt> en aangeleverd te "
+"worden door hun overeenkomstige pakketten.\n"
+"<b>Waarschuwing!</b> Deze functionaliteit is niet stabiel en kan bugs "
+"bevatten. Handmatig bewerken kan uw systeem defect maken."
 
 #: ../glade/galternatives.glade.h:23
 msgid "Show this dialog next time."
-msgstr "diesen Dialog nächstes Mal anzeigen"
+msgstr "Dit dialoogvenster de volgende keer tonen."
 
 #: ../glade/galternatives.glade.h:24
 msgid "Preferences"
-msgstr "Einstellungen"
+msgstr "Voorkeuren"
 
 #: ../glade/galternatives.glade.h:25
 msgid "See update-alternatives(1) \"OPTIONS\" section for details"
-msgstr ""
-"Einzelheiten finden sie im Abschnitt »OPTIONEN« von update-alternatives(1)."
+msgstr "Zie update-alternatives(1) onder de sectie \"OPTIES\" voor details"
 
 #: ../glade/galternatives.glade.h:26
 msgid "Paths"
-msgstr "Pfade"
+msgstr "Paden"
 
 #: ../glade/galternatives.glade.h:27
 msgid "Commit failed"
-msgstr "Übergabe fehlgeschlagen"
+msgstr "Vastleggen is mislukt"
 
 #: ../glade/galternatives.glade.h:28
 msgid "An error has occurred. The results are:"
-msgstr "Ein Fehler ist aufgetreten. Die Ergebnisse sind:"
+msgstr "Er trad een fout op. De resultaten zijn:"
 
 #: ../glade/galternatives.glade.h:29
 msgid "Be careful! Your system may be already in an unstable state."
 msgstr ""
-"Seien Sie vorsichtig. Ihr System könnte bereits in einem instabilen Zustand "
-"sein."
+"Wees voorzichtig! Mogelijk bevindt uw systeem zich reeds in een onstabiele "
+"toestand."
 
 #: ../glade/menubar.glade.h:1
 msgid "_Delay mode"
-msgstr "_verzögerter Modus"
+msgstr "_Vertragingsmodus"
 
 #: ../glade/menubar.glade.h:2
 msgid "Query _package (high I/O)"
-msgstr "_Paket abfragen (hohe E/A)"
+msgstr "Pakket _doorzoeken (veel I/O)"
 
 #: ../glade/menubar.glade.h:3
 msgid "_Use polkit"
-msgstr "Pol_kit verwenden"
+msgstr "_Polkit gebruiken"
 
 #: ../glade/menubar.glade.h:4
 msgid "_Working dir..."
-msgstr "_Arbeitsverzeichnis …"
+msgstr "Werk_map..."
 
 #: ../glade/menubar.glade.h:5
 msgid "_About"
-msgstr "_Über"
+msgstr "_Over"
 
 #: ../glade/menubar.glade.h:6
 msgid "_Quit"
-msgstr "Been_den"
+msgstr "_Afsluiten"

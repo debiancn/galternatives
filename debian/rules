@@ -1,6 +1,8 @@
 #!/usr/bin/make -f
 #export DH_VERBOSE = 1
 
+export PYBUILD_NAME=galternatives
+
 include /usr/share/dpkg/pkg-info.mk
 
 
