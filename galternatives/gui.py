@@ -439,6 +439,10 @@ class MainWindow(object):
 
     def show(self):
         '''Show the main window. Pretend itself as Gtk.Window.'''
+        # Correct the display name.
+        # Ref: https://stackoverflow.com/questions/9324163/
+        # how-to-set-application-title-in-gnome-shell
+        self.main_window.set_wmclass(INFO['program_name'], PACKAGE)
         return self.main_window.show()
 
     def destroy(self):
