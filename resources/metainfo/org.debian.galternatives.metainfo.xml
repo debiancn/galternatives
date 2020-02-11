@@ -58,6 +58,10 @@
         <p>New stable release.</p>
       </description>
     </release>
-
+    <release version="1.0.6" date="2020-02-11">
+      <description>
+        <p>New stable release with AppStream Metadata added.</p>
+      </description>
+    </release>
   </releases>
 </component>
