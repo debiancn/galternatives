@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 14:50-0500\n"
+"POT-Creation-Date: 2020-02-11 15:31-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,29 +269,24 @@ msgstr ""
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:3
 msgid ""
-"A GUI to help the system administrator to choose what program should provide "
-"a given service."
+"<p> A GUI to help the system administrator to choose what program should "
+"provide a given service. </p> <p> This is a graphical front-end to the "
+"update-alternatives program shipped with dpkg. </p>"
 msgstr ""
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:4
-msgid ""
-"This is a graphical front-end to the update-alternatives program shipped "
-"with dpkg."
-msgstr ""
-
-#: ../org.debian.galternatives.metainfo.xml.in.h:5
 msgid "New maintenance release with AppStream Metadata added."
 msgstr ""
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:6
+#: ../org.debian.galternatives.metainfo.xml.in.h:5
 msgid "New maintenance release."
 msgstr ""
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:7
+#: ../org.debian.galternatives.metainfo.xml.in.h:6
 msgid "New stable release."
 msgstr ""
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:8
+#: ../org.debian.galternatives.metainfo.xml.in.h:7
 msgid "New stable release, add feature to search entries."
 msgstr ""
 

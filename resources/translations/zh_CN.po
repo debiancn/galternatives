@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives 1.0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 14:50-0500\n"
-"PO-Revision-Date: 2020-02-11 14:54-0500\n"
+"POT-Creation-Date: 2020-02-11 15:31-0500\n"
+"PO-Revision-Date: 2020-02-11 15:32-0500\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (simplified) <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_CN\n"
@@ -57,8 +57,8 @@ msgid ""
 "modifications under normal user. Unless you have modified your system to "
 "explicitly allow your normal user to do so, GAlternatives will not work."
 msgstr ""
-"此程序需要 pkexec，以在普通用户下执行需要特权的备选系统修改。除非您修改了您的"
-"系统配置允许普通用户这样做，否则 GAltarnatives 将无法工作。"
+"此程序需要 pkexec，以在普通用户下执行需要特权的备选系统修改。除非您修改了您"
+"的系统配置允许普通用户这样做，否则 GAltarnatives 将无法工作。"
 
 #: ../../galternatives/app.py:98
 msgid "Specifying more than one group not allowed"
@@ -276,30 +276,27 @@ msgstr "可选项系统的图形界面配置工具"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:3
 msgid ""
-"A GUI to help the system administrator to choose what program should provide "
-"a given service."
+"<p> A GUI to help the system administrator to choose what program should "
+"provide a given service. </p> <p> This is a graphical front-end to the "
+"update-alternatives program shipped with dpkg. </p>"
 msgstr ""
-"这是一个图形界面配置工具，用于帮助系统管理员选择哪些程序需要设置默认命令。"
+"<p> 这是一个图形界面配置工具，用于帮助系统管理员选择哪些程序需要设置默认命"
+"令。 </p> <p> 这是 update-alternatives(包含于 dpkg) 程序的一个图形前端。 </"
+"p>"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:4
-msgid ""
-"This is a graphical front-end to the update-alternatives program shipped "
-"with dpkg."
-msgstr "这是 update-alternatives（包含于 dpkg）程序的一个图形前端。"
-
-#: ../org.debian.galternatives.metainfo.xml.in.h:5
 msgid "New maintenance release with AppStream Metadata added."
 msgstr "新维护版本，添加了 AppStream 元信息。"
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:6
+#: ../org.debian.galternatives.metainfo.xml.in.h:5
 msgid "New maintenance release."
 msgstr "新维护版本。"
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:7
+#: ../org.debian.galternatives.metainfo.xml.in.h:6
 msgid "New stable release."
 msgstr "新稳定版本。"
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:8
+#: ../org.debian.galternatives.metainfo.xml.in.h:7
 msgid "New stable release, add feature to search entries."
 msgstr "新稳定版本，添加了搜索条目的功能。"
 
@@ -446,121 +443,6 @@ msgid "_Quit"
 msgstr "退出(_Q)"
 
 #~ msgid ""
-#~ "Install option for group `{2}' with priority {4}, `{3}' for master link"
-#~ msgstr "为组`{2}'安装选项 {4}，优先级 {4}，`{3}'用于主链接"
-
-#~ msgid ", `{}' for slave link `{}'"
-#~ msgstr "，`{}'用于从链接`{}'"
-
-#~ msgid ""
-#~ "No `pkexec' detected, but found `gksudo'. You should really consider "
-#~ "polkit."
-#~ msgstr "没有检测到`pkexec'，但发现`gksudo'。您应当考虑 polkit。"
-
-#~ msgid "Running Alternatives Configurator..."
-#~ msgstr "正在运行可选项配置工具..."
-
-#~ msgid ""
-#~ "<b>I need your root password to run\n"
-#~ "the Alternatives Configurator.</b>"
-#~ msgstr ""
-#~ "<b>我需要您的 root 密码来运行\n"
-#~ "可选项配置工具。</b>"
-
-#~ msgid ""
-#~ "<b>This program should be run as root and <tt>/usr/bin/gksu</tt> is not "
-#~ "available.</b>"
-#~ msgstr ""
-#~ "<b>该程序应当以 root 用户身份运行，但是 <tt>/usr/bin/gksu</tt> 不可用。</"
-#~ "b>"
-
-#~ msgid "Run update-alternatives tool to modify system alternative selections"
-#~ msgstr "运行 update-alternatives 工具以修改系统可选项"
-
-#~ msgid "Authentication is required to run update-alternatives tool"
-#~ msgstr "需要验证才能运行 update-alternatives 工具"
-
-#~ msgid "Icon"
-#~ msgstr "图标"
-
-#~ msgid "Messages"
-#~ msgstr "信息"
-
-#~ msgid "Unknown/None"
-#~ msgstr "未知/无"
-
-#~ msgid ""
-#~ "The file or directory you selected does not exist.\n"
-#~ "Please select a valid one."
-#~ msgstr ""
-#~ "您选择的文件或目录不存在。\n"
-#~ "请选择一个有效的项目。"
-
-#~ msgid "Are you sure you want to remove this option?"
-#~ msgstr "您确定要删除这个选项吗？"
-
-#~ msgid "Choice"
-#~ msgstr "选择项"
-
-#~ msgid "Options"
-#~ msgstr "可选项"
-
-#~ msgid "Slave"
-#~ msgstr "子配置"
-
-#~ msgid "_File"
-#~ msgstr "文件(_F)"
-
-#~ msgid "_Help"
-#~ msgstr "帮助(_H)"
-
-#~ msgid "Status:"
-#~ msgstr "状态："
-
-#~ msgid "auto"
-#~ msgstr "自动"
-
-#~ msgid "manual"
-#~ msgstr "手动"
-
-#~ msgid "<span size=\"xx-large\" weight=\"bold\">Alternative</span>"
-#~ msgstr "<span size=\"xx-large\" weight=\"bold\">可选项</span>"
-
-#~ msgid "Details"
-#~ msgstr "详细信息"
-
-#~ msgid "About G Alternatives"
-#~ msgstr "关于 G Alternatives"
-
-#~ msgid "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
-#~ msgstr "<span size=\"xx-large\" weight=\"bold\">G Alternatives</span>"
-
-#~ msgid "C_redits"
-#~ msgstr "鸣谢(_R)"
-
-#~ msgid "G Alternatives Credits"
-#~ msgstr "G Altarnatives 鸣谢信息"
-
-#~ msgid "Gustavo Noronha Silva <kov@debian.org>"
-#~ msgstr "Gustavo Noronha Silva <kov@debian.org>"
-
-#~ msgid "Written by"
-#~ msgstr "作者"
-
-#~ msgid "Translated by"
-#~ msgstr "翻译贡献者"
-
-#~ msgid "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
-#~ msgstr "Leandro A. F. Pereira <leandro@linuxmag.com.br>"
-
-#~ msgid "Thanks to"
-#~ msgstr "感谢"
-
-#~ msgid "Adding option to alternative"
-#~ msgstr "向可选项列表中添加选项"
-
-#~ msgid "*"
-#~ msgstr "*"
-
-#~ msgid "_Browse..."
-#~ msgstr "浏览(_B)..."
+#~ "This is a graphical front-end to the update-alternatives program shipped "
+#~ "with dpkg."
+#~ msgstr "这是 update-alternatives（包含于 dpkg）程序的一个图形前端。"
