@@ -7,7 +7,7 @@ Uploaders:
  Yangfl <mmyangfl@gmail.com>,
 Build-Depends:
  debhelper-compat (= 12),
- dh-python,
+ dh-sequencer-python3,
  intltool,
  python3,
  python3-distutils,
