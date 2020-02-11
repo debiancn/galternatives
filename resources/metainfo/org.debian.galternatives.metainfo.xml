@@ -17,6 +17,7 @@
        program shipped with dpkg. 
     </p>
   </description>
+  <update_contact>byang_AT_debian.org</update_contact>
 
   <launchable type="desktop-id">org.debian.galternatives.desktop</launchable>
   <url type="homepage">https://salsa.debian.org/chinese-team/galternatives</url>
@@ -27,23 +28,16 @@
   </provides>
   <translation type="gettext">galternatives</translation>
 
+  <content_rating type="oars-1.0">
+  </content_rating>
+
   <releases>
-    <release version="1.0.0" date="2018-06-19">
+    <release version="1.0.6" date="2020-02-11">
       <description>
-        <p>New stable release, add feature to search entries.</p>
+        <p>New stable release with AppStream Metadata added.</p>
       </description>
     </release>
-    <release version="1.0.1" date="2018-08-17">
-      <description>
-        <p>New stable release.</p>
-      </description>
-    </release>
-    <release version="1.0.2" date="2018-11-05">
-      <description>
-        <p>New stable release.</p>
-      </description>
-    </release>
-    <release version="1.0.3" date="2019-01-22">
+    <release version="1.0.5" date="2019-05-21">
       <description>
         <p>New stable release.</p>
       </description>
@@ -53,14 +47,24 @@
         <p>New stable release.</p>
       </description>
     </release>
-    <release version="1.0.5" date="2019-05-21">
+    <release version="1.0.3" date="2019-01-22">
       <description>
         <p>New stable release.</p>
       </description>
     </release>
-    <release version="1.0.6" date="2020-02-11">
+    <release version="1.0.2" date="2018-11-05">
       <description>
-        <p>New stable release with AppStream Metadata added.</p>
+        <p>New stable release.</p>
+      </description>
+    </release>
+    <release version="1.0.1" date="2018-08-17">
+      <description>
+        <p>New stable release.</p>
+      </description>
+    </release>
+    <release version="1.0.0" date="2018-06-19">
+      <description>
+        <p>New stable release, add feature to search entries.</p>
       </description>
     </release>
   </releases>
