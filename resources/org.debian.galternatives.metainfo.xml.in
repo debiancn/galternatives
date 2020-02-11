@@ -7,16 +7,16 @@
   <project_license>GPL-1.0+</project_license>
   <_name>G Alternatives</_name>
   <_summary>Graphical setup tool for the alternatives system</_summary>
-  <description>
-    <_p>
+  <_description>
+    <p>
       A GUI to help the system administrator to choose what program
       should provide a given service.
-    </_p>
-    <_p>
+    </p>
+    <p>
        This is a graphical front-end to the update-alternatives
        program shipped with dpkg. 
-    </_p>
-  </description>
+    </p>
+  </_description>
   <update_contact>byang_AT_debian.org</update_contact>
 
   <launchable type="desktop-id">org.debian.galternatives.desktop</launchable>
