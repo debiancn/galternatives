@@ -1,6 +1,7 @@
 *.mo
 *.h
 *.desktop
+*.metainfo.xml
 *~
 POTFILES.in
 locale/

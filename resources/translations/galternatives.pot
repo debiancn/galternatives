@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 20:04+0800\n"
+"POT-Creation-Date: 2020-02-11 14:50-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,45 +106,45 @@ msgstr ""
 msgid "Logo missing. Is your installation correct?"
 msgstr ""
 
-#: ../../galternatives/__init__.py:42
+#: ../../galternatives/__init__.py:44
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
 msgstr ""
 
-#: ../../galternatives/gui.py:63
+#: ../../galternatives/gui.py:61
 msgid "Select File"
 msgstr ""
 
-#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:280
+#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:276
 msgid "Name"
 msgstr ""
 
-#: ../../galternatives/gui.py:214
+#: ../../galternatives/gui.py:210
 msgid "Link"
 msgstr ""
 
-#: ../../galternatives/gui.py:222
+#: ../../galternatives/gui.py:218
 msgid "Edit group - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:229
+#: ../../galternatives/gui.py:225
 msgid "Add group"
 msgstr ""
 
-#: ../../galternatives/gui.py:276 ../../galternatives/gui.py:281
+#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
 msgid "Path"
 msgstr ""
 
-#: ../../galternatives/gui.py:277 ../glade/galternatives.glade.h:16
+#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:16
 msgid "Priority"
 msgstr ""
 
-#: ../../galternatives/gui.py:293
+#: ../../galternatives/gui.py:289
 msgid "Edit option - {}"
 msgstr ""
 
-#: ../../galternatives/gui.py:300
+#: ../../galternatives/gui.py:296
 msgid "Add option"
 msgstr ""
 
@@ -156,15 +156,15 @@ msgstr ""
 msgid "translator_credits"
 msgstr ""
 
-#: ../galternatives.desktop.in.h:1
+#: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
 msgstr ""
 
-#: ../galternatives.desktop.in.h:2
+#: ../org.debian.galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr ""
 
-#: ../galternatives.desktop.in.h:3
+#: ../org.debian.galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr ""
 
@@ -176,14 +176,10 @@ msgstr ""
 msgid "Default WWW Browser to launch URLs and browse the Internet."
 msgstr ""
 
-#: ../descriptions/x-cursor-theme.desktop.in.h:1
-msgid "X Cursor Theme"
-msgstr ""
-
-#: ../descriptions/x-cursor-theme.desktop.in.h:2
+#: ../descriptions/jar.desktop.in.h:1
 msgid ""
-"Default Cursor Theme that helps various aspects of GUI navigation and "
-"manipulation."
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
 msgstr ""
 
 #: ../descriptions/cpp.desktop.in.h:1
@@ -236,6 +232,16 @@ msgstr ""
 msgid "Default command line editor, usually called by `editor` command."
 msgstr ""
 
+#: ../descriptions/x-cursor-theme.desktop.in.h:1
+msgid "X Cursor Theme"
+msgstr ""
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr ""
+
 #: ../descriptions/gnome-www-browser.desktop.in.h:1
 msgid "Gnome WWW Browser"
 msgstr ""
@@ -248,14 +254,45 @@ msgstr ""
 msgid "Default Java Runtime."
 msgstr ""
 
-#: ../descriptions/jar.desktop.in.h:1
-msgid ""
-"Creates an archive for classes and resources, and manipulate or restore "
-"individual classes or resources from an archive."
-msgstr ""
-
 #: ../descriptions/convert.desktop.in.h:1
 msgid "ImageMagick command-line processing tool."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:1
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:2
+msgid "Graphical setup tool for the alternatives system"
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:3
+msgid ""
+"A GUI to help the system administrator to choose what program should provide "
+"a given service."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:4
+msgid ""
+"This is a graphical front-end to the update-alternatives program shipped "
+"with dpkg."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:5
+msgid "New maintenance release with AppStream Metadata added."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:6
+msgid "New maintenance release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:7
+msgid "New stable release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:8
+msgid "New stable release, add feature to search entries."
 msgstr ""
 
 #: ../glade/edit_dialog.glade.h:1
@@ -264,10 +301,6 @@ msgstr ""
 
 #: ../glade/edit_dialog.glade.h:2
 msgid "No changes will be made until you add an option."
-msgstr ""
-
-#: ../glade/galternatives.glade.h:1
-msgid "G Alternatives"
 msgstr ""
 
 #: ../glade/galternatives.glade.h:2

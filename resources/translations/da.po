@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 20:04+0800\n"
+"POT-Creation-Date: 2020-02-11 14:50-0500\n"
 "PO-Revision-Date: 2018-10-19 23:58+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish\n"
@@ -108,7 +108,7 @@ msgstr "Fjern gruppen `{1}'"
 msgid "Logo missing. Is your installation correct?"
 msgstr "Logo mangler. Er din installation korrekt?"
 
-#: ../../galternatives/__init__.py:42
+#: ../../galternatives/__init__.py:44
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
@@ -116,39 +116,39 @@ msgstr ""
 "Et værktøj som hjælper administratoren til at vælge hvilke programmer der, "
 "som standard, giver bestemte tjenester til brugeren."
 
-#: ../../galternatives/gui.py:63
+#: ../../galternatives/gui.py:61
 msgid "Select File"
 msgstr "Vælg fil"
 
-#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:280
+#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:276
 msgid "Name"
 msgstr "Navn"
 
-#: ../../galternatives/gui.py:214
+#: ../../galternatives/gui.py:210
 msgid "Link"
 msgstr "Link"
 
-#: ../../galternatives/gui.py:222
+#: ../../galternatives/gui.py:218
 msgid "Edit group - {}"
 msgstr "Rediger gruppe - {}"
 
-#: ../../galternatives/gui.py:229
+#: ../../galternatives/gui.py:225
 msgid "Add group"
 msgstr "Tilføj gruppe"
 
-#: ../../galternatives/gui.py:276 ../../galternatives/gui.py:281
+#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
 msgid "Path"
 msgstr "Sti"
 
-#: ../../galternatives/gui.py:277 ../glade/galternatives.glade.h:16
+#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:16
 msgid "Priority"
 msgstr "Prioritet"
 
-#: ../../galternatives/gui.py:293
+#: ../../galternatives/gui.py:289
 msgid "Edit option - {}"
 msgstr "Rediger tilvalg - {}"
 
-#: ../../galternatives/gui.py:300
+#: ../../galternatives/gui.py:296
 msgid "Add option"
 msgstr "Tilføj tilvalg"
 
@@ -180,17 +180,13 @@ msgstr "X WWW-browser"
 msgid "Default WWW Browser to launch URLs and browse the Internet."
 msgstr "Standard WWW-browser til at starte URL'er og gennemse internettet."
 
-#: ../descriptions/x-cursor-theme.desktop.in.h:1
-msgid "X Cursor Theme"
-msgstr "X-markørtema"
-
-#: ../descriptions/x-cursor-theme.desktop.in.h:2
+#: ../descriptions/jar.desktop.in.h:1
 msgid ""
-"Default Cursor Theme that helps various aspects of GUI navigation and "
-"manipulation."
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
 msgstr ""
-"Standard markørtema som hjælper diverse aspekter af GUI-navigation og -"
-"manipulation."
+"Oprettet et arkiv til klasser og ressourcer, og manipulerer eller gendanner "
+"enkelte klasser eller ressourcer fra et arkiv."
 
 #: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
@@ -245,6 +241,18 @@ msgid "Default command line editor, usually called by `editor` command."
 msgstr ""
 "Standard kommandolinjeeditor, som typisk kaldes med `editor`-kommandoen."
 
+#: ../descriptions/x-cursor-theme.desktop.in.h:1
+msgid "X Cursor Theme"
+msgstr "X-markørtema"
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr ""
+"Standard markørtema som hjælper diverse aspekter af GUI-navigation og -"
+"manipulation."
+
 #: ../descriptions/gnome-www-browser.desktop.in.h:1
 msgid "Gnome WWW Browser"
 msgstr "Gnome WWW-browser"
@@ -257,17 +265,49 @@ msgstr "Standard WWW-browser til GNOME-skrivebordsmiljø."
 msgid "Default Java Runtime."
 msgstr "Standard Java runtime."
 
-#: ../descriptions/jar.desktop.in.h:1
-msgid ""
-"Creates an archive for classes and resources, and manipulate or restore "
-"individual classes or resources from an archive."
-msgstr ""
-"Oprettet et arkiv til klasser og ressourcer, og manipulerer eller gendanner "
-"enkelte klasser eller ressourcer fra et arkiv."
-
 #: ../descriptions/convert.desktop.in.h:1
 msgid "ImageMagick command-line processing tool."
 msgstr "ImageMagick-behandlingsværktøj til kommandolinjen."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:1
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr "G Alternatives"
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:2
+msgid "Graphical setup tool for the alternatives system"
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:3
+#, fuzzy
+msgid ""
+"A GUI to help the system administrator to choose what program should provide "
+"a given service."
+msgstr ""
+"Et værktøj som hjælper administratoren til at vælge hvilke programmer der, "
+"som standard, giver bestemte tjenester til brugeren."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:4
+msgid ""
+"This is a graphical front-end to the update-alternatives program shipped "
+"with dpkg."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:5
+msgid "New maintenance release with AppStream Metadata added."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:6
+msgid "New maintenance release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:7
+msgid "New stable release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:8
+msgid "New stable release, add feature to search entries."
+msgstr ""
 
 #: ../glade/edit_dialog.glade.h:1
 msgid "Slaves"
@@ -276,10 +316,6 @@ msgstr "Slaver"
 #: ../glade/edit_dialog.glade.h:2
 msgid "No changes will be made until you add an option."
 msgstr "Der foretages ingen ændringer inden du tilføjer et tilvalg."
-
-#: ../glade/galternatives.glade.h:1
-msgid "G Alternatives"
-msgstr "G Alternatives"
 
 #: ../glade/galternatives.glade.h:2
 msgid "Create"

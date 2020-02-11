@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 20:04+0800\n"
+"POT-Creation-Date: 2020-02-11 14:50-0500\n"
 "PO-Revision-Date: 2019-02-01 13:35+0100\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -109,7 +109,7 @@ msgstr "Odebrat skupinu `{1}'"
 msgid "Logo missing. Is your installation correct?"
 msgstr "Chybí logo. Je vaše instalace v pořádku?"
 
-#: ../../galternatives/__init__.py:42
+#: ../../galternatives/__init__.py:44
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
@@ -117,39 +117,39 @@ msgstr ""
 "Nástroj, který správci pomáhá vybrat výchozí programy, které mají uživatelům "
 "poskytovat dané služby."
 
-#: ../../galternatives/gui.py:63
+#: ../../galternatives/gui.py:61
 msgid "Select File"
 msgstr "Výběr souboru"
 
-#: ../../galternatives/gui.py:213 ../../galternatives/gui.py:280
+#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:276
 msgid "Name"
 msgstr "Název"
 
-#: ../../galternatives/gui.py:214
+#: ../../galternatives/gui.py:210
 msgid "Link"
 msgstr "Odkaz"
 
-#: ../../galternatives/gui.py:222
+#: ../../galternatives/gui.py:218
 msgid "Edit group - {}"
 msgstr "Upravit skupinu – {}"
 
-#: ../../galternatives/gui.py:229
+#: ../../galternatives/gui.py:225
 msgid "Add group"
 msgstr "Přidat skupinu"
 
-#: ../../galternatives/gui.py:276 ../../galternatives/gui.py:281
+#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
 msgid "Path"
 msgstr "Popis umístění"
 
-#: ../../galternatives/gui.py:277 ../glade/galternatives.glade.h:16
+#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:16
 msgid "Priority"
 msgstr "Priorita"
 
-#: ../../galternatives/gui.py:293
+#: ../../galternatives/gui.py:289
 msgid "Edit option - {}"
 msgstr "Upravit volbu – {}"
 
-#: ../../galternatives/gui.py:300
+#: ../../galternatives/gui.py:296
 msgid "Add option"
 msgstr "Přidat volbu"
 
@@ -182,17 +182,13 @@ msgstr "Webový prohlížeč pro grafické prostředí"
 msgid "Default WWW Browser to launch URLs and browse the Internet."
 msgstr "Výchozí webový prohlížeč pro spouštění URL adres a procházení webu."
 
-#: ../descriptions/x-cursor-theme.desktop.in.h:1
-msgid "X Cursor Theme"
-msgstr "Motiv vzhledu kurzoru grafického prostředí"
-
-#: ../descriptions/x-cursor-theme.desktop.in.h:2
+#: ../descriptions/jar.desktop.in.h:1
 msgid ""
-"Default Cursor Theme that helps various aspects of GUI navigation and "
-"manipulation."
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
 msgstr ""
-"Výchozí motiv vzhledu kurzoru který pomáhá různým aspektům pohybu a "
-"manipulace v grafickém uživatelském rozhraní."
+"Vytváří archiv pro třídy a prostředky a manipuluje nebo obnovuje jednotlivé "
+"třídy nebo prostředky z archivu."
 
 #: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
@@ -246,6 +242,18 @@ msgstr "Rozbalování RAR archivů."
 msgid "Default command line editor, usually called by `editor` command."
 msgstr "Výchozí editor v příkazovém řádku, obvykle volaný příkazem `editor`."
 
+#: ../descriptions/x-cursor-theme.desktop.in.h:1
+msgid "X Cursor Theme"
+msgstr "Motiv vzhledu kurzoru grafického prostředí"
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr ""
+"Výchozí motiv vzhledu kurzoru který pomáhá různým aspektům pohybu a "
+"manipulace v grafickém uživatelském rozhraní."
+
 #: ../descriptions/gnome-www-browser.desktop.in.h:1
 msgid "Gnome WWW Browser"
 msgstr "Webový prohlížeč pro Gnome"
@@ -258,17 +266,49 @@ msgstr "Výchozí webový prohlížeč pro pracovní prostředí GNOME."
 msgid "Default Java Runtime."
 msgstr "Výchozí běhové prostředí pro Java."
 
-#: ../descriptions/jar.desktop.in.h:1
-msgid ""
-"Creates an archive for classes and resources, and manipulate or restore "
-"individual classes or resources from an archive."
-msgstr ""
-"Vytváří archiv pro třídy a prostředky a manipuluje nebo obnovuje jednotlivé "
-"třídy nebo prostředky z archivu."
-
 #: ../descriptions/convert.desktop.in.h:1
 msgid "ImageMagick command-line processing tool."
 msgstr "Nástroj typu ImageMagick pro zpracování z příkazového řádku."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:1
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr "G Alternativy"
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:2
+msgid "Graphical setup tool for the alternatives system"
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:3
+#, fuzzy
+msgid ""
+"A GUI to help the system administrator to choose what program should provide "
+"a given service."
+msgstr ""
+"Nástroj, který správci pomáhá vybrat výchozí programy, které mají uživatelům "
+"poskytovat dané služby."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:4
+msgid ""
+"This is a graphical front-end to the update-alternatives program shipped "
+"with dpkg."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:5
+msgid "New maintenance release with AppStream Metadata added."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:6
+msgid "New maintenance release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:7
+msgid "New stable release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:8
+msgid "New stable release, add feature to search entries."
+msgstr ""
 
 #: ../glade/edit_dialog.glade.h:1
 msgid "Slaves"
@@ -277,10 +317,6 @@ msgstr "Podřízené"
 #: ../glade/edit_dialog.glade.h:2
 msgid "No changes will be made until you add an option."
 msgstr "Dokud nepřidáte volbu, nebudou učiněny žádné změny."
-
-#: ../glade/galternatives.glade.h:1
-msgid "G Alternatives"
-msgstr "G Alternativy"
 
 #: ../glade/galternatives.glade.h:2
 msgid "Create"

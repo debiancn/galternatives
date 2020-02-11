@@ -2,6 +2,8 @@ DESKTOP_SRC := $(wildcard *.desktop.in)
 DESKTOP := $(DESKTOP_SRC:.in=)
 DESC_SRC := $(wildcard descriptions/*.desktop.in)
 DESC := $(DESC_SRC:.in=)
+METAINFO_SRC := $(wildcard *.metainfo.xml.in)
+METAINFO := $(METAINFO_SRC:.in=)
 GLADE := $(wildcard glade/*.glade)
 UI := $(wildcard glade/*.ui)
 GLADE += $(UI:.ui=.glade)
@@ -15,10 +17,13 @@ space +=
 
 # all
 
-all: $(DESKTOP) $(DESC) $(TRANSLATION)
+all: $(DESKTOP) $(DESC) $(METAINFO) $(TRANSLATION)
 
 %.desktop: %.desktop.in
 	intltool-merge -d translations $< $@
+
+%.metainfo.xml: %.metainfo.xml.in
+	intltool-merge -d translations -x $< $@
 
 locale/%/LC_MESSAGES/galternatives.mo: translations/%.po
 	mkdir -p $(dir $@)
@@ -29,11 +34,12 @@ locale/%/LC_MESSAGES/galternatives.mo: translations/%.po
 extract: translations/POTFILES.in
 	(cd translations; intltool-update -g galternatives -p)
 
-translations/POTFILES.in: $(SRC) $(DESKTOP_SRC) $(DESC_SRC) $(GLADE)
+translations/POTFILES.in: $(SRC) $(DESKTOP_SRC) $(DESC_SRC) $(METAINFO_SRC) $(GLADE)
 	echo '[encoding: UTF-8]' > $@
 	echo $(subst $(space),\\n,$(SRC)) >> $@
 	echo $(subst $(space),\\n,$(DESKTOP_SRC)) >> $@
 	echo $(subst $(space),\\n,$(DESC_SRC)) >> $@
+	echo $(subst $(space),\\n,$(METAINFO_SRC)) >> $@
 	echo $(subst $(space),\\n,$(GLADE)) >> $@
 
 %.glade: %.ui
