@@ -7,10 +7,19 @@ Copyright: 2003-2006 Gustavo Noronha Silva <kov@debian.org>
            2017-2018 Yangfl <mmyangfl@gmail.com>
 License: GPL-1+
 
+Files: resources/metainfo/*.xml
+Copyright: 2020 Boyuan Yang <byang@debian.org>
+License: CC0-1.0
+
 Files: debian/*
 Copyright: 2003-2006 Gustavo Noronha Silva <kov@debian.org>
-           2017 Boyuan Yang <073plan@gmail.com>
+           2017 Boyuan Yang <byang@debian.org>
 License: GPL-1+
+
+License: CC0-1.0
+ On Debian systems, the full text of the CC0 1.0 Universal
+ License can be found in the file
+ "/usr/share/common-licenses/CC0-1.0".
 
 License: GPL-1+
  This program is free software: you can redistribute it and/or modify
