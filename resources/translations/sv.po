@@ -163,15 +163,15 @@ msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
 "Skicka synpunkter på översättningen till <tp-sv@listor.tp-sv.se>"
 
-#: ../galternatives.desktop.in.h:1
+#: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
 msgstr "Alternativkonfiguratorn"
 
-#: ../galternatives.desktop.in.h:2
+#: ../org.debian.galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr "Konfigurera systemets standardalternativ"
 
-#: ../galternatives.desktop.in.h:3
+#: ../org.debian.galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr ""
 

@@ -160,15 +160,15 @@ msgstr "執行命令："
 msgid "translator_credits"
 msgstr "(由開發者提供)"
 
-#: ../galternatives.desktop.in.h:1
+#: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
 msgstr "可選項配置工具"
 
-#: ../galternatives.desktop.in.h:2
+#: ../org.debian.galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr "配置系統可選項的預設值"
 
-#: ../galternatives.desktop.in.h:3
+#: ../org.debian.galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr "可選項;配置;Debian;"
 

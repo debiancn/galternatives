@@ -157,15 +157,15 @@ msgstr ""
 msgid "translator_credits"
 msgstr "Ricardo Mones <mones@aic.uniovi.es>"
 
-#: ../galternatives.desktop.in.h:1
+#: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
 msgstr "Configurador de alternativas"
 
-#: ../galternatives.desktop.in.h:2
+#: ../org.debian.galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr "Configurar las alternativas por defecto del sistema"
 
-#: ../galternatives.desktop.in.h:3
+#: ../org.debian.galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr ""
 

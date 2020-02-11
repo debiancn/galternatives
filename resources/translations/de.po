@@ -163,15 +163,15 @@ msgstr "Befehl ausführen: "
 msgid "translator_credits"
 msgstr "Chris Leick <c.leick@vollbio.de>"
 
-#: ../galternatives.desktop.in.h:1
+#: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
 msgstr "Alternativeneinrichter"
 
-#: ../galternatives.desktop.in.h:2
+#: ../org.debian.galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr "die Standard-Alternativen des Systems einrichten"
 
-#: ../galternatives.desktop.in.h:3
+#: ../org.debian.galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr "Alternativen;GAlternatives;Debian;"
 

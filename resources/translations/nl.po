@@ -164,15 +164,15 @@ msgstr "Commando uitvoeren:"
 msgid "translator_credits"
 msgstr "Frans Spiesschaert <Frans.Spiesschaert@yucom.be>"
 
-#: ../galternatives.desktop.in.h:1
+#: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
 msgstr "Alternatievenconfigurator"
 
-#: ../galternatives.desktop.in.h:2
+#: ../org.debian.galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
 msgstr "De standaardalternatieven van het systeem configureren"
 
-#: ../galternatives.desktop.in.h:3
+#: ../org.debian.galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr "Alternatives;GAlternatives;Debian;"
 

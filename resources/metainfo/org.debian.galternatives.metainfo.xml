@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2020 Boyuan Yang <byang@debian.org> -->
+<!-- This file is released under CC0-1.0 license. -->
+<component type="desktop-application">
+  <id>org.debian.galternatives</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-1.0+</project_license>
+  <name>G Alternatives</name>
+  <summary>Graphical setup tool for the alternatives system</summary>
+  <description>
+    <p>
+      A GUI to help the system administrator to choose what program
+      should provide a given service.
+    </p>
+    <p>
+       This is a graphical front-end to the update-alternatives
+       program shipped with dpkg. 
+    </p>
+  </description>
+
+  <launchable type="desktop-id">org.debian.galternatives.desktop</launchable>
+  <url type="homepage">https://salsa.debian.org/chinese-team/galternatives</url>
+
+  <provides>
+    <binary>galternatives</binary>
+  </provides>
+
+  <releases>
+    <release version="1.0.0" date="2018-06-19">
+      <description>
+        <p>New stable release, add feature to search entries.</p>
+      </description>
+    </release>
+    <release version="1.0.1" date="2018-08-17">
+      <description>
+        <p>New stable release.</p>
+      </description>
+    </release>
+    <release version="1.0.2" date="2018-11-05">
+      <description>
+        <p>New stable release.</p>
+      </description>
+    </release>
+    <release version="1.0.3" date="2019-01-22">
+      <description>
+        <p>New stable release.</p>
+      </description>
+    </release>
+    <release version="1.0.4" date="2019-02-27">
+      <description>
+        <p>New stable release.</p>
+      </description>
+    </release>
+    <release version="1.0.5" date="2019-05-21">
+      <description>
+        <p>New stable release.</p>
+      </description>
+    </release>
+
+  </releases>
+</component>
