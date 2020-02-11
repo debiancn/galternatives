@@ -23,7 +23,9 @@
 
   <provides>
     <binary>galternatives</binary>
+    <python3>galternatives</python3>
   </provides>
+  <translation type="gettext">galternatives</translation>
 
   <releases>
     <release version="1.0.0" date="2018-06-19">
