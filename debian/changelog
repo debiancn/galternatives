@@ -1,3 +1,15 @@
+galternatives (1.0.6) unstable; urgency=medium
+
+  * New maintenance release.
+  * Rebuild for Ubuntu 20.04 LTS.
+  * resources/galternatives: Explicitly use python3 in shebang.
+  * debian/rules: Use dh-sequencer-python3.
+  * debian/control: Bump Standards-Version to 4.5.0.
+  * debian/copyright: Refresh information.
+  * resources: Add an AppStream metainfo XML file.
+
+ -- Boyuan Yang <byang@debian.org>  Tue, 11 Feb 2020 12:47:57 -0500
+
 galternatives (1.0.5) unstable; urgency=medium
 
   * New maintenance release.
