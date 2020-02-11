@@ -7,7 +7,7 @@ Copyright: 2003-2006 Gustavo Noronha Silva <kov@debian.org>
            2017-2018 Yangfl <mmyangfl@gmail.com>
 License: GPL-1+
 
-Files: resources/metainfo/*.xml
+Files: resources/*.metainfo.*
 Copyright: 2020 Boyuan Yang <byang@debian.org>
 License: CC0-1.0
 
