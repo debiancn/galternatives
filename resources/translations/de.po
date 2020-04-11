@@ -2,14 +2,14 @@
 # Copyright (C) 2003 Gustavo Noronha Silva <kov@debian.org>.
 # This file is distributed under the same license as the galternatives
 # package.
-# Chris Leick <c.leick@vollbio.de>, 2009, 2017, 2019.
+# Chris Leick <c.leick@vollbio.de>, 2009, 2017, 2019, 2020.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: galternatives 1.0.3\n"
+"Project-Id-Version: galternatives 1.0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-11 15:31-0500\n"
-"PO-Revision-Date: 2019-02-16 10:35+GMT\n"
+"PO-Revision-Date: 2020-04-10 12:27+GMT\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -281,33 +281,36 @@ msgstr "G Alternatives"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:2
 msgid "Graphical setup tool for the alternatives system"
-msgstr ""
+msgstr "Grafisches Einrichtungswerkzeug für das Alternatives-System"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:3
-#, fuzzy
 msgid ""
 "<p> A GUI to help the system administrator to choose what program should "
 "provide a given service. </p> <p> This is a graphical front-end to the "
 "update-alternatives program shipped with dpkg. </p>"
 msgstr ""
-"ein Werkzeug, das dem Administrator hilft, Programme auszuwählen, die dem "
-"Benutzer spezielle Dienste als Vorgabe bereitstellen"
+"<p> Eine grafische Oberfläche, die dem Systemverwalter hilft auszuwählen, "
+"welches Programm einen bestimmten Dienst bereitstellen soll.</p><p> Dies ist "
+"eine grafische Oberfläche für das mit Dpkg mitgelieferte Programm "
+"Update-alternatives.</p>"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:4
 msgid "New maintenance release with AppStream Metadata added."
-msgstr ""
+msgstr "neue Wartungsveröffentlichung mit hinzugefügten AppStream-Metadaten "
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:5
 msgid "New maintenance release."
-msgstr ""
+msgstr "neue Wartungsveröffentlichung"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:6
 msgid "New stable release."
-msgstr ""
+msgstr "neue stabile Veröffentlichung"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:7
 msgid "New stable release, add feature to search entries."
 msgstr ""
+"neue stabile Veröffentlichung, fügt Funktionalität zum Suchen von Einträgen "
+"hinzu"
 
 #: ../glade/edit_dialog.glade.h:1
 msgid "Slaves"
