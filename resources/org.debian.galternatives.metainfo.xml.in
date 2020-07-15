@@ -32,6 +32,11 @@
   </content_rating>
 
   <releases>
+    <release version="1.0.7" date="2020-07-15">
+      <description>
+        <_p>New maintenance release de,nl translation updated.</_p>
+      </description>
+    </release>
     <release version="1.0.6" date="2020-02-11">
       <description>
         <_p>New maintenance release with AppStream Metadata added.</_p>

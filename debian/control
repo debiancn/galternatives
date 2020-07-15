@@ -6,7 +6,7 @@ Uploaders:
  Boyuan Yang <byang@debian.org>,
  Yangfl <mmyangfl@gmail.com>,
 Build-Depends:
- debhelper-compat (= 12),
+ debhelper-compat (= 13),
  dh-sequence-python3,
  intltool,
  python3,

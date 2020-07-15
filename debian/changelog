@@ -1,3 +1,10 @@
+galternatives (1.0.7) unstable; urgency=medium
+
+  * translations: Update de,nl translation.
+    (Closes: #953987, #956366)
+
+ -- Boyuan Yang <byang@debian.org>  Wed, 15 Jul 2020 12:02:48 -0400
+
 galternatives (1.0.6) unstable; urgency=medium
 
   * New maintenance release.
