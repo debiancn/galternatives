@@ -8,6 +8,7 @@ Uploaders:
 Build-Depends:
  debhelper-compat (= 13),
  dh-sequence-python3,
+ gir1.2-gdk-3.0,
  intltool,
  python3,
  python3-distutils,
