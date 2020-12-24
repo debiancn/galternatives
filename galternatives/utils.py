@@ -1,37 +1,36 @@
-def cached_property(f, key_=None):
-    '''Returns a cached property that is calculated by function f.'''
-    # Source: http://code.activestate.com/recipes/576563-cached-property/
-    # License: MIT
-
-    if key_ is None:
-        key_ = f
-
-    def get(self):
-        try:
-            return self._property_cache[key_]
-        except KeyError:
-            x = self._property_cache[key_] = f(self)
-            return x
-        except AttributeError:
-            self._property_cache = {}
-            x = self._property_cache[key_] = f(self)
-            return x
-
-    def del_(self):
-        del self._property_cache[key_]
-
-    return property(get, fdel=del_)
+from functools import cached_property
 
 
 def stateful_property(default_value=None, constructor=None):
-    def wrapper(f):
-        prop = cached_property(constructor or (lambda self: default_value), f)
+    class _stateful_property(cached_property):
+        def __init__(self, func):
+            super().__init__(constructor or (lambda self: default_value))
+            self.setter = func
 
-        @prop.setter
-        def prop(self, value):
-            if prop.getter(self) != value:
-                self._property_cache[f] = f(self, value)
+        def __set__(self, instance, value):
+            if instance is None:
+                return self
+            if self.attrname is None:
+                raise TypeError(
+                    "Cannot use cached_property instance without calling __set_name__ on it.")
+            try:
+                cache = instance.__dict__
+            except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+                msg = (
+                    f"No '__dict__' attribute on {type(instance).__name__!r} "
+                    f"instance to cache {self.attrname!r} property."
+                )
+                raise TypeError(msg) from None
+            with self.lock:
+                # check if another thread filled cache while we awaited lock
+                val = self.setter(instance, value)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f"The '__dict__' attribute on {type(instance).__name__!r} instance "
+                        f"does not support item assignment for caching {self.attrname!r} property."
+                    )
+                    raise TypeError(msg) from None
 
-        return prop
-
-    return wrapper
+    return _stateful_property

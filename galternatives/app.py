@@ -3,12 +3,12 @@ from __future__ import absolute_import
 from . import logger, eprint, _, PACKAGE, APPID, alternative
 from .appdata import *
 from .gui import MainWindow, AboutDialog
-from .utils import cached_property
 try:
     from .log import set_logger
 except ImportError:
     set_logger = None
 
+from functools import cached_property
 from gi.repository import Gio, GLib, Gtk
 import shutil
 import os
