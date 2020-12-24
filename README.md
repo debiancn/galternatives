@@ -12,7 +12,7 @@ Debian.
 Requirements
 -------------
 Gtk+ >= 3.10  
-python3
+python3  
 python3-gi  
 gettext (for i18n support)
 
