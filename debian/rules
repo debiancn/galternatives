@@ -5,11 +5,16 @@ export PYBUILD_NAME=galternatives
 
 include /usr/share/dpkg/pkg-info.mk
 
+VERSION = $(call dpkg_late_eval,VERSION,echo '$(DEB_VERSION_UPSTREAM)' | sed -e 's/\+b[0-9]*$$//')
+
 
 %:
 	dh $@ --buildsystem=pybuild
 
-override_dh_auto_test:
-ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
-	python3 -c "import galternatives; assert galternatives.INFO['version'] == '$(DEB_VERSION_UPSTREAM)'"
-endif
+execute_after_dh_auto_clean:
+	$(RM) galternatives/version.py
+
+galternatives/version.py:
+	echo 'VERSION = "$(VERSION)"' > $@
+
+execute_before_dh_auto_configure: galternatives/version.py

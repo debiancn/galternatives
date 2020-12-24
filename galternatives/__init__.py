@@ -11,6 +11,11 @@ Attributes:
     logger: Logger for debug and messages.
 
 '''
+try:
+    from .version import VERSION
+except ImportError:
+    VERSION = 'git'
+
 import gettext
 import logging
 import sys
@@ -38,7 +43,7 @@ except (ImportError, AttributeError):
 APPID = 'org.debian.experimental.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
-    'version': '1.0.8',
+    'version': VERSION,
     'comments': _('A tool to help the administrator select which programs '
                   'provide specific services for the user by default.'),
     'license_type': 'GPL_2_0',

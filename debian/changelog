@@ -1,8 +1,11 @@
 galternatives (1.0.8) unreleased; urgency=medium
 
-  * Add build dependency on gir1.2-gdk-3.0 (Closes: #975041)
+  * New maintenance release.
+  * Fix FTBFS for possible binNMU (Closes: #975045).
+  [ Sven Mueller ]
+  * Add build dependency on gir1.2-gdk-3.0 (Closes: #975041).
 
- -- Sven Mueller <sven@debian.org>  Wed, 18 Nov 2020 11:08:48 +0100
+ -- Yangfl <mmyangfl@gmail.com>  Thu, 24 Dec 2020 17:17:56 +0800
 
 galternatives (1.0.7) unstable; urgency=medium
 
