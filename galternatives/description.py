@@ -7,11 +7,10 @@ Attributes:
     DEFAULT_DESCRIPTION (str): Placeholder when no description is found.
 
 '''
-from __future__ import absolute_import
-
 from . import logger, _
 from .appdata import *
 
+import configparser
 import locale
 import subprocess
 import sys
@@ -26,70 +25,40 @@ DEFAULT_DESCRIPTION = _('No description')
 DEFAULT_ICON = 'dialog-question'
 
 
-if sys.version_info >= (3,):
-    import configparser
+def altname_description(name, locale=locale.getdefaultlocale()[0]):
+    '''
+    Find readable group name and its description for given alternative group
+    name.
 
-    def altname_description(name, locale=locale.getdefaultlocale()[0]):
-        desc_file = os.path.join(DESC_DIR, '{}.desktop'.format(name))
-        config = configparser.ConfigParser()
-        # this func call also read the config file!
-        if desc_file in config.read(desc_file):
-            section = config['Desktop Entry']
-            return (
-                section.get('Name[{}]'.format(locale)) or
+    It will try to find proper translated strings, then the untranslated
+    name and description. If both failed, the original name will be
+    returned, along with a placeholder 'No description' as its description.
+
+    Args:
+        name (str): Name of the group.
+        locale (str, optional): Preferred locale. Default to current
+            environment locale.
+
+    Returns:
+        Tuple[str, str]: Readable group name and its description.
+
+    '''
+    desc_file = os.path.join(DESC_DIR, '{}.desktop'.format(name))
+    config = configparser.ConfigParser()
+    # this func call also read the config file!
+    if desc_file in config.read(desc_file):
+        section = config['Desktop Entry']
+        return (
+            section.get('Name[{}]'.format(locale)) or
                 section.get('Name') or
                 name,
-                section.get('Comment[{}]'.format(locale)) or
+            section.get('Comment[{}]'.format(locale)) or
                 section.get('Comment') or
                 DEFAULT_DESCRIPTION,
-                section.get('Icon') or
+            section.get('Icon') or
                 DEFAULT_ICON,
-            )
-        return (name, DEFAULT_DESCRIPTION, DEFAULT_ICON)
-else:
-    import ConfigParser
-
-    def altname_description(name, locale=locale.getdefaultlocale()[0]):
-        desc_file = os.path.join(DESC_DIR, '{}.desktop'.format(name))
-        config = ConfigParser.RawConfigParser()
-        config.read(desc_file)
-        if desc_file in config.read(desc_file):
-            return (
-                config.has_option(
-                    'Desktop Entry', 'Name[{}]'.format(locale)) and
-                config.get('Desktop Entry', 'Name[{}]'.format(locale)) or
-                config.has_option('Desktop Entry', 'Name') and
-                config.get('Desktop Entry', 'Name') or
-                name,
-                config.has_option(
-                    'Desktop Entry', 'Comment[{}]'.format(locale)) and
-                config.get('Desktop Entry', 'Comment[{}]'.format(locale)) or
-                config.has_option('Desktop Entry', 'Comment') and
-                config.get('Desktop Entry', 'Comment') or
-                DEFAULT_DESCRIPTION,
-                config.has_option('Desktop Entry', 'Icon') and
-                config.get('Desktop Entry', 'Icon') or
-                DEFAULT_ICON,
-            )
-        return (name, DEFAULT_DESCRIPTION, DEFAULT_ICON)
-
-altname_description.__doc__ = '''
-Find readable group name and its description for given alternative group
-name.
-
-It will try to find proper translated strings, then the untranslated
-name and description. If both failed, the original name will be
-returned, along with a placeholder 'No description' as its description.
-
-Args:
-    name (str): Name of the group.
-    locale (str, optional): Preferred locale. Default to current
-        environment locale.
-
-Returns:
-    Tuple[str, str]: Readable group name and its description.
-
-'''
+        )
+    return (name, DEFAULT_DESCRIPTION, DEFAULT_ICON)
 
 
 def query_package(filename):
@@ -111,14 +80,12 @@ def query_package(filename):
         RuntimeError: If ``dpkg`` exits with non-zero code.
 
     '''
-    p = subprocess.Popen(('dpkg', '-S', filename),
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = p.communicate()
-    if not out:
-        return
-    if p.returncode:
-        raise RuntimeError("`dpkg' returned with code {}".format(p.returncode))
-    return out.decode().split(': ')[0]
+    try:
+        p = subprocess.run(['dpkg', '-S', filename], capture_output=True)
+    except subprocess.CalledProcessError:
+        raise RuntimeError(f"`dpkg' returned with code {p.returncode}")
+    if p.stdout:
+        return p.stdout.decode().split(': ')[0]
 
 
 def friendlize(commands):

@@ -15,8 +15,6 @@ while we'd like to describe the most fundamental features that will not
 likely to be changed.
 
 '''
-from __future__ import with_statement
-
 from collections import namedtuple
 import os
 import subprocess
@@ -71,7 +69,7 @@ class Option(dict):
                 constructor.
 
         '''
-        super(Option, self).__init__(it, *args, **kwargs)
+        super().__init__(it, *args, **kwargs)
         self.priority = priority
 
     def describe(self, group):
@@ -123,7 +121,7 @@ class Option(dict):
             for i in range(len(group)))
 
 
-class Group(list, object):
+class Group(list):
     '''
     Class for alternative group.
 
@@ -142,7 +140,7 @@ class Group(list, object):
 
     '''
     def __init__(self, name, create=False, parent=None):
-        super(Group, self).__init__()
+        super().__init__()
         self._parent = parent
         self._links = {}
         self._current = True
@@ -158,8 +156,6 @@ class Group(list, object):
         # parse alt file
         with open(self.alt) as alt_file:
             it = map(lambda s: s.strip(), alt_file)
-            if sys.version_info < (3,):
-                it = iter(it)
 
             # target parser
             self._current = next(it) == 'auto'
@@ -251,24 +247,24 @@ class Group(list, object):
             # except_tag(value)
             self._links[value] = self._links[self[index]]
             del self._links[self[index]]
-            super(Group, self).__setitem__(index, value)
+            super().__setitem__(index, value)
         else:
             # except_absolute(value)
             if index not in self._links:
-                super(Group, self).append(index)
+                super().append(index)
             self._links[index] = value
 
     def __getitem__(self, index):
         if type(index) in (int, slice):
-            return super(Group, self).__getitem__(index)
+            return super().__getitem__(index)
         else:
             return self._links[index]
 
     def __delitem__(self, index):
         if type(index) != int:
             index = self.index(index)
-        del self._links[super(Group, self).__getitem__(index)]
-        super(Group, self).__delitem__(index)
+        del self._links[super().__getitem__(index)]
+        super().__delitem__(index)
 
     def __repr__(self):
         return 'altgroup: {} links: {} options: {}'.format(
@@ -340,7 +336,7 @@ class Alternative(dict):
         if log is not None:
             self.log = log
         self._moves = {}
-        super(Alternative, self).__init__(
+        super().__init__(
             map(lambda name: (name, None), filter(
                 lambda name: os.path.isfile(os.path.join(self.altdir, name)),
                 os.listdir(self.altdir))))
@@ -349,10 +345,10 @@ class Alternative(dict):
         return repr(self.keys())
 
     def __getitem__(self, name):
-        item = super(Alternative, self).__getitem__(name)
+        item = super().__getitem__(name)
         if not item:
             item = Group(name, parent=self)
-            super(Alternative, self).__setitem__(name, item)
+            super().__setitem__(name, item)
         return item
 
     def add(self, item):
@@ -371,7 +367,7 @@ class Alternative(dict):
             raise KeyError('element already exists')
         item._parent = self
         self._moves[item.name] = None
-        return super(Alternative, self).__setitem__(item.name, item)
+        return super().__setitem__(item.name, item)
 
     def move(self, old, new):
         if old in self._moves:
@@ -382,8 +378,8 @@ class Alternative(dict):
         if self._moves[new] == new:
             del self._moves[new]
         self[old][0] = new
-        super(Alternative, self).__setitem__(new, self[old])
-        super(Alternative, self).__delitem__(old)
+        super().__setitem__(new, self[old])
+        super().__delitem__(old)
 
     def compare(self, old_db):
         diff = []

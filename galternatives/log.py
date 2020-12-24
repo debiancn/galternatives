@@ -38,7 +38,7 @@ class ColoredFormatter(logging.Formatter):
         if levelname in COLORS:
             record.levelname = ''.join((
                 COLOR_SEQ.format(30 + COLORS[levelname]), levelname, RESET_SEQ))
-        return super(ColoredFormatter, self).format(record)
+        return super().format(record)
 
 
 def set_logger(ns, verbose=False):

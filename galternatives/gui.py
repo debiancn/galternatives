@@ -1,8 +1,6 @@
 '''
 Interface of the application.
 '''
-from __future__ import absolute_import
-
 from . import logger, _, PACKAGE, INFO, alternative
 from .appdata import *
 from .description import *
@@ -21,10 +19,7 @@ except ImportError:
     class xdg:
         class Config:
             icon_size = 48
-if sys.version_info >= (3,):
-    from itertools import zip_longest
-else:
-    from itertools import izip_longest as zip_longest
+from itertools import zip_longest
 
 GObject.threads_init()
 
@@ -132,7 +127,7 @@ class EditDialog(Gtk.Dialog):
             EditDialog._init_edit_dialog(self)
             return self
         else:
-            return super(EditDialog, cls).__new__(cls, *args, **kwargs)
+            return super().__new__(cls, *args, **kwargs)
 
     @Gtk.Template.Callback('add_row')
     def add_row(self, button):
@@ -171,7 +166,7 @@ class EditDialog(Gtk.Dialog):
 
     @Gtk.Template.Callback('close')
     def close(self, *args):
-        return super(EditDialog, self).close()
+        return super().close()
 
     @Gtk.Template.Callback('on_delete_event')
     def on_delete_event(self, window, event):
@@ -333,10 +328,12 @@ icontheme = Gtk.IconTheme.get_default()
 STATUS_ICONS = []
 for icon_name in ('dialog-ok', 'dialog-error'):
     try:
-        STATUS_ICONS.append(icontheme.load_icon(icon_name, 8, 0))
+        icon = icontheme.load_icon(icon_name, 8, 0)
     except GLib.Error:
-        STATUS_ICONS.append(None)
+        icon = None
+    STATUS_ICONS.append(icon)
 STATUS_ICONS.append(None)
+del icon
 del icontheme
 
 
@@ -794,7 +791,7 @@ class AboutDialog(Gtk.AboutDialog):
                     getattr(Gtk.License, kwargs['license_type'])
             else:
                 logger.warn("`license_type' incorrect!")
-        super(AboutDialog, self).__init__(
+        super().__init__(
             logo=LOGO_PATH and GdkPixbuf.Pixbuf.new_from_file_at_scale(
                 LOGO_PATH, xdg.Config.icon_size, -1, True),
             translator_credits=_('translator_credits'),

@@ -11,8 +11,6 @@ Attributes:
     logger: Logger for debug and messages.
 
 '''
-from __future__ import print_function
-
 import gettext
 import logging
 import sys

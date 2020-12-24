@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from . import logger, eprint, _, PACKAGE, APPID, alternative
 from .appdata import *
 from .gui import MainWindow, AboutDialog
@@ -19,7 +17,7 @@ class GAlternativesApp(Gtk.Application):
     target_group = None
 
     def __init__(self, *args, **kwargs):
-        super(GAlternativesApp, self).__init__(
+        super().__init__(
             *args, application_id=APPID,
             flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
             **kwargs)
