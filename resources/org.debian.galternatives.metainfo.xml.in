@@ -32,6 +32,11 @@
   </content_rating>
 
   <releases>
+    <release version="1.0.8" date="2021-01-05">
+      <description>
+        <_p>New maintenance release.</_p>
+      </description>
+    </release>
     <release version="1.0.7" date="2020-07-15">
       <description>
         <_p>New maintenance release de,nl translation updated.</_p>
