@@ -348,6 +348,7 @@ class MainWindow(object):
         self.group = alternative.Group(group, create=True) if group else None
         self.use_polkit = app.use_polkit if app else \
             os.getuid() and bool(shutil.which('pkexec'))
+        self.debug = app.debug
 
         # glade XML
         self.builder = Gtk.Builder.new_from_file(
@@ -502,6 +503,8 @@ class MainWindow(object):
         if diff_cmds is None:
             diff_cmds = self.alt_db.compare(self.alt_db_old)
         self.main_window.set_sensitive(False)
+        if self.debug > 1:
+            logger.debug(f'submit commands {diff_cmds}{" using polkit" if self.use_polkit else""}')
         threading.Thread(target=lambda: GObject.idle_add(
             self.do_save_callback, diff_cmds, autosave, *self.alt_db.commit(
                 diff_cmds,

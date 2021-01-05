@@ -15,6 +15,8 @@ while we'd like to describe the most fundamental features that will not
 likely to be changed.
 
 '''
+from . import logger
+
 from collections import namedtuple
 import os
 import subprocess
@@ -414,14 +416,10 @@ class Alternative(dict):
             args.insert(0, self.update_alternatives)
             if executer:
                 args.insert(0, executer)
-            p = subprocess.Popen(
-                args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            out, err = p.communicate()
-            if isinstance(out, str):
-                results.append(CommandResult(args, p.returncode, out, err))
-            else:
-                results.append(CommandResult(
-                    args, p.returncode, out.decode(), err.decode()))
+            logger.debug(f'run command {args}')
+            p = subprocess.run(args, capture_output=True, text=True)
+            results.append(CommandResult(
+                args, p.returncode, p.stdout, p.stderr))
             if p.returncode:
                 break
         return p.returncode, results
