@@ -1,0 +1,457 @@
+# Turkish translation for Galternatives.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: galternatives 1.0.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-11 15:31-0500\n"
+"PO-Revision-Date: 2021-04-07 15:36+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+"X-Poedit-Bookmarks: -1,-1,12,-1,-1,-1,-1,-1,-1,-1\n"
+
+#: ../../galternatives/app.py:28
+msgid "Enable debug output"
+msgstr "Hata ayıklama çıktısını etkinleştir"
+
+#: ../../galternatives/app.py:31
+msgid "Do not try to acquire root (as normal user)"
+msgstr "Root olmaya çalışmayın (normal kullanıcı olarak)"
+
+#: ../../galternatives/app.py:34
+msgid "Specify the alternatives directory"
+msgstr "Alternatifler dizinini belirtin"
+
+#: ../../galternatives/app.py:37
+msgid "Specify the administrative directory"
+msgstr "Yönetim dizinini belirtin"
+
+#: ../../galternatives/app.py:40
+msgid "Specify the log file"
+msgstr "Günlük dosyasını belirtin"
+
+#: ../../galternatives/app.py:48
+msgid "Testing galternatives..."
+msgstr "Ggalternatives test ediliyor..."
+
+#: ../../galternatives/app.py:57
+msgid "No root privileges detected, but continuing anyway"
+msgstr "Root ayrıcalıkları algılanmadı, ancak yine de devam ediyor"
+
+#: ../../galternatives/app.py:64
+msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
+msgstr "<b>Ayrıcalıklı işlemler için <tt>pkexec</tt> gereklidir.</b>"
+
+#: ../../galternatives/app.py:68
+msgid ""
+"The program needs pkexec to perform privileged alternatives system "
+"modifications under normal user. Unless you have modified your system to "
+"explicitly allow your normal user to do so, GAlternatives will not work."
+msgstr ""
+"Programın, normal kullanıcı altında ayrıcalıklı alternatif sistem "
+"değişikliklerini gerçekleştirmesi için pkexec'e ihtiyacı vardır. "
+"Sisteminizi, normal kullanıcınızın bunu yapmasına açıkça izin verecek "
+"şekilde değiştirmediyseniz, GAlternatives çalışmayacaktır."
+
+#: ../../galternatives/app.py:98
+msgid "Specifying more than one group not allowed"
+msgstr "Birden fazla grup belirtmeye izin verilmez"
+
+#: ../../galternatives/app.py:103
+msgid "No such group"
+msgstr "Böyle bir grup yok"
+
+#: ../../galternatives/description.py:25
+msgid "No description"
+msgstr "Tanım yok"
+
+#: ../../galternatives/description.py:140
+#, python-brace-format
+msgid "Install option `{3}' for group `{2}'"
+msgstr "`{2}' grubu için `{3}' seçeneğini yükleyin"
+
+#: ../../galternatives/description.py:141
+#, python-brace-format
+msgid "Priority: {4}"
+msgstr "Öncelik: {4}"
+
+#: ../../galternatives/description.py:142
+msgid "Slave `{}': `{}'"
+msgstr "Bağımlı `{}': `{}'"
+
+#: ../../galternatives/description.py:147
+#, python-brace-format
+msgid "Set group `{1}' to auto mode"
+msgstr "`{1}' grubunu otomatik moda ayarlayın"
+
+#: ../../galternatives/description.py:151
+#, python-brace-format
+msgid "Set group `{1}' to manual mode, pointed to `{2}'"
+msgstr "`{1}'grubunu manuel moda ayarlayın, `{2}' 'işaretini alın"
+
+#: ../../galternatives/description.py:156
+#, python-brace-format
+msgid "Remove option `{2}' for group `{1}'"
+msgstr "`{1}' grubu için `{2}' seçeneğini kaldırın"
+
+#: ../../galternatives/description.py:159
+#, python-brace-format
+msgid "Remove group `{1}'"
+msgstr "`{1}' Grubunu kaldır"
+
+#: ../../galternatives/appdata.py:89
+msgid "Logo missing. Is your installation correct?"
+msgstr "Logo eksik. Kurulumunuz doğru mu?"
+
+#: ../../galternatives/__init__.py:44
+msgid ""
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default."
+msgstr ""
+"Yöneticinin, hangi programların varsayılan olarak kullanıcıya belirli "
+"hizmetler sağlayacağını seçmesine yardımcı olan bir araç."
+
+#: ../../galternatives/gui.py:61
+msgid "Select File"
+msgstr "Dosya Seç"
+
+#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:276
+msgid "Name"
+msgstr "İsim"
+
+#: ../../galternatives/gui.py:210
+msgid "Link"
+msgstr "Bağlantı"
+
+#: ../../galternatives/gui.py:218
+msgid "Edit group - {}"
+msgstr "Grubu düzenle - {}"
+
+#: ../../galternatives/gui.py:225
+msgid "Add group"
+msgstr "Grup ekle"
+
+#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
+msgid "Path"
+msgstr "Yol"
+
+#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:16
+msgid "Priority"
+msgstr "Öncelik"
+
+#: ../../galternatives/gui.py:289
+msgid "Edit option - {}"
+msgstr "Seçeneği düzenle - {}"
+
+#: ../../galternatives/gui.py:296
+msgid "Add option"
+msgstr "Seçenek ekle"
+
+#: ../../galternatives/gui.py:529
+msgid "Run command: "
+msgstr "Çalıştırma komutu: "
+
+#: ../../galternatives/gui.py:800
+msgid "translator_credits"
+msgstr "Serkan ÖNDER <serkanonder@outlook.com>"
+
+#: ../org.debian.galternatives.desktop.in.h:1
+msgid "Alternatives Configurator"
+msgstr "Alternatif Yapılandırıcılar"
+
+#: ../org.debian.galternatives.desktop.in.h:2
+msgid "Configure the system default alternatives"
+msgstr "Sistem varsayılan seçeneklerini yapılandır"
+
+#: ../org.debian.galternatives.desktop.in.h:3
+msgid "Alternatives;GAlternatives;Debian;"
+msgstr "Alternatifler;GAlternatives;Debian;"
+
+#: ../descriptions/x-www-browser.desktop.in.h:1
+msgid "X WWW Browser"
+msgstr "X WWW Tarayıcı"
+
+#: ../descriptions/x-www-browser.desktop.in.h:2
+msgid "Default WWW Browser to launch URLs and browse the Internet."
+msgstr ""
+"URL'leri başlatmak ve İnternet'te gezinmek için varsayılan WWW Tarayıcısı."
+
+#: ../descriptions/jar.desktop.in.h:1
+msgid ""
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
+msgstr ""
+"Sınıflar ve kaynaklar için bir arşiv oluşturur ve tek tek sınıfları veya "
+"kaynakları bir arşivden yönetir veya geri yükler."
+
+#: ../descriptions/cpp.desktop.in.h:1
+msgid "C Preprocessor."
+msgstr "C Önişlemci."
+
+#: ../descriptions/wine.desktop.in.h:1
+msgid "Compatibility layer for Microsoft Windows programs."
+msgstr "Microsoft Windows programları için uyumluluk katmanı."
+
+#: ../descriptions/desktop-theme.desktop.in.h:1
+msgid "Desktop Theme"
+msgstr "Masaüstü Teması"
+
+#: ../descriptions/desktop-theme.desktop.in.h:2
+msgid "Default desktop theme."
+msgstr "Varsayılan masaüstü teması."
+
+#: ../descriptions/google-chrome.desktop.in.h:1
+msgid "Google Chrome"
+msgstr "Google Chrome"
+
+#: ../descriptions/google-chrome.desktop.in.h:2
+msgid "Default Release Channel of Google Chrome to use."
+msgstr "Kullanılacak Google Chrome'un Varsayılan Sürüm Kanalı."
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:1
+msgid "X Terminal Emulator"
+msgstr "X Terminal Emülatörü"
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:2
+msgid ""
+"Default Terminal Emulator to use when running text-based applications, e.g. "
+"from desktop-neutral mailcap entries."
+msgstr ""
+"Metin tabanlı uygulamaları çalıştırırken kullanılacak Varsayılan Terminal "
+"Emülatörü, ör. masaüstünden bağımsız posta başlığı girişlerinden."
+
+#: ../descriptions/desktop-background.desktop.in.h:1
+msgid "Desktop Background"
+msgstr "Masaüstü Arkaplanı"
+
+#: ../descriptions/desktop-background.desktop.in.h:2
+msgid "Default desktop wallpaper."
+msgstr "Varsayılan masaüstü duvar kağıdı."
+
+#: ../descriptions/unrar.desktop.in.h:1
+msgid "Extractor for RAR archives."
+msgstr "RAR arşivleri için çıkarıcı."
+
+#: ../descriptions/editor.desktop.in.h:1
+msgid "Default command line editor, usually called by `editor` command."
+msgstr ""
+"Varsayılan komut satırı düzenleyicisi, genellikle `editor` komutuyla "
+"çağrılır."
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:1
+msgid "X Cursor Theme"
+msgstr "X Cursor Teması"
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr ""
+"Grafik Arayüz gezinme ve manipülasyonunun çeşitli yönlerine yardımcı olan "
+"Varsayılan İmleç Teması."
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:1
+msgid "Gnome WWW Browser"
+msgstr "Gnome WWW Tarayıcısı"
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:2
+msgid "Default WWW Browser for GNOME Desktop Environment."
+msgstr "GNOME Masaüstü Ortamı için varsayılan WWW Tarayıcısı."
+
+#: ../descriptions/java.desktop.in.h:1
+msgid "Default Java Runtime."
+msgstr "Varsayılan Java Runtime."
+
+#: ../descriptions/convert.desktop.in.h:1
+msgid "ImageMagick command-line processing tool."
+msgstr "ImageMagick komut satırı işleme aracı."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:1
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr "G Alternatives"
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:2
+msgid "Graphical setup tool for the alternatives system"
+msgstr "Alternatifler sistemi için grafik kurulum aracı"
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:3
+msgid ""
+"<p> A GUI to help the system administrator to choose what program should "
+"provide a given service. </p> <p> This is a graphical front-end to the "
+"update-alternatives program shipped with dpkg. </p>"
+msgstr ""
+"<p> Sistem yöneticisinin, belirli bir hizmeti hangi programın sağlayacağını "
+"seçmesine yardımcı olan bir Arayüz. </p> <p> Bu, dpkg ile birlikte "
+"gönderilen güncelleme alternatifleri programının grafiksel bir ön ucudur. </"
+"p>"
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:4
+msgid "New maintenance release with AppStream Metadata added."
+msgstr "Uygulama Akışı Meta Verileri eklenmiş yeni bakım sürümü."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:5
+msgid "New maintenance release."
+msgstr "Yeni bakım sürümü."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:6
+msgid "New stable release."
+msgstr "Yeni kararlı sürüm."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:7
+msgid "New stable release, add feature to search entries."
+msgstr "Yeni kararlı sürüm, arama girişlerine özellik ekleyin."
+
+#: ../glade/edit_dialog.glade.h:1
+msgid "Slaves"
+msgstr "Bağımlılar"
+
+#: ../glade/edit_dialog.glade.h:2
+msgid "No changes will be made until you add an option."
+msgstr "Siz bir seçenek ekleyene kadar hiçbir değişiklik yapılmayacaktır."
+
+#: ../glade/galternatives.glade.h:2
+msgid "Create"
+msgstr "Oluştur"
+
+#: ../glade/galternatives.glade.h:3
+msgid "_Create"
+msgstr "_Oluştur"
+
+#: ../glade/galternatives.glade.h:4
+msgid "Edit"
+msgstr "Düzenle"
+
+#: ../glade/galternatives.glade.h:5
+msgid "_Edit"
+msgstr "_Düzenle"
+
+#: ../glade/galternatives.glade.h:6
+msgid "Remove"
+msgstr "Kaldır"
+
+#: ../glade/galternatives.glade.h:7
+msgid "_Remove"
+msgstr "_Kaldır"
+
+#: ../glade/galternatives.glade.h:8
+msgid "Find"
+msgstr "Bul"
+
+#: ../glade/galternatives.glade.h:9
+msgid "_Find"
+msgstr "_Bul"
+
+#: ../glade/galternatives.glade.h:10
+msgid "Select an alternative group to edit"
+msgstr "Düzenlemek için alternatif bir grup seçin"
+
+#: ../glade/galternatives.glade.h:11
+msgid "Groups"
+msgstr "Gruplar"
+
+#: ../glade/galternatives.glade.h:12
+msgid "Auto:"
+msgstr "Otomatik:"
+
+#: ../glade/galternatives.glade.h:13
+msgid "Auto mode"
+msgstr "Otomatik Kip"
+
+#: ../glade/galternatives.glade.h:14
+msgid "Alternative"
+msgstr "Alternatif"
+
+#: ../glade/galternatives.glade.h:15
+msgid "Choose an alternative group"
+msgstr "Alternatif bir grup seçin"
+
+#: ../glade/galternatives.glade.h:17
+msgid "Package"
+msgstr "Paket"
+
+#: ../glade/galternatives.glade.h:18
+msgid "Some changes are not saved."
+msgstr "Bazı değişiklikler kaydedilmedi."
+
+#: ../glade/galternatives.glade.h:19
+msgid "Are you sure you want to quit now?"
+msgstr "Şimdi çıkmak istediğinden emin misin?"
+
+#: ../glade/galternatives.glade.h:20
+msgid "Alternative settings editing is advanced feature."
+msgstr "Alternatif ayar düzenleme, gelişmiş bir özelliktir."
+
+#: ../glade/galternatives.glade.h:21
+msgid ""
+"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
+"corresponding packages.\n"
+"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
+"editing may break your system."
+msgstr ""
+"Bunların <tt>dpkg</tt> tarafından yönetilmesi ve ilgili paketleri "
+"tarafından sağlanması amaçlanmıştır.\n"
+"<b>Uyarı!</b> Bu özellik kararlı değildir ve hatalar içerebilir. Elle "
+"düzenleme sisteminizi bozabilir."
+
+#: ../glade/galternatives.glade.h:23
+msgid "Show this dialog next time."
+msgstr "Bir dahaki sefere bu diyaloğu göster."
+
+#: ../glade/galternatives.glade.h:24
+msgid "Preferences"
+msgstr "Tercihler"
+
+#: ../glade/galternatives.glade.h:25
+msgid "See update-alternatives(1) \"OPTIONS\" section for details"
+msgstr ""
+"Ayrıntılar için güncelleme alternatifleri (1) \"SEÇENEKLER\" bölümüne bakın"
+
+#: ../glade/galternatives.glade.h:26
+msgid "Paths"
+msgstr "Yollar"
+
+#: ../glade/galternatives.glade.h:27
+msgid "Commit failed"
+msgstr "Kaydetme başarısız"
+
+#: ../glade/galternatives.glade.h:28
+msgid "An error has occurred. The results are:"
+msgstr "Bir hata oluştu. Sonuçlar:"
+
+#: ../glade/galternatives.glade.h:29
+msgid "Be careful! Your system may be already in an unstable state."
+msgstr "Dikkatli ol! Sisteminiz zaten kararsız bir durumda olabilir."
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr "_Gecikme modu"
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr "Sorgu _paketi (yüksek G/Ç)"
+
+#: ../glade/menubar.glade.h:3
+msgid "_Use polkit"
+msgstr "_Polkit kullan"
+
+#: ../glade/menubar.glade.h:4
+msgid "_Working dir..."
+msgstr "_Çalışma diz..."
+
+#: ../glade/menubar.glade.h:5
+msgid "_About"
+msgstr "_Hakkında"
+
+#: ../glade/menubar.glade.h:6
+msgid "_Quit"
+msgstr "_Çıkış"
