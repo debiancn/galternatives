@@ -32,6 +32,11 @@
   </content_rating>
 
   <releases>
+    <release version="1.0.9" date="2022-10-14">
+      <description>
+        <_p>New maintenance release to include Turkish translation.</_p>
+      </description>
+    </release>
     <release version="1.0.8" date="2021-01-05">
       <description>
         <_p>New maintenance release.</_p>
