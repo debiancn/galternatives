@@ -27,7 +27,7 @@ Depends:
  ${misc:Depends},
  ${python3:Depends},
 Recommends:
- policykit-1,
+ pkexec,
  python3-xdg,
 Description: graphical setup tool for the alternatives system
  A GUI to help the system administrator to choose what program
