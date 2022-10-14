@@ -16,7 +16,6 @@ Rules-Requires-Root: no
 Standards-Version: 4.6.1
 Vcs-Git: https://salsa.debian.org/chinese-team/galternatives.git
 Vcs-Browser: https://salsa.debian.org/chinese-team/galternatives
-X-Python3-Version: >= 3.6
 
 Package: galternatives
 Architecture: all
