@@ -1,3 +1,14 @@
+galternatives (1.0.9) unstable; urgency=medium
+
+  * New maintenance release.
+  * d/control:
+    + Replace transitional package dependency: policykit-1 -> pkexec.
+    + Bump Standards-Version to 4.6.1.
+    + Drop legacy X-Python3-Version field.
+  * translations: Add Turkish translation.
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 14 Oct 2022 18:13:28 -0400
+
 galternatives (1.0.8) unstable; urgency=medium
 
   * New maintenance release.
