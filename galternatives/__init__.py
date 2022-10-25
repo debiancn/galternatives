@@ -40,7 +40,7 @@ except (ImportError, AttributeError):
     logger.warn('gi is not installed, assuming you only want to get info for '
                 'this application.')
 
-APPID = 'org.debian.experimental.' + PACKAGE
+APPID = 'org.debian.' + PACKAGE
 INFO = {
     'program_name': 'G Alternatives',
     'version': VERSION,
