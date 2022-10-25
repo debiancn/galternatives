@@ -4,7 +4,7 @@ from galternatives import PACKAGE, INFO
 from glob import glob
 import os
 import sys
-from distutils.core import setup
+from setuptools import setup
 
 
 if len(sys.argv) > 1:
