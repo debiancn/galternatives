@@ -6,8 +6,11 @@ galternatives (1.0.9) unstable; urgency=medium
     + Bump Standards-Version to 4.6.1.
     + Drop legacy X-Python3-Version field.
   * translations: Add Turkish translation.
+  * setup.py: Move from distutils to setuptools.
+  * galternatives/__init__.py: Use "org.debian.*" namespace instead
+    of "org.debian.experimental.*" namespace.
 
- -- Boyuan Yang <byang@debian.org>  Fri, 14 Oct 2022 18:13:28 -0400
+ -- Boyuan Yang <byang@debian.org>  Tue, 25 Oct 2022 17:25:24 -0400
 
 galternatives (1.0.8) unstable; urgency=medium
 

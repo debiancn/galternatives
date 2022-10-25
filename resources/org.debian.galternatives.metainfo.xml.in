@@ -35,6 +35,8 @@
     <release version="1.0.9" date="2022-10-14">
       <description>
         <_p>New maintenance release to include Turkish translation.</_p>
+        <_p>Move build system from distutils to setuptools.</_p>
+        <_p>Use "org.debian.*" namespace for python APPID.</_p>
       </description>
     </release>
     <release version="1.0.8" date="2021-01-05">
