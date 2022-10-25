@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "galternatives"
+description = "Manager for the alternatives system"
+readme = "README.md"
+requires-python = ">=3.5"
+version = "1.0.9"
+license = "GPL-2.0-or-later"
+authors = [
+  {email = "kov@debian.org"},
+  {name = "Gustavo Noronha Silva"}
+]
+maintainers = [
+  {name = "Boyuan Yang", email = "073plan@gmail.com"},
+  {name = "Yangfl", email = "mmyangfl@gmail.com"}
+]
+
+[project.urls]
+homepage = "https://salsa.debian.org/chinese-team/galternatives"

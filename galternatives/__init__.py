@@ -2,11 +2,12 @@
 Shared components and constants of the application.
 
 Attributes:
-    PACKAGE: The package name.
+    PACKAGE: The package name. Should keep in sync with top pyproject.toml.
     APPID: Appid for Gtk.Application.
     INFO: Other info (version, url, etc.) of the application.
         Also used in Gtk.AboutDialog construction, unknown parameter may
         cause error.
+        Should keep in sync with top pyproject.toml.
     _: Gettext function.
     logger: Logger for debug and messages.
 
