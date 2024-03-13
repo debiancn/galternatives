@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
+
 import os
+import signal
 import sys
+
 # If run as a single file (rather than a module), include the correct path so
 # that the package can be imported
 if __name__ == '__main__' and __package__ is None:
     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from galternatives.app import GAlternativesApp
-
-import signal
 
 
 def main():
@@ -19,4 +20,4 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    exit(main())

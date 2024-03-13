@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
-from galternatives import PACKAGE, INFO
 
 from glob import glob
 import os
 import sys
 from setuptools import setup
 
+from galternatives.info import PACKAGE, INFO
 
-if len(sys.argv) > 1:
-    if sys.argv[1] == 'build' or sys.argv[1] == 'install':
-        os.system('make -C resources')
-    elif sys.argv[1] == 'clean':
-        os.system('make -C resources clean')
 
 if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'build' or sys.argv[1] == 'install':
+            os.system('make -C resources')
+        elif sys.argv[1] == 'clean':
+            os.system('make -C resources clean')
+
     setup(
         name=PACKAGE,
         version=INFO['version'],

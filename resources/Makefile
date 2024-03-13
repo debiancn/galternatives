@@ -10,13 +10,9 @@ GLADE += $(UI:.ui=.glade)
 TRANSLATION_SRC := $(wildcard translations/*.po)
 TRANSLATION := $(TRANSLATION_SRC:translations/%.po=locale/%/LC_MESSAGES/galternatives.mo)
 SRC := $(wildcard ../galternatives/*.py)
-space :=
-space +=
 
-.PHONY: all extract update clean
 
-# all
-
+.PHONY: all
 all: $(DESKTOP) $(DESC) $(METAINFO) $(TRANSLATION)
 
 %.desktop: %.desktop.in
@@ -29,32 +25,25 @@ locale/%/LC_MESSAGES/galternatives.mo: translations/%.po
 	mkdir -p $(dir $@)
 	msgfmt --statistics -o $@ $<
 
-# extract
-
+.PHONY: extract
 extract: translations/POTFILES.in
 	(cd translations; intltool-update -g galternatives -p)
 
 translations/POTFILES.in: $(SRC) $(DESKTOP_SRC) $(DESC_SRC) $(METAINFO_SRC) $(GLADE)
 	echo '[encoding: UTF-8]' > $@
-	echo $(subst $(space),\\n,$(SRC)) >> $@
-	echo $(subst $(space),\\n,$(DESKTOP_SRC)) >> $@
-	echo $(subst $(space),\\n,$(DESC_SRC)) >> $@
-	echo $(subst $(space),\\n,$(METAINFO_SRC)) >> $@
-	echo $(subst $(space),\\n,$(GLADE)) >> $@
+	echo $? | sed -e 's/ /\n/g' >> $@
 
 %.glade: %.ui
 	ln -s $(notdir $<) $@
 
-# update
-
+.PHONY: update
 update: $(TRANSLATION_SRC:.po=.update.po)
 
 %.update.po: %.po
 	msgmerge -o $@ $< translations/galternatives.pot
 	mv $@ $<
 
-# clean
-
+.PHONY: clean
 clean:
 	rm -f $(DESKTOP) $(DESC) $(UI:.ui=.glade) translations/POTFILES.in
 	rm -rf locale

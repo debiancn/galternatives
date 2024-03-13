@@ -1,26 +1,25 @@
-'''
+"""
 Handle alternative database.
 
 The library can read the database of alternative system, make virtual
-changes to it, and output ``update-alternatives`` commands according to the
+changes to it, and output `update-alternatives` commands according to the
 differences between two databases, while saving the state of the original
-database is user's duty, by calling ``deepcopy(db)``.
+database is user's duty, by calling `copy.deepcopy(db)`.
 
-The difference is represented in a list of ``update-alternatives`` argument
-lists, without the leading two dashes.
+The difference is represented in a list of `update-alternatives` argument lists,
+without the leading two dashes.
 
-Note we do not try to implement a full version of ``update-alternatives`` in
+Note we do not try to implement a full version of `update-alternatives` in
 Python; format and mechanism of alternative system may change in the future,
-while we'd like to describe the most fundamental features that will not
-likely to be changed.
+while we'd like to describe the most fundamental features that will not likely
+to be changed.
+"""
 
-'''
-from . import logger
-
-from collections import namedtuple
 import os
 import subprocess
-import sys
+from typing import ClassVar, Iterable, Mapping, NamedTuple
+
+from . import logger
 
 
 def except_typeof(i, of_type):
@@ -43,22 +42,30 @@ def except_tag(tag):
         raise ValueError('special char not allowed')
 
 
-CommandResult = namedtuple('CommandResult', ('cmd', 'returncode', 'out', 'err'))
+class CommandResult(NamedTuple):
+    cmd: list[str]
+    "subprocess command arguments list"
+    returncode: int
+    out: str
+    "stdout"
+    err: str
+    "stderr"
 
 
-class Option(dict):
-    '''
+class AltOption(dict[str, str]):
+    """
     Class for option of alternative group.
 
     The class does not remember the group it belongs to; it's more like a
     wrapper for dict.
+    """
+    priority: int
+    "priority of the option"
 
-    Attributes:
-        priority (int): Priority of the option.
+    __slots__ = tuple(__annotations__)
 
-    '''
     def __init__(self, it=(), priority=0, *args, **kwargs):
-        '''
+        """
         Init the class.
 
         Args:
@@ -69,25 +76,23 @@ class Option(dict):
                 constructor.
             **kwargs: Arbitrary keyword arguments will be passed to the super
                 constructor.
-
-        '''
+        """
         super().__init__(it, *args, **kwargs)
         self.priority = priority
 
-    def describe(self, group):
-        '''
-        Convert to ``update-alternatives`` command.
+    def describe(self, group: 'AltGroup'):
+        """
+        Convert into `update-alternatives` command.
 
         Args:
             group (Group): The group which it belongs to.
 
         Returns:
-            Tuple[str, ...]: ``update-alternatives`` command.
+            List[str, ...]: `update-alternatives` command.
 
         Raises:
             ValueError: If the master path is missing.
-
-        '''
+        """
         diff = []
         for ind, name in enumerate(group):
             if name in self and self[name]:
@@ -98,10 +103,10 @@ class Option(dict):
                 raise ValueError('master path missing')
             if ind == 0:
                 diff.append(str(self.priority))
-        return tuple(diff)
+        return diff
 
     def same_with(self, other, group):
-        '''
+        """
         Tell whether two options have the same path set for the group.
 
         Args:
@@ -110,8 +115,7 @@ class Option(dict):
 
         Returns:
             bool: The result.
-
-        '''
+        """
         return all(self[name] == other[name] for name in group)
 
     def __hash__(self):
@@ -123,31 +127,36 @@ class Option(dict):
             for i in range(len(group)))
 
 
-class Group(list):
-    '''
+class AltGroup(list):
+    """
     Class for alternative group.
 
-    It acts like an OrderedDict, but allows int as index. The class itself
-    stores the names for the master and slave links, while the actual links are
-    stored in `_links` attribute.
+    It acts like an :class:`OrderedDict`, but allows int as index. The class
+    itself stores the names for the master and slave links, while the actual
+    links are stored in `_links` attribute.
 
     See update-alternatives(1) for properties' detail.
+    """
+    _parent: 'AltDB | None'
+    "the associated alternative database"
+    _links: dict[str, str]
+    "links for names"
+    _current: AltOption | bool
+    options: list[AltOption]
+    "available options"
 
-    Attributes:
-        _parent (Alternative): The associated alternative database.
-        _links (Dict[str, str]): Links for names.
-        options (List[Option]): Available options.
-        status (bool): Whether the group is in auto mode. Read only.
-        current (Option): The current applied option. Read only.
+    description: str | None
 
-    '''
-    def __init__(self, name, create=False, parent=None):
+    __slots__ = tuple(__annotations__)
+
+    def __init__(self, name: str, create=False, parent=None):
         super().__init__()
         self._parent = parent
         self._links = {}
         self._current = True
-        self[name] = ''
         self.options = []
+        self[name] = ''
+
         if not create:
             self.reload()
 
@@ -174,7 +183,7 @@ class Group(list):
                 line = next(it)
                 if line == '':
                     break
-                option = Option({next(it_name): line}, int(next(it)))
+                option = AltOption({next(it_name): line}, int(next(it)))
                 for name in it_name:
                     option[name] = next(it)
                 self.options.append(option)
@@ -191,17 +200,17 @@ class Group(list):
 
     @property
     def alt(self):
-        '''Path of alt file in the admindir.'''
+        """Path of alt file in the admindir."""
         return os.path.join(self._parent.altdir, self.name)
 
     @property
-    def name(self):
-        '''Name of the group.'''
+    def name(self) -> str:
+        """Name of the group."""
         return self[0]
 
     @property
     def link(self):
-        '''Master link of the group.'''
+        """Master link of the group."""
         return self[self.name]
 
     @link.setter
@@ -210,15 +219,17 @@ class Group(list):
 
     @property
     def status(self):
+        """whether the group is in auto mode"""
         return self._current is True
 
     @property
     def current(self):
+        """the current applied option"""
         return self.best if self.status else self._current
 
     @property
     def best(self):
-        '''The best option for the group (the one with the highest priority).'''
+        """The best option for the group (the one with the highest priority)."""
         return max(self.options, key=lambda o: o.priority)
 
     @property
@@ -284,7 +295,7 @@ class Group(list):
                 return option
 
     def compare(self, old_group={}):
-        '''
+        """
         Compare two groups and return the differential commands.
 
         Args:
@@ -292,12 +303,11 @@ class Group(list):
 
         Returns:
             List[Tuple[str, ...]]: Differential commands.
-
-        '''
+        """
         new_options = self.options_dict
         old_options = old_group and old_group.options_dict
         res = [
-            ('remove', self.name, p)
+            ['remove', self.name, p]
             for p in old_options
             if p not in new_options
         ] + [
@@ -309,13 +319,13 @@ class Group(list):
             # self in auto
             if old_group and not old_group.status:
                 # old in manual
-                res.append(('auto', self.name))
+                res.append(['auto', self.name])
         else:
             # self in manual
             if not old_group or old_group.status or \
                     not self.current.same_with(old_group.current, self):
                 # no old, old in auto, old current not the same
-                res.append(('set', self.name, self.current[self.name]))
+                res.append(['set', self.name, self.current[self.name]])
         return res
 
 
@@ -323,21 +333,31 @@ def list_starts_with(l, prefix):
     return l[:len(prefix)] == prefix
 
 
-class Alternative(dict):
-    altdir = '/var/lib/dpkg/alternatives'
-    admindir = '/etc/alternatives'
-    log = '/var/log/alternatives.log'
-    update_alternatives = 'update-alternatives'
-    PATHS = ('altdir', 'admindir', 'log')
+class AltDB(dict[str, AltGroup]):
+    altdir: str
+    admindir: str
+    log: str
+    update_cmd: str
 
-    def __init__(self, altdir=None, admindir=None, log=None):
-        if altdir is not None:
-            self.altdir = altdir
-        if admindir is not None:
-            self.admindir = admindir
-        if log is not None:
-            self.log = log
+    _moves: dict[str, str]
+
+    __slots__ = tuple(__annotations__)
+
+    ALTDIR: ClassVar[str] = '/var/lib/dpkg/alternatives'
+    ADMINDIR: ClassVar[str] = '/etc/alternatives'
+    LOG: ClassVar[str] = '/var/log/alternatives.log'
+    UPDATE_CMD: ClassVar[str] = 'update-alternatives'
+    PATH_NAMES: ClassVar[list[str]] = ['altdir', 'admindir', 'log']
+
+    def __init__(
+            self, altdir: str | None = None, admindir: str | None = None,
+            log: str | None = None):
+        self.altdir = altdir or self.ALTDIR
+        self.admindir = admindir or self.ADMINDIR
+        self.log = log or self.LOG
+        self.update_cmd = self.UPDATE_CMD
         self._moves = {}
+
         super().__init__(
             map(lambda name: (name, None), filter(
                 lambda name: os.path.isfile(os.path.join(self.altdir, name)),
@@ -346,24 +366,20 @@ class Alternative(dict):
     def __repr__(self):
         return repr(self.keys())
 
-    def __getitem__(self, name):
+    def __getitem__(self, name: str):
         item = super().__getitem__(name)
         if not item:
-            item = Group(name, parent=self)
+            item = AltGroup(name, parent=self)
             super().__setitem__(name, item)
         return item
 
-    def add(self, item):
-        '''
+    def add(self, item: AltGroup):
+        """
         Add new group to the alternative database.
 
-        Args:
-            item (Group): Group to be added.
-
-        Raises:
-            KeyError: If the group name already exists.
-
-        '''
+        :param item: Group to be added.
+        :raises KeyError: If the group name already exists.
+        """
         # except_typeof(item, Group)
         if item.name in self:
             raise KeyError('element already exists')
@@ -371,7 +387,7 @@ class Alternative(dict):
         self._moves[item.name] = None
         return super().__setitem__(item.name, item)
 
-    def move(self, old, new):
+    def move(self, old: str, new: str):
         if old in self._moves:
             self._moves[new] = self._moves[old]
             del self._moves[old]
@@ -383,12 +399,12 @@ class Alternative(dict):
         super().__setitem__(new, self[old])
         super().__delitem__(old)
 
-    def compare(self, old_db):
-        diff = []
+    def compare(self, old_db: Mapping[str, AltGroup]):
+        diffs = list[list[str]]()
         for group_name in old_db:
             if group_name not in self:
                 # group in old but not in new
-                diff.append(('remove-all', group_name))
+                diffs.append(['remove-all', group_name])
         for group_name in self:
             if dict.__getitem__(self, group_name):
                 # item has been accessed
@@ -399,27 +415,39 @@ class Alternative(dict):
                     if group_name in self._moves and \
                             self._moves[group_name] in old_db and \
                             self._moves[group_name] in self:
-                        diff.append(('remove-all', self._moves[group_name]))
+                        diffs.append(['remove-all', self._moves[group_name]])
                     elif group_name in old_db:
-                        diff.append(('remove-all', group_name))
-                    diff.extend(self[group_name].compare())
+                        diffs.append(['remove-all', group_name])
+                    diffs.extend(self[group_name].compare())
                 else:
                     # simply add difference
-                    diff.extend(self[group_name].compare(old_db[group_name]))
-        return diff
+                    diffs.extend(self[group_name].compare(old_db[group_name]))
+        return diffs
 
-    def commit(self, diff, executer=None):
-        results = []
-        for cmd in diff:
-            args = list(cmd)
-            args[0] = '--' + args[0]
-            args.insert(0, self.update_alternatives)
+    def commit(
+            self, diffs: Iterable[Iterable[str]], executer: str | None = None):
+        """
+        Run commands to update alternatives.
+
+        :param diffs: List of differential commands.
+        :param executer: `sudo` command, if any.
+        :return: Return code and list of :class:`CommandResult`. If commands
+            failed midway, result list might be shorter than ``diff``.
+        """
+        results = list[CommandResult]()
+        for diff in diffs:
+            cmd = list[str]()
             if executer:
-                args.insert(0, executer)
-            logger.debug(f'run command {args}')
-            p = subprocess.run(args, capture_output=True, text=True)
+                cmd.append(executer)
+            cmd.append(self.update_cmd)
+            args = list(diff)
+            args[0] = '--' + args[0]
+            cmd.extend(args)
+
+            logger.debug('run command "{}"'.format(' '.join(cmd)))
+            p = subprocess.run(cmd, capture_output=True, text=True)
             results.append(CommandResult(
-                args, p.returncode, p.stdout, p.stderr))
+                cmd, p.returncode, p.stdout, p.stderr))
             if p.returncode:
                 break
         return p.returncode, results
