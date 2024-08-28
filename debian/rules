@@ -5,13 +5,13 @@ export PYBUILD_NAME=galternatives
 
 include /usr/share/dpkg/pkg-info.mk
 
-VERSION = $(call dpkg_late_eval,VERSION,echo '$(DEB_VERSION_UPSTREAM)' | sed -e 's/\+.*$$//')
+VERSION := $(shell echo '$(DEB_VERSION_UPSTREAM)' | sed -e 's/\+.*$$//')
 
 
 %:
 	dh $@ --buildsystem=pybuild
 
-execute_after_dh_auto_clean:
+execute_before_dh_auto_clean:
 	$(RM) galternatives/version.py
 
 galternatives/version.py:

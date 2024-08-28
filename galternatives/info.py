@@ -3,7 +3,7 @@ from gettext import gettext
 try:
     from .version import VERSION
 except ImportError:
-    VERSION = 'git'
+    VERSION = '0.dev0'
 
 
 __all__ = ['PACKAGE', 'APPID', 'INFO']
