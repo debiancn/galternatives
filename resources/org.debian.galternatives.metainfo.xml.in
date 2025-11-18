@@ -5,18 +5,15 @@
   <id>org.debian.galternatives</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-1.0+</project_license>
+  <developer id="org.debian"><_name>The Debian Project</_name></developer>
   <_name>G Alternatives</_name>
   <_summary>Graphical setup tool for the alternatives system</_summary>
-  <_description>
-    <p>
-      A GUI to help the system administrator to choose what program
-      should provide a given service.
-    </p>
-    <p>
-       This is a graphical front-end to the update-alternatives
-       program shipped with dpkg. 
-    </p>
-  </_description>
+  <description>
+    <_p>A GUI to help the system administrator to choose what program
+      should provide a given service.</_p>
+    <_p>This is a graphical front-end to the update-alternatives
+       program shipped with dpkg.</_p>
+  </description>
   <update_contact>byang_AT_debian.org</update_contact>
 
   <launchable type="desktop-id">org.debian.galternatives.desktop</launchable>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 15:31-0500\n"
+"POT-Creation-Date: 2025-11-17 23:04-0500\n"
 "PO-Revision-Date: 2019-02-01 13:35+0100\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -17,39 +17,88 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../galternatives/app.py:28
+#: ../../galternatives/appdata.py:78
+msgid "Logo missing. Is your installation correct?"
+msgstr "Chybí logo. Je vaše instalace v pořádku?"
+
+#: ../../galternatives/app.py:63
+msgid "Select File"
+msgstr "Výběr souboru"
+
+#: ../../galternatives/app.py:213 ../../galternatives/app.py:283
+msgid "Name"
+msgstr "Název"
+
+#: ../../galternatives/app.py:214
+msgid "Link"
+msgstr "Odkaz"
+
+#: ../../galternatives/app.py:222
+msgid "Add group"
+msgstr "Přidat skupinu"
+
+#: ../../galternatives/app.py:225
+msgid "Edit group - {}"
+msgstr "Upravit skupinu – {}"
+
+#: ../../galternatives/app.py:279 ../../galternatives/app.py:284
+msgid "Path"
+msgstr "Popis umístění"
+
+#: ../../galternatives/app.py:280 ../glade/galternatives.glade.h:16
+msgid "Priority"
+msgstr "Priorita"
+
+#: ../../galternatives/app.py:297
+msgid "Add option"
+msgstr "Přidat volbu"
+
+#: ../../galternatives/app.py:303
+msgid "Edit option - {}"
+msgstr "Upravit volbu – {}"
+
+#: ../../galternatives/app.py:568
+msgid "Run command: "
+msgstr "Spustit příkaz: "
+
+#: ../../galternatives/app.py:855
+msgid "translator_credits"
+msgstr ""
+"Miroslav Kuře <kurem@debian.cz>, Pavel Borecki <pavel.borecki@gmail.com>"
+
+#: ../../galternatives/app.py:879
 msgid "Enable debug output"
 msgstr "Zapnout ladící výstup"
 
-#: ../../galternatives/app.py:31
+#: ../../galternatives/app.py:882
 msgid "Do not try to acquire root (as normal user)"
 msgstr "Nepokoušet se získat oprávnění správce (coby běžný uživatele)"
 
-#: ../../galternatives/app.py:34
+#: ../../galternatives/app.py:885
 msgid "Specify the alternatives directory"
 msgstr "Zadejte složku alternativ"
 
-#: ../../galternatives/app.py:37
+#: ../../galternatives/app.py:888
 msgid "Specify the administrative directory"
 msgstr "Zadejte složku pro správu"
 
-#: ../../galternatives/app.py:40
+#: ../../galternatives/app.py:891
 msgid "Specify the log file"
 msgstr "Zadejte soubor pro záznam událostí"
 
-#: ../../galternatives/app.py:48
+#: ../../galternatives/app.py:907
 msgid "Testing galternatives..."
 msgstr "Testování galternatives…"
 
-#: ../../galternatives/app.py:57
+#: ../../galternatives/app.py:916
 msgid "No root privileges detected, but continuing anyway"
 msgstr "Nezjištěno oprávnění správce, ale pokračuje se i tak"
 
-#: ../../galternatives/app.py:64
+#: ../../galternatives/app.py:923
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
 msgstr "<b>Pro privilegované operace je zapotřebí <tt>pkexec</tt>.</b>"
 
-#: ../../galternatives/app.py:68
+#: ../../galternatives/app.py:927
 msgid ""
 "The program needs pkexec to perform privileged alternatives system "
 "modifications under normal user. Unless you have modified your system to "
@@ -59,108 +108,61 @@ msgstr ""
 "alternativ pod běžným uživatelem. Pokud jste svůj systém neupravili tak, aby "
 "toto mohl dělat i běžný uživatel, GAlternatives nebude fungovat."
 
-#: ../../galternatives/app.py:98
-msgid "Specifying more than one group not allowed"
+#: ../../galternatives/app.py:954
+#, fuzzy
+msgid "Error: Specifying more than one group is not allowed"
 msgstr "Zadání více než jedné skupiny není možné"
 
-#: ../../galternatives/app.py:103
-msgid "No such group"
+#: ../../galternatives/app.py:968
+#, fuzzy
+msgid "Error: No such group \"{}\""
 msgstr "Žádná taková skupina"
 
-#: ../../galternatives/description.py:25
+#: ../../galternatives/description.py:28
 msgid "No description"
 msgstr "Bez popisu"
 
-#: ../../galternatives/description.py:140
+#: ../../galternatives/description.py:95
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
 msgstr "Nainstalovat volbu `{3}' pro skupinu `{2}'"
 
-#: ../../galternatives/description.py:141
+#: ../../galternatives/description.py:96
 #, python-brace-format
 msgid "Priority: {4}"
 msgstr "Priorita: {4}"
 
-#: ../../galternatives/description.py:142
+#: ../../galternatives/description.py:98
 msgid "Slave `{}': `{}'"
 msgstr "Podřízené `{}': `{}'"
 
-#: ../../galternatives/description.py:147
+#: ../../galternatives/description.py:101
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr "Nastavit skupinu `{1}' na automatický režim"
 
-#: ../../galternatives/description.py:151
+#: ../../galternatives/description.py:104
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr "Nastavit skupinu `{1}' do ručního režimu, odkazující na `{2}'"
 
-#: ../../galternatives/description.py:156
+#: ../../galternatives/description.py:107
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr "Odebrat volbu `{2}' pro skupinu `{1}'"
 
-#: ../../galternatives/description.py:159
+#: ../../galternatives/description.py:109
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr "Odebrat skupinu `{1}'"
 
-#: ../../galternatives/appdata.py:89
-msgid "Logo missing. Is your installation correct?"
-msgstr "Chybí logo. Je vaše instalace v pořádku?"
-
-#: ../../galternatives/__init__.py:44
+#: ../../galternatives/info.py:22
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
 msgstr ""
 "Nástroj, který správci pomáhá vybrat výchozí programy, které mají uživatelům "
 "poskytovat dané služby."
-
-#: ../../galternatives/gui.py:61
-msgid "Select File"
-msgstr "Výběr souboru"
-
-#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:276
-msgid "Name"
-msgstr "Název"
-
-#: ../../galternatives/gui.py:210
-msgid "Link"
-msgstr "Odkaz"
-
-#: ../../galternatives/gui.py:218
-msgid "Edit group - {}"
-msgstr "Upravit skupinu – {}"
-
-#: ../../galternatives/gui.py:225
-msgid "Add group"
-msgstr "Přidat skupinu"
-
-#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
-msgid "Path"
-msgstr "Popis umístění"
-
-#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:16
-msgid "Priority"
-msgstr "Priorita"
-
-#: ../../galternatives/gui.py:289
-msgid "Edit option - {}"
-msgstr "Upravit volbu – {}"
-
-#: ../../galternatives/gui.py:296
-msgid "Add option"
-msgstr "Přidat volbu"
-
-#: ../../galternatives/gui.py:529
-msgid "Run command: "
-msgstr "Spustit příkaz: "
-
-#: ../../galternatives/gui.py:800
-msgid "translator_credits"
-msgstr ""
-"Miroslav Kuře <kurem@debian.cz>, Pavel Borecki <pavel.borecki@gmail.com>"
 
 #: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
@@ -174,57 +176,13 @@ msgstr "Nastavit výchozí alternativy pro celý systém"
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr "Alternativy;GAlternatives;Debian;"
 
-#: ../descriptions/x-www-browser.desktop.in.h:1
-msgid "X WWW Browser"
-msgstr "Webový prohlížeč pro grafické prostředí"
-
-#: ../descriptions/x-www-browser.desktop.in.h:2
-msgid "Default WWW Browser to launch URLs and browse the Internet."
-msgstr "Výchozí webový prohlížeč pro spouštění URL adres a procházení webu."
-
-#: ../descriptions/jar.desktop.in.h:1
-msgid ""
-"Creates an archive for classes and resources, and manipulate or restore "
-"individual classes or resources from an archive."
-msgstr ""
-"Vytváří archiv pro třídy a prostředky a manipuluje nebo obnovuje jednotlivé "
-"třídy nebo prostředky z archivu."
+#: ../descriptions/convert.desktop.in.h:1
+msgid "ImageMagick command-line processing tool."
+msgstr "Nástroj typu ImageMagick pro zpracování z příkazového řádku."
 
 #: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
 msgstr "Předzpracování jazyka C."
-
-#: ../descriptions/wine.desktop.in.h:1
-msgid "Compatibility layer for Microsoft Windows programs."
-msgstr "Vrstva pro kompatibilitu s aplikacemi pro Microsoft Windows."
-
-#: ../descriptions/desktop-theme.desktop.in.h:1
-msgid "Desktop Theme"
-msgstr "Motiv vzhledu pracovního prostředí"
-
-#: ../descriptions/desktop-theme.desktop.in.h:2
-msgid "Default desktop theme."
-msgstr "Výchozí motiv vzhledu pracovního prostředí."
-
-#: ../descriptions/google-chrome.desktop.in.h:1
-msgid "Google Chrome"
-msgstr "Google Chrome"
-
-#: ../descriptions/google-chrome.desktop.in.h:2
-msgid "Default Release Channel of Google Chrome to use."
-msgstr "Výchozí kanál vydání Google Chrome, který použít."
-
-#: ../descriptions/x-terminal-emulator.desktop.in.h:1
-msgid "X Terminal Emulator"
-msgstr "Emulátor terminálu pro grafické prostředí"
-
-#: ../descriptions/x-terminal-emulator.desktop.in.h:2
-msgid ""
-"Default Terminal Emulator to use when running text-based applications, e.g. "
-"from desktop-neutral mailcap entries."
-msgstr ""
-"Výchozí emulátor terminálu který použít pro spouštění na textu založených "
-"aplikací, např. z položek vůči pracovnímu prostředí neutrálního mailcap."
 
 #: ../descriptions/desktop-background.desktop.in.h:1
 msgid "Desktop Background"
@@ -234,13 +192,53 @@ msgstr "Pozadí plochy"
 msgid "Default desktop wallpaper."
 msgstr "Výchozí pozadí plochy."
 
-#: ../descriptions/unrar.desktop.in.h:1
-msgid "Extractor for RAR archives."
-msgstr "Rozbalování RAR archivů."
+#: ../descriptions/desktop-theme.desktop.in.h:1
+msgid "Desktop Theme"
+msgstr "Motiv vzhledu pracovního prostředí"
+
+#: ../descriptions/desktop-theme.desktop.in.h:2
+msgid "Default desktop theme."
+msgstr "Výchozí motiv vzhledu pracovního prostředí."
 
 #: ../descriptions/editor.desktop.in.h:1
 msgid "Default command line editor, usually called by `editor` command."
 msgstr "Výchozí editor v příkazovém řádku, obvykle volaný příkazem `editor`."
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:1
+msgid "Gnome WWW Browser"
+msgstr "Webový prohlížeč pro Gnome"
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:2
+msgid "Default WWW Browser for GNOME Desktop Environment."
+msgstr "Výchozí webový prohlížeč pro pracovní prostředí GNOME."
+
+#: ../descriptions/google-chrome.desktop.in.h:1
+msgid "Google Chrome"
+msgstr "Google Chrome"
+
+#: ../descriptions/google-chrome.desktop.in.h:2
+msgid "Default Release Channel of Google Chrome to use."
+msgstr "Výchozí kanál vydání Google Chrome, který použít."
+
+#: ../descriptions/jar.desktop.in.h:1
+msgid ""
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
+msgstr ""
+"Vytváří archiv pro třídy a prostředky a manipuluje nebo obnovuje jednotlivé "
+"třídy nebo prostředky z archivu."
+
+#: ../descriptions/java.desktop.in.h:1
+msgid "Default Java Runtime."
+msgstr "Výchozí běhové prostředí pro Java."
+
+#: ../descriptions/unrar.desktop.in.h:1
+msgid "Extractor for RAR archives."
+msgstr "Rozbalování RAR archivů."
+
+#: ../descriptions/wine.desktop.in.h:1
+msgid "Compatibility layer for Microsoft Windows programs."
+msgstr "Vrstva pro kompatibilitu s aplikacemi pro Microsoft Windows."
 
 #: ../descriptions/x-cursor-theme.desktop.in.h:1
 msgid "X Cursor Theme"
@@ -254,54 +252,83 @@ msgstr ""
 "Výchozí motiv vzhledu kurzoru který pomáhá různým aspektům pohybu a "
 "manipulace v grafickém uživatelském rozhraní."
 
-#: ../descriptions/gnome-www-browser.desktop.in.h:1
-msgid "Gnome WWW Browser"
-msgstr "Webový prohlížeč pro Gnome"
+#: ../descriptions/x-terminal-emulator.desktop.in.h:1
+msgid "X Terminal Emulator"
+msgstr "Emulátor terminálu pro grafické prostředí"
 
-#: ../descriptions/gnome-www-browser.desktop.in.h:2
-msgid "Default WWW Browser for GNOME Desktop Environment."
-msgstr "Výchozí webový prohlížeč pro pracovní prostředí GNOME."
+#: ../descriptions/x-terminal-emulator.desktop.in.h:2
+msgid ""
+"Default Terminal Emulator to use when running text-based applications, e.g. "
+"from desktop-neutral mailcap entries."
+msgstr ""
+"Výchozí emulátor terminálu který použít pro spouštění na textu založených "
+"aplikací, např. z položek vůči pracovnímu prostředí neutrálního mailcap."
 
-#: ../descriptions/java.desktop.in.h:1
-msgid "Default Java Runtime."
-msgstr "Výchozí běhové prostředí pro Java."
+#: ../descriptions/x-www-browser.desktop.in.h:1
+msgid "X WWW Browser"
+msgstr "Webový prohlížeč pro grafické prostředí"
 
-#: ../descriptions/convert.desktop.in.h:1
-msgid "ImageMagick command-line processing tool."
-msgstr "Nástroj typu ImageMagick pro zpracování z příkazového řádku."
+#: ../descriptions/x-www-browser.desktop.in.h:2
+msgid "Default WWW Browser to launch URLs and browse the Internet."
+msgstr "Výchozí webový prohlížeč pro spouštění URL adres a procházení webu."
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:1
+msgid "The Debian Project"
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:2
 #: ../glade/galternatives.glade.h:1
 msgid "G Alternatives"
 msgstr "G Alternativy"
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:2
+#: ../org.debian.galternatives.metainfo.xml.in.h:3
 msgid "Graphical setup tool for the alternatives system"
 msgstr ""
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:3
+#: ../org.debian.galternatives.metainfo.xml.in.h:4
 #, fuzzy
 msgid ""
-"<p> A GUI to help the system administrator to choose what program should "
-"provide a given service. </p> <p> This is a graphical front-end to the "
-"update-alternatives program shipped with dpkg. </p>"
+"A GUI to help the system administrator to choose what program should provide "
+"a given service."
 msgstr ""
 "Nástroj, který správci pomáhá vybrat výchozí programy, které mají uživatelům "
 "poskytovat dané služby."
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:4
-msgid "New maintenance release with AppStream Metadata added."
-msgstr ""
-
 #: ../org.debian.galternatives.metainfo.xml.in.h:5
-msgid "New maintenance release."
+msgid ""
+"This is a graphical front-end to the update-alternatives program shipped "
+"with dpkg."
 msgstr ""
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:6
-msgid "New stable release."
+msgid "New maintenance release to include Turkish translation."
 msgstr ""
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:7
+msgid "Move build system from distutils to setuptools."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:8
+msgid "Use \"org.debian.*\" namespace for python APPID."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:9
+msgid "New maintenance release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:10
+msgid "New maintenance release de,nl translation updated."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:11
+msgid "New maintenance release with AppStream Metadata added."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:12
+msgid "New stable release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:13
 msgid "New stable release, add feature to search entries."
 msgstr ""
 

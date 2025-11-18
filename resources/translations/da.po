@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 15:31-0500\n"
+"POT-Creation-Date: 2025-11-17 23:04-0500\n"
 "PO-Revision-Date: 2018-10-19 23:58+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish\n"
@@ -16,39 +16,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../galternatives/app.py:28
+#: ../../galternatives/appdata.py:78
+msgid "Logo missing. Is your installation correct?"
+msgstr "Logo mangler. Er din installation korrekt?"
+
+#: ../../galternatives/app.py:63
+msgid "Select File"
+msgstr "Vælg fil"
+
+#: ../../galternatives/app.py:213 ../../galternatives/app.py:283
+msgid "Name"
+msgstr "Navn"
+
+#: ../../galternatives/app.py:214
+msgid "Link"
+msgstr "Link"
+
+#: ../../galternatives/app.py:222
+msgid "Add group"
+msgstr "Tilføj gruppe"
+
+#: ../../galternatives/app.py:225
+msgid "Edit group - {}"
+msgstr "Rediger gruppe - {}"
+
+#: ../../galternatives/app.py:279 ../../galternatives/app.py:284
+msgid "Path"
+msgstr "Sti"
+
+#: ../../galternatives/app.py:280 ../glade/galternatives.glade.h:16
+msgid "Priority"
+msgstr "Prioritet"
+
+#: ../../galternatives/app.py:297
+msgid "Add option"
+msgstr "Tilføj tilvalg"
+
+#: ../../galternatives/app.py:303
+msgid "Edit option - {}"
+msgstr "Rediger tilvalg - {}"
+
+#: ../../galternatives/app.py:568
+msgid "Run command: "
+msgstr "Kør kommando: "
+
+#: ../../galternatives/app.py:855
+msgid "translator_credits"
+msgstr "scootergrisen"
+
+#: ../../galternatives/app.py:879
 msgid "Enable debug output"
 msgstr "Aktivér fejlretningsoutput"
 
-#: ../../galternatives/app.py:31
+#: ../../galternatives/app.py:882
 msgid "Do not try to acquire root (as normal user)"
 msgstr "Prøv ikke på at bruge root (som normal bruger)"
 
-#: ../../galternatives/app.py:34
+#: ../../galternatives/app.py:885
 msgid "Specify the alternatives directory"
 msgstr "Angiv mappe til alternativer"
 
-#: ../../galternatives/app.py:37
+#: ../../galternatives/app.py:888
 msgid "Specify the administrative directory"
 msgstr "Angiv mappe til administration"
 
-#: ../../galternatives/app.py:40
+#: ../../galternatives/app.py:891
 msgid "Specify the log file"
 msgstr "Angiv logfilen"
 
-#: ../../galternatives/app.py:48
+#: ../../galternatives/app.py:907
 msgid "Testing galternatives..."
 msgstr "Tester galternatives..."
 
-#: ../../galternatives/app.py:57
+#: ../../galternatives/app.py:916
 msgid "No root privileges detected, but continuing anyway"
 msgstr "Ingen root-privilegier registreret, men fortsætter alligevel"
 
-#: ../../galternatives/app.py:64
+#: ../../galternatives/app.py:923
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
 msgstr "<b><tt>pkexec</tt> kræves til privilegerede handlinger.</b>"
 
-#: ../../galternatives/app.py:68
+#: ../../galternatives/app.py:927
 msgid ""
 "The program needs pkexec to perform privileged alternatives system "
 "modifications under normal user. Unless you have modified your system to "
@@ -58,107 +106,61 @@ msgstr ""
 "alternativer-systemet. Med mindre du ændret dit system til eksplicit at "
 "tillade din normale bruger at gøre det, så virker GAlternatives ikke."
 
-#: ../../galternatives/app.py:98
-msgid "Specifying more than one group not allowed"
+#: ../../galternatives/app.py:954
+#, fuzzy
+msgid "Error: Specifying more than one group is not allowed"
 msgstr "Det er ikke tilladt at angive mere end én gruppe"
 
-#: ../../galternatives/app.py:103
-msgid "No such group"
+#: ../../galternatives/app.py:968
+#, fuzzy
+msgid "Error: No such group \"{}\""
 msgstr "Ingen sådan gruppe"
 
-#: ../../galternatives/description.py:25
+#: ../../galternatives/description.py:28
 msgid "No description"
 msgstr "Ingen beskrivelse"
 
-#: ../../galternatives/description.py:140
+#: ../../galternatives/description.py:95
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
 msgstr "Installer tilvalget `{3}' for gruppen `{2}'"
 
-#: ../../galternatives/description.py:141
+#: ../../galternatives/description.py:96
 #, python-brace-format
 msgid "Priority: {4}"
 msgstr "Prioritet: {4}"
 
-#: ../../galternatives/description.py:142
+#: ../../galternatives/description.py:98
 msgid "Slave `{}': `{}'"
 msgstr "Slave `{}': `{}'"
 
-#: ../../galternatives/description.py:147
+#: ../../galternatives/description.py:101
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr "Sæt gruppen `{1}' til automatisk tilstand"
 
-#: ../../galternatives/description.py:151
+#: ../../galternatives/description.py:104
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr "Sæt gruppen `{1}' til manuel tilstand, pegede på `{2}'"
 
-#: ../../galternatives/description.py:156
+#: ../../galternatives/description.py:107
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr "Fjern tilvalget `{2}' for gruppen `{1}'"
 
-#: ../../galternatives/description.py:159
+#: ../../galternatives/description.py:109
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr "Fjern gruppen `{1}'"
 
-#: ../../galternatives/appdata.py:89
-msgid "Logo missing. Is your installation correct?"
-msgstr "Logo mangler. Er din installation korrekt?"
-
-#: ../../galternatives/__init__.py:44
+#: ../../galternatives/info.py:22
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
 msgstr ""
 "Et værktøj som hjælper administratoren til at vælge hvilke programmer der, "
 "som standard, giver bestemte tjenester til brugeren."
-
-#: ../../galternatives/gui.py:61
-msgid "Select File"
-msgstr "Vælg fil"
-
-#: ../../galternatives/gui.py:209 ../../galternatives/gui.py:276
-msgid "Name"
-msgstr "Navn"
-
-#: ../../galternatives/gui.py:210
-msgid "Link"
-msgstr "Link"
-
-#: ../../galternatives/gui.py:218
-msgid "Edit group - {}"
-msgstr "Rediger gruppe - {}"
-
-#: ../../galternatives/gui.py:225
-msgid "Add group"
-msgstr "Tilføj gruppe"
-
-#: ../../galternatives/gui.py:272 ../../galternatives/gui.py:277
-msgid "Path"
-msgstr "Sti"
-
-#: ../../galternatives/gui.py:273 ../glade/galternatives.glade.h:16
-msgid "Priority"
-msgstr "Prioritet"
-
-#: ../../galternatives/gui.py:289
-msgid "Edit option - {}"
-msgstr "Rediger tilvalg - {}"
-
-#: ../../galternatives/gui.py:296
-msgid "Add option"
-msgstr "Tilføj tilvalg"
-
-#: ../../galternatives/gui.py:529
-msgid "Run command: "
-msgstr "Kør kommando: "
-
-#: ../../galternatives/gui.py:800
-msgid "translator_credits"
-msgstr "scootergrisen"
 
 #: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
@@ -172,29 +174,21 @@ msgstr "Konfigurer systemets standardalternativer"
 msgid "Alternatives;GAlternatives;Debian;"
 msgstr "Alternativer;GAlternatives;Debian;"
 
-#: ../descriptions/x-www-browser.desktop.in.h:1
-msgid "X WWW Browser"
-msgstr "X WWW-browser"
-
-#: ../descriptions/x-www-browser.desktop.in.h:2
-msgid "Default WWW Browser to launch URLs and browse the Internet."
-msgstr "Standard WWW-browser til at starte URL'er og gennemse internettet."
-
-#: ../descriptions/jar.desktop.in.h:1
-msgid ""
-"Creates an archive for classes and resources, and manipulate or restore "
-"individual classes or resources from an archive."
-msgstr ""
-"Oprettet et arkiv til klasser og ressourcer, og manipulerer eller gendanner "
-"enkelte klasser eller ressourcer fra et arkiv."
+#: ../descriptions/convert.desktop.in.h:1
+msgid "ImageMagick command-line processing tool."
+msgstr "ImageMagick-behandlingsværktøj til kommandolinjen."
 
 #: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
 msgstr "C-preprocessor."
 
-#: ../descriptions/wine.desktop.in.h:1
-msgid "Compatibility layer for Microsoft Windows programs."
-msgstr "Kompatibilitetslager til Microsoft Windows-programmer."
+#: ../descriptions/desktop-background.desktop.in.h:1
+msgid "Desktop Background"
+msgstr "Skrivebordsbaggrund"
+
+#: ../descriptions/desktop-background.desktop.in.h:2
+msgid "Default desktop wallpaper."
+msgstr "Standard skrivebordstapet."
 
 #: ../descriptions/desktop-theme.desktop.in.h:1
 msgid "Desktop Theme"
@@ -204,6 +198,19 @@ msgstr "Skrivebordstema"
 msgid "Default desktop theme."
 msgstr "Standard skrivebordstema."
 
+#: ../descriptions/editor.desktop.in.h:1
+msgid "Default command line editor, usually called by `editor` command."
+msgstr ""
+"Standard kommandolinjeeditor, som typisk kaldes med `editor`-kommandoen."
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:1
+msgid "Gnome WWW Browser"
+msgstr "Gnome WWW-browser"
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:2
+msgid "Default WWW Browser for GNOME Desktop Environment."
+msgstr "Standard WWW-browser til GNOME-skrivebordsmiljø."
+
 #: ../descriptions/google-chrome.desktop.in.h:1
 msgid "Google Chrome"
 msgstr "Google Chrome"
@@ -211,6 +218,38 @@ msgstr "Google Chrome"
 #: ../descriptions/google-chrome.desktop.in.h:2
 msgid "Default Release Channel of Google Chrome to use."
 msgstr "Standard udgivelseskanel som skal bruges til Google Chrome."
+
+#: ../descriptions/jar.desktop.in.h:1
+msgid ""
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
+msgstr ""
+"Oprettet et arkiv til klasser og ressourcer, og manipulerer eller gendanner "
+"enkelte klasser eller ressourcer fra et arkiv."
+
+#: ../descriptions/java.desktop.in.h:1
+msgid "Default Java Runtime."
+msgstr "Standard Java runtime."
+
+#: ../descriptions/unrar.desktop.in.h:1
+msgid "Extractor for RAR archives."
+msgstr "Udpakker til RAR-arkiver."
+
+#: ../descriptions/wine.desktop.in.h:1
+msgid "Compatibility layer for Microsoft Windows programs."
+msgstr "Kompatibilitetslager til Microsoft Windows-programmer."
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:1
+msgid "X Cursor Theme"
+msgstr "X-markørtema"
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr ""
+"Standard markørtema som hjælper diverse aspekter af GUI-navigation og "
+"-manipulation."
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1
 msgid "X Terminal Emulator"
@@ -224,83 +263,71 @@ msgstr ""
 "Standard terminalemulator som skal bruges når der køres tekstbaserede "
 "programmer, f.eks. fra skrivebordsneutrale mailcap-punkter."
 
-#: ../descriptions/desktop-background.desktop.in.h:1
-msgid "Desktop Background"
-msgstr "Skrivebordsbaggrund"
+#: ../descriptions/x-www-browser.desktop.in.h:1
+msgid "X WWW Browser"
+msgstr "X WWW-browser"
 
-#: ../descriptions/desktop-background.desktop.in.h:2
-msgid "Default desktop wallpaper."
-msgstr "Standard skrivebordstapet."
-
-#: ../descriptions/unrar.desktop.in.h:1
-msgid "Extractor for RAR archives."
-msgstr "Udpakker til RAR-arkiver."
-
-#: ../descriptions/editor.desktop.in.h:1
-msgid "Default command line editor, usually called by `editor` command."
-msgstr ""
-"Standard kommandolinjeeditor, som typisk kaldes med `editor`-kommandoen."
-
-#: ../descriptions/x-cursor-theme.desktop.in.h:1
-msgid "X Cursor Theme"
-msgstr "X-markørtema"
-
-#: ../descriptions/x-cursor-theme.desktop.in.h:2
-msgid ""
-"Default Cursor Theme that helps various aspects of GUI navigation and "
-"manipulation."
-msgstr ""
-"Standard markørtema som hjælper diverse aspekter af GUI-navigation og -"
-"manipulation."
-
-#: ../descriptions/gnome-www-browser.desktop.in.h:1
-msgid "Gnome WWW Browser"
-msgstr "Gnome WWW-browser"
-
-#: ../descriptions/gnome-www-browser.desktop.in.h:2
-msgid "Default WWW Browser for GNOME Desktop Environment."
-msgstr "Standard WWW-browser til GNOME-skrivebordsmiljø."
-
-#: ../descriptions/java.desktop.in.h:1
-msgid "Default Java Runtime."
-msgstr "Standard Java runtime."
-
-#: ../descriptions/convert.desktop.in.h:1
-msgid "ImageMagick command-line processing tool."
-msgstr "ImageMagick-behandlingsværktøj til kommandolinjen."
+#: ../descriptions/x-www-browser.desktop.in.h:2
+msgid "Default WWW Browser to launch URLs and browse the Internet."
+msgstr "Standard WWW-browser til at starte URL'er og gennemse internettet."
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:1
+msgid "The Debian Project"
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:2
 #: ../glade/galternatives.glade.h:1
 msgid "G Alternatives"
 msgstr "G Alternatives"
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:2
+#: ../org.debian.galternatives.metainfo.xml.in.h:3
 msgid "Graphical setup tool for the alternatives system"
 msgstr ""
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:3
+#: ../org.debian.galternatives.metainfo.xml.in.h:4
 #, fuzzy
 msgid ""
-"<p> A GUI to help the system administrator to choose what program should "
-"provide a given service. </p> <p> This is a graphical front-end to the "
-"update-alternatives program shipped with dpkg. </p>"
+"A GUI to help the system administrator to choose what program should provide "
+"a given service."
 msgstr ""
 "Et værktøj som hjælper administratoren til at vælge hvilke programmer der, "
 "som standard, giver bestemte tjenester til brugeren."
 
-#: ../org.debian.galternatives.metainfo.xml.in.h:4
-msgid "New maintenance release with AppStream Metadata added."
-msgstr ""
-
 #: ../org.debian.galternatives.metainfo.xml.in.h:5
-msgid "New maintenance release."
+msgid ""
+"This is a graphical front-end to the update-alternatives program shipped "
+"with dpkg."
 msgstr ""
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:6
-msgid "New stable release."
+msgid "New maintenance release to include Turkish translation."
 msgstr ""
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:7
+msgid "Move build system from distutils to setuptools."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:8
+msgid "Use \"org.debian.*\" namespace for python APPID."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:9
+msgid "New maintenance release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:10
+msgid "New maintenance release de,nl translation updated."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:11
+msgid "New maintenance release with AppStream Metadata added."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:12
+msgid "New stable release."
+msgstr ""
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:13
 msgid "New stable release, add feature to search entries."
 msgstr ""
 
