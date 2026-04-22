@@ -72,7 +72,7 @@ class AltOption(dict[str, str]):
     priority: int
     "priority of the option"
 
-    __slots__ = tuple(__annotations__)
+    __slots__ = ('priority', )
 
     def __init__(self, iterable: 'DictInit[str, str]' = (), priority: int = 0):
         """
@@ -154,7 +154,7 @@ class AltGroup(list[str]):
 
     desc: str | None
 
-    __slots__ = tuple(__annotations__)
+    __slots__ = ('config', 'options', '_links', '_current', 'desc')
 
     def __init__(
             self, name: str, create: bool = False,
@@ -380,7 +380,7 @@ class AltDB(dict[str, AltGroup | None], AltConfig):
     _moves: dict[str, str | None]
     "map from new name to old name"
 
-    __slots__ = tuple(__annotations__)
+    __slots__ = ('_moves', )
 
     def __init__(
             self, altdir: str | None = None, admindir: str | None = None,
