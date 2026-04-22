@@ -126,6 +126,7 @@
                     <property name="has-frame">False</property>
                     <property name="primary-icon-stock">gtk-find</property>
                     <signal name="changed" handler="on_group_find_entry_changed" swapped="no"/>
+                    <signal name="key_release_event" handler="on_group_find_entry_key_release_event" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
