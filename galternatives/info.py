@@ -1,9 +1,11 @@
 from gettext import gettext
+from typing import cast
 
 try:
-    from .version import VERSION
+    from .version import VERSION  # type: ignore
 except ImportError:
-    VERSION = '0.dev0'
+    VERSION = '0.dev0'  # type: ignore
+VERSION = cast(str, VERSION)  # type: ignore
 
 
 __all__ = ['PACKAGE', 'APPID', 'INFO']
@@ -16,7 +18,7 @@ PACKAGE = 'galternatives'
 "the package name"
 APPID = 'org.debian.' + PACKAGE
 "appid for Gtk.Application"
-INFO = {
+INFO: dict[str, str|tuple[str, ...]] = {
     'program_name': 'G Alternatives',
     'version': VERSION,
     'comments': _('A tool to help the administrator select which programs '

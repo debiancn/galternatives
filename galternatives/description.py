@@ -11,9 +11,9 @@ Attributes:
 from configparser import ConfigParser
 from gettext import gettext
 from locale import getdefaultlocale
-from typing import Any, Generator, NamedTuple
 import os
 import subprocess
+from typing import Iterable, Iterator, NamedTuple
 
 from .appdata import get_data_path
 
@@ -35,7 +35,8 @@ class Description(NamedTuple):
     icon: str = DEFAULT_ICON
 
 
-def altname_desc(name: str, locale=getdefaultlocale()[0]) -> Description:
+def altname_desc(
+        name: str, locale: str | None = getdefaultlocale()[0]) -> Description:
     """
     Find readable group name and its description for given alternative group
     name.
@@ -48,7 +49,10 @@ def altname_desc(name: str, locale=getdefaultlocale()[0]) -> Description:
     :param locale: Preferred locale. Default to current environment locale.
     :return: Readable group name and its description.
     """
-    desc_file = os.path.join(DESC_DIR, '{}.desktop'.format(name))
+    if DESC_DIR is None:
+        return Description(name)
+
+    desc_file = os.path.join(DESC_DIR, f'{name}.desktop')
 
     config = ConfigParser()
     if desc_file not in config.read(desc_file):
@@ -77,11 +81,11 @@ def query_package(filename: str) -> str | None:
     try:
         p = subprocess.run(['dpkg', '-S', filename], capture_output=True)
     except subprocess.CalledProcessError:
-        raise RuntimeError(f"`dpkg' returned with code {p.returncode}")
+        raise RuntimeError(f"`dpkg' returned with code {p.returncode}")  # type: ignore
     return p.stdout and p.stdout.decode().split(': ')[0] or None
 
 
-def describe_cmds(cmds: list[list[str]]) -> Generator[list[str], Any, None]:
+def describe_cmds(cmds: Iterable[list[str]]) -> Iterator[list[str]]:
     """
     Describe `update-alternatives` command operations.
 
@@ -90,20 +94,20 @@ def describe_cmds(cmds: list[list[str]]) -> Generator[list[str], Any, None]:
     """
     for cmd in cmds:
         action = cmd[0]
-        if action == 'install':
+        if action == '--install':
             desc = [
                 _("Install option `{3}' for group `{2}'").format(*cmd),
                 _('Priority: {4}').format(*cmd)]
             for __, __, name, path in zip(*([iter(cmd[5:])] * 4)):
                 desc.append(_("Slave `{}': `{}'").format(name, path))
             yield desc
-        elif action == 'auto':
+        elif action == '--auto':
             yield [_("Set group `{1}' to auto mode").format(*cmd)]
-        elif action == 'set':
+        elif action == '--set':
             yield [_(
                 "Set group `{1}' to manual mode, pointed to `{2}'"
             ).format(*cmd)]
-        elif action == 'remove':
+        elif action == '--remove':
             yield [_("Remove option `{2}' for group `{1}'").format(*cmd)]
-        elif action == 'remove-all':
+        elif action == '--remove-all':
             yield [_("Remove group `{1}'").format(*cmd)]

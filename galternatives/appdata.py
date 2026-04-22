@@ -4,7 +4,7 @@ Find and locate resources for the application.
 
 from gettext import gettext
 import os
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterator, Literal, overload
 
 if TYPE_CHECKING:
     from _typeshed import StrPath
@@ -14,8 +14,8 @@ from . import logger, PACKAGE
 try:
     from xdg.BaseDirectory import load_data_paths
 except ImportError:
-    def load_data_paths(resource: 'StrPath'):
-        yield os.path.join('/usr/share/', resource)
+    def load_data_paths(*resource) -> Iterator[str]:  # type: ignore
+        yield os.path.join('/usr/share/', *resource)  # type: ignore
 
 try:
     from xdg.IconTheme import getIconPath
@@ -44,31 +44,52 @@ Note: orders matter, especially when the program is installed globally.
 DATA_DIRS.extend(load_data_paths(PACKAGE))
 
 
-def get_data_path(path: 'StrPath', is_dir=False):
+@overload
+def get_data_path(
+    name: 'StrPath', is_dir: bool = False, require: Literal[False] = False
+) -> str | None: ...
+
+
+@overload
+def get_data_path(
+    name: 'StrPath', is_dir: bool, require: Literal[True]) -> str: ...
+
+
+def get_data_path(
+        name: 'StrPath', is_dir: bool = False, require: bool = False
+) -> str | None:
     """
     Find a file or directory by its name in multiple locations.
 
     It will search the target in the directory from ``DATA_DIRS`` sequentially,
     and return the first matching item.
 
-    :param file: Path of the target.
+    :param name: Relative path to the target.
     :param is_dir: Whether ``path`` should be a directory.
-    :return: The path to the target, or `None` if not found.
+    :return: Full path to the target, or `None` if not found.
     """
+    path = None
     for dir in DATA_DIRS:
-        test = os.path.join(dir, path)
-        if os.path.isdir(test) if is_dir else os.path.isfile(test):
-            logger.debug('locate "{}" at {}'.format(path, test))
-            return test
-    logger.warning('locate "{}" FAILED'.format(path))
+        path = os.path.join(dir, name)
+        if os.path.isdir(path) if is_dir else os.path.isfile(path):
+            logger.debug(f'locate "{name}" at {name, path}')
+            break
+
+    if path is None:
+        if require:
+            raise FileNotFoundError(f'locate "{name}" FAILED')
+        else:
+            logger.warning(f'locate "{name}" FAILED')
+
+    return path
 
 
-def get_icon_path(iconname: str):
+def get_icon_path(iconname: str) -> str | None:
     path = getIconPath(iconname)
     if path:
         return path
-    for extensions in ['png', 'svg', 'xpm']:
-        path = get_data_path('icons/{}.{}'.format(iconname, extensions))
+    for ext in ['png', 'svg', 'xpm']:
+        path = get_data_path(f'icons/{iconname}.{ext}')
         if path:
             return path
 

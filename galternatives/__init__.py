@@ -1,13 +1,8 @@
 import gettext
 import gi
 import logging
-import sys
 
 from .info import *
-
-
-def eprint(*args, **kwargs):
-    print(*args, file=sys.stderr, **kwargs)
 
 
 # set gtk version for the whole module

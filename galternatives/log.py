@@ -27,7 +27,7 @@ import logging
 __all__ = ['setColoredLogger']
 
 
-class Color(IntEnum):
+class SGRColor(IntEnum):
     """
     The background is set with 40 plus the number of the color, and the
     foreground with 30.
@@ -44,7 +44,7 @@ class Color(IntEnum):
     WHITE = 7
 
 
-def colored(s: str, color: int, bold=False):
+def wrap_ansi_color(s: str, color: int, bold: bool = False) -> str:
     if not color:
         return s
     COLOR_SEQ = '\033[1;'
@@ -57,14 +57,14 @@ class ColoredFormatter(logging.Formatter):
     __slots__ = ()
 
     COLORS = {
-        'WARNING': Color.YELLOW,
-        'INFO': Color.WHITE,
-        'DEBUG': Color.BLUE,
-        'CRITICAL': Color.YELLOW,
-        'ERROR': Color.RED
+        'WARNING': SGRColor.YELLOW,
+        'INFO': SGRColor.WHITE,
+        'DEBUG': SGRColor.BLUE,
+        'CRITICAL': SGRColor.YELLOW,
+        'ERROR': SGRColor.RED
     }
 
-    def format(self, record: logging.LogRecord):
+    def format(self, record: logging.LogRecord) -> str:
         """
         Format the record using the underlying formatter, but display the
         level name in color.
@@ -74,11 +74,12 @@ class ColoredFormatter(logging.Formatter):
         record = copy(record)
         levelname = record.levelname
         if levelname in self.COLORS:
-            record.levelname = colored(levelname, self.COLORS[levelname])
+            record.levelname = wrap_ansi_color(levelname, self.COLORS[levelname])
         return super().format(record)
 
 
-def setColoredLogger(logger: str | logging.Logger, verbose=False):
+def setColoredLogger(
+        logger: str | logging.Logger, verbose: bool = False) -> None:
     """
     Set console output for logger of giver namespace.
 

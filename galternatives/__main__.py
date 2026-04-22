@@ -12,7 +12,7 @@ if __name__ == '__main__' and __package__ is None:
 from galternatives.app import GAlternativesApp
 
 
-def main():
+def main() -> int:
     # Allow Ctrl-C to work
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = GAlternativesApp()
