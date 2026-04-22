@@ -241,11 +241,11 @@ class GroupDialog(EditDialog):
 
         if self.group is None:
             self.group = AltGroup(name, create=True)
-            main_instance.alt_db.add(self.group)
+            main_instance.db.add(self.group)
             reload_groups_p = True
         elif name != self.group.name:
             slaves_diff[self.group.name] = name
-            main_instance.alt_db.move(self.group.name, name)
+            main_instance.db.move(self.group.name, name)
             reload_groups_p = True
         self.group.link = self.link.get_text()
 
