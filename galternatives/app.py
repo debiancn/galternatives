@@ -144,6 +144,10 @@ class EditDialog(Gtk.Dialog):
     def remove_row(self, button):
         model, it = self.slaves_tv.get_selection().get_selected()
         del model[it]
+        if len(model) > 0:
+            # on_click_slave and on_slave_fields_changed will be called
+            return
+        # on_click_slave will not be called, clear fields
         for widget in self.slaves_entries:
             widget.set_text('')
 
