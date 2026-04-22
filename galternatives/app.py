@@ -838,7 +838,6 @@ class MainWindow:
 
 class AboutDialog(Gtk.AboutDialog):
     """About dialog of the application."""
-    __slots__ = ()
 
     def __init__(self, **kwargs):
         kwargs.update(INFO)
@@ -867,8 +866,6 @@ class GAlternativesApp(Gtk.Application):
 
     _window: MainWindow | None
     _about_dialog: AboutDialog | None
-
-    __slots__ = tuple(__annotations__)
 
     def __init__(self, *args, **kwargs):
         super().__init__(
