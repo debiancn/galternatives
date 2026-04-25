@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: galternatives 1.0.11\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-17 23:04-0500\n"
-"PO-Revision-Date: 2025-11-17 23:12-0500\n"
-"Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
+"PO-Revision-Date: 2026-04-26 00:58+0800\n"
+"Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
 "Language-Team: Chinese (simplified) <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: ../../galternatives/appdata.py:78
 msgid "Logo missing. Is your installation correct?"
@@ -61,11 +61,11 @@ msgstr "编辑选项 - {}"
 
 #: ../../galternatives/app.py:568
 msgid "Run command: "
-msgstr "运行命令: "
+msgstr "运行命令："
 
 #: ../../galternatives/app.py:855
 msgid "translator_credits"
-msgstr "（由开发者提供）"
+msgstr "(由开发者提供)"
 
 #: ../../galternatives/app.py:879
 msgid "Enable debug output"
@@ -77,7 +77,7 @@ msgstr "不要尝试获取 root (以普通用户运行)"
 
 #: ../../galternatives/app.py:885
 msgid "Specify the alternatives directory"
-msgstr "指定可选项(alternatives)目录"
+msgstr "指定备选项(alternatives)目录"
 
 #: ../../galternatives/app.py:888
 msgid "Specify the administrative directory"
@@ -100,13 +100,8 @@ msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
 msgstr "<b>需要 <tt>pkexec</tt> 以执行特权操作。</b>"
 
 #: ../../galternatives/app.py:927
-msgid ""
-"The program needs pkexec to perform privileged alternatives system "
-"modifications under normal user. Unless you have modified your system to "
-"explicitly allow your normal user to do so, GAlternatives will not work."
-msgstr ""
-"此程序需要 pkexec，以在普通用户下执行需要特权的备选系统修改。除非您修改了您的"
-"系统配置允许普通用户这样做，否则 GAltarnatives 将无法工作。"
+msgid "The program needs pkexec to perform privileged alternatives system modifications under normal user. Unless you have modified your system to explicitly allow your normal user to do so, GAlternatives will not work."
+msgstr "此程序需要 pkexec 以普通用户身份执行需要特权的备选系统修改。除非您已修改系统并明确允许普通用户执行此操作，否则 GAlternatives 将无法正常工作。"
 
 #: ../../galternatives/app.py:954
 msgid "Error: Specifying more than one group is not allowed"
@@ -114,7 +109,7 @@ msgstr "错误：不允许同时指定多个组"
 
 #: ../../galternatives/app.py:968
 msgid "Error: No such group \"{}\""
-msgstr "错误：没有“{}”这样的组"
+msgstr "错误：组“{}”不存在"
 
 #: ../../galternatives/description.py:28
 msgid "No description"
@@ -155,18 +150,16 @@ msgid "Remove group `{1}'"
 msgstr "删除组`{1}'"
 
 #: ../../galternatives/info.py:22
-msgid ""
-"A tool to help the administrator select which programs provide specific "
-"services for the user by default."
-msgstr "帮助管理员选择为用户提供特定服务的默认选项的一个工具。"
+msgid "A tool to help the administrator select which programs provide specific services for the user by default."
+msgstr "帮助管理员选择哪些程序默认为用户提供特定服务的工具。"
 
 #: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
-msgstr "可选项配置工具"
+msgstr "备选系统配置工具"
 
 #: ../org.debian.galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
-msgstr "配置系统可选项的默认值"
+msgstr "配置系统备选列表的默认值"
 
 #: ../org.debian.galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
@@ -214,14 +207,11 @@ msgstr "Google Chrome"
 
 #: ../descriptions/google-chrome.desktop.in.h:2
 msgid "Default Release Channel of Google Chrome to use."
-msgstr "要默认使用的 Google Chrome 发布版本。"
+msgstr "默认使用的 Google Chrome 发布版本。"
 
 #: ../descriptions/jar.desktop.in.h:1
-msgid ""
-"Creates an archive for classes and resources, and manipulate or restore "
-"individual classes or resources from an archive."
-msgstr ""
-"创建类和资源的档案，或处理档案中的单个类或资源或者从档案中还原单个类或资源。"
+msgid "Creates an archive for classes and resources, and manipulate or restore individual classes or resources from an archive."
+msgstr "创建类和资源的档案，或处理档案中的单个类或资源或者从档案中还原单个类或资源。"
 
 #: ../descriptions/java.desktop.in.h:1
 msgid "Default Java Runtime."
@@ -240,9 +230,7 @@ msgid "X Cursor Theme"
 msgstr "X 光标主题"
 
 #: ../descriptions/x-cursor-theme.desktop.in.h:2
-msgid ""
-"Default Cursor Theme that helps various aspects of GUI navigation and "
-"manipulation."
+msgid "Default Cursor Theme that helps various aspects of GUI navigation and manipulation."
 msgstr "默认光标主题，用于 GUI 各导航和操作中。"
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:1
@@ -250,12 +238,8 @@ msgid "X Terminal Emulator"
 msgstr "X 终端模拟器"
 
 #: ../descriptions/x-terminal-emulator.desktop.in.h:2
-msgid ""
-"Default Terminal Emulator to use when running text-based applications, e.g. "
-"from desktop-neutral mailcap entries."
-msgstr ""
-"默认终端模拟器，在运行基于文本的应用程序时使用，如各桌面环境通用的 mailcap "
-"项。"
+msgid "Default Terminal Emulator to use when running text-based applications, e.g. from desktop-neutral mailcap entries."
+msgstr "默认终端模拟器，在运行基于文本的应用程序时使用，如各桌面环境通用的 mailcap 项。"
 
 #: ../descriptions/x-www-browser.desktop.in.h:1
 msgid "X WWW Browser"
@@ -276,20 +260,15 @@ msgstr "G Alternatives"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:3
 msgid "Graphical setup tool for the alternatives system"
-msgstr "可选项系统的图形界面配置工具"
+msgstr "备选项系统的图形界面配置工具"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:4
-msgid ""
-"A GUI to help the system administrator to choose what program should provide "
-"a given service."
-msgstr ""
-"这是一个图形界面配置工具，用于帮助系统管理员选择哪些程序需要设置默认命令。"
+msgid "A GUI to help the system administrator to choose what program should provide a given service."
+msgstr "帮助系统管理员选择应该由哪个程序提供特定服务的图形界面。"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:5
-msgid ""
-"This is a graphical front-end to the update-alternatives program shipped "
-"with dpkg."
-msgstr "这是 update-alternatives(包含于 dpkg) 程序的一个图形前端。"
+msgid "This is a graphical front-end to the update-alternatives program shipped with dpkg."
+msgstr "这是 update-alternatives (包含于 dpkg)程序的一个图形前端。"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:6
 msgid "New maintenance release to include Turkish translation."
@@ -365,7 +344,7 @@ msgstr "查找(_F)"
 
 #: ../glade/galternatives.glade.h:10
 msgid "Select an alternative group to edit"
-msgstr "选择要编辑的可选项组"
+msgstr "选择要编辑的备选项组"
 
 #: ../glade/galternatives.glade.h:11
 msgid "Groups"
@@ -381,11 +360,11 @@ msgstr "自动模式"
 
 #: ../glade/galternatives.glade.h:14
 msgid "Alternative"
-msgstr "可选项"
+msgstr "备选项"
 
 #: ../glade/galternatives.glade.h:15
 msgid "Choose an alternative group"
-msgstr "选择一个可选项组"
+msgstr "选择一个备选项组"
 
 #: ../glade/galternatives.glade.h:17
 msgid "Package"
@@ -401,14 +380,12 @@ msgstr "您确定现在退出吗？"
 
 #: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
-msgstr "编辑可选项设置是高级功能。"
+msgstr "编辑备选项设置是高级功能。"
 
 #: ../glade/galternatives.glade.h:21
 msgid ""
-"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
-"corresponding packages.\n"
-"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
-"editing may break your system."
+"Those are meant to be managed by <tt>dpkg</tt> and provided by their corresponding packages.\n"
+"<b>Warning!</b> This feature is not stable and may contain bugs. Manual editing may break your system."
 msgstr ""
 "这些是由 <tt>dpkg</tt> 管理，由相应的软件包提供。\n"
 "<b>警告！</b>此功能不稳定，可能包含错误。手动编辑可能会破坏您的系统。"
@@ -423,7 +400,7 @@ msgstr "首选项"
 
 #: ../glade/galternatives.glade.h:25
 msgid "See update-alternatives(1) \"OPTIONS\" section for details"
-msgstr "详细信息参见 update-alternatives(1) 手册页的“OPTIONS”一节"
+msgstr "详情请参阅 update-alternatives(1) 手册页的“OPTIONS”章节"
 
 #: ../glade/galternatives.glade.h:26
 msgid "Paths"

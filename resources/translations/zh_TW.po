@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: galternatives 0.92.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-17 23:04-0500\n"
-"PO-Revision-Date: 2018-06-15 20:14+0800\n"
+"PO-Revision-Date: 2026-04-26 00:55+0800\n"
 "Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
 "Language-Team: Chinese (traditional) <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_TW\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 3.9\n"
 
 #: ../../galternatives/appdata.py:78
 msgid "Logo missing. Is your installation correct?"
@@ -37,11 +37,11 @@ msgstr "連結"
 
 #: ../../galternatives/app.py:222
 msgid "Add group"
-msgstr "添加組"
+msgstr "添加群組"
 
 #: ../../galternatives/app.py:225
 msgid "Edit group - {}"
-msgstr "編輯組 - {}"
+msgstr "編輯群組 - {}"
 
 #: ../../galternatives/app.py:279 ../../galternatives/app.py:284
 msgid "Path"
@@ -61,7 +61,7 @@ msgstr "編輯選項 - {}"
 
 #: ../../galternatives/app.py:568
 msgid "Run command: "
-msgstr "執行命令："
+msgstr "執行指令："
 
 #: ../../galternatives/app.py:855
 msgid "translator_credits"
@@ -77,7 +77,7 @@ msgstr "不要嘗試獲取 root (以普通使用者執行)"
 
 #: ../../galternatives/app.py:885
 msgid "Specify the alternatives directory"
-msgstr "指定可選項(alternatives)目錄"
+msgstr "指定備選項(alternatives)目錄"
 
 #: ../../galternatives/app.py:888
 msgid "Specify the administrative directory"
@@ -93,7 +93,7 @@ msgstr "正在測試 galternatives..."
 
 #: ../../galternatives/app.py:916
 msgid "No root privileges detected, but continuing anyway"
-msgstr "沒有檢測到 root，但仍繼續"
+msgstr "未偵測到 root 權限，但仍繼續"
 
 #: ../../galternatives/app.py:923
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
@@ -105,18 +105,16 @@ msgid ""
 "modifications under normal user. Unless you have modified your system to "
 "explicitly allow your normal user to do so, GAlternatives will not work."
 msgstr ""
-"此程式需要 pkexec，以在普通使用者下執行需要特權的備選系統修改。除非您修改了您"
-"的系統組態允許普通使用者這樣做，否則 GAltarnatives 將無法工作。"
+"此程式需要 pkexec 以普通使用者身分執行需要特權的備選系統修改。除非您已修改系"
+"統並明確允許普通使用者執行此操作，否則 GAlternatives 將無法正常運作。"
 
 #: ../../galternatives/app.py:954
-#, fuzzy
 msgid "Error: Specifying more than one group is not allowed"
-msgstr "不允許同時指定多個組"
+msgstr "錯誤：不允許同時指定多個群組"
 
 #: ../../galternatives/app.py:968
-#, fuzzy
 msgid "Error: No such group \"{}\""
-msgstr "沒有這樣的組"
+msgstr "錯誤：群組「{}」不存在"
 
 #: ../../galternatives/description.py:28
 msgid "No description"
@@ -125,7 +123,7 @@ msgstr "無描述"
 #: ../../galternatives/description.py:95
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
-msgstr "為組`{2}'安裝選項`{3}'"
+msgstr "為群組`{2}'安裝選項`{3}'"
 
 #: ../../galternatives/description.py:96
 #, python-brace-format
@@ -139,36 +137,36 @@ msgstr "從連結`{}'：`{}'"
 #: ../../galternatives/description.py:101
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
-msgstr "將組`{1}'設為自動模式"
+msgstr "將群組`{1}'設為自動模式"
 
 #: ../../galternatives/description.py:104
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
-msgstr "將組`{1}'設為手動模式，指向`{2}'"
+msgstr "將群組`{1}'設為手動模式，指向`{2}'"
 
 #: ../../galternatives/description.py:107
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
-msgstr "刪除組`{1}'的選項`{2}'"
+msgstr "刪除群組`{1}'的選項`{2}'"
 
 #: ../../galternatives/description.py:109
 #, python-brace-format
 msgid "Remove group `{1}'"
-msgstr "刪除組`{1}'"
+msgstr "刪除群組`{1}'"
 
 #: ../../galternatives/info.py:22
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
-msgstr "幫助管理員選擇為使用者提供特定服務的預設選項的一個工具。"
+msgstr "幫助管理員選擇哪些程式預設為使用者提供特定服務的工具。"
 
 #: ../org.debian.galternatives.desktop.in.h:1
 msgid "Alternatives Configurator"
-msgstr "可選項配置工具"
+msgstr "備選系統配置工具"
 
 #: ../org.debian.galternatives.desktop.in.h:2
 msgid "Configure the system default alternatives"
-msgstr "配置系統可選項的預設值"
+msgstr "配置系統備選清單的預設值"
 
 #: ../org.debian.galternatives.desktop.in.h:3
 msgid "Alternatives;GAlternatives;Debian;"
@@ -180,7 +178,7 @@ msgstr "ImageMagick 命令列處理工具。"
 
 #: ../descriptions/cpp.desktop.in.h:1
 msgid "C Preprocessor."
-msgstr "C 前處理器。"
+msgstr "C 前置處理器。"
 
 #: ../descriptions/desktop-background.desktop.in.h:1
 msgid "Desktop Background"
@@ -188,7 +186,7 @@ msgstr "桌面背景"
 
 #: ../descriptions/desktop-background.desktop.in.h:2
 msgid "Default desktop wallpaper."
-msgstr "預設桌面桌布。"
+msgstr "預設桌布。"
 
 #: ../descriptions/desktop-theme.desktop.in.h:1
 msgid "Desktop Theme"
@@ -216,7 +214,7 @@ msgstr "Google Chrome"
 
 #: ../descriptions/google-chrome.desktop.in.h:2
 msgid "Default Release Channel of Google Chrome to use."
-msgstr "要預設使用的 Google Chrome 釋出版本。"
+msgstr "預設使用的 Google Chrome 釋出版本。"
 
 #: ../descriptions/jar.desktop.in.h:1
 msgid ""
@@ -269,7 +267,7 @@ msgstr "預設網路瀏覽器，用於開啟 URL 或瀏覽網際網路。"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:1
 msgid "The Debian Project"
-msgstr ""
+msgstr "Debian 專案"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:2
 #: ../glade/galternatives.glade.h:1
@@ -281,11 +279,10 @@ msgid "Graphical setup tool for the alternatives system"
 msgstr ""
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:4
-#, fuzzy
 msgid ""
 "A GUI to help the system administrator to choose what program should provide "
 "a given service."
-msgstr "幫助管理員選擇為使用者提供特定服務的預設選項的一個工具。"
+msgstr "幫助系統管理員選擇應該由哪個程式提供特定服務的圖形介面。"
 
 #: ../org.debian.galternatives.metainfo.xml.in.h:5
 msgid ""
@@ -367,11 +364,11 @@ msgstr "查詢(_F)"
 
 #: ../glade/galternatives.glade.h:10
 msgid "Select an alternative group to edit"
-msgstr "選擇要編輯的可選項組"
+msgstr "選擇要編輯的備選項群組"
 
 #: ../glade/galternatives.glade.h:11
 msgid "Groups"
-msgstr "組"
+msgstr "群組"
 
 #: ../glade/galternatives.glade.h:12
 msgid "Auto:"
@@ -383,11 +380,11 @@ msgstr "自動模式"
 
 #: ../glade/galternatives.glade.h:14
 msgid "Alternative"
-msgstr "可選項"
+msgstr "備選項"
 
 #: ../glade/galternatives.glade.h:15
 msgid "Choose an alternative group"
-msgstr "選擇一個可選項組"
+msgstr "選擇一個備選項群組"
 
 #: ../glade/galternatives.glade.h:17
 msgid "Package"
@@ -403,7 +400,7 @@ msgstr "您確定現在退出嗎？"
 
 #: ../glade/galternatives.glade.h:20
 msgid "Alternative settings editing is advanced feature."
-msgstr "編輯可選項設置是進階功能。"
+msgstr "編輯備選項設置是進階功能。"
 
 #: ../glade/galternatives.glade.h:21
 msgid ""
@@ -425,7 +422,7 @@ msgstr "偏好設定"
 
 #: ../glade/galternatives.glade.h:25
 msgid "See update-alternatives(1) \"OPTIONS\" section for details"
-msgstr "詳細資訊參照 update-alternatives(1) “OPTIONS”章節"
+msgstr "詳情請參閱 update-alternatives(1) 手冊頁的「OPTIONS」章節"
 
 #: ../glade/galternatives.glade.h:26
 msgid "Paths"
