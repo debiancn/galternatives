@@ -1,0 +1,479 @@
+# Georgian translation for galternatives.
+# Copyright (C) 2026 galternatives' authors
+# This file is distributed under the same license as the galternatives package.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: galternatives\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-17 23:04-0500\n"
+"PO-Revision-Date: 2026-04-30 13:29+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: ../../galternatives/appdata.py:78
+msgid "Logo missing. Is your installation correct?"
+msgstr "ლოგო აღმოჩენილი არაა. პროგრამა სწორად დააყენეთ?"
+
+#: ../../galternatives/app.py:63
+msgid "Select File"
+msgstr "აირჩიეთ ფაილი"
+
+#: ../../galternatives/app.py:213 ../../galternatives/app.py:283
+msgid "Name"
+msgstr "სახელი"
+
+#: ../../galternatives/app.py:214
+msgid "Link"
+msgstr "ბმული"
+
+#: ../../galternatives/app.py:222
+msgid "Add group"
+msgstr "ჯგუფის დამატება"
+
+#: ../../galternatives/app.py:225
+msgid "Edit group - {}"
+msgstr "ჯგუფის ჩასწორება - {}"
+
+#: ../../galternatives/app.py:279 ../../galternatives/app.py:284
+msgid "Path"
+msgstr "ბილიკი"
+
+#: ../../galternatives/app.py:280 ../glade/galternatives.glade.h:16
+msgid "Priority"
+msgstr "პრიორიტეტი"
+
+#: ../../galternatives/app.py:297
+msgid "Add option"
+msgstr "არჩევნის დამატება"
+
+#: ../../galternatives/app.py:303
+msgid "Edit option - {}"
+msgstr "არჩევნის ჩასწორება - {}"
+
+#: ../../galternatives/app.py:568
+msgid "Run command: "
+msgstr "ბრძანების გაშვება: "
+
+#: ../../galternatives/app.py:855
+msgid "translator_credits"
+msgstr "მთარგმნელის_შესახებ"
+
+#: ../../galternatives/app.py:879
+msgid "Enable debug output"
+msgstr "გამართვის გამოტანის ჩართვა"
+
+#: ../../galternatives/app.py:882
+msgid "Do not try to acquire root (as normal user)"
+msgstr "root პრივილეგიების მიღების არცდა (ნორმალური მომხმარებლით)"
+
+#: ../../galternatives/app.py:885
+msgid "Specify the alternatives directory"
+msgstr "მიუთითეთ ალტერნატივების საქაღალდე"
+
+#: ../../galternatives/app.py:888
+msgid "Specify the administrative directory"
+msgstr "მიუთითეთ ადმინისტრაციული საქაღალდე"
+
+#: ../../galternatives/app.py:891
+msgid "Specify the log file"
+msgstr "მიუთითეთ ჟურნალის ფაილი"
+
+#: ../../galternatives/app.py:907
+msgid "Testing galternatives..."
+msgstr "ალტერნატივების შემოწმება..."
+
+#: ../../galternatives/app.py:916
+msgid "No root privileges detected, but continuing anyway"
+msgstr "root-ის პრივილეგიები აღმოჩენილი არაა. მაინც გავაგრძელებ"
+
+#: ../../galternatives/app.py:923
+msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
+msgstr "<b>პრივილეგირებული ოპერაციებისთვის საჭიროა <tt>pkexec</tt>.</b>"
+
+#: ../../galternatives/app.py:927
+msgid ""
+"The program needs pkexec to perform privileged alternatives system "
+"modifications under normal user. Unless you have modified your system to "
+"explicitly allow your normal user to do so, GAlternatives will not work."
+msgstr ""
+"ნორმალური მომხმარებლით პრივილეგირებული ალტერნატივების სისტემის "
+"ცვლილებებისთვის პროგრამას pkexec სჭირდება. თუ თქვენი სისტემა ისე არ "
+"შეცვალეთ, რომ ნორმალურ მომხმარებელს ამისი უფლება ჰქონდეს, GAlternatives არ "
+"იმუშავებს."
+
+#: ../../galternatives/app.py:954
+msgid "Error: Specifying more than one group is not allowed"
+msgstr "შეცდომა: ერთზე მეტი ჯგუფის მითითება დაუშვებელია"
+
+#: ../../galternatives/app.py:968
+msgid "Error: No such group \"{}\""
+msgstr "შეცდომა: ჯგუფი \"{}\" არ არსებობს"
+
+#: ../../galternatives/description.py:28
+msgid "No description"
+msgstr "აღწერის გარეშე"
+
+#: ../../galternatives/description.py:95
+#, python-brace-format
+msgid "Install option `{3}' for group `{2}'"
+msgstr "არჩევნის `{3}' დაყენება ჯგუფისთვის`{2}'"
+
+#: ../../galternatives/description.py:96
+#, python-brace-format
+msgid "Priority: {4}"
+msgstr "პრიორიტეტი: {4}"
+
+#: ../../galternatives/description.py:98
+msgid "Slave `{}': `{}'"
+msgstr "დამხმარე `{}': `{}'"
+
+#: ../../galternatives/description.py:101
+#, python-brace-format
+msgid "Set group `{1}' to auto mode"
+msgstr "ჯგუფის `{1}' დაყენება ავტომატურ რეჟიმზე"
+
+#: ../../galternatives/description.py:104
+#, python-brace-format
+msgid "Set group `{1}' to manual mode, pointed to `{2}'"
+msgstr "ჯგუფის `{1}' დაყენება რეჟიმზე 'ხელით'. მიუთითებს `{2}'-ზე"
+
+#: ../../galternatives/description.py:107
+#, python-brace-format
+msgid "Remove option `{2}' for group `{1}'"
+msgstr "არჩევნის `{2}' წაშლა ჯგუფისთვის `{1}'"
+
+#: ../../galternatives/description.py:109
+#, python-brace-format
+msgid "Remove group `{1}'"
+msgstr "ჯგუფის `{1}' წაშლა"
+
+#: ../../galternatives/info.py:22
+msgid ""
+"A tool to help the administrator select which programs provide specific "
+"services for the user by default."
+msgstr ""
+"პროგრამა, რომელიც ეხმარება ადმინისტრატორს, აირჩიოს, რომელი პროგრამები "
+"უზრუნველყოფს მომხმარებლისთვის ნაგულისხმევად კონკრეტულ სერვისებს."
+
+#: ../org.debian.galternatives.desktop.in.h:1
+msgid "Alternatives Configurator"
+msgstr "ალტერნატივების მორგება"
+
+#: ../org.debian.galternatives.desktop.in.h:2
+msgid "Configure the system default alternatives"
+msgstr "სისტემის ნაგულისხმევი ალტერნატივების მორგება"
+
+#: ../org.debian.galternatives.desktop.in.h:3
+msgid "Alternatives;GAlternatives;Debian;"
+msgstr "Alternatives;GAlternatives;Debian;ალტერნატივები;"
+
+#: ../descriptions/convert.desktop.in.h:1
+msgid "ImageMagick command-line processing tool."
+msgstr "ბრძანების სტრიქონის დამუშავების პროგრამა ImageMagick."
+
+#: ../descriptions/cpp.desktop.in.h:1
+msgid "C Preprocessor."
+msgstr "C-ის პრეპროცესორი."
+
+#: ../descriptions/desktop-background.desktop.in.h:1
+msgid "Desktop Background"
+msgstr "სამუშაო მაგიდის ფონი"
+
+#: ../descriptions/desktop-background.desktop.in.h:2
+msgid "Default desktop wallpaper."
+msgstr "ნაგულისხმევი სამუშაო მაგიდის ფონი."
+
+#: ../descriptions/desktop-theme.desktop.in.h:1
+msgid "Desktop Theme"
+msgstr "სამუშაო მაგიდის თემა"
+
+#: ../descriptions/desktop-theme.desktop.in.h:2
+msgid "Default desktop theme."
+msgstr "ნაგულისხმევი სამუშაო მაგიდის თემა."
+
+#: ../descriptions/editor.desktop.in.h:1
+msgid "Default command line editor, usually called by `editor` command."
+msgstr ""
+"ნაგულისხმევი ბრძანების ხაზის რედაქტორი. გამოძახება, ჩვეულებრივ, ხდება "
+"ბრძანებით \"editor\"."
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:1
+msgid "Gnome WWW Browser"
+msgstr "GNOME-ის ვებბრაუზერი"
+
+#: ../descriptions/gnome-www-browser.desktop.in.h:2
+msgid "Default WWW Browser for GNOME Desktop Environment."
+msgstr "ნაგულისხმევი ვებბრაუზერი სამუშაო გარემოსთვის GNOME."
+
+#: ../descriptions/google-chrome.desktop.in.h:1
+msgid "Google Chrome"
+msgstr "Google Chrome"
+
+#: ../descriptions/google-chrome.desktop.in.h:2
+msgid "Default Release Channel of Google Chrome to use."
+msgstr "Google Chrome-ის ნაგულისხმევი გამოცემის არხი."
+
+#: ../descriptions/jar.desktop.in.h:1
+msgid ""
+"Creates an archive for classes and resources, and manipulate or restore "
+"individual classes or resources from an archive."
+msgstr ""
+"ქმნის არქივს კლასებისა და რესურსებისთვის და ცვლის, ან აღადგენს ინდივიდუალურ "
+"კლასებს ან რესურსებს არქივიდან."
+
+#: ../descriptions/java.desktop.in.h:1
+msgid "Default Java Runtime."
+msgstr "ნაგულისხმევი Java-ის გაშვების გარემო."
+
+#: ../descriptions/unrar.desktop.in.h:1
+msgid "Extractor for RAR archives."
+msgstr "გამშლელი RAR არქივებისთვის."
+
+#: ../descriptions/wine.desktop.in.h:1
+msgid "Compatibility layer for Microsoft Windows programs."
+msgstr "თავსებადობის ფენა Microsoft Windows-ის პროგრამებისთვის."
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:1
+msgid "X Cursor Theme"
+msgstr "X-ის კურსორის თემა"
+
+#: ../descriptions/x-cursor-theme.desktop.in.h:2
+msgid ""
+"Default Cursor Theme that helps various aspects of GUI navigation and "
+"manipulation."
+msgstr ""
+"ნაგულისხმევი კურსორის თემა, რომელიც GUI-ის ნავიგაციისა და მანიპულაციის "
+"სხვადასხვა ასპექტს ეხმარება."
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:1
+msgid "X Terminal Emulator"
+msgstr "X ტერმინალის ემულატორი"
+
+#: ../descriptions/x-terminal-emulator.desktop.in.h:2
+msgid ""
+"Default Terminal Emulator to use when running text-based applications, e.g. "
+"from desktop-neutral mailcap entries."
+msgstr ""
+"ნაგულისხმევი ტერმინალის ემულატორი, რომელიც გამოიყენება ტექსტური "
+"აპლიკაციების, მაგალითად სამუშაო გარემოს მიმართ ნეიტრალური mailcap-ის "
+"ჩანაწერების გაშვებისას გამოიყენება."
+
+#: ../descriptions/x-www-browser.desktop.in.h:1
+msgid "X WWW Browser"
+msgstr "X-ის ვებბრაუზერი"
+
+#: ../descriptions/x-www-browser.desktop.in.h:2
+msgid "Default WWW Browser to launch URLs and browse the Internet."
+msgstr "ნაგულისხმევი ბრაუზერი URL-ების გასახსნელად და ინტერნეტში სამუშაოდ."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:1
+msgid "The Debian Project"
+msgstr "პროექტი Debian"
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:2
+#: ../glade/galternatives.glade.h:1
+msgid "G Alternatives"
+msgstr "G Alternatives"
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:3
+msgid "Graphical setup tool for the alternatives system"
+msgstr "გრაფიკული მორგების პროგრამა სისტემისთვის alternatives"
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:4
+msgid ""
+"A GUI to help the system administrator to choose what program should provide "
+"a given service."
+msgstr ""
+"GUI, რომელიც ეხმარება სისტემურ ადმინისტრატორს, აირჩიოს, რომელი პროგრამა "
+"უზრუნველყოფს მოცემულ სერვისს."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:5
+msgid ""
+"This is a graphical front-end to the update-alternatives program shipped "
+"with dpkg."
+msgstr ""
+"ეს გრაფიკული წინაბოლოა პროგრამისთვის update-alternatives, რომელიც dpkg-ს "
+"მოჰყვება."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:6
+msgid "New maintenance release to include Turkish translation."
+msgstr "ახალი შეცდომების გასწორების გამოცემა. დაემატა თურქული თარგმანი."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:7
+msgid "Move build system from distutils to setuptools."
+msgstr "აგების სისტემა გადატანილია distutils-იდან setuptools-ზე."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:8
+msgid "Use \"org.debian.*\" namespace for python APPID."
+msgstr "\"org.debian.*\" სახელების სივრცის გამოყენება python APPID-ისთვის."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:9
+msgid "New maintenance release."
+msgstr "ახალი შეცდომების გასწორების გამოცემა."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:10
+msgid "New maintenance release de,nl translation updated."
+msgstr "ახალი შეცდომების გასწორების გამოცემა. განახლდა de, nl თარგმანები."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:11
+msgid "New maintenance release with AppStream Metadata added."
+msgstr "ახალი შეცდომების გასწორების გამოცემა AppStream-ის მეტამონაცემებით."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:12
+msgid "New stable release."
+msgstr "ახალი სტაბილური გამოცემა."
+
+#: ../org.debian.galternatives.metainfo.xml.in.h:13
+msgid "New stable release, add feature to search entries."
+msgstr "ახალი სტაბილური გამოცემა. დაემატა ჩანაწერების ძებნის ფუნქცია."
+
+#: ../glade/edit_dialog.glade.h:1
+msgid "Slaves"
+msgstr "დამხმარეები"
+
+#: ../glade/edit_dialog.glade.h:2
+msgid "No changes will be made until you add an option."
+msgstr "სანამ არჩევანს არ დაამატებთ, არაფერი შეიცვლება."
+
+#: ../glade/galternatives.glade.h:2
+msgid "Create"
+msgstr "შექმნა"
+
+#: ../glade/galternatives.glade.h:3
+msgid "_Create"
+msgstr "შე_ქმნა"
+
+#: ../glade/galternatives.glade.h:4
+msgid "Edit"
+msgstr "ჩასწორება"
+
+#: ../glade/galternatives.glade.h:5
+msgid "_Edit"
+msgstr "_ჩასწორება"
+
+#: ../glade/galternatives.glade.h:6
+msgid "Remove"
+msgstr "წაშლა"
+
+#: ../glade/galternatives.glade.h:7
+msgid "_Remove"
+msgstr "_წაშლა"
+
+#: ../glade/galternatives.glade.h:8
+msgid "Find"
+msgstr "ძებნა"
+
+#: ../glade/galternatives.glade.h:9
+msgid "_Find"
+msgstr "_პოვნა"
+
+#: ../glade/galternatives.glade.h:10
+msgid "Select an alternative group to edit"
+msgstr "აირჩიეთ ჩასასწორებელი ალტერნატივების ჯგუფი"
+
+#: ../glade/galternatives.glade.h:11
+msgid "Groups"
+msgstr "ჯგუფები"
+
+#: ../glade/galternatives.glade.h:12
+msgid "Auto:"
+msgstr "ავტო:"
+
+#: ../glade/galternatives.glade.h:13
+msgid "Auto mode"
+msgstr "ავტომატური რეჟიმი"
+
+#: ../glade/galternatives.glade.h:14
+msgid "Alternative"
+msgstr "ალტერნატივა"
+
+#: ../glade/galternatives.glade.h:15
+msgid "Choose an alternative group"
+msgstr "აირჩიეთ ალტერნატივის ჯგუფი"
+
+#: ../glade/galternatives.glade.h:17
+msgid "Package"
+msgstr "პაკეტი"
+
+#: ../glade/galternatives.glade.h:18
+msgid "Some changes are not saved."
+msgstr "ზოგიერთი ცვლილება შენახული არაა."
+
+#: ../glade/galternatives.glade.h:19
+msgid "Are you sure you want to quit now?"
+msgstr "მართლა გნებავთ, ახლა გახვიდეთ?"
+
+#: ../glade/galternatives.glade.h:20
+msgid "Alternative settings editing is advanced feature."
+msgstr "ალტერნატივის პარამეტრების ჩასწორება დამატებითი ფუნქციაა."
+
+#: ../glade/galternatives.glade.h:21
+msgid ""
+"Those are meant to be managed by <tt>dpkg</tt> and provided by their "
+"corresponding packages.\n"
+"<b>Warning!</b> This feature is not stable and may contain bugs. Manual "
+"editing may break your system."
+msgstr ""
+"ეს, წესით, <tt>dpkg-ით</tt> უნდა იმართებოდეს და მოწოდებულია მათი შესაბამისი "
+"პაკეტების მიერ.\n"
+"<b>ფრთხილად!</b> ეს ფუნქცია სტაბილური არაა და შეიძლება, შეცდომებს შეიცავდეს. "
+"ხელით ჩასწორებამ, შეიძლება, სისტემა გააფუჭოს."
+
+#: ../glade/galternatives.glade.h:23
+msgid "Show this dialog next time."
+msgstr "ამ ფანჯრის ჩვენება შემდეგ ჯერზეც."
+
+#: ../glade/galternatives.glade.h:24
+msgid "Preferences"
+msgstr "მორგება"
+
+#: ../glade/galternatives.glade.h:25
+msgid "See update-alternatives(1) \"OPTIONS\" section for details"
+msgstr "დეტალებისთვის იხილეთ update-alternatives(1)-ის თავი \"OPTIONS\""
+
+#: ../glade/galternatives.glade.h:26
+msgid "Paths"
+msgstr "ბილიკები"
+
+#: ../glade/galternatives.glade.h:27
+msgid "Commit failed"
+msgstr "გადაცემა ჩავარდა"
+
+#: ../glade/galternatives.glade.h:28
+msgid "An error has occurred. The results are:"
+msgstr "აღმოჩენილია შეცდომა. შედეგებია:"
+
+#: ../glade/galternatives.glade.h:29
+msgid "Be careful! Your system may be already in an unstable state."
+msgstr "ფრთხილად! თქვენი სისტემა, შეიძლება, უკვე არასტაბილურია."
+
+#: ../glade/menubar.glade.h:1
+msgid "_Delay mode"
+msgstr "_დაყოვნების რეჟიმი"
+
+#: ../glade/menubar.glade.h:2
+msgid "Query _package (high I/O)"
+msgstr "_პაკეტის გამოთხოვა (მაღალი I/O)"
+
+#: ../glade/menubar.glade.h:3
+msgid "_Use polkit"
+msgstr "Polkit-ის გამო_ყენება"
+
+#: ../glade/menubar.glade.h:4
+msgid "_Working dir..."
+msgstr "სამუშაო სა_ქაღალდე..."
+
+#: ../glade/menubar.glade.h:5
+msgid "_About"
+msgstr "_შესახებ"
+
+#: ../glade/menubar.glade.h:6
+msgid "_Quit"
+msgstr "გასვ_ლა"
