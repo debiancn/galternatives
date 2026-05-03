@@ -1008,6 +1008,7 @@ class AboutDialog(Gtk.AboutDialog):
             GdkPixbuf.Pixbuf.new_from_file_at_scale(
                 LOGO_PATH, icon_size, -1, True)
         super().__init__(
+# TRANSLATORS: Your name <Your email address> here!
             logo=logo, translator_credits=_('translator_credits'), **kwargs)
 
         self.connect('response', hide_on_delete)

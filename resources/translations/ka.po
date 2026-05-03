@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-17 23:04-0500\n"
+"POT-Creation-Date: 2026-05-03 17:31+0800\n"
 "PO-Revision-Date: 2026-04-30 13:29+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -17,87 +17,88 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.9\n"
 
-#: ../../galternatives/appdata.py:78
+#: ../../galternatives/appdata.py:99
 msgid "Logo missing. Is your installation correct?"
 msgstr "ლოგო აღმოჩენილი არაა. პროგრამა სწორად დააყენეთ?"
 
-#: ../../galternatives/app.py:63
+#: ../../galternatives/app.py:89
 msgid "Select File"
 msgstr "აირჩიეთ ფაილი"
 
-#: ../../galternatives/app.py:213 ../../galternatives/app.py:283
+#: ../../galternatives/app.py:266 ../../galternatives/app.py:344
 msgid "Name"
 msgstr "სახელი"
 
-#: ../../galternatives/app.py:214
+#: ../../galternatives/app.py:267
 msgid "Link"
 msgstr "ბმული"
 
-#: ../../galternatives/app.py:222
+#: ../../galternatives/app.py:284
 msgid "Add group"
 msgstr "ჯგუფის დამატება"
 
-#: ../../galternatives/app.py:225
+#: ../../galternatives/app.py:287
 msgid "Edit group - {}"
 msgstr "ჯგუფის ჩასწორება - {}"
 
-#: ../../galternatives/app.py:279 ../../galternatives/app.py:284
+#: ../../galternatives/app.py:340 ../../galternatives/app.py:345
 msgid "Path"
 msgstr "ბილიკი"
 
-#: ../../galternatives/app.py:280 ../glade/galternatives.glade.h:16
+#: ../../galternatives/app.py:341 ../glade/galternatives.glade.h:16
 msgid "Priority"
 msgstr "პრიორიტეტი"
 
-#: ../../galternatives/app.py:297
+#: ../../galternatives/app.py:365
 msgid "Add option"
 msgstr "არჩევნის დამატება"
 
-#: ../../galternatives/app.py:303
+#: ../../galternatives/app.py:371
 msgid "Edit option - {}"
 msgstr "არჩევნის ჩასწორება - {}"
 
-#: ../../galternatives/app.py:568
+#: ../../galternatives/app.py:685
 msgid "Run command: "
 msgstr "ბრძანების გაშვება: "
 
-#: ../../galternatives/app.py:855
+#. TRANSLATORS: Your name <Your email address> here!
+#: ../../galternatives/app.py:1012
 msgid "translator_credits"
 msgstr "მთარგმნელის_შესახებ"
 
-#: ../../galternatives/app.py:879
+#: ../../galternatives/app.py:1033
 msgid "Enable debug output"
 msgstr "გამართვის გამოტანის ჩართვა"
 
-#: ../../galternatives/app.py:882
+#: ../../galternatives/app.py:1036
 msgid "Do not try to acquire root (as normal user)"
 msgstr "root პრივილეგიების მიღების არცდა (ნორმალური მომხმარებლით)"
 
-#: ../../galternatives/app.py:885
+#: ../../galternatives/app.py:1039
 msgid "Specify the alternatives directory"
 msgstr "მიუთითეთ ალტერნატივების საქაღალდე"
 
-#: ../../galternatives/app.py:888
+#: ../../galternatives/app.py:1042
 msgid "Specify the administrative directory"
 msgstr "მიუთითეთ ადმინისტრაციული საქაღალდე"
 
-#: ../../galternatives/app.py:891
+#: ../../galternatives/app.py:1045
 msgid "Specify the log file"
 msgstr "მიუთითეთ ჟურნალის ფაილი"
 
-#: ../../galternatives/app.py:907
+#: ../../galternatives/app.py:1061
 msgid "Testing galternatives..."
 msgstr "ალტერნატივების შემოწმება..."
 
-#: ../../galternatives/app.py:916
+#: ../../galternatives/app.py:1070
 msgid "No root privileges detected, but continuing anyway"
 msgstr "root-ის პრივილეგიები აღმოჩენილი არაა. მაინც გავაგრძელებ"
 
-#: ../../galternatives/app.py:923
+#: ../../galternatives/app.py:1077
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
 msgstr "<b>პრივილეგირებული ოპერაციებისთვის საჭიროა <tt>pkexec</tt>.</b>"
 
-#: ../../galternatives/app.py:927
+#: ../../galternatives/app.py:1081
 msgid ""
 "The program needs pkexec to perform privileged alternatives system "
 "modifications under normal user. Unless you have modified your system to "
@@ -108,11 +109,11 @@ msgstr ""
 "შეცვალეთ, რომ ნორმალურ მომხმარებელს ამისი უფლება ჰქონდეს, GAlternatives არ "
 "იმუშავებს."
 
-#: ../../galternatives/app.py:954
+#: ../../galternatives/app.py:1110
 msgid "Error: Specifying more than one group is not allowed"
 msgstr "შეცდომა: ერთზე მეტი ჯგუფის მითითება დაუშვებელია"
 
-#: ../../galternatives/app.py:968
+#: ../../galternatives/app.py:1125
 msgid "Error: No such group \"{}\""
 msgstr "შეცდომა: ჯგუფი \"{}\" არ არსებობს"
 
@@ -120,41 +121,41 @@ msgstr "შეცდომა: ჯგუფი \"{}\" არ არსებო�
 msgid "No description"
 msgstr "აღწერის გარეშე"
 
-#: ../../galternatives/description.py:95
+#: ../../galternatives/description.py:99
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
 msgstr "არჩევნის `{3}' დაყენება ჯგუფისთვის`{2}'"
 
-#: ../../galternatives/description.py:96
+#: ../../galternatives/description.py:100
 #, python-brace-format
 msgid "Priority: {4}"
 msgstr "პრიორიტეტი: {4}"
 
-#: ../../galternatives/description.py:98
+#: ../../galternatives/description.py:102
 msgid "Slave `{}': `{}'"
 msgstr "დამხმარე `{}': `{}'"
 
-#: ../../galternatives/description.py:101
+#: ../../galternatives/description.py:105
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr "ჯგუფის `{1}' დაყენება ავტომატურ რეჟიმზე"
 
-#: ../../galternatives/description.py:104
+#: ../../galternatives/description.py:108
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr "ჯგუფის `{1}' დაყენება რეჟიმზე 'ხელით'. მიუთითებს `{2}'-ზე"
 
-#: ../../galternatives/description.py:107
+#: ../../galternatives/description.py:111
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr "არჩევნის `{2}' წაშლა ჯგუფისთვის `{1}'"
 
-#: ../../galternatives/description.py:109
+#: ../../galternatives/description.py:113
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr "ჯგუფის `{1}' წაშლა"
 
-#: ../../galternatives/info.py:22
+#: ../../galternatives/info.py:24
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."

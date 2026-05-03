@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-17 23:04-0500\n"
+"POT-Creation-Date: 2026-05-03 17:31+0800\n"
 "PO-Revision-Date: 2018-10-19 23:58+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish\n"
@@ -16,87 +16,88 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../galternatives/appdata.py:78
+#: ../../galternatives/appdata.py:99
 msgid "Logo missing. Is your installation correct?"
 msgstr "Logo mangler. Er din installation korrekt?"
 
-#: ../../galternatives/app.py:63
+#: ../../galternatives/app.py:89
 msgid "Select File"
 msgstr "Vælg fil"
 
-#: ../../galternatives/app.py:213 ../../galternatives/app.py:283
+#: ../../galternatives/app.py:266 ../../galternatives/app.py:344
 msgid "Name"
 msgstr "Navn"
 
-#: ../../galternatives/app.py:214
+#: ../../galternatives/app.py:267
 msgid "Link"
 msgstr "Link"
 
-#: ../../galternatives/app.py:222
+#: ../../galternatives/app.py:284
 msgid "Add group"
 msgstr "Tilføj gruppe"
 
-#: ../../galternatives/app.py:225
+#: ../../galternatives/app.py:287
 msgid "Edit group - {}"
 msgstr "Rediger gruppe - {}"
 
-#: ../../galternatives/app.py:279 ../../galternatives/app.py:284
+#: ../../galternatives/app.py:340 ../../galternatives/app.py:345
 msgid "Path"
 msgstr "Sti"
 
-#: ../../galternatives/app.py:280 ../glade/galternatives.glade.h:16
+#: ../../galternatives/app.py:341 ../glade/galternatives.glade.h:16
 msgid "Priority"
 msgstr "Prioritet"
 
-#: ../../galternatives/app.py:297
+#: ../../galternatives/app.py:365
 msgid "Add option"
 msgstr "Tilføj tilvalg"
 
-#: ../../galternatives/app.py:303
+#: ../../galternatives/app.py:371
 msgid "Edit option - {}"
 msgstr "Rediger tilvalg - {}"
 
-#: ../../galternatives/app.py:568
+#: ../../galternatives/app.py:685
 msgid "Run command: "
 msgstr "Kør kommando: "
 
-#: ../../galternatives/app.py:855
+#. TRANSLATORS: Your name <Your email address> here!
+#: ../../galternatives/app.py:1012
 msgid "translator_credits"
 msgstr "scootergrisen"
 
-#: ../../galternatives/app.py:879
+#: ../../galternatives/app.py:1033
 msgid "Enable debug output"
 msgstr "Aktivér fejlretningsoutput"
 
-#: ../../galternatives/app.py:882
+#: ../../galternatives/app.py:1036
 msgid "Do not try to acquire root (as normal user)"
 msgstr "Prøv ikke på at bruge root (som normal bruger)"
 
-#: ../../galternatives/app.py:885
+#: ../../galternatives/app.py:1039
 msgid "Specify the alternatives directory"
 msgstr "Angiv mappe til alternativer"
 
-#: ../../galternatives/app.py:888
+#: ../../galternatives/app.py:1042
 msgid "Specify the administrative directory"
 msgstr "Angiv mappe til administration"
 
-#: ../../galternatives/app.py:891
+#: ../../galternatives/app.py:1045
 msgid "Specify the log file"
 msgstr "Angiv logfilen"
 
-#: ../../galternatives/app.py:907
+#: ../../galternatives/app.py:1061
 msgid "Testing galternatives..."
 msgstr "Tester galternatives..."
 
-#: ../../galternatives/app.py:916
+#: ../../galternatives/app.py:1070
 msgid "No root privileges detected, but continuing anyway"
 msgstr "Ingen root-privilegier registreret, men fortsætter alligevel"
 
-#: ../../galternatives/app.py:923
+#: ../../galternatives/app.py:1077
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
 msgstr "<b><tt>pkexec</tt> kræves til privilegerede handlinger.</b>"
 
-#: ../../galternatives/app.py:927
+#: ../../galternatives/app.py:1081
 msgid ""
 "The program needs pkexec to perform privileged alternatives system "
 "modifications under normal user. Unless you have modified your system to "
@@ -106,12 +107,12 @@ msgstr ""
 "alternativer-systemet. Med mindre du ændret dit system til eksplicit at "
 "tillade din normale bruger at gøre det, så virker GAlternatives ikke."
 
-#: ../../galternatives/app.py:954
+#: ../../galternatives/app.py:1110
 #, fuzzy
 msgid "Error: Specifying more than one group is not allowed"
 msgstr "Det er ikke tilladt at angive mere end én gruppe"
 
-#: ../../galternatives/app.py:968
+#: ../../galternatives/app.py:1125
 #, fuzzy
 msgid "Error: No such group \"{}\""
 msgstr "Ingen sådan gruppe"
@@ -120,41 +121,41 @@ msgstr "Ingen sådan gruppe"
 msgid "No description"
 msgstr "Ingen beskrivelse"
 
-#: ../../galternatives/description.py:95
+#: ../../galternatives/description.py:99
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
 msgstr "Installer tilvalget `{3}' for gruppen `{2}'"
 
-#: ../../galternatives/description.py:96
+#: ../../galternatives/description.py:100
 #, python-brace-format
 msgid "Priority: {4}"
 msgstr "Prioritet: {4}"
 
-#: ../../galternatives/description.py:98
+#: ../../galternatives/description.py:102
 msgid "Slave `{}': `{}'"
 msgstr "Slave `{}': `{}'"
 
-#: ../../galternatives/description.py:101
+#: ../../galternatives/description.py:105
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr "Sæt gruppen `{1}' til automatisk tilstand"
 
-#: ../../galternatives/description.py:104
+#: ../../galternatives/description.py:108
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr "Sæt gruppen `{1}' til manuel tilstand, pegede på `{2}'"
 
-#: ../../galternatives/description.py:107
+#: ../../galternatives/description.py:111
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr "Fjern tilvalget `{2}' for gruppen `{1}'"
 
-#: ../../galternatives/description.py:109
+#: ../../galternatives/description.py:113
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr "Fjern gruppen `{1}'"
 
-#: ../../galternatives/info.py:22
+#: ../../galternatives/info.py:24
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."

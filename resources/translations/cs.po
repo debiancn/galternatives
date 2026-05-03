@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: galternatives\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-17 23:04-0500\n"
+"POT-Creation-Date: 2026-05-03 17:31+0800\n"
 "PO-Revision-Date: 2019-02-01 13:35+0100\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -17,88 +17,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../galternatives/appdata.py:78
+#: ../../galternatives/appdata.py:99
 msgid "Logo missing. Is your installation correct?"
 msgstr "Chybí logo. Je vaše instalace v pořádku?"
 
-#: ../../galternatives/app.py:63
+#: ../../galternatives/app.py:89
 msgid "Select File"
 msgstr "Výběr souboru"
 
-#: ../../galternatives/app.py:213 ../../galternatives/app.py:283
+#: ../../galternatives/app.py:266 ../../galternatives/app.py:344
 msgid "Name"
 msgstr "Název"
 
-#: ../../galternatives/app.py:214
+#: ../../galternatives/app.py:267
 msgid "Link"
 msgstr "Odkaz"
 
-#: ../../galternatives/app.py:222
+#: ../../galternatives/app.py:284
 msgid "Add group"
 msgstr "Přidat skupinu"
 
-#: ../../galternatives/app.py:225
+#: ../../galternatives/app.py:287
 msgid "Edit group - {}"
 msgstr "Upravit skupinu – {}"
 
-#: ../../galternatives/app.py:279 ../../galternatives/app.py:284
+#: ../../galternatives/app.py:340 ../../galternatives/app.py:345
 msgid "Path"
 msgstr "Popis umístění"
 
-#: ../../galternatives/app.py:280 ../glade/galternatives.glade.h:16
+#: ../../galternatives/app.py:341 ../glade/galternatives.glade.h:16
 msgid "Priority"
 msgstr "Priorita"
 
-#: ../../galternatives/app.py:297
+#: ../../galternatives/app.py:365
 msgid "Add option"
 msgstr "Přidat volbu"
 
-#: ../../galternatives/app.py:303
+#: ../../galternatives/app.py:371
 msgid "Edit option - {}"
 msgstr "Upravit volbu – {}"
 
-#: ../../galternatives/app.py:568
+#: ../../galternatives/app.py:685
 msgid "Run command: "
 msgstr "Spustit příkaz: "
 
-#: ../../galternatives/app.py:855
+#. TRANSLATORS: Your name <Your email address> here!
+#: ../../galternatives/app.py:1012
 msgid "translator_credits"
 msgstr ""
 "Miroslav Kuře <kurem@debian.cz>, Pavel Borecki <pavel.borecki@gmail.com>"
 
-#: ../../galternatives/app.py:879
+#: ../../galternatives/app.py:1033
 msgid "Enable debug output"
 msgstr "Zapnout ladící výstup"
 
-#: ../../galternatives/app.py:882
+#: ../../galternatives/app.py:1036
 msgid "Do not try to acquire root (as normal user)"
 msgstr "Nepokoušet se získat oprávnění správce (coby běžný uživatele)"
 
-#: ../../galternatives/app.py:885
+#: ../../galternatives/app.py:1039
 msgid "Specify the alternatives directory"
 msgstr "Zadejte složku alternativ"
 
-#: ../../galternatives/app.py:888
+#: ../../galternatives/app.py:1042
 msgid "Specify the administrative directory"
 msgstr "Zadejte složku pro správu"
 
-#: ../../galternatives/app.py:891
+#: ../../galternatives/app.py:1045
 msgid "Specify the log file"
 msgstr "Zadejte soubor pro záznam událostí"
 
-#: ../../galternatives/app.py:907
+#: ../../galternatives/app.py:1061
 msgid "Testing galternatives..."
 msgstr "Testování galternatives…"
 
-#: ../../galternatives/app.py:916
+#: ../../galternatives/app.py:1070
 msgid "No root privileges detected, but continuing anyway"
 msgstr "Nezjištěno oprávnění správce, ale pokračuje se i tak"
 
-#: ../../galternatives/app.py:923
+#: ../../galternatives/app.py:1077
 msgid "<b><tt>pkexec</tt> required for privileged operations.</b>"
 msgstr "<b>Pro privilegované operace je zapotřebí <tt>pkexec</tt>.</b>"
 
-#: ../../galternatives/app.py:927
+#: ../../galternatives/app.py:1081
 msgid ""
 "The program needs pkexec to perform privileged alternatives system "
 "modifications under normal user. Unless you have modified your system to "
@@ -108,12 +109,12 @@ msgstr ""
 "alternativ pod běžným uživatelem. Pokud jste svůj systém neupravili tak, aby "
 "toto mohl dělat i běžný uživatel, GAlternatives nebude fungovat."
 
-#: ../../galternatives/app.py:954
+#: ../../galternatives/app.py:1110
 #, fuzzy
 msgid "Error: Specifying more than one group is not allowed"
 msgstr "Zadání více než jedné skupiny není možné"
 
-#: ../../galternatives/app.py:968
+#: ../../galternatives/app.py:1125
 #, fuzzy
 msgid "Error: No such group \"{}\""
 msgstr "Žádná taková skupina"
@@ -122,41 +123,41 @@ msgstr "Žádná taková skupina"
 msgid "No description"
 msgstr "Bez popisu"
 
-#: ../../galternatives/description.py:95
+#: ../../galternatives/description.py:99
 #, python-brace-format
 msgid "Install option `{3}' for group `{2}'"
 msgstr "Nainstalovat volbu `{3}' pro skupinu `{2}'"
 
-#: ../../galternatives/description.py:96
+#: ../../galternatives/description.py:100
 #, python-brace-format
 msgid "Priority: {4}"
 msgstr "Priorita: {4}"
 
-#: ../../galternatives/description.py:98
+#: ../../galternatives/description.py:102
 msgid "Slave `{}': `{}'"
 msgstr "Podřízené `{}': `{}'"
 
-#: ../../galternatives/description.py:101
+#: ../../galternatives/description.py:105
 #, python-brace-format
 msgid "Set group `{1}' to auto mode"
 msgstr "Nastavit skupinu `{1}' na automatický režim"
 
-#: ../../galternatives/description.py:104
+#: ../../galternatives/description.py:108
 #, python-brace-format
 msgid "Set group `{1}' to manual mode, pointed to `{2}'"
 msgstr "Nastavit skupinu `{1}' do ručního režimu, odkazující na `{2}'"
 
-#: ../../galternatives/description.py:107
+#: ../../galternatives/description.py:111
 #, python-brace-format
 msgid "Remove option `{2}' for group `{1}'"
 msgstr "Odebrat volbu `{2}' pro skupinu `{1}'"
 
-#: ../../galternatives/description.py:109
+#: ../../galternatives/description.py:113
 #, python-brace-format
 msgid "Remove group `{1}'"
 msgstr "Odebrat skupinu `{1}'"
 
-#: ../../galternatives/info.py:22
+#: ../../galternatives/info.py:24
 msgid ""
 "A tool to help the administrator select which programs provide specific "
 "services for the user by default."
