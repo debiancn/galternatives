@@ -1,3 +1,13 @@
+galternatives (1.0.11) unstable; urgency=medium
+
+  * New upstream release. (Closes: #1134570)
+  * debian/: Bump debhelper compat to v14, Standards-Version 4.7.4.
+  * debian/lintian-overrides: Rename to galternatives.lintian-overrides.
+  * debian/manpages: Rename to galternatives.manpages.
+  * debian/copyright: Update to use SPDX short names.
+
+ -- Boyuan Yang <byang@debian.org>  Sun, 28 Jun 2026 13:03:58 -0400
+
 galternatives (1.0.10) unstable; urgency=medium
 
   * Fix FTBFS (Closes: #1077407).
@@ -377,7 +387,7 @@ galternatives (0.7) unstable; urgency=low
   * main.py, galternatives, alternative.py:
   - modified to accept the new locations of the descriptions,
     image and description files (/usr/share/galternatives subdirs)
-  - galternative is now a Python script instead of a
+  - galternatives is now a Python script instead of a
     shell script
   * debian/galternatives.menu:
   - added quotes to make lintian happy
