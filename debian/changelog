@@ -5,8 +5,16 @@ galternatives (1.0.11) unstable; urgency=medium
   * debian/lintian-overrides: Rename to galternatives.lintian-overrides.
   * debian/manpages: Rename to galternatives.manpages.
   * debian/copyright: Update to use SPDX short names.
+  * Merge select changes from Ubuntu:
 
- -- Boyuan Yang <byang@debian.org>  Sun, 28 Jun 2026 13:03:58 -0400
+  [ Thomas Ward ]
+  * d/rules: Add PEP440_VERSION definition that alters the VERSION
+    string to provide a PEP440 compliant string that works with 
+    pybuild and setuptools. Fixes FTBFS from build1 and the 
+    introduction of ubuntu1 in the version string for PEP440 
+    compliance.
+
+ -- Boyuan Yang <byang@debian.org>  Sun, 28 Jun 2026 13:08:23 -0400
 
 galternatives (1.0.10) unstable; urgency=medium
 

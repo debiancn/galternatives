@@ -7,6 +7,9 @@ include /usr/share/dpkg/pkg-info.mk
 
 VERSION := $(shell echo '$(DEB_VERSION_UPSTREAM)' | sed -e 's/\+.*$$//')
 
+# Mangle VERSION to create PEP440_VERSION for PEP440 compliance.
+PEP440_VERSION := $(shell echo '$(VERSION)' | sed -E 's/[^0-9.+-].*$$//')
+
 
 %:
 	dh $@ --buildsystem=pybuild
@@ -15,6 +18,6 @@ execute_before_dh_auto_clean:
 	$(RM) galternatives/version.py
 
 galternatives/version.py:
-	echo 'VERSION = "$(VERSION)"' > $@
+	echo 'VERSION = "$(PEP440_VERSION)"' > $@
 
 execute_before_dh_auto_configure: galternatives/version.py
