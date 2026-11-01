@@ -1,6 +1,5 @@
 Source: galternatives
 Section: admin
-Priority: optional
 Maintainer: Debian Chinese Team <chinese-developers@lists.alioth.debian.org>
 Uploaders:
  Boyuan Yang <byang@debian.org>,

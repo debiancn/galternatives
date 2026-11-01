@@ -1,3 +1,11 @@
+galternatives (1.0.12) unstable; urgency=medium
+
+  * translations: Update Dutch translation, thanks to Frans
+    Spiesschaert. (Closes: #1152619)
+  * debian/control: Drop redundant Priority: optional.
+
+ -- Boyuan Yang <byang@debian.org>  Sun, 01 Nov 2026 15:06:14 -0500
+
 galternatives (1.0.11) unstable; urgency=medium
 
   * New upstream release. (Closes: #1134570)
