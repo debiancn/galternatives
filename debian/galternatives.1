@@ -1,58 +1,85 @@
-.TH "galternatives" "1"
+.TH GALTERNATIVES 1 "2026-11-01" "galternatives" "User Commands"
 .SH NAME
-galternatives \- A front-end to the update-alternatives
-
-
+galternatives \- graphical configuration tool for the alternatives system
 .SH SYNOPSIS
 .B galternatives
-.RI [ OPTIONS "...] [" "Alternative Group" ]
-
-
+.RI [ option ...]
+.RI [ group ]
 .SH DESCRIPTION
 .B galternatives
-is a front-end to the Debian
-.B update-alternatives
-tools. galternatives allows the user to specify a preferred application to handle commonly-used commands.
-
-
-.SH OPTIONS
-
-.TP
-.B \-h, \-\-help
-Show help options
-
-.TP
-.B \-d, \-\-debug
-Enable debug output
-
-.TP
-.B \-n, \-\-normal
-Do not try to acquire root (as normal user)
-
-.TP
-.BR \-\-altdir " \fIALTDIR\fR"
-Specify the directory containing alternative symlinks (default: /etc/alternatives).
-
-.TP
-.BR \-\-admindir " \fIADMINDIR\fR"
-Specify the directory containing alternatives state files (default: /var/lib/dpkg/alternatives).
-
-.TP
-.BR \-\-log " \fILOG\fR"
-Specify the log file
-
-
-.SH NOTES
-Before version 1.0.12, galternatives interpreted the altdir and admindir
-options in reverse. These options now follow update-alternatives(1).
-
-.SH AUTHOR
+provides a graphical interface to
+.BR update-alternatives (1).
+It lets users choose the default program for commands managed by the
+alternatives system.
+It also supports adding, editing, and removing alternative groups and options,
+and working with a custom alternatives database.
 .PP
-This manual page is written by
+The optional
+.I group
+argument must name an existing alternative group.
+At most one group may be specified.
+.PP
+By default, changes made by an ordinary user are submitted through
+.BR pkexec (1)
+for authorization.
+Use
+.B \-\-normal
+to run commands with the current user's privileges.
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\-help
+Show command-line help and exit.
+.TP
+.B \-\-help-all
+Show all command-line options, including GTK and GApplication options, and exit.
+.TP
+.BR \-d ", " \-\-debug
+Enable debug output.
+.TP
+.BR \-n ", " \-\-normal
+Run without requesting additional privileges through
+.BR pkexec (1).
+This option does not change the privileges of a process already running as root.
+.TP
+.BI \-\-altdir " directory"
+Use
+.I directory
+for alternative symlinks instead of
+.IR /etc/alternatives .
+.TP
+.BI \-\-admindir " directory"
+Read and update alternative group state files in
+.I directory
+instead of
+.IR /var/lib/dpkg/alternatives .
+.TP
+.BI \-\-log " file"
+Write the
+.BR update-alternatives (1)
+log to
+.I file
+instead of
+.IR /var/log/alternatives.log .
+.SH NOTES
+Before version 1.0.12,
+.B galternatives
+interpreted
+.B \-\-altdir
+and
+.B \-\-admindir
+in reverse.
+These options now have the same meanings as in
+.BR update-alternatives (1).
+.SH AUTHORS
+This manual page was written by
 .MT adb@\:iinet.net.au
 Andrew Burton
-.ME ,
+.ME
+and
 .MT mmyangfl@\:gmail.com
 Yangfl
 .ME
 for the Debian Project (but may be used by others).
+.SH SEE ALSO
+.BR update-alternatives (1),
+.BR pkexec (1)

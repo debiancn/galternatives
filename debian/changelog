@@ -7,10 +7,11 @@ galternatives (1.0.12) unstable; urgency=medium
     update-alternatives.
   * Pass the selected directories and log file to every update-
     alternatives command, including privileged operations.
-  * debian/galternatives.1: Document directory meanings and the
-    corrected option behavior.
+  * debian/galternatives.1: Refresh roff formatting and the synopsis;
+    clarify privilege handling, document help and path defaults, and add
+    cross-references and the directory-option compatibility note.
 
- -- Boyuan Yang <byang@debian.org>  Sun, 01 Nov 2026 15:18:12 -0500
+ -- Boyuan Yang <byang@debian.org>  Sun, 01 Nov 2026 18:00:33 -0500
 
 galternatives (1.0.11) unstable; urgency=medium
 
