@@ -9,9 +9,12 @@ galternatives (1.0.12) unstable; urgency=medium
     alternatives command, including privileged operations.
   * debian/galternatives.1: Refresh roff formatting and the synopsis;
     clarify privilege handling, document help and path defaults, and add
-    cross-references and the directory-option compatibility note.
+    cross-references, initial group selection, and the directory-option
+    compatibility note.
+  * Select the command-line target group before loading the main window,
+    and clear it for invocations without a group.
 
- -- Boyuan Yang <byang@debian.org>  Sun, 01 Nov 2026 18:00:33 -0500
+ -- Boyuan Yang <byang@debian.org>  Sun, 01 Nov 2026 18:31:53 -0500
 
 galternatives (1.0.11) unstable; urgency=medium
 

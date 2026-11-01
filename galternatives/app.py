@@ -1111,6 +1111,7 @@ class GAlternativesApp(Gtk.Application):
                   file=sys.stderr)
             return 2
 
+        self.target_group = args[1] if len(args) > 1 else None
         self._window = MainWindow(self, self.altdb_paths, self.target_group)
         try:
             self._window.load_db()
@@ -1119,13 +1120,12 @@ class GAlternativesApp(Gtk.Application):
             self._window.destroy()
             return 1
 
-        if len(args) > 1:
-            self.target_group = args[1]
-            if self.target_group not in self._window.db:
-                print(_('Error: No such group "{}"').format(self.target_group),
-                      file=sys.stderr)
-                self._window.destroy()
-                return 1
+        if self.target_group is not None and \
+                self.target_group not in self._window.db:
+            print(_('Error: No such group "{}"').format(self.target_group),
+                  file=sys.stderr)
+            self._window.destroy()
+            return 1
 
         self._about_dialog = AboutDialog(
             transient_for=self._window.main_window)
