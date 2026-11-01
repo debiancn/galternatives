@@ -49,8 +49,8 @@ class CommandResult(NamedTuple):
 
 @dataclass
 class AltConfig:
-    ALTDIR: ClassVar[str] = '/var/lib/dpkg/alternatives'
-    ADMINDIR: ClassVar[str] = '/etc/alternatives'
+    ALTDIR: ClassVar[str] = '/etc/alternatives'
+    ADMINDIR: ClassVar[str] = '/var/lib/dpkg/alternatives'
     LOG: ClassVar[str] = '/var/log/alternatives.log'
     UPDATE_CMD: ClassVar[str] = 'update-alternatives'
 
@@ -197,10 +197,10 @@ class AltGroup(list[str]):
                     option[name] = next(it)
                 self.options.append(option)
 
-        admin = os.path.join(self.config.admindir, self.name)
-        if not os.path.islink(admin):
-            raise IOError(f'admin link for "{self.name}" corrupted')
-        current_path = os.readlink(admin)
+        link = os.path.join(self.config.altdir, self.name)
+        if not os.path.islink(link):
+            raise IOError(f'alternative link for "{self.name}" corrupted')
+        current_path = os.readlink(link)
 
         if auto_mode:
             self._current = None
@@ -214,8 +214,8 @@ class AltGroup(list[str]):
 
     @property
     def alt(self) -> str:
-        """Path of alt file in the admindir."""
-        return os.path.join(self.config.altdir, self.name)
+        """Path of the state file in the administrative directory."""
+        return os.path.join(self.config.admindir, self.name)
 
     @property
     def name(self) -> str:
@@ -385,12 +385,12 @@ class AltDB(dict[str, AltGroup | None], AltConfig):
     def __init__(
             self, altdir: str | None = None, admindir: str | None = None,
             log: str | None = None) -> None:
-        super().__init__(map(lambda name: (name, None), filter(
-            lambda name: os.path.isfile(os.path.join(self.altdir, name)),
-            os.listdir(self.altdir))))
         AltConfig.__init__(
-            self, altdir or self.ALTDIR, admindir or self.ADMINDIR,
-            log or self.LOG)
+            self, altdir=altdir or self.ALTDIR,
+            admindir=admindir or self.ADMINDIR, log=log or self.LOG)
+        super().__init__(map(lambda name: (name, None), filter(
+            lambda name: os.path.isfile(os.path.join(self.admindir, name)),
+            os.listdir(self.admindir))))
         self._moves = {}
 
     def __repr__(self) -> str:
@@ -471,7 +471,12 @@ class AltDB(dict[str, AltGroup | None], AltConfig):
             cmd: list[str] = []
             if executer:
                 cmd.append(executer)
-            cmd.append(self.update_cmd)
+            cmd.extend([
+                self.update_cmd,
+                '--altdir', self.altdir,
+                '--admindir', self.admindir,
+                '--log', self.log,
+            ])
             cmd.extend(args)
 
             logger.debug(f'run command "{' '.join(cmd)}"')

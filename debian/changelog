@@ -3,8 +3,14 @@ galternatives (1.0.12) unstable; urgency=medium
   * translations: Update Dutch translation, thanks to Frans
     Spiesschaert. (Closes: #1152619)
   * debian/control: Drop redundant Priority: optional.
+  * Fix custom database initialization and align directory options with
+    update-alternatives.
+  * Pass the selected directories and log file to every update-
+    alternatives command, including privileged operations.
+  * debian/galternatives.1: Document directory meanings and the
+    corrected option behavior.
 
- -- Boyuan Yang <byang@debian.org>  Sun, 01 Nov 2026 15:06:14 -0500
+ -- Boyuan Yang <byang@debian.org>  Sun, 01 Nov 2026 15:18:12 -0500
 
 galternatives (1.0.11) unstable; urgency=medium
 

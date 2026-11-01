@@ -31,16 +31,20 @@ Do not try to acquire root (as normal user)
 
 .TP
 .BR \-\-altdir " \fIALTDIR\fR"
-Specify the alternatives directory
+Specify the directory containing alternative symlinks (default: /etc/alternatives).
 
 .TP
 .BR \-\-admindir " \fIADMINDIR\fR"
-Specify the administrative directory
+Specify the directory containing alternatives state files (default: /var/lib/dpkg/alternatives).
 
 .TP
 .BR \-\-log " \fILOG\fR"
 Specify the log file
 
+
+.SH NOTES
+Before version 1.0.12, galternatives interpreted the altdir and admindir
+options in reverse. These options now follow update-alternatives(1).
 
 .SH AUTHOR
 .PP
