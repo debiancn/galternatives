@@ -13,8 +13,9 @@ galternatives (1.0.12) unstable; urgency=medium
     compatibility note.
   * Select the command-line target group before loading the main window,
     and clear it for invocations without a group.
+  * resources: Add the AppStream release notes for version 1.0.12.
 
- -- Boyuan Yang <byang@debian.org>  Sun, 01 Nov 2026 18:31:53 -0500
+ -- Boyuan Yang <byang@debian.org>  Sun, 01 Nov 2026 18:40:40 -0500
 
 galternatives (1.0.11) unstable; urgency=medium
 

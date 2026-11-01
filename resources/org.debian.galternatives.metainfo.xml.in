@@ -29,6 +29,17 @@
   </content_rating>
 
   <releases>
+    <release version="1.0.12" date="2026-11-01">
+      <description>
+        <_p>Update the Dutch translation.</_p>
+        <_p>Fix custom database initialization, align directory options with
+          update-alternatives, and use the selected directories and log file
+          when saving changes.</_p>
+        <_p>Select the group specified on the command line when opening the
+          window.</_p>
+        <_p>Refresh the manual page and clarify command-line options.</_p>
+      </description>
+    </release>
     <release version="1.0.9" date="2022-10-14">
       <description>
         <_p>New maintenance release to include Turkish translation.</_p>
